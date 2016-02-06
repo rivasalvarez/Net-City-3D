@@ -11,19 +11,29 @@ public class cars : MonoBehaviour {
 	GameObject playerMemory;
 	playerManager playerScript;
 
+
+
+	//wavePoint for each car 
+
+
+
+
 	string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
 
 	// Use this for initialization
 	void Start () {
+		gameObject.GetComponent<Renderer>().material.color = Color.yellow;
 		playerMemory = GameObject.Find ("GameObject");
 		playerScript = playerMemory.GetComponent<playerManager> ();	
 		//assign the rigid body of the car to use in collisions
 		rb = GetComponent<Rigidbody>();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		// if flag true move car forward
 		if (flag) {
 			transform.position +=  transform.right * Time.deltaTime * movementSpeed;
