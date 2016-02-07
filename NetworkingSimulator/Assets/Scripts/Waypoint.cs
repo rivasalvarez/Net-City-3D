@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Waypoints : MonoBehaviour {
+public class Waypoint : MonoBehaviour {
 
-	public Transform[] wayPointList;
+	public Transform[] wayPointList = new Transform[5];
 	public int currentWayPoint = 0;
 	Transform targetWayPoint;
 	public float speed = 4f;
 
 	// Use this for initialization
 	void Start (){
+		wayPointList[0] = GameObject.Find ("WayPoint1").transform;
+		wayPointList[1] = GameObject.Find ("WayPoint2").transform;
+		wayPointList[2] = GameObject.Find ("WayPoint3").transform;
+		wayPointList[3] = GameObject.Find ("WayPoint4").transform;
+		wayPointList[4] = GameObject.Find ("WayPoint5").transform;
+        targetWayPoint = wayPointList[currentWayPoint];
 	}
 	
 	// Update is called once per frame
 	void Update (){
 	  
 		if (currentWayPoint < this.wayPointList.Length){
-          if(targetWayPoint == null)
-             targetWayPoint = wayPointList[currentWayPoint];
+
           walk();
 		}
 	}
