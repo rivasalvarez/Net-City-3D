@@ -6,7 +6,7 @@ public class Waypoint : MonoBehaviour {
 	public Transform[] wayPointList = new Transform[5];
 	public int currentWayPoint = 0;
 	Transform targetWayPoint;
-	public float speed = 4f;
+	private float speed = 15f; 
 
 	// Use this for initialization
 	void Start (){
@@ -21,18 +21,19 @@ public class Waypoint : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 	  
-		if (currentWayPoint < this.wayPointList.Length){
-
+		if (currentWayPoint < this.wayPointList.Length)
           walk();
-		}
 	}
 
     void walk(){
       transform.forward = Vector3.RotateTowards(transform.forward, targetWayPoint.position - transform.position, speed * Time.deltaTime, 0.0f);
       transform.position = Vector3.MoveTowards(transform.position, targetWayPoint.position, speed * Time.deltaTime);
-      if(transform.position == targetWayPoint.position){
-        currentWayPoint++;
-        targetWayPoint = wayPointList[currentWayPoint];
-      }
+
+      if (transform.position == targetWayPoint.position)
+			currentWayPoint++;
+
+      if(currentWayPoint < this.wayPointList.Length)
+            targetWayPoint = wayPointList[currentWayPoint];
+      
     }   
 }
