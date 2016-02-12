@@ -33,13 +33,13 @@ public class newUserScript : MonoBehaviour {
 		GUI.color = Color.black;
 		GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 150, 20), "Create Username");
 
-		GUI.color = Color.red;
+		GUI.color = Color.white;
 		name = GUI.TextField (new Rect (Screen.width / 2, (Screen.height / 2) + 25, 200, 20), name.Trim (), 25);
 
 		GUI.color = Color.black;
 		GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 150, 20), "Create a Password");
 
-		GUI.color = Color.red;
+		GUI.color = Color.white;
 		pass = GUI.TextField (new Rect (Screen.width / 2, (Screen.height / 2) + 75, 200, 20), pass, 25);
 
 

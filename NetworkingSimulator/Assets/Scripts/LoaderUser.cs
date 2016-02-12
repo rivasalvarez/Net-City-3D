@@ -30,7 +30,7 @@ public class LoaderUser : MonoBehaviour {
 		GUI.Label(new Rect (Screen.width / 2, Screen.height / 2,150,20), "Please Insert Username to load checkpoint");
 
 		//create textfields to insert username and password
-		GUI.color = Color.red;
+		GUI.color = Color.white;
 		name = GUI.TextField(new Rect(Screen.width / 2, (Screen.height / 2) + 25, 200, 20), name.Trim(), 25);
 
 		password = GUI.TextField(new Rect(Screen.width / 2, (Screen.height / 2) + 50, 200, 20), password.Trim(), 25);
