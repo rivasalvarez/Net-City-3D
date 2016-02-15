@@ -2,14 +2,8 @@
 using System.Collections;
 
 public class cars : MonoBehaviour {
-	public int route;
-	//public movementspeed of car that can be altered in editor
-	public float movementSpeed = 5.0f;
 
-	//public rigidbody for car
 	public Rigidbody rb;
-
-	//private bool flag: true, car moves forward, false:car stands still
 	private bool flag = true;
 	GameObject playerMemory;
 	playerManager playerScript;
@@ -19,6 +13,12 @@ public class cars : MonoBehaviour {
 	private int currentWayPoint = 0;
 	Transform targetWayPoint;
 	private float speed = 15f;
+
+    //Car Details
+    private string color;
+	public int route;
+    public int carColor;
+	public float movementSpeed = 5.0f;
 
 	string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
@@ -33,6 +33,8 @@ public class cars : MonoBehaviour {
 
 		//Random Path for now
 		route = Random.Range(0,4);
+		carColor = Random.Range(0,4);
+		gameObject.GetComponent<Renderer>().material.color = playerScript.colorArray[carColor];
 		setWavePoints (route);
 
 	}
@@ -107,7 +109,6 @@ public class cars : MonoBehaviour {
   
 		switch( ro ){
 		case 0:
-			gameObject.GetComponent<Renderer>().material.color = Color.yellow;
 			wayPointList = new Transform[5];
 			wayPointList[0] = GameObject.Find ("WayPoint1").transform;
 			wayPointList[1] = GameObject.Find ("WayPoint2").transform;
@@ -117,7 +118,6 @@ public class cars : MonoBehaviour {
 			break;
 
 		case 1:
-			gameObject.GetComponent<Renderer>().material.color = Color.blue;
 			wayPointList = new Transform[4];
 			wayPointList[0] = GameObject.Find ("WayPoint1").transform;
 			wayPointList[1] = GameObject.Find ("WayPoint2").transform;
@@ -126,7 +126,6 @@ public class cars : MonoBehaviour {
 			break;
 
 		case 2:
-			gameObject.GetComponent<Renderer>().material.color = Color.green;
 			wayPointList = new Transform[8];
 			wayPointList[0] = GameObject.Find ("WayPoint1").transform;
 			wayPointList[1] = GameObject.Find ("WayPoint2").transform;
@@ -139,7 +138,6 @@ public class cars : MonoBehaviour {
 			break;
 
 		case 3:
-			gameObject.GetComponent<Renderer>().material.color = Color.red;
 			wayPointList = new Transform[8];
 			wayPointList[0] = GameObject.Find ("WayPoint1").transform;
 			wayPointList[1] = GameObject.Find ("WayPoint2").transform;

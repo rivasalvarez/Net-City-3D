@@ -14,7 +14,7 @@ public class tutorial01 : MonoBehaviour {
 	bool placingCar;
 	bool placingSecurity;
 	bool placingHighway;
-	public Texture2D cashTexture;
+	GUIStyle guiCash;
 	GUIStyle guiStyle;
 	float timer = 300;
 
@@ -23,9 +23,15 @@ public class tutorial01 : MonoBehaviour {
 		levelName = "tutorial01";
 		playerMemory = GameObject.Find ("GameObject");
 		playerScript = playerMemory.GetComponent<playerManager> ();
+
 		guiStyle =  new GUIStyle();
 		guiStyle.fontSize = 20;
 		guiStyle.normal.textColor = Color.white;
+
+		
+		guiCash =  new GUIStyle();
+		guiCash.fontSize = 20;
+		guiCash.normal.textColor = Color.green;
   
 		if (playerScript.getLevelLoaded ()) {
 			//begins the player with 3000 dollars of currency
@@ -53,7 +59,6 @@ public class tutorial01 : MonoBehaviour {
 				obj.GetComponent<road> ().setPosition (obj.transform.position);
 
 				playerScript.roadsInThisScene.Add (obj.GetComponent<road> ());
-
 			}
 				
 
@@ -67,18 +72,14 @@ public class tutorial01 : MonoBehaviour {
 				obj.GetComponent<security>().setPosition(obj.transform.position);
 
 				playerScript.securityInThisScene.Add (obj.GetComponent<security>());
-
 			}
 
-
-			
 			tmp = playerScript.carsInThisScene.Count;
 			playerScript.carsInThisScene.Clear ();
 			
 			for(int i = 0; i < tmp; i++)
 			{
 				print ("CARS");
-
 			}
 			showSettings = false;
 			placingCar = false;
@@ -87,8 +88,6 @@ public class tutorial01 : MonoBehaviour {
 
 		} else {
 			playerScript.setCash (3000);
-
-
 
 			// Loop through at starting integer 68 and instantiate roads based on that
 			float z = 68;
@@ -99,7 +98,6 @@ public class tutorial01 : MonoBehaviour {
 			obj.GetComponent<building> ().setMonetary (300);
 			obj.GetComponent<building>().setPosition(obj.transform.position);
 			playerScript.buildingsInThisScene.Add (obj.GetComponent<building> ());
-
 
 			for (int i = 0; i < 19; i++, z-=2.5f) {
 				obj = Instantiate (Resources.Load ("Prefabs/roadPre", typeof(GameObject))) as GameObject;
@@ -130,8 +128,7 @@ public class tutorial01 : MonoBehaviour {
 		string mins = Mathf.Floor(timer / 60).ToString("00");
 		string secs = Mathf.Floor(timer % 60).ToString("00");
 
-		GUI.Label(new Rect (Screen.width /1.10f, Screen.height / 11,150,20),  playerScript.getCash().ToString());
-		GUI.Label(new Rect ((Screen.width /1.10f) - 20, Screen.height / 11,150,20), cashTexture);
+		GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
 		GUI.Label(new Rect (0, 0, 150, 20), mins + ":" + secs,guiStyle);
  
 		if (placingCar == false && placingSecurity == false) {
@@ -158,7 +155,7 @@ public class tutorial01 : MonoBehaviour {
 					
 				}
 
-				if (GUI.Button (new Rect (0, (Screen.height / 12f), 100, 50), "Settings")) {
+				if (GUI.Button (new Rect (330, (Screen.height / 1.10f), 100, 50), "Settings")) {
 					showSettings = true;
 						
 				}

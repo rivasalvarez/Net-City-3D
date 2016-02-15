@@ -24,6 +24,8 @@ public class playerManager : MonoBehaviour {
 	public List<Vector3> security;
 	public List<Vector3> car;
 
+    public Color[] colorArray;
+
 
 	// Player variable information pertaining to the level
 	int cash;
@@ -48,6 +50,13 @@ public class playerManager : MonoBehaviour {
 	 * @algorithm: Checks to see if at the selection menu, if so, loads the first level possible within the game, otherwise, it loads the level the user was at last 
 	 */ 
 	void Start () {
+		colorArray = new Color[4];
+
+		colorArray[0] = Color.green;
+		colorArray[1] = Color.yellow;
+		colorArray[2] = Color.blue;
+		colorArray[3] = Color.red;
+
 		// Check to see if the application last loaded level was 2, if so, that means the player is new
 		if (Application.loadedLevel == 2) {
 			Application.LoadLevel ("tutorial01");
