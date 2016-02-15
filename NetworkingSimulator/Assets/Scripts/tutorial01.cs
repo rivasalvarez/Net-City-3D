@@ -8,27 +8,25 @@ public class tutorial01 : MonoBehaviour {
 	public Camera myCam;
 	GameObject playerMemory;
 	playerManager playerScript;
-
 	public GameObject obj;
 	public GameObject tmpObj;
-
 	private bool showSettings;
-
 	bool placingCar;
 	bool placingSecurity;
 	bool placingHighway;
-
-
 	public Texture2D cashTexture;
-
+	GUIStyle guiStyle;
+	float timer = 300;
 
 	// Use this for initialization
 	void Start () {
 		levelName = "tutorial01";
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<playerManager> ();	
-
-
+		playerScript = playerMemory.GetComponent<playerManager> ();
+		guiStyle =  new GUIStyle();
+		guiStyle.fontSize = 20;
+		guiStyle.normal.textColor = Color.white;
+  
 		if (playerScript.getLevelLoaded ()) {
 			//begins the player with 3000 dollars of currency
 			playerScript.setCash (3000);
@@ -80,12 +78,6 @@ public class tutorial01 : MonoBehaviour {
 			for(int i = 0; i < tmp; i++)
 			{
 				print ("CARS");
-				/*obj = Instantiate (Resources.Load ("Prefabs/firetruckPre", typeof(GameObject))) as GameObject;
-				tmpObj = obj;
-				obj.transform.position = playerScript.car[i];
-				obj.GetComponent<cars>().setPosition(obj.transform.position);
-
-				playerScript.carsInThisScene.Add (obj.GetComponent<cars> ());  */
 
 			}
 			showSettings = false;
@@ -109,13 +101,6 @@ public class tutorial01 : MonoBehaviour {
 			playerScript.buildingsInThisScene.Add (obj.GetComponent<building> ());
 
 
-			/*obj = Instantiate (Resources.Load ("Prefabs/firetruckPre", typeof(GameObject))) as GameObject;
-			obj.transform.position = new Vector3 (39.4f, 0.5f, 65.0f);
-			obj.GetComponent<cars>().setPosition(obj.transform.position);
-			playerScript.carsInThisScene.Add (obj.GetComponent<cars> ());   */
-
-
-
 			for (int i = 0; i < 19; i++, z-=2.5f) {
 				obj = Instantiate (Resources.Load ("Prefabs/roadPre", typeof(GameObject))) as GameObject;
 				obj.transform.position = new Vector3 (40, 0.2f, z);
@@ -137,22 +122,18 @@ public class tutorial01 : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (tmpObj == null) {
-			/*obj = Instantiate (Resources.Load ("Prefabs/firetruckPre", typeof(GameObject))) as GameObject;
-			tmpObj = obj;
-			obj.transform.position = new Vector3 (39.4f, 0.5f, 65.0f);
-			obj.GetComponent<cars>().setPosition(obj.transform.position);
-			playerScript.carsInThisScene.Add (obj.GetComponent<cars> ());  */
-		}
-	
+	    timer -= Time.deltaTime;
 	}
 
 	void OnGUI()
 	{
+		string mins = Mathf.Floor(timer / 60).ToString("00");
+		string secs = Mathf.Floor(timer % 60).ToString("00");
+
 		GUI.Label(new Rect (Screen.width /1.10f, Screen.height / 11,150,20),  playerScript.getCash().ToString());
 		GUI.Label(new Rect ((Screen.width /1.10f) - 20, Screen.height / 11,150,20), cashTexture);
-
-
+		GUI.Label(new Rect (0, 0, 150, 20), mins + ":" + secs,guiStyle);
+ 
 		if (placingCar == false && placingSecurity == false) {
 			if (showSettings == false) {
 				// This button is for create Profile
