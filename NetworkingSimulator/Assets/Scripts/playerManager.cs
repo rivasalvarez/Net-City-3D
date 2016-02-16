@@ -25,6 +25,7 @@ public class playerManager : MonoBehaviour {
 	public List<Vector3> car;
 
     public Color[] colorArray;
+    public string[] carTypeArray;
 
 
 	// Player variable information pertaining to the level
@@ -56,6 +57,17 @@ public class playerManager : MonoBehaviour {
 		colorArray[1] = Color.yellow;
 		colorArray[2] = Color.blue;
 		colorArray[3] = Color.red;
+
+        carTypeArray= new string[8];
+
+		carTypeArray[0] = "Prefabs/Ambulance";
+		carTypeArray[1] = "Prefabs/FireTruck";
+		carTypeArray[2] = "Prefabs/Hearse";
+		carTypeArray[3] = "Prefabs/IceCream";
+		carTypeArray[4] = "Prefabs/PoliceCar";
+		carTypeArray[5] = "Prefabs/Tanker";
+		carTypeArray[6] = "Prefabs/Taxi";
+		carTypeArray[7] = "Prefabs/Truck";
 
 		// Check to see if the application last loaded level was 2, if so, that means the player is new
 		if (Application.loadedLevel == 2) {
