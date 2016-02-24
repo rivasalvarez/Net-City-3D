@@ -6,13 +6,13 @@ public class LoaderUser : MonoBehaviour {
 	public string password = "password ";
 
 	GameObject playerMemory;
-	playerManager playerScript;
+	gameManager playerScript;
 
 	// Use this for initialization
 	void Start () {
 		//to access playerManager which is not destroyed throughout scenes
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<playerManager> ();	
+		playerScript = playerMemory.GetComponent<gameManager> ();	
 	}
 	
 	// Update is called once per frame
