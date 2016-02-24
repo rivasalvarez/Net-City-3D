@@ -44,6 +44,9 @@ public class Car : MonoBehaviour {
         colorString = gameMgr.carColorDict[carColor];
 
 		setWavePoints (route);
+
+		
+		Debug.Log(gameObject.tag);
 	}
 	
 	// Update is called once per frame
