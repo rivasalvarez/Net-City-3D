@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cars : MonoBehaviour {
+public class Car : MonoBehaviour {
 
 	public Rigidbody rb;
 	private bool flag = true;
 	GameObject playerMemory;
-	playerManager playerScript;
+	gameManager gameMgr;
 
 	//WavePoint Stuff
 	private Transform[] wayPointList;
 	private int currentWayPoint = 0;
 	Transform targetWayPoint;
-	private float speed = 15f;
 
     //Car Details
-    private string color;
+    public string colorString;
+    public string sizeString;
+    public string carTypeString;
+
 	public int route;
     public int carColor;
-	public float movementSpeed = 5.0f;
+	public float speed = 10.0f;
 
 	string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
@@ -26,7 +28,7 @@ public class cars : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<playerManager> ();	
+		gameMgr = playerMemory.GetComponent<gameManager> ();	
 
 		//assign the rigid body of the car to use in collisions
 		rb = GetComponent<Rigidbody>();
@@ -34,9 +36,14 @@ public class cars : MonoBehaviour {
 		//Random Path for now
 		route = Random.Range(0,4);
 		carColor = Random.Range(0,4);
-		gameObject.GetComponent<Renderer>().material.color = playerScript.colorArray[carColor];
-		setWavePoints (route);
+		gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
 
+
+		carTypeString = gameMgr.carTypeDict[gameMgr.carType];
+        sizeString = gameMgr.carSizeDict[gameMgr.carType];
+        colorString = gameMgr.carColorDict[carColor];
+
+		setWavePoints (route);
 	}
 	
 	// Update is called once per frame
@@ -52,7 +59,7 @@ public class cars : MonoBehaviour {
 		if (other.gameObject.tag == "corporatePre") {
 			// if it is then destroy the car because it has reached its destination
 			Destroy (gameObject);
-			playerScript.addCash(300);
+			gameMgr.addCash(300);
 			//flag = false;
 		} 
 

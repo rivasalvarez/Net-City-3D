@@ -6,7 +6,7 @@ public class newUserScript : MonoBehaviour {
 	public string pass = "";
 
 	GameObject playerMemory;
-	playerManager playerScript;
+	gameManager playerScript;
 
 	bool sameUserName;
 
@@ -14,7 +14,7 @@ public class newUserScript : MonoBehaviour {
 	void Start () {
 		//assigns playerManager which is not destroyed throughout scenes
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<playerManager> ();	
+		playerScript = playerMemory.GetComponent<gameManager> ();	
 	}
 	
 	// Update is called once per frame
