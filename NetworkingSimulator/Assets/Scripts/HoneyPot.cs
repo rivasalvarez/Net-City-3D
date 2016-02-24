@@ -4,15 +4,18 @@ using System.Collections;
 public class HoneyPot : MonoBehaviour {
 
   GameObject playerMemory;
-  gameManager playerScript;
+  gameManager gameMgr;
 
+  GameObject main;
+  mainGame gameWorld;
 
 	// Use this for initialization
 	void Start () {
 	  playerMemory = GameObject.Find ("GameObject");
-	  playerScript = playerMemory.GetComponent<gameManager> ();
+	  gameMgr = playerMemory.GetComponent<gameManager> ();
 
-
+	  main = GameObject.Find ("Main Camera");
+	  gameWorld = main.GetComponent<mainGame> ();
 	}
 	
 	// Update is called once per frame
@@ -26,8 +29,12 @@ public class HoneyPot : MonoBehaviour {
 		   col.gameObject.tag == "IceCream" || col.gameObject.tag == "Tanker" ||
 		   col.gameObject.tag == "Taxi" || col.gameObject.tag == "Truck"){
 
-			Debug.Log("WTF");
-		}
-	}
+           Car colCar = col.gameObject.GetComponent<Car>();
+            
+			string info = "Color: " + colCar.colorString + "  Size: " + colCar.sizeString 
+                      + "  Type: " + colCar.carTypeString + "  Time: " + gameWorld.time;
+			Debug.Log(info);
+		} 
+	} 
 
 }

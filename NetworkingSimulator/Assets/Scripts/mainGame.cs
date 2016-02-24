@@ -16,7 +16,10 @@ public class mainGame : MonoBehaviour {
 	bool placingHighway;
 	GUIStyle guiCash;
 	GUIStyle guiStyle;
-	float timer = 300;
+	public float timer = 300;
+	string mins;
+	string secs;
+	public string time;
 
 	// Use this for initialization
 	void Start () {
@@ -96,15 +99,15 @@ public class mainGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    timer -= Time.deltaTime;
+		mins = Mathf.Floor(timer / 60).ToString("00");
+		secs = Mathf.Floor(timer % 60).ToString("00");
+		time = mins + ":" + secs;
 	}
 
 	void OnGUI()
 	{
-		string mins = Mathf.Floor(timer / 60).ToString("00");
-		string secs = Mathf.Floor(timer % 60).ToString("00");
-
 		GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
-		GUI.Label(new Rect (0, 0, 150, 20), mins + ":" + secs,guiStyle);
+		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
  
 		if (placingCar == false && placingSecurity == false) {
 			if (showSettings == false) {

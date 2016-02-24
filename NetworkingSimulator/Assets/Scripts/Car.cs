@@ -44,9 +44,6 @@ public class Car : MonoBehaviour {
         colorString = gameMgr.carColorDict[carColor];
 
 		setWavePoints (route);
-
-		
-		Debug.Log(gameObject.tag);
 	}
 	
 	// Update is called once per frame
@@ -57,23 +54,25 @@ public class Car : MonoBehaviour {
 	}
 
 	//Called when two objects touch
-	void OnCollisionEnter(Collision other){
+	void OnCollisionEnter(Collision col){
+/*
 		//Check tag to see if colliding with building
-		if (other.gameObject.tag == "corporatePre") {
+		if (col.gameObject.tag == "Building") {
 			// if it is then destroy the car because it has reached its destination
 			Destroy (gameObject);
-			gameMgr.addCash(300);
-			//flag = false;
+			gameMgr.cash += 300;
+            Debug.Log("collision");
 		} 
 
 
 		// Check tag to see if colliding with the gate
-		else if (other.gameObject.tag == "gatePre")  
+		else if (col.gameObject.tag == "gatePre")  
 		{
 			//set flag so the car won't move and also start coroutine
 			flag = false;
-			StartCoroutine(moveGate(other));
+			StartCoroutine(moveGate(col));
 		}
+*/
 	}
 
 	//calls a timer and then moves gate to the side and lets car pass
@@ -136,15 +135,13 @@ public class Car : MonoBehaviour {
 			break;
 
 		case 2:
-			wayPointList = new Transform[8];
+			wayPointList = new Transform[6];
 			wayPointList[0] = GameObject.Find ("WayPoint1").transform;
-			wayPointList[1] = GameObject.Find ("WayPoint2").transform;
-			wayPointList[2] = GameObject.Find ("WayPoint6").transform;
-			wayPointList[3] = GameObject.Find ("WayPoint10").transform;
-			wayPointList[4] = GameObject.Find ("WayPoint11").transform;
-			wayPointList[5] = GameObject.Find ("WayPoint12").transform;
-			wayPointList[6] = GameObject.Find ("WayPoint13").transform;
-			wayPointList[7] = GameObject.Find ("WayPoint14").transform;
+			wayPointList[1] = GameObject.Find ("WayPoint10").transform;
+			wayPointList[2] = GameObject.Find ("WayPoint11").transform;
+			wayPointList[3] = GameObject.Find ("WayPoint12").transform;
+			wayPointList[4] = GameObject.Find ("WayPoint13").transform;
+			wayPointList[5] = GameObject.Find ("WayPoint14").transform;
 			break;
 
 		case 3:

@@ -40,7 +40,7 @@ public class gameManager : MonoBehaviour {
 
 
 	// Player variable information pertaining to the level
-	int cash;
+	public int cash;
 	int material;
 	int securityLevel;
 
