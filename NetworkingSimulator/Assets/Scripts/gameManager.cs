@@ -118,7 +118,6 @@ public class gameManager : MonoBehaviour {
 			carPrefab = carPrefabDict[carType];
 			obj = Resources.Load (carPrefab) as GameObject;
 			Instantiate (obj, pos,Quaternion.identity );
-Debug.Log(gameObject.tag);
 		}
 	}
 
