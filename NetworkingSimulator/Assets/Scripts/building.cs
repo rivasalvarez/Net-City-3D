@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class building : MonoBehaviour {
+public class Building : MonoBehaviour {
 	// The position of the building in the scene
 	private Vector3 position;
 

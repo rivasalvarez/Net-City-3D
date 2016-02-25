@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class security : MonoBehaviour {
+public class Security : MonoBehaviour {
 	Vector3 Position;
 
 

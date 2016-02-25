@@ -1,24 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cars : MonoBehaviour {
+public class Car : MonoBehaviour {
 
 	public Rigidbody rb;
 	private bool flag = true;
 	GameObject playerMemory;
-	playerManager playerScript;
+	gameManager gameMgr;
 
 	//WavePoint Stuff
 	private Transform[] wayPointList;
 	private int currentWayPoint = 0;
 	Transform targetWayPoint;
-	private float speed = 15f;
 
     //Car Details
-    private string color;
+    public string colorString;
+    public string sizeString;
+    public string carTypeString;
+
 	public int route;
     public int carColor;
-	public float movementSpeed = 5.0f;
+	public float speed = 10.0f;
 
 	string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
@@ -26,7 +28,7 @@ public class cars : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<playerManager> ();	
+		gameMgr = playerMemory.GetComponent<gameManager> ();	
 
 		//assign the rigid body of the car to use in collisions
 		rb = GetComponent<Rigidbody>();
@@ -34,9 +36,14 @@ public class cars : MonoBehaviour {
 		//Random Path for now
 		route = Random.Range(0,4);
 		carColor = Random.Range(0,4);
-		gameObject.GetComponent<Renderer>().material.color = playerScript.colorArray[carColor];
-		setWavePoints (route);
+		gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
 
+
+		carTypeString = gameMgr.carTypeDict[gameMgr.carType];
+        sizeString = gameMgr.carSizeDict[gameMgr.carType];
+        colorString = gameMgr.carColorDict[carColor];
+
+		setWavePoints (route);
 	}
 	
 	// Update is called once per frame
@@ -47,23 +54,25 @@ public class cars : MonoBehaviour {
 	}
 
 	//Called when two objects touch
-	void OnCollisionEnter(Collision other){
+	void OnCollisionEnter(Collision col){
+/*
 		//Check tag to see if colliding with building
-		if (other.gameObject.tag == "corporatePre") {
+		if (col.gameObject.tag == "Building") {
 			// if it is then destroy the car because it has reached its destination
 			Destroy (gameObject);
-			playerScript.addCash(300);
-			//flag = false;
+			gameMgr.cash += 300;
+            Debug.Log("collision");
 		} 
 
 
 		// Check tag to see if colliding with the gate
-		else if (other.gameObject.tag == "gatePre")  
+		else if (col.gameObject.tag == "gatePre")  
 		{
 			//set flag so the car won't move and also start coroutine
 			flag = false;
-			StartCoroutine(moveGate(other));
+			StartCoroutine(moveGate(col));
 		}
+*/
 	}
 
 	//calls a timer and then moves gate to the side and lets car pass
@@ -126,15 +135,13 @@ public class cars : MonoBehaviour {
 			break;
 
 		case 2:
-			wayPointList = new Transform[8];
+			wayPointList = new Transform[6];
 			wayPointList[0] = GameObject.Find ("WayPoint1").transform;
-			wayPointList[1] = GameObject.Find ("WayPoint2").transform;
-			wayPointList[2] = GameObject.Find ("WayPoint6").transform;
-			wayPointList[3] = GameObject.Find ("WayPoint10").transform;
-			wayPointList[4] = GameObject.Find ("WayPoint11").transform;
-			wayPointList[5] = GameObject.Find ("WayPoint12").transform;
-			wayPointList[6] = GameObject.Find ("WayPoint13").transform;
-			wayPointList[7] = GameObject.Find ("WayPoint14").transform;
+			wayPointList[1] = GameObject.Find ("WayPoint10").transform;
+			wayPointList[2] = GameObject.Find ("WayPoint11").transform;
+			wayPointList[3] = GameObject.Find ("WayPoint12").transform;
+			wayPointList[4] = GameObject.Find ("WayPoint13").transform;
+			wayPointList[5] = GameObject.Find ("WayPoint14").transform;
 			break;
 
 		case 3:

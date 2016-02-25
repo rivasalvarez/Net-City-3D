@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class tutorial01 : MonoBehaviour {
+public class mainGame : MonoBehaviour {
 	string levelName;
 	public GameObject goTerrain;
 	public Camera myCam;
 	GameObject playerMemory;
-	playerManager playerScript;
+	gameManager playerScript;
 	public GameObject obj;
 	public GameObject tmpObj;
 	private bool showSettings;
@@ -16,13 +16,16 @@ public class tutorial01 : MonoBehaviour {
 	bool placingHighway;
 	GUIStyle guiCash;
 	GUIStyle guiStyle;
-	float timer = 300;
+	public float timer = 300;
+	string mins;
+	string secs;
+	public string time;
 
 	// Use this for initialization
 	void Start () {
-		levelName = "tutorial01";
+		levelName = "mainGame";
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<playerManager> ();
+		playerScript = playerMemory.GetComponent<gameManager> ();
 
 		guiStyle =  new GUIStyle();
 		guiStyle.fontSize = 20;
@@ -45,20 +48,8 @@ public class tutorial01 : MonoBehaviour {
 				obj = Instantiate (Resources.Load ("Prefabs/corporatePre", typeof(GameObject))) as GameObject;
 				//obj.transform.position = playerScript.buildingsInThisScene[i].getPosition();
 				obj.transform.position = playerScript.buildings[0];
-				obj.GetComponent<building>().setPosition(obj.transform.position);
-				playerScript.buildingsInThisScene.Add (obj.GetComponent<building> ());
-			}
-
-			tmp = playerScript.roadsInThisScene.Count;
-			playerScript.roadsInThisScene.Clear ();
-
-			for(int i = 0; i < tmp;i++)
-			{
-				obj = Instantiate (Resources.Load ("Prefabs/roadPre", typeof(GameObject))) as GameObject;
-				obj.transform.position = playerScript.roads[i];
-				obj.GetComponent<road> ().setPosition (obj.transform.position);
-
-				playerScript.roadsInThisScene.Add (obj.GetComponent<road> ());
+				obj.GetComponent<Building>().setPosition(obj.transform.position);
+				playerScript.buildingsInThisScene.Add (obj.GetComponent<Building> ());
 			}
 				
 
@@ -69,18 +60,11 @@ public class tutorial01 : MonoBehaviour {
 			{
 				obj = Instantiate (Resources.Load ("Prefabs/gatePre", typeof(GameObject))) as GameObject;
 				obj.transform.position = playerScript.security[i];
-				obj.GetComponent<security>().setPosition(obj.transform.position);
+				obj.GetComponent<Security>().setPosition(obj.transform.position);
 
-				playerScript.securityInThisScene.Add (obj.GetComponent<security>());
+				playerScript.securityInThisScene.Add (obj.GetComponent<Security>());
 			}
 
-			tmp = playerScript.carsInThisScene.Count;
-			playerScript.carsInThisScene.Clear ();
-			
-			for(int i = 0; i < tmp; i++)
-			{
-				print ("CARS");
-			}
 			showSettings = false;
 			placingCar = false;
 			placingSecurity = false;	
@@ -95,21 +79,15 @@ public class tutorial01 : MonoBehaviour {
 			obj = Instantiate (Resources.Load ("Prefabs/corporatePre", typeof(GameObject))) as GameObject;
 			tmpObj = obj;
 			obj.transform.position = new Vector3 (40, 0, 20);
-			obj.GetComponent<building> ().setMonetary (300);
-			obj.GetComponent<building>().setPosition(obj.transform.position);
-			playerScript.buildingsInThisScene.Add (obj.GetComponent<building> ());
+			obj.GetComponent<Building> ().setMonetary (300);
+			obj.GetComponent<Building>().setPosition(obj.transform.position);
+			playerScript.buildingsInThisScene.Add (obj.GetComponent<Building> ());
 
-			for (int i = 0; i < 19; i++, z-=2.5f) {
-				obj = Instantiate (Resources.Load ("Prefabs/roadPre", typeof(GameObject))) as GameObject;
-				obj.transform.position = new Vector3 (40, 0.2f, z);
-				obj.GetComponent<road> ().setPosition (obj.transform.position);
-				playerScript.roadsInThisScene.Add (obj.GetComponent<road> ());
-			}
 
 			obj = Instantiate (Resources.Load ("Prefabs/gatePre", typeof(GameObject))) as GameObject;
 			obj.transform.position = new Vector3 (40.28648f, 2f, 29.05575f);
-			obj.GetComponent<security>().setPosition(obj.transform.position);
-			playerScript.securityInThisScene.Add (obj.GetComponent<security>());
+			obj.GetComponent<Security>().setPosition(obj.transform.position);
+			playerScript.securityInThisScene.Add (obj.GetComponent<Security>());
 
 			showSettings = false;
 			placingCar = false;
@@ -121,15 +99,15 @@ public class tutorial01 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    timer -= Time.deltaTime;
+		mins = Mathf.Floor(timer / 60).ToString("00");
+		secs = Mathf.Floor(timer % 60).ToString("00");
+		time = mins + ":" + secs;
 	}
 
 	void OnGUI()
 	{
-		string mins = Mathf.Floor(timer / 60).ToString("00");
-		string secs = Mathf.Floor(timer % 60).ToString("00");
-
 		GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
-		GUI.Label(new Rect (0, 0, 150, 20), mins + ":" + secs,guiStyle);
+		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
  
 		if (placingCar == false && placingSecurity == false) {
 			if (showSettings == false) {
@@ -184,35 +162,6 @@ public class tutorial01 : MonoBehaviour {
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, 100, 50), "Back ")) {
 					showSettings = false;
 					
-				}
-			}
-		}
-
-		if (placingCar == true) {
-			if (Input.GetMouseButton (0)) {
-				Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
-				RaycastHit hit;
-
-				if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
-					print (hit);
-					if (hit.collider.tag == "Terrain") {
-						playerScript.minusCash (30);
-
-						Vector3 placePosition;
-						placePosition = hit.point;
-						print (placePosition);
-							
-						placePosition.y += .2f;
-						placePosition.x = Mathf.Round (placePosition.x);
-						placePosition.z = Mathf.Round (placePosition.z);
-							
-						obj = Instantiate (Resources.Load ("Prefabs/roadPre", typeof(GameObject))) as GameObject;
-						obj.transform.position = new Vector3 (placePosition.x, placePosition.y, placePosition.z);	
-						obj.GetComponent<road> ().setPosition (obj.transform.position);
-						playerScript.roadsInThisScene.Add (obj.GetComponent<road> ());
-						placingCar = false;
-							
-					}
 				}
 			}
 		}

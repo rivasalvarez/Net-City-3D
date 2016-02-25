@@ -5,7 +5,21 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using System;
-public class playerManager : MonoBehaviour {
+
+
+public class gameManager : MonoBehaviour {
+	
+    // Dictionaries
+	public Dictionary<int, string> carSizeDict = new Dictionary<int, string>();
+	public Dictionary<int, string> carTypeDict = new Dictionary<int, string>();
+	public Dictionary<int, string> carColorDict = new Dictionary<int, string>();
+	public Dictionary<int, string> carPrefabDict = new Dictionary<int, string>();
+	public Dictionary<string, int> carMoneyDict = new Dictionary<string, int>();
+
+	GameObject obj;
+	Vector3 pos = new Vector3 (203.0f, 0.6f, -2.0f);
+	float timer = 10;
+	public int carType;
 
 	// These variables will be used for file I/O in terms of C#
 	private string fileName ; // The name of the file that will be created, it will be the same name as the user, except with a .txt at the end
@@ -14,22 +28,19 @@ public class playerManager : MonoBehaviour {
 
 	// These are the different list for each and everything within that specific level
 	
-	public List<building> buildingsInThisScene = new List<building>() ;
-	public List<road> roadsInThisScene = new List<road> ();
-	public List<security> securityInThisScene = new List<security>();
-	public List<cars> carsInThisScene = new List<cars>();
+	public List<Building> buildingsInThisScene = new List<Building>() ;
+	public List<Security> securityInThisScene = new List<Security>();
+	public List<Car> carsInThisScene = new List<Car>();
 
 	public List<Vector3> buildings;
-	public List<Vector3> roads;
 	public List<Vector3> security;
 	public List<Vector3> car;
 
     public Color[] colorArray;
-    public string[] carTypeArray;
 
 
 	// Player variable information pertaining to the level
-	int cash;
+	public int cash;
 	int material;
 	int securityLevel;
 
@@ -57,17 +68,38 @@ public class playerManager : MonoBehaviour {
 		colorArray[1] = Color.yellow;
 		colorArray[2] = Color.blue;
 		colorArray[3] = Color.red;
+		
+		carColorDict.Add(0,"Green");
+		carColorDict.Add(1,"Yellow");
+		carColorDict.Add(2,"Blue");
+		carColorDict.Add(3,"Red");
 
-        carTypeArray= new string[8];
+		carPrefabDict.Add(0,"Prefabs/Ambulance");
+		carPrefabDict.Add(1,"Prefabs/FireTruck");
+		carPrefabDict.Add(2,"Prefabs/Hearse");
+		carPrefabDict.Add(3,"Prefabs/IceCream");
+		carPrefabDict.Add(4,"Prefabs/PoliceCar");
+		carPrefabDict.Add(5,"Prefabs/Tanker");
+		carPrefabDict.Add(6,"Prefabs/Taxi");
+		carPrefabDict.Add(7,"Prefabs/Truck");
 
-		carTypeArray[0] = "Prefabs/Ambulance";
-		carTypeArray[1] = "Prefabs/FireTruck";
-		carTypeArray[2] = "Prefabs/Hearse";
-		carTypeArray[3] = "Prefabs/IceCream";
-		carTypeArray[4] = "Prefabs/PoliceCar";
-		carTypeArray[5] = "Prefabs/Tanker";
-		carTypeArray[6] = "Prefabs/Taxi";
-		carTypeArray[7] = "Prefabs/Truck";
+		carTypeDict.Add(0,"Ambulance");
+		carTypeDict.Add(1,"Fire Truck");
+		carTypeDict.Add(2,"Hearse");
+		carTypeDict.Add(3,"Ice Cream");
+		carTypeDict.Add(4,"Police Car");
+		carTypeDict.Add(5,"Tanker");
+		carTypeDict.Add(6,"Taxi");
+		carTypeDict.Add(7,"Truck");
+
+		carSizeDict.Add(0,"Meduim");
+		carSizeDict.Add(1,"Large");
+		carSizeDict.Add(2,"Small");
+		carSizeDict.Add(3,"Meduim");
+		carSizeDict.Add(4,"Small");
+		carSizeDict.Add(5,"Large");
+		carSizeDict.Add(6,"Small");
+		carSizeDict.Add(7,"Small");
 
 		// Check to see if the application last loaded level was 2, if so, that means the player is new
 		if (Application.loadedLevel == 2) {
@@ -77,10 +109,20 @@ public class playerManager : MonoBehaviour {
 	
 	// Update is called once per frame, this will not be used for this project as far as my knowledge
 	void Update () {
-	
+		
+		timer -= Time.deltaTime;
+		if(timer < 0){
+            string carPrefab;
+			timer = 10;
+			carType = UnityEngine.Random.Range(0,8);
+			carPrefab = carPrefabDict[carType];
+			obj = Resources.Load (carPrefab) as GameObject;
+			Instantiate (obj, pos,Quaternion.identity );
+		}
 	}
 
-	/**
+
+		/**
 	 * Function to load the file from the computer based on the user
 	 * @param: A string which is the name of the user
 	 * @pre: Has to have a name of a user.
@@ -92,14 +134,12 @@ public class playerManager : MonoBehaviour {
 	public bool loadSave(string name){
 		fileName = @"C:\Users\murad\SP\NetworkingSimulator\" + name + ".txt";
 
-		string a;
 		if (File.Exists (fileName)) {
 			setUserName(name);
 			StreamReader sr = File.OpenText(fileName);
 			Debug.Log (fileName + " Exist");
 
 			string input;
-			int level;
 			float x, y, z;
 			x = y =z = 0.0f;
 	
@@ -147,7 +187,7 @@ public class playerManager : MonoBehaviour {
 					float.TryParse(words[1], out y);
 					float.TryParse(words[2], out z);
 
-					building obj = new building();
+					Building obj = new Building();
 					obj.setPosition(new Vector3(x, y, z));
 					//buildingsInThisScene = new List<building>();
 					buildingsInThisScene.Add(obj);
@@ -164,29 +204,6 @@ public class playerManager : MonoBehaviour {
 				numberOfStuff = 0;
 				int.TryParse(words[0], out numberOfStuff);
 
-				print (words[0]);
-				for(int i = 0; i < numberOfStuff; i++)
-				{
-					
-					input = sr.ReadLine();
-					words = input.Split(secondDelimiter);
-					
-					words[0] = words[0].Trim('(');
-					words[2] = words[2].Trim(')');
-					
-					float.TryParse(words[0], out x);
-					float.TryParse(words[1], out y);
-					float.TryParse(words[2], out z);
-					
-					road obj = new road();
-					obj.setPosition(new Vector3(x, y, z));
-					//roadsInThisScene = new List<road>();
-					roadsInThisScene.Add(obj);
-					
-					print (roadsInThisScene[0].getPosition());
-					roads.Add(obj.getPosition());
-				}
-
 
 				input = sr.ReadLine();
 				words = input.Split(delimiterChars);
@@ -210,9 +227,9 @@ public class playerManager : MonoBehaviour {
 					float.TryParse(words[1], out y);
 					float.TryParse(words[2], out z);
 					
-					security obj = new security();
+					Security obj = new Security();
 					obj.setPosition(new Vector3(x, y, z));
-					securityInThisScene = new List<security>();
+					securityInThisScene = new List<Security>();
 					securityInThisScene.Add(obj);
 	
 					security.Add(obj.getPosition());
@@ -242,9 +259,9 @@ public class playerManager : MonoBehaviour {
 					float.TryParse(words[1], out y);
 					float.TryParse(words[2], out z);
 					
-					cars obj = new cars();
+					Car obj = new Car();
 					obj.setPosition(new Vector3(x, y, z));
-					carsInThisScene = new List<cars>();
+					carsInThisScene = new List<Car>();
 					carsInThisScene.Add(obj);
 					
 					car.Add(obj.getPosition());
@@ -297,13 +314,7 @@ public class playerManager : MonoBehaviour {
 		for (int i = 0; i < buildingsInThisScene.Count; i++) {
 			//writer.WriteLine (buildingsInThisScene [i].getMonetary ());
 			writer.WriteLine (buildingsInThisScene [i].getPosition ());
-		}	
-
-		writer.WriteLine ("Roads");
-		writer.WriteLine (roadsInThisScene.Count);
-		for (int i = 0; i < roadsInThisScene.Count; i++) {
-			writer.WriteLine (roadsInThisScene [i].getPosition ());
-		}	
+		}		
 
 		writer.WriteLine ("Security");
 		writer.WriteLine (securityInThisScene.Count);
