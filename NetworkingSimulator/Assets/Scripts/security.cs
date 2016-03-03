@@ -25,47 +25,32 @@ public class Security : MonoBehaviour {
 			animation.Play ("Cylinder|idle");
 		}
 
-		Debug.DrawRay (transform.position, wd, Color.green);
 		RaycastHit hit;
-		Ray landingRay = new Ray (transform.position, Vector3.forward);
+		Ray landingRay = new Ray (transform.position, Vector3.back);
 
 		// Check for the rotation of the object
 		//if(transform.eulerAngles.y == )
-			//{
-				// Check if the measurement is not-changed, then shoot out a raycast straight
-				if (Physics.Raycast (landingRay, out hit, Mathf.Infinity)) {
-			objectDetected = true;
+		//{
+		// Check if the measurement is not-changed, then shoot out a raycast straight
+		Debug.DrawRay (transform.position, wd, Color.red);
+			
+		if (Physics.Raycast (landingRay, out hit, 20f  )) {
+			//objectDetected = true;
 				
-					//print (hit);
-					Debug.DrawRay (transform.position , wd, Color.green);
-					animation.Play ("Cylinder|liftUp");
+			//print ("Object detected");
 
-					//transform.Translate(new Vector3 (90,20,30)) ;
+			print (hit);	
+			if(hit.collider.gameObject.tag == "car")
+			{
+				print ("Car detected");
+			animation.Play ("Cylinder|liftUp");
+
+			//transform.Translate(new Vector3 (90,20,30)) ;
 				}
-
-		else{
-			objectDetected = false;
+				
+	
+	
 		}
-		/*
-				// Otherwise check if the rotation is positioned in 90 degrees
-				if (Physics.Raycast (landingRay, out hit, Mathf.Infinity)) {
-						//print (hit);
-						Debug.DrawRay (transform.position , wd, Color.green);
-
-						//transform.Translate(new Vector3 (90,20,30)) ;
-					}
-
-				// Otherwise check if the rotation is position in the -180
-				if (Physics.Raycast (landingRay, out hit, Mathf.Infinity)) {
-						//print (hit);
-						Debug.DrawRay (transform.position , wd, Color.green);
-
-						//transform.Translate(new Vector3 (90,20,30)) ;
-					}
-			//}
-	*/
-	
-	
 	}
 
 	public Vector3 getPosition(){

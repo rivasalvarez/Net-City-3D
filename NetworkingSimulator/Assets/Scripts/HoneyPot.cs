@@ -33,7 +33,7 @@ public class HoneyPot : MonoBehaviour {
             
 			string info = "Color: " + colCar.colorString + "  Size: " + colCar.sizeString 
                       + "  Type: " + colCar.carTypeString + "  Time: " + gameWorld.time;
-			Debug.Log(info);
+			//Debug.Log(info);
 		} 
 	} 
 

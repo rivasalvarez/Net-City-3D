@@ -76,6 +76,7 @@ public class mainGame : MonoBehaviour {
 			// Loop through at starting integer 68 and instantiate roads based on that
 			float z = 68;
 
+			/*
 			obj = Instantiate (Resources.Load ("Prefabs/corporatePre", typeof(GameObject))) as GameObject;
 			tmpObj = obj;
 			obj.transform.position = new Vector3 (40, 0, 20);
@@ -92,6 +93,7 @@ public class mainGame : MonoBehaviour {
 			showSettings = false;
 			placingCar = false;
 			placingSecurity = false;
+			*/
 		}
 
 
