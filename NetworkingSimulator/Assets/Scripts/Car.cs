@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Car : MonoBehaviour {
-
+	public bool stop; // This variable is to make sure that the car is stopped before the security gate
 	public Rigidbody rb;
 	private bool flag = true;
 	GameObject playerMemory;
@@ -21,6 +21,8 @@ public class Car : MonoBehaviour {
 	public int route;
     public int carColor;
 	public float speed = 10.0f;
+
+
 
 	string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
@@ -76,15 +78,17 @@ public class Car : MonoBehaviour {
 	}
 
 	//calls a timer and then moves gate to the side and lets car pass
-	IEnumerator moveGate(Collision other){
+	/*IEnumerator moveGate(Collision other){
+
 		//set timer for 5secs
 		yield return new WaitForSeconds (5);
 		//move gate
 		other.gameObject.transform.position += new Vector3(10,0,0);
 		//set flag to move car forward
 		flag = true;
+		
 	}
-
+*/
 	//gets and sets of car
 	public string getName(){
 		return name;
@@ -103,14 +107,14 @@ public class Car : MonoBehaviour {
 	}
 
 	void drive(){
-		transform.forward = Vector3.RotateTowards(transform.forward, targetWayPoint.position - transform.position, speed * Time.deltaTime, 0.0f);
-		transform.position = Vector3.MoveTowards(transform.position, targetWayPoint.position, speed * Time.deltaTime);
-		
-		if (transform.position == targetWayPoint.position)
-			currentWayPoint++;
-		
-		if(currentWayPoint < this.wayPointList.Length)
-			targetWayPoint = wayPointList[currentWayPoint];
+			transform.forward = Vector3.RotateTowards (transform.forward, targetWayPoint.position - transform.position, speed * Time.deltaTime, 0.0f);
+			transform.position = Vector3.MoveTowards (transform.position, targetWayPoint.position, speed * Time.deltaTime);
+			
+			if (transform.position == targetWayPoint.position)
+				currentWayPoint++;
+			
+			if (currentWayPoint < this.wayPointList.Length)
+				targetWayPoint = wayPointList [currentWayPoint];
 		
 	} 
 
@@ -159,4 +163,9 @@ public class Car : MonoBehaviour {
 
 		targetWayPoint = wayPointList[currentWayPoint];
 	}
+
+	public void setStop(){
+		stop = true;
+	}
+
 }

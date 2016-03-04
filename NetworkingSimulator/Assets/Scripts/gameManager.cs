@@ -117,7 +117,7 @@ public class gameManager : MonoBehaviour {
 			carType = UnityEngine.Random.Range(0,8);
 			carPrefab = carPrefabDict[carType];
 			obj = Resources.Load (carPrefab) as GameObject;
-			obj.tag = "car";
+
 			Instantiate (obj, pos,Quaternion.identity );
 		}
 	}

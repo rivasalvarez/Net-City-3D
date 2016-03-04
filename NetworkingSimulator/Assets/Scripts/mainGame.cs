@@ -108,7 +108,8 @@ public class mainGame : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
+		/*
+		//GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
 		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
  
 		if (placingCar == false && placingSecurity == false) {
@@ -195,7 +196,8 @@ public class mainGame : MonoBehaviour {
 
 				}
 
-	}
 
+		*/
+	}
 }
 
