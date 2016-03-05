@@ -22,9 +22,13 @@ public class Security : MonoBehaviour {
 		Debug.DrawRay (newPos, fwd);
 		if (Physics.Raycast (newPos, fwd, out hit, 100.0F)) {
 			//print (hit.collider.tag);
-			if (hit.collider.tag != "Hearse" || hit.collider.tag != "Tanker" || hit.collider.tag != "Truck") {
+			if (hit.collider.tag != "Hearse") {
 				print (hit.collider.tag + " is found");
-				hit.transform.gameObject.GetComponent<Car>().setStop();
+				Destroy (hit.transform.gameObject);
+			} else {
+				if (hit.collider.tag == "Hearse") {
+					print ("I found a " + hit.collider.tag);
+				}
 			}
 		}
 
