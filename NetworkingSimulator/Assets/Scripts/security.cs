@@ -17,16 +17,19 @@ public class Security : MonoBehaviour {
 		Vector3 fwd = transform.TransformDirection (Vector3.forward);
 		RaycastHit hit;
 
-
 		Vector3 newPos = new Vector3 (transform.position.x, transform.position.y + 3, transform.position.z);
+	
 		Debug.DrawRay (newPos, fwd);
 		if (Physics.Raycast (newPos, fwd, out hit, 100.0F)) {
 			//print (hit.collider.tag);
 			if (hit.collider.tag != "Hearse") {
+				
 				print (hit.collider.tag + " is found");
 				Destroy (hit.transform.gameObject);
 			} else {
 				if (hit.collider.tag == "Hearse") {
+					animation.Play ("Cylinder|liftUpIdle");
+
 					print ("I found a " + hit.collider.tag);
 				}
 			}

@@ -104,11 +104,43 @@ public class mainGame : MonoBehaviour {
 		mins = Mathf.Floor(timer / 60).ToString("00");
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
+
+		//if (Input.GetKeyDown (KeyCode.G)) {
+		if(Input.GetButtonDown("Fire1")){
+		Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
+			RaycastHit hit;
+			//print ("Ray cast is starting");
+
+
+			if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
+
+				//print ("Ray cast found a hit");
+				if (hit.collider.tag == "Building") {
+					//print ("Ray cast found building");
+
+					print (hit.collider.tag);
+					playerScript.minusCash (playerScript.getSecurityLevelCash ());
+					print (hit);
+
+					Vector3 placePosition;
+					placePosition = hit.point;
+					print (placePosition);
+
+					placePosition.y += .0f;
+					placePosition.x = Mathf.Round (placePosition.x);
+					placePosition.z = Mathf.Round (placePosition.z);
+
+					obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
+					obj.transform.position = new Vector3 (placePosition.x, 0, placePosition.z);			
+					placingSecurity = false;
+				}
+			}
+		}
+
 	}
 
 	void OnGUI()
 	{
-		/*
 		//GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
 		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
  
@@ -123,7 +155,7 @@ public class mainGame : MonoBehaviour {
 				}
 
 				if (GUI.Button (new Rect (110, (Screen.height / 1.10f), 100, 50), "Create Security")) {
-					if(playerScript.getCash() >= playerScript.getSecurityLevelCash()){
+					if(playerScript.getCash() >= 30){
 						placingSecurity = true;
 					}
 
@@ -169,6 +201,7 @@ public class mainGame : MonoBehaviour {
 			}
 		}
 
+		/*
 		 if(placingSecurity == true && placingCar == false){
 					if (Input.GetKeyDown (KeyCode.G)) {
 						Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
@@ -184,20 +217,19 @@ public class mainGame : MonoBehaviour {
 								placePosition = hit.point;
 								print (placePosition);
 								
-								placePosition.y += .2f;
+								placePosition.y += .0f;
 								placePosition.x = Mathf.Round (placePosition.x);
 								placePosition.z = Mathf.Round (placePosition.z);
 								
-					obj = Instantiate (Resources.Load ("Prefabs/gatePre", typeof(GameObject))) as GameObject;
+							obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
 							obj.transform.position = new Vector3 (placePosition.x, 2, placePosition.z);			
 							placingSecurity = false;
 													}
 					}
 
 				}
-
-
 		*/
+
 	}
 }
 
