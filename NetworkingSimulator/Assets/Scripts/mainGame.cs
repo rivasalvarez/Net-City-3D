@@ -3,29 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class mainGame : MonoBehaviour {
-	string levelName;
-	public GameObject goTerrain;
-	public Camera myCam;
-	GameObject playerMemory;
-	gameManager playerScript;
-	public GameObject obj;
-	public GameObject tmpObj;
-	private bool showSettings;
-	bool placingCar;
-	bool placingSecurity;
-	bool placingHighway;
+	string levelName;	// The level the user is currently on
+	public GameObject goTerrain;	// The terrain of the object
+	public Camera myCam; // The camera object
+	GameObject playerMemory; // Not sure why we need this object
+	gameManager playerScript; // This gets the players information
+	shopMenu shopScript; // This gets the information for the shop class, and lets player manipulate their stuff using the shop class
+	public GameObject obj; // Not sure about this object
+	public GameObject tmpObj; // Not sure about this object
+	private bool showSettings; // This is a bool to check for if it is on show setting
+	bool openingShop;  // This is a bool to open up the shop
+	bool placingSecurity; // This is a bool to check for if placing security, this is ok
 	GUIStyle guiCash;
 	GUIStyle guiStyle;
-	public float timer = 300;
-	string mins;
-	string secs;
-	public string time;
+	public float timer = 300; // A timer to calculate how long the user has been playing for
+	string mins; // String of the amount of minutes that has passed
+	string secs; // String of the amount of seconds that has passed
+	public string time; // String of the amount of time overall that has passed
 
 	// Use this for initialization
 	void Start () {
 		levelName = "mainGame";
 		playerMemory = GameObject.Find ("GameObject");
 		playerScript = playerMemory.GetComponent<gameManager> ();
+
+		// shopScript =  
+
 
 		guiStyle =  new GUIStyle();
 		guiStyle.fontSize = 20;
@@ -36,6 +39,8 @@ public class mainGame : MonoBehaviour {
 		guiCash.fontSize = 20;
 		guiCash.normal.textColor = Color.green;
   
+
+		/*
 		if (playerScript.getLevelLoaded ()) {
 			//begins the player with 3000 dollars of currency
 			playerScript.setCash (3000);
@@ -76,7 +81,6 @@ public class mainGame : MonoBehaviour {
 			// Loop through at starting integer 68 and instantiate roads based on that
 			float z = 68;
 
-			/*
 			obj = Instantiate (Resources.Load ("Prefabs/corporatePre", typeof(GameObject))) as GameObject;
 			tmpObj = obj;
 			obj.transform.position = new Vector3 (40, 0, 20);
@@ -94,7 +98,7 @@ public class mainGame : MonoBehaviour {
 			placingCar = false;
 			placingSecurity = false;
 			*/
-		}
+
 
 
 	}
@@ -125,20 +129,21 @@ public class mainGame : MonoBehaviour {
 
 	}
 
+	/**
+	 * Function to calculate all of the GUI stuff for the main portion of the game
+	 * @param: None
+	 * @pre: None, requires initialized boolean varaibles
+	 * @post: Loads the required GUI stuff.
+	 * 		If user wants to place security, they press g and place a security gate at their mouse' designated spot
+	 * 		If user presses Open Shop, the call the function to open up the menu
+	 * @algorithm: Checks to see if the user clicked on the gui capabilities in the menu, if so, it launches whatever option that they clicked on 
+	 */ 
 	void OnGUI()
 	{
-		//GUI.Label(new Rect (Screen.width - 80, 0 , 150, 20), "$" + playerScript.getCash().ToString(), guiCash);
 		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
  
-		if (placingCar == false && placingSecurity == false) {
+		if (placingSecurity == false) {
 			if (showSettings == false) {
-				// This button is for create Profile
-				if (GUI.Button (new Rect (0, (Screen.height / 1.10f), 100, 50), "Create Road")) {
-					if(playerScript.getCash() >= 30)
-					{
-						placingCar = true;
-					}
-				}
 
 				if (GUI.Button (new Rect (110, (Screen.height / 1.10f), 100, 50), "Create Security")) {
 					if(playerScript.getCash() >= 30){
@@ -146,10 +151,9 @@ public class mainGame : MonoBehaviour {
 					}
 
 				}
-
-
+					
 				
-				if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Create highway")) {
+				if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Open Shop")) {
 					
 					
 				}
@@ -187,7 +191,7 @@ public class mainGame : MonoBehaviour {
 			}
 		}
 
-		 if(placingSecurity == true && placingCar == false){
+		 if(placingSecurity == true){
 					if (Input.GetKeyDown (KeyCode.G)) {
 						Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
 						RaycastHit hit;
