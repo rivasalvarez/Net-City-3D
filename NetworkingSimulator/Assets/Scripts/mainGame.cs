@@ -105,6 +105,7 @@ public class mainGame : MonoBehaviour {
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
 
+
 		//if (Input.GetKeyDown (KeyCode.G)) {
 		if(Input.GetButtonDown("Fire1")){
 		Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
@@ -115,27 +116,12 @@ public class mainGame : MonoBehaviour {
 			if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
 				//print ("Ray cast found a hit");
-				if (hit.collider.tag == "Building") {
-					//print ("Ray cast found building");
+				if (hit.collider.tag == "tollPre") {
 
-					print (hit.collider.tag);
-					playerScript.minusCash (playerScript.getSecurityLevelCash ());
-					print (hit);
-
-					Vector3 placePosition;
-					placePosition = hit.point;
-					print (placePosition);
-
-					placePosition.y += .0f;
-					placePosition.x = Mathf.Round (placePosition.x);
-					placePosition.z = Mathf.Round (placePosition.z);
-
-					obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
-					obj.transform.position = new Vector3 (placePosition.x, 0, placePosition.z);			
-					placingSecurity = false;
 				}
 			}
 		}
+
 
 	}
 
@@ -201,7 +187,6 @@ public class mainGame : MonoBehaviour {
 			}
 		}
 
-		/*
 		 if(placingSecurity == true && placingCar == false){
 					if (Input.GetKeyDown (KeyCode.G)) {
 						Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
@@ -209,26 +194,32 @@ public class mainGame : MonoBehaviour {
 
 
 						if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
-							print (hit.collider.tag);
-								playerScript.minusCash (playerScript.getSecurityLevelCash());
-							print (hit);
 
-								Vector3 placePosition;
-								placePosition = hit.point;
-								print (placePosition);
-								
-								placePosition.y += .0f;
-								placePosition.x = Mathf.Round (placePosition.x);
-								placePosition.z = Mathf.Round (placePosition.z);
-								
-							obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
-							obj.transform.position = new Vector3 (placePosition.x, 2, placePosition.z);			
-							placingSecurity = false;
-													}
+					//print ("Ray cast found a hit");
+					if (hit.collider.tag == "Building") {
+						//print ("Ray cast found building");
+
+						//print (hit.collider.tag);
+						playerScript.minusCash (playerScript.getSecurityLevelCash ());
+						//print (hit);
+
+						Vector3 placePosition;
+						placePosition = hit.point;
+						//print (placePosition);
+
+						placePosition.y += .0f;
+						placePosition.x = Mathf.Round (placePosition.x);
+						placePosition.z = Mathf.Round (placePosition.z);
+
+						obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
+						obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);			
+						placingSecurity = false;
+					}
+							}
 					}
 
 				}
-		*/
+	
 
 	}
 }

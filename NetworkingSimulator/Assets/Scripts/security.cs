@@ -23,12 +23,12 @@ public class Security : MonoBehaviour {
 		if (Physics.Raycast (newPos, fwd, out hit, 100.0F)) {
 			//print (hit.collider.tag);
 			if (hit.collider.tag != "Hearse") {
-				
+				//animation.Play ("Cylinder|idle");
 				print (hit.collider.tag + " is found");
 				Destroy (hit.transform.gameObject);
 			} else {
 				if (hit.collider.tag == "Hearse") {
-					animation.Play ("Cylinder|liftUpIdle");
+					//animation.Play ("Cylinder|liftUpIdle");
 
 					print ("I found a " + hit.collider.tag);
 				}
