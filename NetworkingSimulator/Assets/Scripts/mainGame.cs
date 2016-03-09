@@ -7,7 +7,7 @@ public class mainGame : MonoBehaviour {
 	public GameObject goTerrain;	// The terrain of the object
 	public Camera myCam; // The camera object
 	GameObject playerMemory; // Not sure why we need this object
-	gameManager playerScript; // This gets the players information
+	gameManager gameMgr; // This gets the players information
 	shopMenu shopScript; // This gets the information for the shop class, and lets player manipulate their stuff using the shop class
 	public GameObject obj; // Not sure about this object
 	public GameObject tmpObj; // Not sure about this object
@@ -25,8 +25,8 @@ public class mainGame : MonoBehaviour {
 	void Start () {
 		levelName = "mainGame";
 		playerMemory = GameObject.Find ("GameObject");
-		playerScript = playerMemory.GetComponent<gameManager> ();
-
+		gameMgr = playerMemory.GetComponent<gameManager> ();
+        gameMgr.gameIsStarted = true;
 		// shopScript =  
 
 
@@ -146,7 +146,7 @@ public class mainGame : MonoBehaviour {
 			if (showSettings == false) {
 
 				if (GUI.Button (new Rect (110, (Screen.height / 1.10f), 100, 50), "Create Security")) {
-					if(playerScript.getCash() >= 30){
+					if(gameMgr.getCash() >= 30){
 						placingSecurity = true;
 					}
 
@@ -166,12 +166,12 @@ public class mainGame : MonoBehaviour {
 
 			else {
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2), 100, 50), "Load Game")) {
-					playerScript.saveData ();
+					gameMgr.saveData ();
 					
 				}
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 100, 50), "Save Game")) {
-					playerScript.setCurrentLevel(levelName);
-					playerScript.saveData ();
+					gameMgr.setCurrentLevel(levelName);
+					gameMgr.saveData ();
 					
 				}
 
@@ -204,7 +204,7 @@ public class mainGame : MonoBehaviour {
 						//print ("Ray cast found building");
 
 						//print (hit.collider.tag);
-						playerScript.minusCash (playerScript.getSecurityLevelCash ());
+						gameMgr.minusCash (gameMgr.getSecurityLevelCash ());
 						//print (hit);
 
 						Vector3 placePosition;

@@ -43,6 +43,7 @@ public class gameManager : MonoBehaviour {
 	public int cash;
 	int material;
 	int securityLevel;
+    public bool gameIsStarted = false;
 
 	// Current level within the game
 	string currentLevel; // Used to determine what level the user was playing at last, it saved to a file upon save and used upon load
@@ -111,7 +112,7 @@ public class gameManager : MonoBehaviour {
 	void Update () {
 		
 		timer -= Time.deltaTime;
-		if(timer < 0){
+		if(timer < 0 && gameIsStarted){
             string carPrefab;
 			timer = 10;
 			carType = UnityEngine.Random.Range(0,8);
