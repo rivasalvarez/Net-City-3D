@@ -31,7 +31,11 @@ public class shopMenu : MonoBehaviour {
 	void OnGUI()
 	{
 		if (shopOpen == true) {
+			// Otherwise, place an interactable GUI button onto the screen called OpenShop
+			if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Close Shop")) {
+				shopOpen = false;
 
+			}
 
 		}
 

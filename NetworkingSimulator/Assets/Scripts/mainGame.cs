@@ -35,9 +35,9 @@ public class mainGame : MonoBehaviour {
 		// The boolean variable is going to check if the game has started 
         gameMgr.gameIsStarted = true;
 
-		// This is to find the gameObject for the shop, and play it from there
-		// shopScript =  
-
+		// This is to find the gameObject that holds the shopScript
+		shopScript = GameObject.Find("GameObject").GetComponent<shopMenu>();
+	
 		// This is to allocate new GUISTYLE to the variable and set its appropriate values
 		guiStyle =  new GUIStyle();
 		guiStyle.fontSize = 20;
@@ -162,7 +162,8 @@ public class mainGame : MonoBehaviour {
 						
 					// Otherwise, place an interactable GUI button onto the screen called OpenShop
 					if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Open Shop")) {
-						
+						// This will set the shopMenu Script to be true, in which it will display the appropriate GUI
+						shopScript.setShopOpen (true);
 						
 					}
 
