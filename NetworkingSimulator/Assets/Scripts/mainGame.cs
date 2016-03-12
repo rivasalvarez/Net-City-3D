@@ -23,18 +23,27 @@ public class mainGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// This sets the string of the current level
 		levelName = "mainGame";
+
+		// This finds a game object and sets to a object called player Memory
 		playerMemory = GameObject.Find ("GameObject");
+
+		// This gets the component known as gameManager and sets it to the variable
 		gameMgr = playerMemory.GetComponent<gameManager> ();
+
+		// The boolean variable is going to check if the game has started 
         gameMgr.gameIsStarted = true;
+
+		// This is to find the gameObject for the shop, and play it from there
 		// shopScript =  
 
-
+		// This is to allocate new GUISTYLE to the variable and set its appropriate values
 		guiStyle =  new GUIStyle();
 		guiStyle.fontSize = 20;
 		guiStyle.normal.textColor = Color.white;
 
-		
+		// This is to allocate new GUISTYLE to the cash, and set its appropriate information
 		guiCash =  new GUIStyle();
 		guiCash.fontSize = 20;
 		guiCash.normal.textColor = Color.green;
@@ -104,27 +113,13 @@ public class mainGame : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		// This is the timer, calculates the minutes, seconds, and the overall time.
 	    timer -= Time.deltaTime;
 		mins = Mathf.Floor(timer / 60).ToString("00");
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
 
 
-		//if (Input.GetKeyDown (KeyCode.G)) {
-		if(Input.GetButtonDown("Fire1")){
-		Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
-			RaycastHit hit;
-			//print ("Ray cast is starting");
-
-
-			if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
-
-				//print ("Ray cast found a hit");
-				if (hit.collider.tag == "tollPre") {
-
-				}
-			}
-		}
 
 
 	}
@@ -132,99 +127,132 @@ public class mainGame : MonoBehaviour {
 	/**
 	 * Function to calculate all of the GUI stuff for the main portion of the game
 	 * @param: None
-	 * @pre: None, requires initialized boolean varaibles
+	 * @pre: None, requires initialized boolean variables
 	 * @post: Loads the required GUI stuff.
 	 * 		If user wants to place security, they press g and place a security gate at their mouse' designated spot
 	 * 		If user presses Open Shop, the call the function to open up the menu
 	 * @algorithm: Checks to see if the user clicked on the gui capabilities in the menu, if so, it launches whatever option that they clicked on 
 	 */ 
-	void OnGUI()
-	{
+	void OnGUI(){
+		// This is going to create a label with a rectangle size with the appropriate guiStyle along with the current time after retreiving it from update
 		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
  
-		if (placingSecurity == false) {
-			if (showSettings == false) {
+		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
+		// This checks if the security button was not pressed
+		if (placingSecurity == false){
+			
+			// This checks if the showSettings button was not pushed
+			if (showSettings == false) 	{
+				
+					// This will place an interactable GUI button onto the screen called "Create Security"
+					if (GUI.Button (new Rect (110, (Screen.height / 1.10f), 100, 50), "Create Security")) {
+						
+						/* This will check if the player cash value is greater than 30. 
+							*NOTE*
+							* THIS IS SET TO TRUE AND NEEDS TO BE CHANGED LATER
+							*NOTE*
+						*/
+						if(true){
+							
+							//Set placingSecurity to be true so the user can place the object onto the map with 'g'
+							placingSecurity = true;
+						}
 
-				if (GUI.Button (new Rect (110, (Screen.height / 1.10f), 100, 50), "Create Security")) {
-					if(gameMgr.getCash() >= 30){
-						placingSecurity = true;
+					}
+						
+					// Otherwise, place an interactable GUI button onto the screen called OpenShop
+					if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Open Shop")) {
+						
+						
 					}
 
-				}
-					
-				
-				if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Open Shop")) {
-					
-					
-				}
-
-				if (GUI.Button (new Rect (330, (Screen.height / 1.10f), 100, 50), "Settings")) {
-					showSettings = true;
+					// Or check if the user interacts with the GUI button called settings on the screen
+					if (GUI.Button (new Rect (330, (Screen.height / 1.10f), 100, 50), "Settings")) {
 						
-				}
+						// This is a boolean utilized to open up another set of GUI's for loading and saving, settings
+						showSettings = true;							
+					}
 			}
 
+			// If showSettings is true, then a set of different functionalities will be displayed
 			else {
+				// Interactable GUI button for load game
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2), 100, 50), "Load Game")) {
-					gameMgr.saveData ();
-					
+					/* Saves the game data
+					 * *NOTE * shouldn't it be loading?
+					 */
+					gameMgr.saveData ();					
 				}
+				// Interactable GUI button for saving the game 
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 100, 50), "Save Game")) {
+					// Passes in the current levelName string as an argument
 					gameMgr.setCurrentLevel(levelName);
-					gameMgr.saveData ();
-					
+
+					// Calls the save functionality for the gameMgr
+					gameMgr.saveData ();					
 				}
 
+				// Interactable GUI button for options 
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 100, 100, 50), "Options")) {
 
 
 				}
-
+					
+				// Interactable GUI button for quitting the game
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 150, 100, 50), "Quit Game")) {
-								
+					// Check to see if the user wants to save, if so, then called gameMgr.saveData, or something along those lines
+
+					// Then quit the game entirely
+
 				}
 
+				// Interactable GUI button for back
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, 100, 50), "Back ")) {
-					showSettings = false;
-					
+					// Sets this to false, so the setting gui options will not appear
+					showSettings = false;					
 				}
 			}
 		}
 
+		 // This will branch into placing a security gate onto the map
 		 if(placingSecurity == true){
+					// This checks if the user pressed the G key on the keyboard
 					if (Input.GetKeyDown (KeyCode.G)) {
+						// Create a ray object, and have it trace the mousePosition from top down
 						Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
+
+						// Create a hit variable that will store the value of whatever it hits
 						RaycastHit hit;
-
-
+						
+						// Cast a raycast from the starting position of the mouse down infinitely
 						if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
-					//print ("Ray cast found a hit");
-					if (hit.collider.tag == "Building") {
-						//print ("Ray cast found building");
+						if (hit.collider.tag == "Building") {
+								// This is a variable that will hold the position of where the hit is detected for the mouse
+								Vector3 placePosition;
 
-						//print (hit.collider.tag);
-						gameMgr.minusCash (gameMgr.getSecurityLevelCash ());
-						//print (hit);
+								// This removes the amount of cash the user will have from the total
+								gameMgr.minusCash (gameMgr.getSecurityLevelCash ());
+									
+								// Store the hit position into the placePosition
+								placePosition = hit.point;
 
-						Vector3 placePosition;
-						placePosition = hit.point;
-						//print (placePosition);
+								// This will round the x and z variable, not sure if this is needed though since accuracy is much better than inaccuracy for object placement
+								placePosition.x = Mathf.Round (placePosition.x);
+								placePosition.z = Mathf.Round (placePosition.z);
 
-						placePosition.y += .0f;
-						placePosition.x = Mathf.Round (placePosition.x);
-						placePosition.z = Mathf.Round (placePosition.z);
-
-						obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
-						obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);			
-						placingSecurity = false;
-					}
-							}
-					}
-
+								// instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
+								obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
+								
+								// Change the position of it so it will be placed a little bit above the road level
+								obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
+								
+								// Set the placing security to false, in which it won't let the user keep pressing g for more security gates
+								placingSecurity = false;
+								}
+						}
+					}	
 				}
-	
-
+		}
 	}
-}
 
