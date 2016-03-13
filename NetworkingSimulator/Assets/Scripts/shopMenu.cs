@@ -7,8 +7,27 @@ public class shopMenu : MonoBehaviour {
 	private int security_one_cost; // This is the amount the player has to pay for security level 1 upgrade
 	private int security_two_cost; // This is the amount the player has to pay for security level 2 upgrade
 	private int security_three_cost; // This is the amount the player has to pay for security level 2 upgrade
-	private Vector2 button_size; // This is the size of the buttons for each of the security upgrades
 	private GUIStyle guiStyle; // This will hold the type of GUI options for the buttons and etc
+
+	// This is for the location of the button only for upgrades and for the purpose of organization
+	private int upgradeOneGUIRow;
+	private int upgradeGUICol;
+	private int upgradeTwoGUIRow;
+	private int upgradeThreeGUIRow;
+
+	// This will be for the size of the GUI buttons
+	private int guiWidth;
+	private int guiHeight;
+
+	// This is the images for each of the different security types
+	Texture2D securityOneImage;
+	Texture2D securityTwoImage;
+	Texture2D securityThreeImage;
+
+	// This is the content for which the images will be held to
+	GUIContent securityOneImageContainer;
+	GUIContent securityTwoImageContainer;
+	GUIContent securityThreeImageContainer;
 
 	// Use this for initialization
 	void Start () {
@@ -17,14 +36,25 @@ public class shopMenu : MonoBehaviour {
 		security_one_cost = 400; // This is the amount the player has to pay for security level 1 upgrade
 		security_two_cost = 800; // This is the amount the player has to pay for security level 2 upgrade
 		security_three_cost = 1200; // This is the amount the player has to pay for security level 2 upgrade
-		button_size = new Vector2(30,30); // This is the size of the buttons for each of the security upgrades
 		guiStyle = new GUIStyle(); // Allocate memory to the gui Style Variable
+
 
 		// Change the font size to 20
 		guiStyle.fontSize = 20;
 
 		// Change the color to white
 		guiStyle.normal.textColor = Color.white;
+
+		upgradeOneGUIRow = (Screen.width/2)-500;
+		upgradeGUICol = (Screen.height/2)-150;
+		upgradeTwoGUIRow = (Screen.width/2)-300;
+		upgradeThreeGUIRow  = (Screen.width/2)- 100;
+
+		// Initialize the images
+		securityOneImage = 	(Texture2D) Resources.Load ("Images/security");
+
+		securityOneImageContainer = new GUIContent();
+		securityOneImageContainer.image = securityOneImage;
 	}
 	
 	// Update is called once per frame
@@ -40,20 +70,30 @@ public class shopMenu : MonoBehaviour {
 			// This is to contain all of the different buying options
 			GUI.Box (new Rect (0, 0, 800, 600), "Shop");
 
+			// This is for the image of the first security gate upgrade
+			GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
+
+			// This is for the image of the second security gate upgrade
+			GUI.Button (new Rect (upgradeTwoGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
+
+			// This is for the image of the third security gate upgrade
+			GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
+
 			// This button is here for upgrading to security option 1
-			if (GUI.Button (new Rect (Screen.width/2 - 500, Screen.height/2 -150, 100,50), "Clickable")) {
+			if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol, 100,50), "Security 1")) {
 				print ("This is working");
 			}
 
 			// This button is here for upgrading to security option 2
-			if (GUI.Button (new Rect (Screen.width/2 - 300, Screen.height/2 -150, 100,50), "Clickable")) {
+			if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeGUICol, 100,50), "Security 2")) {
 				print ("This is working");
 			}
 
 			// This button is here for upgrading to security option 3
-			if (GUI.Button (new Rect (Screen.width/2 - 100, Screen.height/2 -150, 100,50), "Clickable")) {
+			if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol, 100,50), "Security 3")) {
 				print ("This is working");
 			}
+
 
 			// This button is here to close down the shop and place the old GUI buttons on the screen
 			if (GUI.Button (new Rect ( Screen.width/2, Screen.height -100, 100,50), "Close Shop")) {
