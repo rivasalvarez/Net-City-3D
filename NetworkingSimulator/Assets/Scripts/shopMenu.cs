@@ -8,19 +8,23 @@ public class shopMenu : MonoBehaviour {
 	private int security_two_cost; // This is the amount the player has to pay for security level 2 upgrade
 	private int security_three_cost; // This is the amount the player has to pay for security level 2 upgrade
 	private Vector2 button_size; // This is the size of the buttons for each of the security upgrades
-
+	private GUIStyle guiStyle; // This will hold the type of GUI options for the buttons and etc
 
 	// Use this for initialization
 	void Start () {
 		// This is going to initialize all of the variables at the get go
 		shopOpen = false; // The shop will be closed from the very beginning unless otherwise noted
-	//	player = new LoaderUser(); // This is to check for player manipulation, cash, levels etc.
 		security_one_cost = 400; // This is the amount the player has to pay for security level 1 upgrade
 		security_two_cost = 800; // This is the amount the player has to pay for security level 2 upgrade
 		security_three_cost = 1200; // This is the amount the player has to pay for security level 2 upgrade
 		button_size = new Vector2(30,30); // This is the size of the buttons for each of the security upgrades
+		guiStyle = new GUIStyle(); // Allocate memory to the gui Style Variable
 
+		// Change the font size to 20
+		guiStyle.fontSize = 20;
 
+		// Change the color to white
+		guiStyle.normal.textColor = Color.white;
 	}
 	
 	// Update is called once per frame
@@ -28,17 +32,38 @@ public class shopMenu : MonoBehaviour {
 	
 	}
 
-	void OnGUI()
-	{
+	void OnGUI(){
 		if (shopOpen == true) {
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
-			if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Close Shop")) {
-				shopOpen = false;
+			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 600));
 
+			// This is to contain all of the different buying options
+			GUI.Box (new Rect (0, 0, 800, 600), "Shop");
+
+			// This button is here for upgrading to security option 1
+			if (GUI.Button (new Rect (Screen.width/2 - 500, Screen.height/2 -150, 100,50), "Clickable")) {
+				print ("This is working");
 			}
 
-		}
+			// This button is here for upgrading to security option 2
+			if (GUI.Button (new Rect (Screen.width/2 - 300, Screen.height/2 -150, 100,50), "Clickable")) {
+				print ("This is working");
+			}
 
+			// This button is here for upgrading to security option 3
+			if (GUI.Button (new Rect (Screen.width/2 - 100, Screen.height/2 -150, 100,50), "Clickable")) {
+				print ("This is working");
+			}
+
+			// This button is here to close down the shop and place the old GUI buttons on the screen
+			if (GUI.Button (new Rect ( Screen.width/2, Screen.height -100, 100,50), "Close Shop")) {
+				setShopOpen (false);
+				print ("Closing down Shop");
+			}
+
+			// necessary function call for beginGroup
+			GUI.EndGroup ();	
+		}
 	}
 
 

@@ -139,8 +139,8 @@ public class mainGame : MonoBehaviour {
  
 		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
 		// This checks if the security button was not pressed
-		if (placingSecurity == false){
-			
+		if (placingSecurity == false && (shopScript.getShopOpen() == false)){
+
 			// This checks if the showSettings button was not pushed
 			if (showSettings == false) 	{
 				
@@ -254,6 +254,9 @@ public class mainGame : MonoBehaviour {
 						}
 					}	
 				}
+		if (shopScript.getShopOpen () == true) {
+
 		}
 	}
+}
 
