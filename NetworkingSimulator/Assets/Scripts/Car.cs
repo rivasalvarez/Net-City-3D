@@ -57,7 +57,7 @@ public class Car : MonoBehaviour {
 
 	//Called when two objects touch
 	void OnCollisionEnter(Collision col){
-/*
+
 		//Check tag to see if colliding with building
 		if (col.gameObject.tag == "Building") {
 			// if it is then destroy the car because it has reached its destination
@@ -66,7 +66,7 @@ public class Car : MonoBehaviour {
             Debug.Log("collision");
 		} 
 
-
+/*
 		// Check tag to see if colliding with the gate
 		else if (col.gameObject.tag == "gatePre")  
 		{
