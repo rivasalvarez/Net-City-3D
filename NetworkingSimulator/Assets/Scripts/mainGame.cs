@@ -3,34 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class mainGame : MonoBehaviour {
-	string levelName;	// The level the user is currently on
-	public GameObject goTerrain;	// The terrain of the object
-	public Camera myCam; // The camera object
-	GameObject playerMemory; // Not sure why we need this object
 	gameManager gameMgr; // This gets the players information
 	shopMenu shopScript; // This gets the information for the shop class, and lets player manipulate their stuff using the shop class
-	public GameObject obj; // Not sure about this object
-	public GameObject tmpObj; // Not sure about this object
-	private bool showSettings; // This is a bool to check for if it is on show setting
-	bool openingShop;  // This is a bool to open up the shop
-	bool placingSecurity; // This is a bool to check for if placing security, this is ok
 	GUIStyle guiCash;
 	GUIStyle guiStyle;
+
+	bool openingShop;  // This is a bool to open up the shop
+	bool placingSecurity; // This is a bool to check for if placing security, this is ok
+	public bool showSettings; // This is a bool to check for if it is on show setting
+
+	public Camera myCam; // The camera object
+	public GameObject obj; // This is for Save Menu!!!!! TODO
+    public GameObject tmpObj; // This is for Save Menu!!!!! TODO
+
 	public float timer = 300; // A timer to calculate how long the user has been playing for
+	public string time; // String of the amount of time overall that has passed
 	string mins; // String of the amount of minutes that has passed
 	string secs; // String of the amount of seconds that has passed
-	public string time; // String of the amount of time overall that has passed
 
 	// Use this for initialization
 	void Start () {
-		// This sets the string of the current level
-		levelName = "mainGame";
-
-		// This finds a game object and sets to a object called player Memory
-		playerMemory = GameObject.Find ("GameObject");
 
 		// This gets the component known as gameManager and sets it to the variable
-		gameMgr = playerMemory.GetComponent<gameManager> ();
+		gameMgr = GameObject.Find ("GameObject").GetComponent<gameManager> ();
 
 		// The boolean variable is going to check if the game has started 
         gameMgr.gameIsStarted = true;
@@ -118,10 +113,6 @@ public class mainGame : MonoBehaviour {
 		mins = Mathf.Floor(timer / 60).ToString("00");
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
-
-
-
-
 	}
 
 	/**
@@ -135,7 +126,10 @@ public class mainGame : MonoBehaviour {
 	 */ 
 	void OnGUI(){
 		// This is going to create a label with a rectangle size with the appropriate guiStyle along with the current time after retreiving it from update
-		GUI.Label(new Rect (0, 0, 150, 20), time,guiStyle);
+        GUI.Label(new Rect(Screen.width / 2, 0, 150, 20), time, guiStyle);
+        // This displays cash on GUI
+        string moneyString = "$" + gameMgr.cash;
+        GUI.Label(new Rect(Screen.width - 100, 0, 150, 20), moneyString, guiCash);
  
 		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
 		// This checks if the security button was not pressed
@@ -143,32 +137,16 @@ public class mainGame : MonoBehaviour {
 
 			// This checks if the showSettings button was not pushed
 			if (showSettings == false) 	{
-				
-					// This will place an interactable GUI button onto the screen called "Create Security"
-					if (GUI.Button (new Rect (110, (Screen.height / 1.10f), 100, 50), "Create Security")) {
-						
-						/* This will check if the player cash value is greater than 30. 
-							*NOTE*
-							* THIS IS SET TO TRUE AND NEEDS TO BE CHANGED LATER
-							*NOTE*
-						*/
-						if(true){
-							
-							//Set placingSecurity to be true so the user can place the object onto the map with 'g'
-							placingSecurity = true;
-						}
-
-					}
 						
 					// Otherwise, place an interactable GUI button onto the screen called OpenShop
-					if (GUI.Button (new Rect (220, (Screen.height / 1.10f), 100, 50), "Open Shop")) {
+					if (GUI.Button (new Rect (Screen.width - 100, 35, 100, 50), "Open Shop")) {
 						// This will set the shopMenu Script to be true, in which it will display the appropriate GUI
 						shopScript.setShopOpen (true);
 						
 					}
 
 					// Or check if the user interacts with the GUI button called settings on the screen
-					if (GUI.Button (new Rect (330, (Screen.height / 1.10f), 100, 50), "Settings")) {
+					if (GUI.Button (new Rect (5, 5, 75, 50), "Settings")) {
 						
 						// This is a boolean utilized to open up another set of GUI's for loading and saving, settings
 						showSettings = true;							
@@ -186,17 +164,9 @@ public class mainGame : MonoBehaviour {
 				}
 				// Interactable GUI button for saving the game 
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 100, 50), "Save Game")) {
-					// Passes in the current levelName string as an argument
-					gameMgr.setCurrentLevel(levelName);
 
 					// Calls the save functionality for the gameMgr
 					gameMgr.saveData ();					
-				}
-
-				// Interactable GUI button for options 
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 100, 100, 50), "Options")) {
-
-
 				}
 					
 				// Interactable GUI button for quitting the game

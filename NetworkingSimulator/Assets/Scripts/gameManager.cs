@@ -16,10 +16,12 @@ public class gameManager : MonoBehaviour {
 	public Dictionary<int, string> carPrefabDict = new Dictionary<int, string>();
 	public Dictionary<string, int> carMoneyDict = new Dictionary<string, int>();
 
-	GameObject obj;
-	Vector3 pos = new Vector3 (203.0f, 0.6f, -2.0f);
+    // Car Spawn obj, pos, timer, type
+	GameObject carPre;
+	Vector3 carStartPos = new Vector3 (203.0f, 0.6f, -2.0f);
 	float timer = 10;
 	public int carType;
+    public Color[] colorArray;
 
 	// These variables will be used for file I/O in terms of C#
 	private string fileName ; // The name of the file that will be created, it will be the same name as the user, except with a .txt at the end
@@ -27,7 +29,6 @@ public class gameManager : MonoBehaviour {
 	private string password; // This will be used to check if the user is who he says it is, after getting the first line from the file
 
 	// These are the different list for each and everything within that specific level
-	
 	public List<Building> buildingsInThisScene = new List<Building>() ;
 	public List<Security> securityInThisScene = new List<Security>();
 	public List<Car> carsInThisScene = new List<Car>();
@@ -36,17 +37,11 @@ public class gameManager : MonoBehaviour {
 	public List<Vector3> security;
 	public List<Vector3> car;
 
-    public Color[] colorArray;
-
-
 	// Player variable information pertaining to the level
 	public int cash;
-	int material;
 	int securityLevel;
     public bool gameIsStarted = false;
 
-	// Current level within the game
-	string currentLevel; // Used to determine what level the user was playing at last, it saved to a file upon save and used upon load
 	bool levelLoaded; // This is used to tell the different tutorial that a profile has been loaded
 
 	// Function that makes sure the script that the object is attached to stays alive
@@ -101,25 +96,20 @@ public class gameManager : MonoBehaviour {
 		carSizeDict.Add(5,"Large");
 		carSizeDict.Add(6,"Small");
 		carSizeDict.Add(7,"Small");
-
-		// Check to see if the application last loaded level was 2, if so, that means the player is new
-		if (Application.loadedLevel == 2) {
-			Application.LoadLevel ("tutorial01");
-		}
 	}
 	
 	// Update is called once per frame, this will not be used for this project as far as my knowledge
 	void Update () {
-		
+        // Spawn Car
 		timer -= Time.deltaTime;
+        // If game is started and car spawn timer is < 0 car will spawn
 		if(timer < 0 && gameIsStarted){
-            string carPrefab;
+
+            //reset timer, random type, and spawn car
 			timer = 10;
 			carType = UnityEngine.Random.Range(0,8);
-			carPrefab = carPrefabDict[carType];
-			obj = Resources.Load (carPrefab) as GameObject;
-
-			Instantiate (obj, pos,Quaternion.identity );
+			carPre = Resources.Load (carPrefabDict[carType]) as GameObject;
+            Instantiate(carPre, carStartPos , Quaternion.identity);
 		}
 	}
 
@@ -161,8 +151,6 @@ public class gameManager : MonoBehaviour {
 			if(words[0] == password)
 			{
 				input = sr.ReadLine();
-
-				setCurrentLevel(input);
 
 				print (input);
 				levelLoaded = true;
@@ -269,12 +257,8 @@ public class gameManager : MonoBehaviour {
 					car.Add(obj.getPosition());
 					print (carsInThisScene[0].getPosition());
 				}
-
-
 				sr.Close();
-				loadLevel();
 				return true;
-
 			}
 		
 			else{
@@ -305,9 +289,6 @@ public class gameManager : MonoBehaviour {
 		password = password.Trim ();
 		// Write the password to file
 		writer.WriteLine (password);
-
-		// Save the name of the current level the user is on
-		writer.WriteLine ( currentLevel);
 
 		writer.WriteLine (cash);
 		writer.WriteLine ("Buildings");
@@ -390,14 +371,6 @@ public class gameManager : MonoBehaviour {
 		cash += money;
 	}
 
-	public void setCurrentLevel(string levelName){
-		currentLevel = levelName;
-	}
-
-	public string getCurrentLevel(){
-		return currentLevel;
-	}
-
 	//will check if the user exists
 	public bool checkForUser(string name)
 	{
@@ -408,17 +381,4 @@ public class gameManager : MonoBehaviour {
 		} 
 		return false;
 	}
-
-	//this will load the level
-	private void loadLevel()
-	{
-		Application.LoadLevel (currentLevel);
-	}
-
-	//will returnt he level loaded
-	public bool getLevelLoaded()
-	{
-		return levelLoaded;
-	}
-
 }
