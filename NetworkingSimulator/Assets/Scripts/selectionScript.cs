@@ -20,7 +20,7 @@ public class selectionScript : MonoBehaviour {
 		
 		
 		// This button is to go to first tutorial
-		if (GUI.Button (new Rect (0, (Screen.height/2 ) , 100, 50), "Tutorial 1")) {
+		if (GUI.Button (new Rect ((Screen.width/2), (Screen.height/2 ) , 100, 50), "Start Game")) {
 			
 			Application.LoadLevel("tutorial01");			
 		}

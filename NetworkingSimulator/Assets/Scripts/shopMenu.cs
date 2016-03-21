@@ -80,17 +80,17 @@ public class shopMenu : MonoBehaviour {
 			GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
 
 			// This button is here for upgrading to security option 1
-			if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol, 100,50), "Security 1")) {
+			if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol, 100,50), "Firewall")) {
 				print ("This is working");
 			}
 
 			// This button is here for upgrading to security option 2
-			if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeGUICol, 100,50), "Security 2")) {
+			if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeGUICol, 100,50), "Honey Pot")) {
 				print ("This is working");
 			}
 
 			// This button is here for upgrading to security option 3
-			if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol, 100,50), "Security 3")) {
+			if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol, 100,50), "IDS")) {
 				print ("This is working");
 			}
 
