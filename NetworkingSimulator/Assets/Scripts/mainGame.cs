@@ -225,7 +225,7 @@ public class mainGame : MonoBehaviour {
 					}	
 				}
 		if (shopScript.getShopOpen () == true) {
-
+			Time.timeScale = 0;
 		}
 	}
 }

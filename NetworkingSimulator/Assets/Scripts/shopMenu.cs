@@ -45,21 +45,30 @@ public class shopMenu : MonoBehaviour {
 		// Change the color to white
 		guiStyle.normal.textColor = Color.white;
 
-		upgradeOneGUIRow = (Screen.width/2)-500;
-		upgradeGUICol = (Screen.height/2)-150;
-		upgradeTwoGUIRow = (Screen.width/2)-300;
-		upgradeThreeGUIRow  = (Screen.width/2)- 100;
+		upgradeOneGUIRow = (Screen.width/2) + 500;
+		upgradeGUICol = (Screen.height/2)-100;
+		upgradeTwoGUIRow = (Screen.width/2) + 250;
+		upgradeThreeGUIRow  = (Screen.width/2);
 
 		// Initialize the images
-		securityOneImage = 	(Texture2D) Resources.Load ("Images/security");
+		securityOneImage = 	(Texture2D) Resources.Load ("Images/FirewallIcon");
+		securityTwoImage = (Texture2D)Resources.Load ("Images/HoneyPotIcon");
+		securityThreeImage = (Texture2D)Resources.Load ("Images/Security");
 
 		securityOneImageContainer = new GUIContent();
 		securityOneImageContainer.image = securityOneImage;
+
+		securityTwoImageContainer = new GUIContent();
+		securityTwoImageContainer.image = securityTwoImage;
+
+		securityThreeImageContainer = new GUIContent();
+		securityThreeImageContainer.image = securityThreeImage;
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	void OnGUI(){
@@ -68,16 +77,16 @@ public class shopMenu : MonoBehaviour {
 			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 600));
 
 			// This is to contain all of the different buying options
-			GUI.Box (new Rect (0, 0, 800, 600), "Shop");
+			GUI.Box (new Rect (0, 10, 800, 600), "Shop");
 
 			// This is for the image of the first security gate upgrade
 			GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
 
 			// This is for the image of the second security gate upgrade
-			GUI.Button (new Rect (upgradeTwoGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
+			GUI.Button (new Rect (upgradeTwoGUIRow, upgradeGUICol-150, 128, 128), securityTwoImageContainer);
 
 			// This is for the image of the third security gate upgrade
-			GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
+			GUI.Button (new Rect (upgradeThreeGUIRow, upgradeGUICol-150, 128, 128), securityThreeImageContainer);
 
 			// This button is here for upgrading to security option 1
 			if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol, 100,50), "Firewall")) {
@@ -96,8 +105,9 @@ public class shopMenu : MonoBehaviour {
 
 
 			// This button is here to close down the shop and place the old GUI buttons on the screen
-			if (GUI.Button (new Rect ( Screen.width/2, Screen.height -100, 100,50), "Close Shop")) {
+			if (GUI.Button (new Rect ( upgradeTwoGUIRow, Screen.height -100, 100,50), "Close Shop")) {
 				setShopOpen (false);
+				Time.timeScale = 1;
 				print ("Closing down Shop");
 			}
 
