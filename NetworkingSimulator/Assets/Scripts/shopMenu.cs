@@ -33,11 +33,6 @@ public class shopMenu : MonoBehaviour {
 	GUIContent securityTwoImageContainer;
 	GUIContent securityThreeImageContainer;
 
-	// Variable to store the name of the grids gui's
-	private string[] selStrings;
-	private int selGridInt;
-	private GUIContent[] guiStrings;
-
 	// String value which will detect what type of security it is. The range can be L1, L2, L3
 	private string securityType;
 
@@ -50,6 +45,11 @@ public class shopMenu : MonoBehaviour {
 	private bool large;
 	private bool median;
 	private bool small;
+
+	// Bool if upgrade chosen
+	bool upgradeChosen;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -91,11 +91,17 @@ public class shopMenu : MonoBehaviour {
 		securityThreeImageContainer = new GUIContent();
 		securityThreeImageContainer.image = securityThreeImage;
 
-		selStrings = new string[] {"Security", "HoneyPot", "Firewall"};
-
-		selGridInt = 0;	
-
-		guiStrings = new GUIContent[] { securityOneImageContainer, securityTwoImageContainer, securityThreeImageContainer };
+		// String value is set to a default value
+		securityType = " ";
+	
+		// Set default values as false
+		red = false;;
+		blue = false;
+		green = false;
+		large = false;
+		median = false;
+		small = false;
+		upgradeChosen = false;
 	}
 
 	// Update is called once per frame
@@ -109,80 +115,103 @@ public class shopMenu : MonoBehaviour {
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
 			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 600));
 
-			// This is to contain all of the different buying options
-			GUI.Box (new Rect (0, 0, 800, 600), "Shop");
+			if (upgradeChosen) {
+				if (securityType == "L1") {
+					GUI.Box (new Rect (0, 0, 300, 300), "Purchase Options");
+					red = GUI.Toggle (new Rect (10, 60, 100, 30), red, "Red");
+					green = GUI.Toggle (new Rect (10, 160, 100, 30), green, "Green");
+					blue = GUI.Toggle (new Rect (10, 260, 100, 30), blue, "Blue");
 
+					if (red || blue || green) {
+						small = GUI.Toggle (new Rect (140, 60, 100, 30), small, "Small");
+						median = GUI.Toggle (new Rect (140, 160, 100, 30), median, "Medium");
+						large = GUI.Toggle (new Rect (140, 260, 100, 30), large, "Large");
 
-			// First set of upgrades for the security for the pictures
-			GUI.Label (new Rect (upgradeOneGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
-			GUI.Label (new Rect (upgradeOneGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
-			GUI.Label (new Rect (upgradeOneGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
-
-			// This is the second set of upgrades for the pictures
-			GUI.Label (new Rect (upgradeTwoGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
-			GUI.Label (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
-			GUI.Label (new Rect (upgradeTwoGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
-
-			// This is the third set of upgrades for the pictures
-			GUI.Label (new Rect (upgradeThreeGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
-			GUI.Label (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
-			GUI.Label (new Rect (upgradeThreeGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
-
-
-
-			// This button is here for upgrading to security option 1
-			if (GUI.Button (new Rect (upgradeOneGUIRow , upgradeOneGUICol + 128, 128, 50), "Security One")) {
-				print ("This is working");
+						if (small || median || large) {
+							{
+								upgradeChosen = false;
+							}
+						}
+					}
+				} 
 			}
+				else {
+				// This is to contain all of the different buying options
+				GUI.Box (new Rect (0, 0, 800, 600), "Shop");
 
-			// This button is here for upgrading to security option 2
-			if (GUI.Button (new Rect (upgradeOneGUIRow , upgradeTwoGUICol + 128  ,  128, 50), "HoneyPot One")) {
-				print ("This is working");
+
+				// First set of upgrades for the security for the pictures
+				GUI.Label (new Rect (upgradeOneGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
+				GUI.Label (new Rect (upgradeOneGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
+				GUI.Label (new Rect (upgradeOneGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
+
+				// This is the second set of upgrades for the pictures
+				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
+				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
+				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
+
+				// This is the third set of upgrades for the pictures
+				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
+				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
+				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
+
+
+
+				// This button is here for upgrading to security option 1
+				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeOneGUICol + 128, 128, 50), "Security One")) {
+					securityType = "L1";
+					upgradeChosen = true;
+					red = green = blue = small = median = large = false;
+				}
+
+				// This button is here for upgrading to security option 2
+				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot One")) {
+					print ("This is working");
+				}
+
+				// This button is here for upgrading to security option 3
+				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeThreeGUICol + 128, 128, 50), "IDS One")) {
+					print ("This is working");
+				}
+
+				// This button is here for upgrading to security option 1
+				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Two")) {
+					securityType = "L2";
+				}
+
+				// This button is here for upgrading to security option 2
+				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Two")) {
+					print ("This is working");
+				}
+
+				// This button is here for upgrading to security option 3
+				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeThreeGUICol + 128, 128, 50), "IDS Two")) {
+					print ("This is working");
+				}
+
+				// This button is here for upgrading to security option 1
+				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Three")) {
+					securityType = "L3";
+				}
+
+				// This button is here for upgrading to security option 2
+				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Three")) {
+					print ("This is working");
+				}
+
+				// This button is here for upgrading to security option 3
+				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeThreeGUICol + 128, 128, 50), "IDS Three")) {
+					print ("This is working");
+				}
+
+
+				// This button is here to close down the shop and place the old GUI buttons on the screen
+				if (GUI.Button (new Rect (800 - 128, upgradeThreeGUICol + 128, 128, 50), "Close Shop")) {
+					setShopOpen (false);
+					Time.timeScale = 1;
+					print ("Closing down Shop");
+				}
 			}
-
-			// This button is here for upgrading to security option 3
-			if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeThreeGUICol + 128,  128, 50), "IDS One")) {
-				print ("This is working");
-			}
-
-			// This button is here for upgrading to security option 1
-			if (GUI.Button (new Rect (upgradeTwoGUIRow , upgradeOneGUICol + 128, 128, 50), "Security Two")) {
-				print ("This is working");
-			}
-
-			// This button is here for upgrading to security option 2
-			if (GUI.Button (new Rect (upgradeTwoGUIRow , upgradeTwoGUICol + 128  ,  128, 50), "HoneyPot Two")) {
-				print ("This is working");
-			}
-
-			// This button is here for upgrading to security option 3
-			if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeThreeGUICol + 128,  128, 50), "IDS Two")) {
-				print ("This is working");
-			}
-
-			// This button is here for upgrading to security option 1
-			if (GUI.Button (new Rect (upgradeThreeGUIRow , upgradeOneGUICol + 128, 128, 50), "Security Three")) {
-				print ("This is working");
-			}
-
-			// This button is here for upgrading to security option 2
-			if (GUI.Button (new Rect (upgradeThreeGUIRow , upgradeTwoGUICol + 128  ,  128, 50), "HoneyPot Three")) {
-				print ("This is working");
-			}
-
-			// This button is here for upgrading to security option 3
-			if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeThreeGUICol + 128,  128, 50), "IDS Three")) {
-				print ("This is working");
-			}
-
-
-			// This button is here to close down the shop and place the old GUI buttons on the screen
-			if (GUI.Button (new Rect ( 800-128, upgradeThreeGUICol + 128, 128, 50), "Close Shop")) {
-				setShopOpen (false);
-				Time.timeScale = 1;
-				print ("Closing down Shop");
-			}
-
 			// necessary function call for beginGroup
 			GUI.EndGroup ();	
 

@@ -220,7 +220,7 @@ public class mainGame : MonoBehaviour {
 								
 								// Set the placing security to false, in which it won't let the user keep pressing g for more security gates
 								placingSecurity = false;
-								}
+							}
 						}
 					}	
 				}

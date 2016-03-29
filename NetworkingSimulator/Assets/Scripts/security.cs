@@ -6,6 +6,19 @@ public class Security : MonoBehaviour {
 	Animator animation;
 	bool objectDetected;
 
+	// This is the type of security gate it is
+	private string securityType;
+
+	// This is the set of colors that it can detect
+	private bool red;
+	private bool green;
+	private bool blue;
+
+	// This is the set of sizes that it can detect
+	private bool small;
+	private bool medium;
+	private bool large;
+
 	// Use this for initialization
 	void Start () {
 		animation = GetComponent<Animator> ();
@@ -45,5 +58,18 @@ public class Security : MonoBehaviour {
 		Position = inVect;
 	}
 
+		
+	// This is to set the things the security gate will detect
+	public void setColors(bool r, bool g, bool b){
+		red = r;
+		green = g;
+		blue = b;
+	}
+
+	public void setSize(bool s, bool m, bool l){
+		small = s;
+		medium = m;
+		large = l;
+	}
 }
 
