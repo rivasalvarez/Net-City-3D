@@ -29,6 +29,24 @@ public class shopMenu : MonoBehaviour {
 	GUIContent securityTwoImageContainer;
 	GUIContent securityThreeImageContainer;
 
+	// Variable to store the name of the grids gui's
+	private string[] selStrings;
+	private int selGridInt;
+	private GUIContent[] guiStrings;
+
+	// String value which will detect what type of security it is. The range can be L1, L2, L3
+	private string securityType;
+
+	// These are the values for car color that it will detect what car colors are allowed
+	private bool red;
+	private bool blue;
+	private bool green;
+
+	// These are the values for the size of the car which the gate will detect
+	private bool large;
+	private bool median;
+	private bool small;
+
 	// Use this for initialization
 	void Start () {
 		// This is going to initialize all of the variables at the get go
@@ -64,6 +82,11 @@ public class shopMenu : MonoBehaviour {
 		securityThreeImageContainer = new GUIContent();
 		securityThreeImageContainer.image = securityThreeImage;
 
+		selStrings = new string[] {"Security", "HoneyPot", "Firewall"};
+
+		selGridInt = 0;	
+
+		guiStrings = new GUIContent[] { securityOneImageContainer, securityTwoImageContainer, securityThreeImageContainer };
 	}
 
 	// Update is called once per frame
@@ -73,11 +96,13 @@ public class shopMenu : MonoBehaviour {
 
 	void OnGUI(){
 		if (shopOpen == true) {
+			
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
 			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 600));
 
 			// This is to contain all of the different buying options
 			GUI.Box (new Rect (0, 10, 800, 600), "Shop");
+
 
 			// This is for the image of the first security gate upgrade
 			GUI.Button (new Rect (upgradeOneGUIRow, upgradeGUICol-150, 128, 128), securityOneImageContainer);
@@ -113,6 +138,7 @@ public class shopMenu : MonoBehaviour {
 
 			// necessary function call for beginGroup
 			GUI.EndGroup ();	
+
 		}
 	}
 
