@@ -113,6 +113,21 @@ public class mainGame : MonoBehaviour {
 		mins = Mathf.Floor(timer / 60).ToString("00");
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
+
+
+		if (Input.GetMouseButtonDown (1)) {
+			// Create a ray object, and have it trace the mousePosition from top down
+			Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
+
+			// Create a hit variable that will store the value of whatever it hits
+			RaycastHit hit;
+
+			Physics.Raycast (vRay, out hit, Mathf.Infinity);
+
+			if (hit.collider.tag == "Hearse") {
+				print (GetComponent<Collider>().tag);
+			}
+		}
 	}
 
 	/**
@@ -133,8 +148,8 @@ public class mainGame : MonoBehaviour {
  
 		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
 		// This checks if the security button was not pressed
-		if (placingSecurity == false && (shopScript.getShopOpen() == false)){
-
+		if ( (shopScript.getShopOpen() == false) && (shopScript.getSecurityType() == " ")){
+			print ("Shop is closed");
 			// This checks if the showSettings button was not pushed
 			if (showSettings == false) 	{
 						
@@ -185,45 +200,49 @@ public class mainGame : MonoBehaviour {
 			}
 		}
 
-		 // This will branch into placing a security gate onto the map
-		 if(placingSecurity == true){
-					// This checks if the user pressed the G key on the keyboard
-					if (Input.GetKeyDown (KeyCode.G)) {
-						// Create a ray object, and have it trace the mousePosition from top down
-						Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
+		if (shopScript.getSecurityType () == "L1" || shopScript.getSecurityType() == "L2") {
+			placingSecurity = true;
+			// This will branch into placing a security gate onto the map
+			if (placingSecurity == true) {
+				// This checks if the user pressed the G key on the keyboard
+				if (Input.GetMouseButtonDown(1)) {
+					// Create a ray object, and have it trace the mousePosition from top down
+					Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
 
-						// Create a hit variable that will store the value of whatever it hits
-						RaycastHit hit;
+					// Create a hit variable that will store the value of whatever it hits
+					RaycastHit hit;
 						
-						// Cast a raycast from the starting position of the mouse down infinitely
-						if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
+					// Cast a raycast from the starting position of the mouse down infinitely
+					if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
 						if (hit.collider.tag == "Building") {
-								// This is a variable that will hold the position of where the hit is detected for the mouse
-								Vector3 placePosition;
+							// This is a variable that will hold the position of where the hit is detected for the mouse
+							Vector3 placePosition;
 
-								// This removes the amount of cash the user will have from the total
-								gameMgr.minusCash (gameMgr.getSecurityLevelCash ());
+							// This removes the amount of cash the user will have from the total
+							gameMgr.minusCash (gameMgr.getSecurityLevelCash ());
 									
-								// Store the hit position into the placePosition
-								placePosition = hit.point;
+							// Store the hit position into the placePosition
+							placePosition = hit.point;
 
-								// This will round the x and z variable, not sure if this is needed though since accuracy is much better than inaccuracy for object placement
-								placePosition.x = Mathf.Round (placePosition.x);
-								placePosition.z = Mathf.Round (placePosition.z);
+							// This will round the x and z variable, not sure if this is needed though since accuracy is much better than inaccuracy for object placement
+							placePosition.x = Mathf.Round (placePosition.x);
+							placePosition.z = Mathf.Round (placePosition.z);
 
-								// instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
-								obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
+							// instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
+							obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
 								
-								// Change the position of it so it will be placed a little bit above the road level
-								obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
+							// Change the position of it so it will be placed a little bit above the road level
+							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
 								
-								// Set the placing security to false, in which it won't let the user keep pressing g for more security gates
-								placingSecurity = false;
-							}
+							// Set the placing security to false, in which it won't let the user keep pressing g for more security gates
+							placingSecurity = false;
+							shopScript.clear ();
 						}
-					}	
-				}
+					}
+				}	
+			}
+		}
 		if (shopScript.getShopOpen () == true) {
 			Time.timeScale = 0;
 		}

@@ -117,23 +117,64 @@ public class shopMenu : MonoBehaviour {
 
 			if (upgradeChosen) {
 				if (securityType == "L1") {
-					GUI.Box (new Rect (0, 0, 300, 300), "Purchase Options");
+					GUI.Box (new Rect (0, 0, 600, 600), "Purchase Options");
 					red = GUI.Toggle (new Rect (10, 60, 100, 30), red, "Red");
 					green = GUI.Toggle (new Rect (10, 160, 100, 30), green, "Green");
 					blue = GUI.Toggle (new Rect (10, 260, 100, 30), blue, "Blue");
 
-					if (red || blue || green) {
+					if ((red && !blue && !green) || (!red && blue && !green) || (!red && !blue && green)) {
 						small = GUI.Toggle (new Rect (140, 60, 100, 30), small, "Small");
 						median = GUI.Toggle (new Rect (140, 160, 100, 30), median, "Medium");
 						large = GUI.Toggle (new Rect (140, 260, 100, 30), large, "Large");
 
-						if (small || median || large) {
+						if ((small && !median && !large) || (!small && median && !large) || (!small && !median && large)) {
 							{
-								upgradeChosen = false;
+								if (GUI.Button (new Rect (240, 400- (128*2) + 128, 128, 50), "Purchase")) {
+									upgradeChosen = false;
+									shopOpen = false;
+									Time.timeScale = 1;
+								}
 							}
 						}
 					}
-				} 
+					if (GUI.Button (new Rect (240, 400-128 + 128, 128, 50), "Cancel Purchase")) {
+						clear ();
+						upgradeChosen = false;
+						Time.timeScale = 1;
+	
+					}
+				}
+
+				if (securityType == "L2") {
+					GUI.Box (new Rect (0, 0, 600, 600), "Purchase Options");
+					red = GUI.Toggle (new Rect (10, 60, 100, 30), red, "Red");
+					green = GUI.Toggle (new Rect (10, 160, 100, 30), green, "Green");
+					blue = GUI.Toggle (new Rect (10, 260, 100, 30), blue, "Blue");
+
+					if ((red && blue && !green) || (!red && blue && green) || (red && !blue && green)) {
+						small = GUI.Toggle (new Rect (140, 60, 100, 30), small, "Small");
+						median = GUI.Toggle (new Rect (140, 160, 100, 30), median, "Medium");
+						large = GUI.Toggle (new Rect (140, 260, 100, 30), large, "Large");
+
+						if ((small && median && !large) || (!small && median && large) || (small && !median && large)) {
+							{
+								if (GUI.Button (new Rect (240, 400- (128*2) + 128, 128, 50), "Purchase")) {
+									upgradeChosen = false;
+									shopOpen = false;
+									Time.timeScale = 1;
+
+								}
+							}
+						}
+					}
+					if (GUI.Button (new Rect (240, 400-128 + 128, 128, 50), "Cancel Purchase")) {
+						clear ();
+						upgradeChosen = false;
+						Time.timeScale = 1;
+
+					}
+
+				}
 			}
 				else {
 				// This is to contain all of the different buying options
@@ -161,7 +202,6 @@ public class shopMenu : MonoBehaviour {
 				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeOneGUICol + 128, 128, 50), "Security One")) {
 					securityType = "L1";
 					upgradeChosen = true;
-					red = green = blue = small = median = large = false;
 				}
 
 				// This button is here for upgrading to security option 2
@@ -177,6 +217,7 @@ public class shopMenu : MonoBehaviour {
 				// This button is here for upgrading to security option 1
 				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Two")) {
 					securityType = "L2";
+					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
@@ -207,7 +248,10 @@ public class shopMenu : MonoBehaviour {
 
 				// This button is here to close down the shop and place the old GUI buttons on the screen
 				if (GUI.Button (new Rect (800 - 128, upgradeThreeGUICol + 128, 128, 50), "Close Shop")) {
-					setShopOpen (false);
+					shopOpen = false;
+					upgradeChosen = false;
+					clear ();
+					print (securityType);
 					Time.timeScale = 1;
 					print ("Closing down Shop");
 				}
@@ -240,5 +284,14 @@ public class shopMenu : MonoBehaviour {
 	 */ 
 	public bool getShopOpen(){
 		return shopOpen;
+	}
+
+	public string getSecurityType(){
+		return securityType;
+	}
+
+	public void clear(){
+		red = green = blue = small = median = large = false;
+		securityType = " ";
 	}
 }
