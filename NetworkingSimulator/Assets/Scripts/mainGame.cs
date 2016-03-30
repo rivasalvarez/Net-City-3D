@@ -114,21 +114,7 @@ public class mainGame : MonoBehaviour {
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
 
-
-		if (Input.GetMouseButtonDown (1)) {
-			// Create a ray object, and have it trace the mousePosition from top down
-			Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
-
-			// Create a hit variable that will store the value of whatever it hits
-			RaycastHit hit;
-
-			Physics.Raycast (vRay, out hit, Mathf.Infinity);
-
-			if (hit.collider.tag == "Hearse") {
-				print (GetComponent<Collider>().tag);
 			}
-		}
-	}
 
 	/**
 	 * Function to calculate all of the GUI stuff for the main portion of the game
@@ -140,6 +126,28 @@ public class mainGame : MonoBehaviour {
 	 * @algorithm: Checks to see if the user clicked on the gui capabilities in the menu, if so, it launches whatever option that they clicked on 
 	 */ 
 	void OnGUI(){
+			GameObject temp;
+			print ("Button down");
+			// Create a ray object, and have it trace the mousePosition from top down
+			Ray ray = myCam.ScreenPointToRay (Input.mousePosition);
+
+			// Create a hit variable that will store the value of whatever it hits
+			RaycastHit hitDetected;
+
+			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
+
+			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
+				if (hitDetected.collider.tag != "Building") {
+					//temp = RaycastHit.transform.gameObject;
+					print (hitDetected.collider.tag);
+				GUI.Label (new Rect (Input.mousePosition.x, Screen.height-Input.mousePosition.y, 100, 100), " This works" +
+					" '\n'This also works", guiCash);
+				} else {
+					print ("Hit not detected");
+				}
+			}
+	
+
 		// This is going to create a label with a rectangle size with the appropriate guiStyle along with the current time after retreiving it from update
         GUI.Label(new Rect(Screen.width / 2, 0, 150, 20), time, guiStyle);
         // This displays cash on GUI
@@ -149,7 +157,6 @@ public class mainGame : MonoBehaviour {
 		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
 		// This checks if the security button was not pressed
 		if ( (shopScript.getShopOpen() == false) && (shopScript.getSecurityType() == " ")){
-			print ("Shop is closed");
 			// This checks if the showSettings button was not pushed
 			if (showSettings == false) 	{
 						
