@@ -126,7 +126,7 @@ public class mainGame : MonoBehaviour {
 	 * @algorithm: Checks to see if the user clicked on the gui capabilities in the menu, if so, it launches whatever option that they clicked on 
 	 */ 
 	void OnGUI(){
-			GameObject temp;
+			Car tempScript;
 			print ("Button down");
 			// Create a ray object, and have it trace the mousePosition from top down
 			Ray ray = myCam.ScreenPointToRay (Input.mousePosition);
@@ -138,9 +138,8 @@ public class mainGame : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
 				if (hitDetected.collider.tag != "Building") {
-					//temp = RaycastHit.transform.gameObject;
 					print (hitDetected.collider.tag);
-				GUI.Label (new Rect (Input.mousePosition.x, Screen.height-Input.mousePosition.y, 100, 100), " This works" +
+					GUI.Label (new Rect (Input.mousePosition.x, Screen.height-Input.mousePosition.y, 100, 100), " This works" +
 					" '\n'This also works", guiCash);
 				} else {
 					print ("Hit not detected");
