@@ -37,28 +37,26 @@ public class shopMenu : MonoBehaviour {
 	private string securityType;
 
 	// These are the values for car color that it will detect what car colors are allowed
-	private bool red;
-	private bool blue;
-	private bool green;
+	public bool red;
+	public bool blue;
+	public bool green;
 
 	// These are the values for the size of the car which the gate will detect
-	private bool large;
-	private bool median;
-	private bool small;
+	public bool large;
+	public bool median;
+	public bool small;
 
 	// Bool if upgrade chosen
-	bool upgradeChosen;
+	public bool upgradeChosen;
 
 	// This is the toggle boolean variables for the different types of car user can choose from
-	bool ambulance;
-	bool fireTruck;
-	bool Tanker;
-	bool Truck;
-	bool Hearse;
-	bool IceCream;
-	bool policeCar;
-
-
+	public bool ambulance;
+	public bool fireTruck;
+	public bool Tanker;
+	public bool Truck;
+	public bool Hearse;
+	public bool IceCream;
+	public bool policeCar;
 
 	// Use this for initialization
 	void Start () {
@@ -363,7 +361,7 @@ public class shopMenu : MonoBehaviour {
 	}
 
 	public void clear(){
-		red = green = blue = small = median = large = false;
+		ambulance = fireTruck =  Tanker = Truck = Hearse = IceCream =policeCar = red = green = blue = small = median = large = false;
 		securityType = " ";
 	}
 }

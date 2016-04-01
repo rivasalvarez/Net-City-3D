@@ -228,6 +228,26 @@ public class mainGame : MonoBehaviour {
 					if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
 						if (hit.collider.tag == "Building") {
+							// These are the values for car color that it will detect what car colors are allowed
+							bool red = shopScript.red;
+							bool blue = shopScript.blue;
+							bool green = shopScript.green;
+
+							// These are the values for the size of the car which the gate will detect
+							bool large = shopScript.large;
+							bool median = shopScript.median;
+							bool small = shopScript.small;
+
+							// This is the toggle boolean variables for the different types of car user can choose from
+							bool ambulance = shopScript.ambulance;
+							bool fireTruck= shopScript.fireTruck;
+							bool Tanker= shopScript.Tanker;
+							bool Truck= shopScript.Truck;
+							bool Hearse= shopScript.Hearse;
+							bool IceCream= shopScript.IceCream;
+							bool policeCar= shopScript.policeCar;
+
+
 							// This is a variable that will hold the position of where the hit is detected for the mouse
 							Vector3 placePosition;
 
@@ -243,7 +263,12 @@ public class mainGame : MonoBehaviour {
 
 							// instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
 							obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
-								
+
+							obj.GetComponent <Security> ().setTypes (ambulance, fireTruck, Tanker, Truck, Hearse, IceCream, policeCar);
+							obj.GetComponent <Security> ().setColors (red, green, blue);
+							obj.GetComponent <Security> ().setSize (small, median, large);
+							obj.GetComponent <Security> ().setSecurityType (shopScript.getSecurityType());
+
 							// Change the position of it so it will be placed a little bit above the road level
 							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
 								
