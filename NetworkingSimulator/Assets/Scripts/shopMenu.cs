@@ -49,6 +49,15 @@ public class shopMenu : MonoBehaviour {
 	// Bool if upgrade chosen
 	bool upgradeChosen;
 
+	// This is the toggle boolean variables for the different types of car user can choose from
+	bool ambulance;
+	bool fireTruck;
+	bool Tanker;
+	bool Truck;
+	bool Hearse;
+	bool IceCream;
+	bool policeCar;
+
 
 
 	// Use this for initialization
@@ -113,26 +122,49 @@ public class shopMenu : MonoBehaviour {
 		if (shopOpen == true) {
 			
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
-			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 600));
+			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 700));
 
 			if (upgradeChosen) {
 				if (securityType == "L1") {
-					GUI.Box (new Rect (0, 0, 600, 600), "Purchase Options");
-					red = GUI.Toggle (new Rect (10, 60, 100, 30), red, "Red");
-					green = GUI.Toggle (new Rect (10, 160, 100, 30), green, "Green");
-					blue = GUI.Toggle (new Rect (10, 260, 100, 30), blue, "Blue");
 
-					if ((red && !blue && !green) || (!red && blue && !green) || (!red && !blue && green)) {
-						small = GUI.Toggle (new Rect (140, 60, 100, 30), small, "Small");
-						median = GUI.Toggle (new Rect (140, 160, 100, 30), median, "Medium");
-						large = GUI.Toggle (new Rect (140, 260, 100, 30), large, "Large");
+					GUI.Box (new Rect (0, 0, 700, 700), "Purchase Options");
 
-						if ((small && !median && !large) || (!small && median && !large) || (!small && !median && large)) {
-							{
-								if (GUI.Button (new Rect (240, 400- (128*2) + 128, 128, 50), "Purchase")) {
-									upgradeChosen = false;
-									shopOpen = false;
-									Time.timeScale = 1;
+					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");;
+					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");;
+					Tanker = GUI.Toggle (new Rect (10, 240, 100, 30), Tanker, "Tanker");
+					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck"); ;
+					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");;
+					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream");
+					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");;
+
+					if (
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar)) {
+						// This is to check for what type of color the security gate will look for
+						red = GUI.Toggle (new Rect (140, 40, 100, 30), red, "Red");
+						green = GUI.Toggle (new Rect (140, 140, 100, 30), green, "Green");
+						blue = GUI.Toggle (new Rect (140, 240, 100, 30), blue, "Blue");
+
+						// This checks if at least one of the option for each of the things has been checked
+						if ((red && !blue && !green) || (!red && blue && !green) || (!red && !blue && green)) {
+							// This is the toggle gui button that will check what size to check for based on user preferance
+							small = GUI.Toggle (new Rect (240, 40, 100, 30), small, "Small");
+							median = GUI.Toggle (new Rect (240, 140, 100, 30), median, "Medium");
+							large = GUI.Toggle (new Rect (240, 240, 100, 30), large, "Large");
+
+							// This checks if an option is picked
+							if ((small && !median && !large) || (!small && median && !large) || (!small && !median && large)) {
+								{
+									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
+										upgradeChosen = false;
+										shopOpen = false;
+										Time.timeScale = 1;
+									}
 								}
 							}
 						}
@@ -146,23 +178,63 @@ public class shopMenu : MonoBehaviour {
 				}
 
 				if (securityType == "L2") {
-					GUI.Box (new Rect (0, 0, 600, 600), "Purchase Options");
-					red = GUI.Toggle (new Rect (10, 60, 100, 30), red, "Red");
-					green = GUI.Toggle (new Rect (10, 160, 100, 30), green, "Green");
-					blue = GUI.Toggle (new Rect (10, 260, 100, 30), blue, "Blue");
+					GUI.Box (new Rect (0, 0, 700, 700), "Purchase Options");
 
-					if ((red && blue && !green) || (!red && blue && green) || (red && !blue && green)) {
-						small = GUI.Toggle (new Rect (140, 60, 100, 30), small, "Small");
-						median = GUI.Toggle (new Rect (140, 160, 100, 30), median, "Medium");
-						large = GUI.Toggle (new Rect (140, 260, 100, 30), large, "Large");
+					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");;
+					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");;
+					Tanker = GUI.Toggle (new Rect (10, 240, 100, 30), Tanker, "Tanker");
+					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck"); ;
+					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");;
+					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream");
+					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");;
 
-						if ((small && median && !large) || (!small && median && large) || (small && !median && large)) {
-							{
-								if (GUI.Button (new Rect (240, 400- (128*2) + 128, 128, 50), "Purchase")) {
-									upgradeChosen = false;
-									shopOpen = false;
-									Time.timeScale = 1;
+					if (
+						// For ambulances and anything matching with that one
+						(ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
+						(ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
+						(ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar) ||
 
+						// For firetrucks
+						(!ambulance && fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar) ||
+
+						(!ambulance && !fireTruck && Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && policeCar) ||
+
+						(!ambulance && !fireTruck && !Tanker && Truck && Hearse && !IceCream && !policeCar) || 
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && policeCar) ||
+
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && IceCream && !policeCar) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && policeCar)||
+		
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && policeCar)) {
+
+						red = GUI.Toggle (new Rect (140, 40, 100, 30), red, "Red");
+						green = GUI.Toggle (new Rect (140, 140, 100, 30), green, "Green");
+						blue = GUI.Toggle (new Rect (140, 240, 100, 30), blue, "Blue");
+
+						if ((red && blue && !green) || (!red && blue && green) || (red && !blue && green)) {
+							small = GUI.Toggle (new Rect (240, 40, 100, 30), small, "Small");
+							median = GUI.Toggle (new Rect (240, 140, 100, 30), median, "Medium");
+							large = GUI.Toggle (new Rect (240, 240, 100, 30), large, "Large");
+
+							if ((small && median && !large) || (!small && median && large) || (small && !median && large)) {
+								{
+									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
+										upgradeChosen = false;
+										shopOpen = false;
+										Time.timeScale = 1;
+
+									}
 								}
 							}
 						}

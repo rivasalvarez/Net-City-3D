@@ -7,6 +7,7 @@ public class mainGame : MonoBehaviour {
 	shopMenu shopScript; // This gets the information for the shop class, and lets player manipulate their stuff using the shop class
 	GUIStyle guiCash;
 	GUIStyle guiStyle;
+	GUIStyle boxInformation;
 
 	bool openingShop;  // This is a bool to open up the shop
 	bool placingSecurity; // This is a bool to check for if placing security, this is ok
@@ -43,6 +44,9 @@ public class mainGame : MonoBehaviour {
 		guiCash.fontSize = 20;
 		guiCash.normal.textColor = Color.green;
   
+		boxInformation = new GUIStyle ();
+		boxInformation.fontSize = 14;
+		boxInformation.normal.textColor = Color.gray;
 
 		/*
 		if (playerScript.getLevelLoaded ()) {
@@ -127,7 +131,6 @@ public class mainGame : MonoBehaviour {
 	 */ 
 	void OnGUI(){
 			Car tempScript;
-			print ("Button down");
 			// Create a ray object, and have it trace the mousePosition from top down
 			Ray ray = myCam.ScreenPointToRay (Input.mousePosition);
 
@@ -137,13 +140,16 @@ public class mainGame : MonoBehaviour {
 			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
-				if (hitDetected.collider.tag != "Building") {
-					print (hitDetected.collider.tag);
-					GUI.Label (new Rect (Input.mousePosition.x, Screen.height-Input.mousePosition.y, 100, 100), " This works" +
-					" '\n'This also works", guiCash);
-				} else {
-					print ("Hit not detected");
-				}
+			if (hitDetected.collider.tag != "Building" && hitDetected .collider.tag  != "Untagged") {
+					// This gets the script from the object that it hits. 
+					tempScript = hitDetected.collider.GetComponent <Car>();
+					
+				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
+					GUI.Label (new Rect (Input.mousePosition.x, Screen.height-Input.mousePosition.y + 20, 100, 100), 
+					"Car Type: " + tempScript.carTypeString +
+					" \nCar Color: "  + tempScript.colorString +
+					" \nCar Size : "  + tempScript.sizeString, boxInformation);
+				} 
 			}
 	
 
