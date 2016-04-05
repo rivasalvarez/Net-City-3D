@@ -48,64 +48,9 @@ public class mainGame : MonoBehaviour {
 		boxInformation.fontSize = 14;
 		boxInformation.normal.textColor = Color.gray;
 
-		/*
-		if (playerScript.getLevelLoaded ()) {
-			//begins the player with 3000 dollars of currency
-			playerScript.setCash (3000);
 
-			int tmp = playerScript.buildingsInThisScene.Count;
-			
-			playerScript.buildingsInThisScene.Clear ();
-			for(int i = 0; i < tmp; i++)
-			{
-				obj = Instantiate (Resources.Load ("Prefabs/corporatePre", typeof(GameObject))) as GameObject;
-				//obj.transform.position = playerScript.buildingsInThisScene[i].getPosition();
-				obj.transform.position = playerScript.buildings[0];
-				obj.GetComponent<Building>().setPosition(obj.transform.position);
-				playerScript.buildingsInThisScene.Add (obj.GetComponent<Building> ());
-			}
-				
+		gameMgr.setCash (300);
 
-			tmp = playerScript.securityInThisScene.Count;
-			playerScript.securityInThisScene.Clear ();
-
-			for(int i = 0; i < tmp; i++)
-			{
-				obj = Instantiate (Resources.Load ("Prefabs/gatePre", typeof(GameObject))) as GameObject;
-				obj.transform.position = playerScript.security[i];
-				obj.GetComponent<Security>().setPosition(obj.transform.position);
-
-				playerScript.securityInThisScene.Add (obj.GetComponent<Security>());
-			}
-
-			showSettings = false;
-			placingCar = false;
-			placingSecurity = false;	
-
-
-		} else {
-			playerScript.setCash (3000);
-
-			// Loop through at starting integer 68 and instantiate roads based on that
-			float z = 68;
-
-			obj = Instantiate (Resources.Load ("Prefabs/corporatePre", typeof(GameObject))) as GameObject;
-			tmpObj = obj;
-			obj.transform.position = new Vector3 (40, 0, 20);
-			obj.GetComponent<Building> ().setMonetary (300);
-			obj.GetComponent<Building>().setPosition(obj.transform.position);
-			playerScript.buildingsInThisScene.Add (obj.GetComponent<Building> ());
-
-
-			obj = Instantiate (Resources.Load ("Prefabs/gatePre", typeof(GameObject))) as GameObject;
-			obj.transform.position = new Vector3 (40.28648f, 2f, 29.05575f);
-			obj.GetComponent<Security>().setPosition(obj.transform.position);
-			playerScript.securityInThisScene.Add (obj.GetComponent<Security>());
-
-			showSettings = false;
-			placingCar = false;
-			placingSecurity = false;
-			*/
 
         HoneyPot hp;
         hp = GameObject.Find("HoneySpoon").GetComponent<HoneyPot>();
@@ -176,6 +121,9 @@ public class mainGame : MonoBehaviour {
 						
 					// Otherwise, place an interactable GUI button onto the screen called OpenShop
 					if (GUI.Button (new Rect (Screen.width - 100, 35, 100, 50), "Open Shop")) {
+						// This retrieves the cash amount and gives it to the shopMenu
+						shopScript.playerCash = gameMgr.getCash ();
+
 						// This will set the shopMenu Script to be true, in which it will display the appropriate GUI
 						shopScript.setShopOpen (true);
 						
@@ -221,7 +169,7 @@ public class mainGame : MonoBehaviour {
 			}
 		}
 
-		if (shopScript.getSecurityType () == "FL1" || shopScript.getSecurityType() == "FL2") {
+		if (shopScript.getSecurityType () == "FL1" || shopScript.getSecurityType() == "FL2"  || shopScript.getSecurityType() == "FL3") {
 			placingSecurity = true;
 			// This will branch into placing a security gate onto the map
 			if (placingSecurity == true) {
@@ -241,6 +189,7 @@ public class mainGame : MonoBehaviour {
 							bool red = shopScript.red;
 							bool blue = shopScript.blue;
 							bool green = shopScript.green;
+							bool yellow = shopScript.yellow;
 
 							// These are the values for the size of the car which the gate will detect
 							bool large = shopScript.large;
@@ -255,14 +204,17 @@ public class mainGame : MonoBehaviour {
 							bool Hearse= shopScript.Hearse;
 							bool IceCream= shopScript.IceCream;
 							bool policeCar= shopScript.policeCar;
+							bool taxi= shopScript.Taxi;
 
+							if (shopScript.getSecurityType () == "FL3") {
+								 red =  blue =  green = yellow = large = median =  small = ambulance = fireTruck= Tanker= Truck=  Hearse= IceCream= policeCar=  taxi= true;
 
+							}
 							// This is a variable that will hold the position of where the hit is detected for the mouse
 							Vector3 placePosition;
 
-							// This removes the amount of cash the user will have from the total
-							gameMgr.minusCash (gameMgr.getSecurityLevelCash ());
-									
+							gameMgr.setCash (shopScript.playerCash);
+
 							// Store the hit position into the placePosition
 							placePosition = hit.point;
 
@@ -273,13 +225,14 @@ public class mainGame : MonoBehaviour {
 							// instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
 							obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
 
-							obj.GetComponent <Security> ().setTypes (ambulance, fireTruck, Tanker, Truck, Hearse, IceCream, policeCar);
-							obj.GetComponent <Security> ().setColors (red, green, blue);
+							obj.GetComponent <Security> ().setTypes (ambulance, fireTruck, Tanker, Truck, Hearse, IceCream, policeCar, taxi );
+							obj.GetComponent <Security> ().setColors (red, green, blue, yellow);
 							obj.GetComponent <Security> ().setSize (small, median, large);
 							obj.GetComponent <Security> ().setSecurityType (shopScript.getSecurityType());
 
 							// Change the position of it so it will be placed a little bit above the road level
 							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
+							obj.transform.localScale *= 6;
 								
 							// Set the placing security to false, in which it won't let the user keep pressing g for more security gates
 							placingSecurity = false;

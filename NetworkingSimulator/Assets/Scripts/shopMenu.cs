@@ -59,18 +59,29 @@ public class shopMenu : MonoBehaviour {
 	public bool Hearse;
 	public bool IceCream;
 	public bool policeCar;
+	public bool Taxi;
 
+	public int playerCash;
     public List<string> honeyFlags = new List<string>();
+
+	GUIStyle guiCash;
+
 
 	// Use this for initialization
 	void Start () {
 		// This is going to initialize all of the variables at the get go
 		shopOpen = false; // The shop will be closed from the very beginning unless otherwise noted
-		security_one_cost = 400; // This is the amount the player has to pay for security level 1 upgrade
-		security_two_cost = 800; // This is the amount the player has to pay for security level 2 upgrade
-		security_three_cost = 1200; // This is the amount the player has to pay for security level 2 upgrade
+		security_one_cost = 75; // This is the amount the player has to pay for security level 1 upgrade
+		security_two_cost = 75*2; // This is the amount the player has to pay for security level 2 upgrade
+		security_three_cost = 75*3; // This is the amount the player has to pay for security level 2 upgrade
 		guiStyle = new GUIStyle(); // Allocate memory to the gui Style Variable
 
+		// This is to allocate new GUISTYLE to the cash, and set its appropriate information
+		guiCash =  new GUIStyle();
+		guiCash.fontSize = 20;
+		guiCash.normal.textColor = Color.green;
+
+		playerCash = 0;
 
 		// Change the font size to 20
 		guiStyle.fontSize = 20;
@@ -125,12 +136,12 @@ public class shopMenu : MonoBehaviour {
 		if (shopOpen == true) {
 
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
-			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 700));
+			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 800));
 
 			if (upgradeChosen) {
 				if (securityType == "FL1") {
 
-					GUI.Box (new Rect (0, 0, 700, 700), "Purchase Options");
+					GUI.Box (new Rect (0, 0, 700, 800), "Purchase Options");
 
 					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");
 					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");
@@ -139,22 +150,25 @@ public class shopMenu : MonoBehaviour {
 					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");
 					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream");
 					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");
+					Taxi = GUI.Toggle (new Rect (10, 740, 100, 30), Taxi, "Taxi");;
 
 					if (
-						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar)) {
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar && Taxi )) {
 						// This is to check for what type of color the security gate will look for
 						red = GUI.Toggle (new Rect (140, 40, 100, 30), red, "Red");
 						green = GUI.Toggle (new Rect (140, 140, 100, 30), green, "Green");
 						blue = GUI.Toggle (new Rect (140, 240, 100, 30), blue, "Blue");
+						yellow = GUI.Toggle (new Rect (140, 340, 100, 30), yellow, "Yellow");
 
 						// This checks if at least one of the option for each of the things has been checked
-						if ((red && !blue && !green) || (!red && blue && !green) || (!red && !blue && green)) {
+						if ((red && !blue && !green && !yellow) || (!red && blue && !green && !yellow) || (!red && !blue && green &&!yellow) || (!red && !blue && !green && yellow)) {
 							// This is the toggle gui button that will check what size to check for based on user preferance
 							small = GUI.Toggle (new Rect (240, 40, 100, 30), small, "Small");
 							median = GUI.Toggle (new Rect (240, 140, 100, 30), median, "Medium");
@@ -164,9 +178,12 @@ public class shopMenu : MonoBehaviour {
 							if ((small && !median && !large) || (!small && median && !large) || (!small && !median && large)) {
 								{
 									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
-										upgradeChosen = false;
-										shopOpen = false;
-										Time.timeScale = 1;
+										if (playerCash >= security_one_cost) {
+											upgradeChosen = false;
+											shopOpen = false;
+											playerCash -= security_one_cost;
+											Time.timeScale = 1;
+										}
 									}
 								}
 							}
@@ -181,7 +198,7 @@ public class shopMenu : MonoBehaviour {
 				}
 
 				if (securityType == "FL2") {
-					GUI.Box (new Rect (0, 0, 700, 700), "Purchase Options");
+					GUI.Box (new Rect (0, 0, 700, 800), "Purchase Options");
 
 					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");
 					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");
@@ -190,42 +207,55 @@ public class shopMenu : MonoBehaviour {
 					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");
 					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream");
 					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");
+					Taxi = GUI.Toggle (new Rect (10, 740, 100, 30), Taxi, "Taxi");;
 
 					if (
 						// For ambulances and anything matching with that one
-						(ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
-						(ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
-						(ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
-						(ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
-						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
-						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar) ||
-
+						(ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar && !Taxi) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar && !Taxi) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar && !Taxi) ||
+						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar && Taxi) ||
 						// For firetrucks
-						(!ambulance && fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
-						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
-						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar) ||
+						(!ambulance && fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar && !Taxi) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar && !Taxi) ||
+						(!ambulance && fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar && Taxi) ||
 
-						(!ambulance && !fireTruck && Tanker && Truck && !Hearse && !IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && Tanker && !Truck && Hearse && !IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && policeCar) ||
+						// For tanker
+						(!ambulance && !fireTruck && Tanker && Truck && !Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && Hearse && !IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && Tanker && !Truck && !Hearse && !IceCream && !policeCar && Taxi) ||
 
-						(!ambulance && !fireTruck && !Tanker && Truck && Hearse && !IceCream && !policeCar) || 
-						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && policeCar) ||
+						// For truck
+						(!ambulance && !fireTruck && !Tanker && Truck && Hearse && !IceCream && !policeCar && !Taxi) || 
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && Truck && !Hearse && !IceCream && !policeCar && Taxi) ||
 
-						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && IceCream && !policeCar) ||
-						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && policeCar)||
+						// For Hearse
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && IceCream && !policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && !policeCar && Taxi) ||
 
-						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && policeCar)) {
+						// For icecream
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && policeCar && !Taxi) ||
+						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar && Taxi)) {
 
 						red = GUI.Toggle (new Rect (140, 40, 100, 30), red, "Red");
 						green = GUI.Toggle (new Rect (140, 140, 100, 30), green, "Green");
 						blue = GUI.Toggle (new Rect (140, 240, 100, 30), blue, "Blue");
+						yellow = GUI.Toggle (new Rect (140, 340, 100, 30), yellow, "Yellow");
 
-						if ((red && blue && !green) || (!red && blue && green) || (red && !blue && green)) {
+						if ((red && blue && !green) || (red && !blue && green) || (red && !blue &&  !green && yellow)||
+										(!red && blue && green && !yellow) || (!red && blue && !green && yellow) 
+										|| (!red && !blue && green && yellow)) {
 							small = GUI.Toggle (new Rect (240, 40, 100, 30), small, "Small");
 							median = GUI.Toggle (new Rect (240, 140, 100, 30), median, "Medium");
 							large = GUI.Toggle (new Rect (240, 240, 100, 30), large, "Large");
@@ -233,10 +263,12 @@ public class shopMenu : MonoBehaviour {
 							if ((small && median && !large) || (!small && median && large) || (small && !median && large)) {
 								{
 									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
-										upgradeChosen = false;
-										shopOpen = false;
-										Time.timeScale = 1;
-
+										if (playerCash >= security_two_cost) {
+											playerCash -= security_two_cost;
+											upgradeChosen = false;
+											shopOpen = false;
+											Time.timeScale = 1;
+										}
 									}
 								}
 							}
@@ -251,6 +283,27 @@ public class shopMenu : MonoBehaviour {
 
 				}
 
+
+				if (securityType == "FL3") {
+					GUI.Box (new Rect (0, 0, 400, 300), " ");
+
+					if (GUI.Button (new Rect ( 150,100, 128, 50), "Purchase")) {
+								if (playerCash >= security_three_cost) {
+									playerCash -= security_three_cost;
+									upgradeChosen = false;
+									shopOpen = false;
+									Time.timeScale = 1;
+								}
+							}
+						
+					if (GUI.Button (new Rect (150, 100+ 60, 128, 50), "Cancel Purchase")) {
+						clear ();
+						upgradeChosen = false;
+						Time.timeScale = 1;
+
+					}
+
+				}
 
 	
 
@@ -430,6 +483,9 @@ public class shopMenu : MonoBehaviour {
 				// This is to contain all of the different buying options
 				GUI.Box (new Rect (0, 0, 800, 600), "Shop");
 
+				// This displays cash on GUI
+				string moneyString = "$" + playerCash;
+				GUI.Label(new Rect(Screen.width - 100, 0, 150, 20), moneyString, guiCash);
 
 				// First set of upgrades for the security for the pictures
 				GUI.Label (new Rect (upgradeOneGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
@@ -460,11 +516,6 @@ public class shopMenu : MonoBehaviour {
 					upgradeChosen = true;
 				}
 
-				// This button is here for upgrading to security option 3
-				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeThreeGUICol + 128, 128, 50), "IDS One")) {
-					print ("This is working");
-				}
-
 				// This button is here for upgrading to security option 1
 				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Two")) {
 					securityType = "FL2";
@@ -477,14 +528,10 @@ public class shopMenu : MonoBehaviour {
 					upgradeChosen = true;
 				}
 
-				// This button is here for upgrading to security option 3
-				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeThreeGUICol + 128, 128, 50), "IDS Two")) {
-					print ("This is working");
-				}
-
 				// This button is here for upgrading to security option 1
 				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Three")) {
 					securityType = "FL3";
+					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
@@ -492,12 +539,6 @@ public class shopMenu : MonoBehaviour {
                     securityType = "HL3";
                     upgradeChosen = true;
 				}
-
-				// This button is here for upgrading to security option 3
-				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeThreeGUICol + 128, 128, 50), "IDS Three")) {
-					print ("This is working");
-				}
-
 
 				// This button is here to close down the shop and place the old GUI buttons on the screen
 				if (GUI.Button (new Rect (800 - 128, upgradeThreeGUICol + 128, 128, 50), "Close Shop")) {
@@ -544,7 +585,7 @@ public class shopMenu : MonoBehaviour {
 	}
 
 	public void clear(){
-		ambulance = fireTruck =  Tanker = Truck = Hearse = IceCream =policeCar = red = green = blue = small = median = large = false;
+		ambulance = fireTruck = Tanker = Truck = Hearse = IceCream = policeCar = red = green = blue = small = median = yellow =  large = Taxi = false;
 		securityType = " ";
 	}
 }
