@@ -23,9 +23,7 @@ public class Car : MonoBehaviour {
 	public float speed = 10.0f;
     public int carPID;
 
-
-
-	string name; // This is if the car is a potential attacker
+    string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
 
 	// Use this for initialization

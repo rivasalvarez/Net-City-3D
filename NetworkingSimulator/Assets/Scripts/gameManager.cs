@@ -99,11 +99,6 @@ public class gameManager : MonoBehaviour {
 		carSizeDict.Add(6,"Small");
 		carSizeDict.Add(7,"Small");
 
-        HoneyPot hp;
-        hp = GameObject.Find("HoneySpoon").GetComponent<HoneyPot>();
-        hp.Keys.Add("Yellow");
-        hp.Keys.Add("Blue");
-        honeyPots.Add(hp);
 	}
 	
 	// Update is called once per frame, this will not be used for this project as far as my knowledge

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class shopMenu : MonoBehaviour {
 	private bool shopOpen; // This is to check if the shop has been opened and ready to show it to the user
@@ -40,6 +41,7 @@ public class shopMenu : MonoBehaviour {
 	public bool red;
 	public bool blue;
 	public bool green;
+    public bool yellow;
 
 	// These are the values for the size of the car which the gate will detect
 	public bool large;
@@ -57,6 +59,8 @@ public class shopMenu : MonoBehaviour {
 	public bool Hearse;
 	public bool IceCream;
 	public bool policeCar;
+
+    public List<string> honeyFlags = new List<string>();
 
 	// Use this for initialization
 	void Start () {
@@ -100,11 +104,12 @@ public class shopMenu : MonoBehaviour {
 
 		// String value is set to a default value
 		securityType = " ";
-	
+
 		// Set default values as false
 		red = false;;
 		blue = false;
 		green = false;
+        yellow = false;
 		large = false;
 		median = false;
 		small = false;
@@ -118,22 +123,22 @@ public class shopMenu : MonoBehaviour {
 
 	void OnGUI(){
 		if (shopOpen == true) {
-			
+
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
 			GUI.BeginGroup(new Rect(Screen.width/2 - 400, Screen.height/2 -300, 800, 700));
 
 			if (upgradeChosen) {
-				if (securityType == "L1") {
+				if (securityType == "FL1") {
 
 					GUI.Box (new Rect (0, 0, 700, 700), "Purchase Options");
 
-					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");;
-					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");;
+					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");
+					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");
 					Tanker = GUI.Toggle (new Rect (10, 240, 100, 30), Tanker, "Tanker");
-					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck"); ;
-					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");;
+					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck"); 
+					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");
 					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream");
-					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");;
+					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");
 
 					if (
 						(ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && !policeCar) ||
@@ -171,20 +176,20 @@ public class shopMenu : MonoBehaviour {
 						clear ();
 						upgradeChosen = false;
 						Time.timeScale = 1;
-	
+
 					}
 				}
 
-				if (securityType == "L2") {
+				if (securityType == "FL2") {
 					GUI.Box (new Rect (0, 0, 700, 700), "Purchase Options");
 
-					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");;
-					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");;
+					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance");
+					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck");
 					Tanker = GUI.Toggle (new Rect (10, 240, 100, 30), Tanker, "Tanker");
-					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck"); ;
-					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");;
+					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck"); 
+					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse");
 					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream");
-					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");;
+					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar");
 
 					if (
 						// For ambulances and anything matching with that one
@@ -213,7 +218,7 @@ public class shopMenu : MonoBehaviour {
 
 						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && IceCream && !policeCar) ||
 						(!ambulance && !fireTruck && !Tanker && !Truck && Hearse && !IceCream && policeCar)||
-		
+
 						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && policeCar)) {
 
 						red = GUI.Toggle (new Rect (140, 40, 100, 30), red, "Red");
@@ -245,8 +250,183 @@ public class shopMenu : MonoBehaviour {
 					}
 
 				}
+
+
+	
+
+				if (securityType == "HL1") {
+                    GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+
+                    red = GUI.Toggle(new Rect(140, 40, 100, 30), red, "Red");
+                    green = GUI.Toggle(new Rect(140, 140, 100, 30), green, "Green");
+                    blue = GUI.Toggle(new Rect(140, 240, 100, 30), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(140, 340, 100, 30), yellow, "Blue");
+
+
+                    //This is to check for what type of color the security gate will look for
+                    if (red && !honeyFlags.Contains("Red")) { honeyFlags.Add("Red"); Debug.Log("on"); }
+                    else if (!red && honeyFlags.Contains("Red")) { honeyFlags.Remove("Red"); Debug.Log("off"); }
+
+                    else if (green && !honeyFlags.Contains("Green")) { honeyFlags.Add("Green"); Debug.Log("on"); }
+                    else if (!green && honeyFlags.Contains("Green")) { honeyFlags.Remove("Green"); Debug.Log("off"); }
+
+                    else if (blue && !honeyFlags.Contains("Blue")) { honeyFlags.Add("Blue"); Debug.Log("on"); }
+                    else if (!blue && honeyFlags.Contains("Blue")) { honeyFlags.Remove("Blue"); Debug.Log("off"); }
+
+                    else if (yellow && !honeyFlags.Contains("Yellow")) { honeyFlags.Add("Yellow"); Debug.Log("on"); }
+                    else if (!yellow && honeyFlags.Contains("Yellow")) { honeyFlags.Remove("Yellow"); Debug.Log("off"); }
+
+                    if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
+                        upgradeChosen = false;
+                        shopOpen = false;
+                        Time.timeScale = 1;
+                    }
+
+                    if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
+                        clear();
+                        upgradeChosen = false;
+                        Time.timeScale = 1;
+
+                    }
+
+				}
+
+				if (securityType == "HL2") {
+                    GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+
+                    red = GUI.Toggle(new Rect(10, 40, 100, 30), red, "Red");
+                    green = GUI.Toggle(new Rect(10, 140, 100, 30), green, "Green");
+                    blue = GUI.Toggle(new Rect(10, 240, 100, 30), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Blue");
+
+                    small = GUI.Toggle(new Rect(140, 40, 100, 30), small, "Small");
+                    median = GUI.Toggle(new Rect(140, 140, 100, 30), median, "Meduim");
+                    large = GUI.Toggle(new Rect(140, 240, 100, 30), large, "Large");
+
+
+                    //This is to check for what type of color the security gate will look for
+                    if (red && !honeyFlags.Contains("Red")) { honeyFlags.Add("Red"); Debug.Log("on"); }
+                    else if (!red && honeyFlags.Contains("Red")) { honeyFlags.Remove("Red"); Debug.Log("off"); }
+
+                    else if (green && !honeyFlags.Contains("Green")) { honeyFlags.Add("Green"); Debug.Log("on"); }
+                    else if (!green && honeyFlags.Contains("Green")) { honeyFlags.Remove("Green"); Debug.Log("off"); }
+
+                    else if (blue && !honeyFlags.Contains("Blue")) { honeyFlags.Add("Blue"); Debug.Log("on"); }
+                    else if (!blue && honeyFlags.Contains("Blue")) { honeyFlags.Remove("Blue"); Debug.Log("off"); }
+
+                    else if (yellow && !honeyFlags.Contains("Yellow")) { honeyFlags.Add("Yellow"); Debug.Log("on"); }
+                    else if (!yellow && honeyFlags.Contains("Yellow")) { honeyFlags.Remove("Yellow"); Debug.Log("off"); }
+
+                    else if (small && !honeyFlags.Contains("Small")) { honeyFlags.Add("Small"); Debug.Log("on"); }
+                    else if (!small && honeyFlags.Contains("Small")) { honeyFlags.Remove("Small"); Debug.Log("off"); }
+
+                    else if (median && !honeyFlags.Contains("Medium")) { honeyFlags.Add("Medium"); Debug.Log("on"); }
+                    else if (!median && honeyFlags.Contains("Medium")) { honeyFlags.Remove("Medium"); Debug.Log("off"); }
+
+                    else if (large && !honeyFlags.Contains("Large")) { honeyFlags.Add("Large"); Debug.Log("on"); }
+                    else if (!large && honeyFlags.Contains("Large")) { honeyFlags.Remove("Large"); Debug.Log("off"); }
+
+                    if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
+                        upgradeChosen = false;
+                        shopOpen = false;
+                        Time.timeScale = 1;
+                    }
+
+                    if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
+                        clear();
+                        upgradeChosen = false;
+                        Time.timeScale = 1;
+
+                    }
+
+				}
+
+
+                if (securityType == "HL3")
+                {
+                    GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+
+                    red = GUI.Toggle(new Rect(10, 40, 100, 30), red, "Red");
+                    green = GUI.Toggle(new Rect(10, 140, 100, 30), green, "Green");
+                    blue = GUI.Toggle(new Rect(10, 240, 100, 30), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Blue");
+
+                    small = GUI.Toggle(new Rect(140, 40, 100, 30), small, "Small");
+                    median = GUI.Toggle(new Rect(140, 140, 100, 30), median, "Meduim");
+                    large = GUI.Toggle(new Rect(140, 240, 100, 30), large, "Large");
+
+                    ambulance = GUI.Toggle(new Rect(240, 40, 100, 30), ambulance, "Ambulance");
+                    fireTruck = GUI.Toggle(new Rect(240, 140, 100, 30), fireTruck, "Fire Truck");
+                    Tanker = GUI.Toggle(new Rect(240, 240, 100, 30), Tanker, "Oil Truck");
+                    Truck = GUI.Toggle(new Rect(240, 340, 100, 30), Truck, "Truck");
+                    Hearse = GUI.Toggle(new Rect(240, 440, 100, 30), Hearse, "Hearse");
+                    IceCream = GUI.Toggle(new Rect(240, 540, 100, 30), IceCream, "Ice Cream Truck");
+                    policeCar = GUI.Toggle(new Rect(240, 640, 100, 30), policeCar, "Police Car");
+
+
+                    //This is to check for what type of color the security gate will look for
+                    if (red && !honeyFlags.Contains("Red")) { honeyFlags.Add("Red"); Debug.Log("on"); }
+                    else if (!red && honeyFlags.Contains("Red")) { honeyFlags.Remove("Red"); Debug.Log("off"); }
+
+                    else if (green && !honeyFlags.Contains("Green")) { honeyFlags.Add("Green"); Debug.Log("on"); }
+                    else if (!green && honeyFlags.Contains("Green")) { honeyFlags.Remove("Green"); Debug.Log("off"); }
+
+                    else if (blue && !honeyFlags.Contains("Blue")) { honeyFlags.Add("Blue"); Debug.Log("on"); }
+                    else if (!blue && honeyFlags.Contains("Blue")) { honeyFlags.Remove("Blue"); Debug.Log("off"); }
+
+                    else if (yellow && !honeyFlags.Contains("Yellow")) { honeyFlags.Add("Yellow"); Debug.Log("on"); }
+                    else if (!yellow && honeyFlags.Contains("Yellow")) { honeyFlags.Remove("Yellow"); Debug.Log("off"); }
+
+                    else if (small && !honeyFlags.Contains("Small")) { honeyFlags.Add("Small"); Debug.Log("on"); }
+                    else if (!small && honeyFlags.Contains("Small")) { honeyFlags.Remove("Small"); Debug.Log("off"); }
+
+                    else if (median && !honeyFlags.Contains("Medium")) { honeyFlags.Add("Medium"); Debug.Log("on"); }
+                    else if (!median && honeyFlags.Contains("Medium")) { honeyFlags.Remove("Medium"); Debug.Log("off"); }
+
+                    else if (large && !honeyFlags.Contains("Large")) { honeyFlags.Add("Large"); Debug.Log("on"); }
+                    else if (!large && honeyFlags.Contains("Large")) { honeyFlags.Remove("Large"); Debug.Log("off"); }
+
+                    else if (ambulance && !honeyFlags.Contains("Ambulance")) { honeyFlags.Add("Ambulance"); Debug.Log("on"); }
+                    else if (!ambulance && honeyFlags.Contains("Ambulance")) { honeyFlags.Remove("Ambulance"); Debug.Log("off"); }
+
+                    else if (fireTruck && !honeyFlags.Contains("Fire Truck")) { honeyFlags.Add("Fire Truck"); Debug.Log("on"); }
+                    else if (!fireTruck && honeyFlags.Contains("Fire Truck")) { honeyFlags.Remove("Fire Truck"); Debug.Log("off"); }
+
+                    else if (Tanker && !honeyFlags.Contains("Tanker")) { honeyFlags.Add("Tanker"); Debug.Log("on"); }
+                    else if (!Tanker && honeyFlags.Contains("Tanker")) { honeyFlags.Remove("Tanker"); Debug.Log("off"); }
+
+                    else if (Truck && !honeyFlags.Contains("Truck")) { honeyFlags.Add("Truck"); Debug.Log("on"); }
+                    else if (!Truck && honeyFlags.Contains("Truck")) { honeyFlags.Remove("Truck"); Debug.Log("off"); }
+
+                    else if (Hearse && !honeyFlags.Contains("Hearse")) { honeyFlags.Add("Hearse"); Debug.Log("on"); }
+                    else if (!Hearse && honeyFlags.Contains("Hearse")) { honeyFlags.Remove("Hearse"); Debug.Log("off"); }
+
+                    else if (IceCream && !honeyFlags.Contains("Ice Cream")) { honeyFlags.Add("Ice Cream"); Debug.Log("on"); }
+                    else if (!IceCream && honeyFlags.Contains("Ice Cream")) { honeyFlags.Remove("Ice Cream"); Debug.Log("off"); }
+
+                    else if (policeCar && !honeyFlags.Contains("Police Car")) { honeyFlags.Add("Police Car"); Debug.Log("on"); }
+                    else if (!policeCar && honeyFlags.Contains("Police Car")) { honeyFlags.Remove("Police Car"); Debug.Log("off"); }
+
+
+                    if (GUI.Button(new Rect(340, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
+                    {
+                        upgradeChosen = false;
+                        shopOpen = false;
+                        Time.timeScale = 1;
+                    }
+
+                    if (GUI.Button(new Rect(340, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
+                    {
+                        clear();
+                        upgradeChosen = false;
+                        Time.timeScale = 1;
+
+                    }
+
+                }
+
 			}
-				else {
+			else {
 				// This is to contain all of the different buying options
 				GUI.Box (new Rect (0, 0, 800, 600), "Shop");
 
@@ -270,13 +450,14 @@ public class shopMenu : MonoBehaviour {
 
 				// This button is here for upgrading to security option 1
 				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeOneGUICol + 128, 128, 50), "Security One")) {
-					securityType = "L1";
+					securityType = "FL1";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
 				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot One")) {
-					print ("This is working");
+					securityType = "HL1";
+					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 3
@@ -286,13 +467,14 @@ public class shopMenu : MonoBehaviour {
 
 				// This button is here for upgrading to security option 1
 				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Two")) {
-					securityType = "L2";
+					securityType = "FL2";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
 				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Two")) {
-					print ("This is working");
+					securityType = "HL2";
+					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 3
@@ -302,12 +484,13 @@ public class shopMenu : MonoBehaviour {
 
 				// This button is here for upgrading to security option 1
 				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeOneGUICol + 128, 128, 50), "Security Three")) {
-					securityType = "L3";
+					securityType = "FL3";
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Three")) {
-					print ("This is working");
+                if (GUI.Button(new Rect(upgradeThreeGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Three")){
+                    securityType = "HL3";
+                    upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 3

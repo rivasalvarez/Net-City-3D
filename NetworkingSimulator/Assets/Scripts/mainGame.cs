@@ -221,7 +221,7 @@ public class mainGame : MonoBehaviour {
 			}
 		}
 
-		if (shopScript.getSecurityType () == "L1" || shopScript.getSecurityType() == "L2") {
+		if (shopScript.getSecurityType () == "FL1" || shopScript.getSecurityType() == "FL2") {
 			placingSecurity = true;
 			// This will branch into placing a security gate onto the map
 			if (placingSecurity == true) {
@@ -289,6 +289,15 @@ public class mainGame : MonoBehaviour {
 				}	
 			}
 		}
+
+
+
+        if (shopScript.getSecurityType() == "HL1"){
+           
+        }
+
+
+
 		if (shopScript.getShopOpen () == true) {
 			Time.timeScale = 0;
 		}
