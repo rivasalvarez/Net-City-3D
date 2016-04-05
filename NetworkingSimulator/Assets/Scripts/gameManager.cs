@@ -32,6 +32,7 @@ public class gameManager : MonoBehaviour {
 	public List<Building> buildingsInThisScene = new List<Building>() ;
 	public List<Security> securityInThisScene = new List<Security>();
 	public List<Car> carsInThisScene = new List<Car>();
+    public List<HoneyPot> honeyPots = new List<HoneyPot>();
 
 	public List<Vector3> buildings;
 	public List<Vector3> security;
@@ -41,6 +42,7 @@ public class gameManager : MonoBehaviour {
 	public int cash;
 	int securityLevel;
     public bool gameIsStarted = false;
+    public int count = 0;
 
 	bool levelLoaded; // This is used to tell the different tutorial that a profile has been loaded
 
@@ -96,6 +98,12 @@ public class gameManager : MonoBehaviour {
 		carSizeDict.Add(5,"Large");
 		carSizeDict.Add(6,"Small");
 		carSizeDict.Add(7,"Small");
+
+        HoneyPot hp;
+        hp = GameObject.Find("HoneySpoon").GetComponent<HoneyPot>();
+        hp.Keys.Add("Yellow");
+        hp.Keys.Add("Blue");
+        honeyPots.Add(hp);
 	}
 	
 	// Update is called once per frame, this will not be used for this project as far as my knowledge
@@ -110,6 +118,7 @@ public class gameManager : MonoBehaviour {
 			carType = UnityEngine.Random.Range(0,8);
 			carPre = Resources.Load (carPrefabDict[carType]) as GameObject;
             Instantiate(carPre, carStartPos , Quaternion.identity);
+            count++;
 		}
 	}
 
