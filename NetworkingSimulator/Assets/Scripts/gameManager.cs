@@ -32,7 +32,10 @@ public class gameManager : MonoBehaviour {
 	public List<Building> buildingsInThisScene = new List<Building>() ;
 	public List<Security> securityInThisScene = new List<Security>();
 	public List<Car> carsInThisScene = new List<Car>();
+
+
     public List<HoneyPot> honeyPots = new List<HoneyPot>();
+    public int honeyCount = 1;
 
 	public List<Vector3> buildings;
 	public List<Vector3> security;

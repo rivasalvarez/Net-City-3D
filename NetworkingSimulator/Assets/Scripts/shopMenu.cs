@@ -62,7 +62,9 @@ public class shopMenu : MonoBehaviour {
 	public bool Taxi;
 
 	public int playerCash;
+
     public List<string> honeyFlags = new List<string>();
+    public int honeyLevel = 1;
 
 	GUIStyle guiCash;
 
@@ -309,11 +311,12 @@ public class shopMenu : MonoBehaviour {
 
 				if (securityType == "HL1") {
                     GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+                    honeyLevel = 1;
 
                     red = GUI.Toggle(new Rect(140, 40, 100, 30), red, "Red");
                     green = GUI.Toggle(new Rect(140, 140, 100, 30), green, "Green");
                     blue = GUI.Toggle(new Rect(140, 240, 100, 30), blue, "Blue");
-                    yellow = GUI.Toggle(new Rect(140, 340, 100, 30), yellow, "Blue");
+                    yellow = GUI.Toggle(new Rect(140, 340, 100, 30), yellow, "Yellow");
 
 
                     //This is to check for what type of color the security gate will look for
@@ -336,7 +339,7 @@ public class shopMenu : MonoBehaviour {
                     }
 
                     if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
-                        clear();
+                        honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
 
@@ -346,11 +349,12 @@ public class shopMenu : MonoBehaviour {
 
 				if (securityType == "HL2") {
                     GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+                    honeyLevel = 2; 
 
                     red = GUI.Toggle(new Rect(10, 40, 100, 30), red, "Red");
                     green = GUI.Toggle(new Rect(10, 140, 100, 30), green, "Green");
                     blue = GUI.Toggle(new Rect(10, 240, 100, 30), blue, "Blue");
-                    yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Yellow");
 
                     small = GUI.Toggle(new Rect(140, 40, 100, 30), small, "Small");
                     median = GUI.Toggle(new Rect(140, 140, 100, 30), median, "Meduim");
@@ -386,7 +390,7 @@ public class shopMenu : MonoBehaviour {
                     }
 
                     if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
-                        clear();
+                        honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
 
@@ -398,11 +402,12 @@ public class shopMenu : MonoBehaviour {
                 if (securityType == "HL3")
                 {
                     GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+                    honeyLevel = 3;
 
                     red = GUI.Toggle(new Rect(10, 40, 100, 30), red, "Red");
                     green = GUI.Toggle(new Rect(10, 140, 100, 30), green, "Green");
                     blue = GUI.Toggle(new Rect(10, 240, 100, 30), blue, "Blue");
-                    yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Yellow");
 
                     small = GUI.Toggle(new Rect(140, 40, 100, 30), small, "Small");
                     median = GUI.Toggle(new Rect(140, 140, 100, 30), median, "Meduim");
@@ -470,7 +475,7 @@ public class shopMenu : MonoBehaviour {
 
                     if (GUI.Button(new Rect(340, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
                     {
-                        clear();
+                        honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
 
