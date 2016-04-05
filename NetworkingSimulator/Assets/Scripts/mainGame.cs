@@ -17,7 +17,7 @@ public class mainGame : MonoBehaviour {
 	public GameObject obj; // This is for Save Menu!!!!! TODO
     public GameObject tmpObj; // This is for Save Menu!!!!! TODO
 
-	public float timer = 300; // A timer to calculate how long the user has been playing for
+	float timer = 60; // A timer to calculate how long the user has been playing for
 	public string time; // String of the amount of time overall that has passed
 	string mins; // String of the amount of minutes that has passed
 	string secs; // String of the amount of seconds that has passed
@@ -107,7 +107,11 @@ public class mainGame : MonoBehaviour {
 			placingSecurity = false;
 			*/
 
-
+        HoneyPot hp;
+        hp = GameObject.Find("HoneySpoon").GetComponent<HoneyPot>();
+        hp.Keys.Add("Yellow");
+        hp.Keys.Add("Blue");
+        gameMgr.honeyPots.Add(hp);
 
 	}
 	// Update is called once per frame
@@ -118,6 +122,11 @@ public class mainGame : MonoBehaviour {
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
 
+        if (timer < 0){
+            timer = 60;
+            foreach (var hp in gameMgr.honeyPots)
+                hp.carPIDS.Clear();
+        }
 			}
 
 	/**

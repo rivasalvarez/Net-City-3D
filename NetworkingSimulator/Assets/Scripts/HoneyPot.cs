@@ -1,21 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class HoneyPot : MonoBehaviour {
 
-  GameObject playerMemory;
   gameManager gameMgr;
+  mainGame main;
+  public Dictionary<int, Car> carPIDS = new Dictionary<int, Car>();
+  public List<string> Keys = new List<string>();
 
-  GameObject main;
-  mainGame gameWorld;
 
 	// Use this for initialization
 	void Start () {
-	  playerMemory = GameObject.Find ("GameObject");
-	  gameMgr = playerMemory.GetComponent<gameManager> ();
-
-	  main = GameObject.Find ("Main Camera");
-	  gameWorld = main.GetComponent<mainGame> ();
+      gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();
+      main = GameObject.Find("Main Camera").GetComponent<mainGame>();
 	}
 	
 	// Update is called once per frame
@@ -24,17 +21,21 @@ public class HoneyPot : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col){
-		if(col.gameObject.tag == "Ambulance" || col.gameObject.tag == "PoliceCar" ||
-		   col.gameObject.tag == "FireTruck" || col.gameObject.tag == "Hearse" ||
-		   col.gameObject.tag == "IceCream" || col.gameObject.tag == "Tanker" ||
-		   col.gameObject.tag == "Taxi" || col.gameObject.tag == "Truck"){
-
+        if(col.gameObject.tag == "car"){
            Car colCar = col.gameObject.GetComponent<Car>();
-            
-			string info = "Color: " + colCar.colorString + "  Size: " + colCar.sizeString 
-                      + "  Type: " + colCar.carTypeString + "  Time: " + gameWorld.time;
-			//Debug.Log(info);
-		} 
-	} 
+           foreach (var flag in Keys){
+              if (colCar.colorString == flag || colCar.carTypeString == flag || colCar.sizeString == flag){
 
+                if (!carPIDS.ContainsKey(colCar.carPID)){
+                    carPIDS.Add(colCar.carPID, colCar);
+                    Debug.Log("Added");
+                }
+             }
+           }
+        }
+	}
+
+    void OnMouseDown(){
+        Debug.Log("click");
+    }
 }

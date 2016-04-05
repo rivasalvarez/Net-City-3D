@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class CameraControl : MonoBehaviour {
-	public float speed = 0.10F;
-	public float rotationSpeed = 100.0F;
+	float speed = 1.5f;
+	float rotationSpeed = 50;
 	Vector3 startPos = new Vector3(0f,0f,0f);
 	Quaternion startRot;
 
@@ -20,87 +20,63 @@ public class CameraControl : MonoBehaviour {
 
 		// 'W' key moves camera forward
 		if (Input.GetKey (KeyCode.R)) {
-			float translation = this.transform.position.z * speed;
-			translation *= Time.deltaTime;
-			this.transform.Translate(0, 0, translation);
+			this.transform.Translate(0, 0, speed);
 		}
 
 		// 'S' key moves camera back
 		if (Input.GetKey (KeyCode.F)) {
-			float translation = this.transform.position.z * speed;
-			translation *= Time.deltaTime;
-			this.transform.Translate(0, 0, -translation);
+			this.transform.Translate(0, 0, -speed);
 		}
 
 		// 'D' key moves camera right
 		if (Input.GetKey (KeyCode.W)) {
-			float translation = this.transform.position.y * speed;
-			translation *= Time.deltaTime;
-			this.transform.Translate(0, translation, 0);
+			this.transform.Translate(0, speed, 0);
 		}
 		
 		// 'A' key moves camera left
 		if (Input.GetKey (KeyCode.S)) {
-			float translation = this.transform.position.y * speed;
-			translation *= Time.deltaTime;
-			this.transform.Translate(0, -translation ,0);
+			this.transform.Translate(0, -speed ,0);
 		}
 		// 'D' key moves camera right
 		if (Input.GetKey (KeyCode.D)) {
-			float translation = this.transform.position.x * speed;
-			translation *= Time.deltaTime;
-			this.transform.Translate(translation, 0, 0);
+			this.transform.Translate(speed, 0, 0);
 		}
 
 		// 'A' key moves camera left
 		if (Input.GetKey (KeyCode.A)) {
-			float translation = this.transform.position.x * speed;
-			translation *= Time.deltaTime;
-			this.transform.Translate(-translation, 0, 0);
+			this.transform.Translate(-speed, 0, 0);
 		}
 
 		// 'E' controls the pitch clockwise
 		if (Input.GetKey (KeyCode.L)) {
-			float translation = this.transform.position.y * speed;
-			translation *= Time.deltaTime;
-			this.transform.Rotate(0, translation, 0);
+			this.transform.Rotate(0, speed, 0);
 		}
 
 		// 'R' controls the pitch counter clockwise
 		if (Input.GetKey (KeyCode.J)) {
-			float translation = this.transform.position.y * speed;
-			translation *= Time.deltaTime;
-			this.transform.Rotate(0, -translation, 0);
+			this.transform.Rotate(0, -speed, 0);
 		}
 
 		// 'Q' controls the roll clockwise
 		if (Input.GetKey (KeyCode.K)) {
-			float translation = this.transform.position.x * speed;
-			translation *= Time.deltaTime;
-			this.transform.Rotate( translation, 0, 0);
+			this.transform.Rotate( speed, 0, 0);
 			
 		}
 
 		// 'Z' controls the roll counter clockwise
 		if (Input.GetKey (KeyCode.I)) {
-			float translation = this.transform.position.x * speed;
-			translation *= Time.deltaTime;
-			this.transform.Rotate( -translation, 0,0);
+			this.transform.Rotate( -speed, 0,0);
 		}
 
 		// 'X' controls the yaw clockwise
 		if (Input.GetKey (KeyCode.Y)) {
-			float translation = this.transform.position.z * speed;
-			translation *= Time.deltaTime;
-			this.transform.Rotate( 0, 0, translation);
+			this.transform.Rotate( 0, 0, speed);
 			
 		}
 
 		//'C' controls the yaw counter clockwise
 		if (Input.GetKey (KeyCode.H)) {
-			float translation = this.transform.position.z * speed;
-			translation *= Time.deltaTime;
-			this.transform.Rotate(  0, 0, -translation);
+			this.transform.Rotate(  0, 0, -speed);
 		}
 
 		//space bar reset position

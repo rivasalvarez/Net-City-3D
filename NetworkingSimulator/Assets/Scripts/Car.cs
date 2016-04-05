@@ -21,6 +21,7 @@ public class Car : MonoBehaviour {
 	public int route;
     public int carColor;
 	public float speed = 10.0f;
+    public int carPID;
 
 
 
@@ -44,7 +45,7 @@ public class Car : MonoBehaviour {
 		carTypeString = gameMgr.carTypeDict[gameMgr.carType];
         sizeString = gameMgr.carSizeDict[gameMgr.carType];
         colorString = gameMgr.carColorDict[carColor];
-
+        carPID = gameMgr.count;
 		setWavePoints (route);
 	}
 	
