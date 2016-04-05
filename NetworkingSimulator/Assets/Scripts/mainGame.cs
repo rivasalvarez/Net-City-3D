@@ -22,6 +22,7 @@ public class mainGame : MonoBehaviour {
 	string mins; // String of the amount of minutes that has passed
 	string secs; // String of the amount of seconds that has passed
 
+
 	// Use this for initialization
 	void Start () {
 
@@ -50,14 +51,6 @@ public class mainGame : MonoBehaviour {
 
 
 		gameMgr.setCash (300);
-
-
-        HoneyPot hp;
-        hp = GameObject.Find("HoneySpoon").GetComponent<HoneyPot>();
-        hp.Keys.Add("Yellow");
-        hp.Keys.Add("Blue");
-        gameMgr.honeyPots.Add(hp);
-
 	}
 	// Update is called once per frame
 	void Update () {
@@ -245,8 +238,56 @@ public class mainGame : MonoBehaviour {
 
 
 
-        if (shopScript.getSecurityType() == "HL1"){
-           
+        if (shopScript.getSecurityType() == "HL1" || shopScript.getSecurityType() == "HL2" || shopScript.getSecurityType() == "HL3")
+        {
+            placingSecurity = true;
+
+                // This checks if the user pressed the G key on the keyboard
+                if (Input.GetMouseButtonDown(1))
+                {
+                    // Create a ray object, and have it trace the mousePosition from top down
+                    Ray vRay = myCam.ScreenPointToRay(Input.mousePosition);
+
+                    // Create a hit variable that will store the value of whatever it hits
+                    RaycastHit hit;
+
+                    // Cast a raycast from the starting position of the mouse down infinitely
+                    if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
+                    {
+                        Debug.Log(hit.collider.tag);
+                        if (hit.collider.tag == "Building")
+                        {
+
+                            // This is a variable that will hold the position of where the hit is detected for the mouse
+                            Vector3 placePosition;
+
+                            // Store the hit position into the placePosition
+                            placePosition = hit.point;
+
+                            // This will round the x and z variable, not sure if this is needed though since accuracy is much better than inaccuracy for object placement
+                            placePosition.x = Mathf.Round(placePosition.x);
+                            placePosition.z = Mathf.Round(placePosition.z);
+
+                            // instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
+                            obj = Instantiate(Resources.Load("Prefabs/HoneySpoon", typeof(GameObject))) as GameObject;
+
+                            obj.GetComponent<HoneyPot>().setList(shopScript.honeyFlags);
+                            obj.GetComponent<HoneyPot>().setLevel(shopScript.honeyLevel);
+                            obj.GetComponent<HoneyPot>().setMenuBools(shopScript.red, shopScript.green, shopScript.blue, shopScript.yellow,
+                                shopScript.small, shopScript.median, shopScript.large, shopScript.ambulance, shopScript.fireTruck, shopScript.Tanker,
+                                shopScript.Truck, shopScript.Hearse, shopScript.policeCar, shopScript.IceCream);
+
+                            // Change the position of it so it will be placed a little bit above the road level
+                            obj.transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+
+                            // Set the placing security to false, in which it won't let the user keep pressing g for more security gates
+                            gameMgr.honeyPots.Add( obj.GetComponent<HoneyPot>() );
+                            placingSecurity = false;
+                            shopScript.clear();
+                            shopScript.honeyFlags.Clear();
+                        }
+                    }
+                }
         }
 
 
