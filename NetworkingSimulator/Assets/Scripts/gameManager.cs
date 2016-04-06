@@ -288,16 +288,35 @@ public class gameManager : MonoBehaviour {
 	 * @algorithm: Called from the gui save button in which it gets the username of the player after being set somewhere else. Opens the file, writes the different things for the different levels
 	 */ 
 	public bool saveData(){
-		// Create a stream writer object
+		// Create the name of the file. it will be the username along with a .txt at the end, not necessary but windows likes extension
 		fileName = username + ".txt";
+
+		// Create a streamwriter, in order to open up the file 
 		StreamWriter writer = new StreamWriter (fileName);
 
-	
+		// Trim the password so it does not have uncessary data like whitespace
 		password = password.Trim ();
-		// Write the password to file
+
+
+		// Write the password onto the line in the file
 		writer.WriteLine (password);
 
+		// Write the cash 
 		writer.WriteLine (cash);
+
+		//Write that the current information coming in is going to be security stuff
+
+			// Loop through that information, and start placing it on the map
+
+
+		// Next up is the honey pots
+			// Loop through that information, and start placing it on the map	
+
+
+		// Close the file
+		writer.Close();
+		return true;
+		/*
 		writer.WriteLine ("Buildings");
 		
 		writer.WriteLine (buildingsInThisScene.Count);
@@ -320,6 +339,7 @@ public class gameManager : MonoBehaviour {
 		writer.Close ();
 
 		return true;
+		*/
 	}
 
 	//sets and gets of user attributes
