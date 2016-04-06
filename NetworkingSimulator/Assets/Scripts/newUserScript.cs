@@ -30,13 +30,13 @@ public class newUserScript : MonoBehaviour {
 		bool pInput = false;
 
 		//create the labels and textfields for username and password
-		GUI.color = Color.black;
+		GUI.color = Color.white;
 		GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 150, 20), "Create Username");
 
 		GUI.color = Color.white;
 		name = GUI.TextField (new Rect (Screen.width / 2, (Screen.height / 2) + 25, 200, 20), name.Trim (), 25);
 
-		GUI.color = Color.black;
+		GUI.color = Color.white;
 		GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 150, 20), "Create a Password");
 
 		GUI.color = Color.white;
