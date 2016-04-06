@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.IO;
 
 public class HoneyPot : MonoBehaviour {
 
@@ -27,15 +30,18 @@ public class HoneyPot : MonoBehaviour {
   bool Hearse = false;
   bool policeCar = false;
   bool IceCream = false;
+  public bool first = true;
 
-
+  public Camera myCam; // The camera object
+  private Vector3 screenPoint; private Vector3 offset; private float _lockedYPosition;
 
 	// Use this for initialization
 	void Start () {
       gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();
       main = GameObject.Find("Main Camera").GetComponent<mainGame>();
       PID = gameMgr.honeyCount++;
-        
+      myCam = GameObject.Find("Main Camera").GetComponent<Camera>();
+
         carTags.Add("Ambulance");
         carTags.Add("FireTruck");
         carTags.Add("Hearse");
@@ -48,7 +54,8 @@ public class HoneyPot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if ( Input.GetMouseButtonDown(2))
+        upgrade = true;
 	}
 
 	void OnCollisionEnter(Collision col){
@@ -64,8 +71,40 @@ public class HoneyPot : MonoBehaviour {
         }
 	}
 
-    void OnMouseDown(){
-        upgrade = true;
+
+    void OnMouseDrag()
+    {
+
+            Ray vRay = myCam.ScreenPointToRay(Input.mousePosition);
+
+            // Create a hit variable that will store the value of whatever it hits
+            RaycastHit hit;
+
+            // Cast a raycast from the starting position of the mouse down infinitely
+            if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
+            {
+                Debug.Log(hit.collider.tag);
+                if (hit.collider.tag == "Untagged")
+                {
+
+                    // This is a variable that will hold the position of where the hit is detected for the mouse
+                    Vector3 placePosition;
+
+                    // Store the hit position into the placePosition
+                    placePosition = hit.point;
+
+                    // This will round the x and z variable, not sure if this is needed though since accuracy is much better than inaccuracy for object placement
+                    placePosition.x = Mathf.Round(placePosition.x);
+                    placePosition.z = Mathf.Round(placePosition.z);
+
+
+                    // Change the position of it so it will be placed a little bit above the road level
+                    transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+                }
+
+            }
+
+        
     }
 
     public void setList(List<string> purchasedList){
@@ -97,6 +136,36 @@ public class HoneyPot : MonoBehaviour {
       IceCream = i;
     }
 
+    public void writeToLog(StreamWriter fout)
+    {
+        fout.WriteLine("Log for HoneyPot {0}:", PID);
+
+        foreach (KeyValuePair<int, Car> kvp in carPIDS)
+        {
+            int i = 1;
+            if (level == 1)
+            {
+                fout.WriteLine("Entry {0}: Car Color {1}:", i++, kvp.Value.colorString);
+            }
+
+            if (level == 2)
+            {
+                fout.WriteLine("Entry {0}: Car Color {1}:", i++, kvp.Value.colorString);
+            }
+
+            if (level == 3)
+            {
+                fout.WriteLine("Entry {0}: Car Color {1}:", i++, kvp.Value.colorString);
+            }
+
+        }
+
+
+        fout.WriteLine("this is my file.");
+        fout.WriteLine("i can write ints {0} or floats {1}, and so on.",
+            1, 4.2);
+    }
+
     void OnGUI(){
         if (upgrade == true)
         {
@@ -113,17 +182,17 @@ public class HoneyPot : MonoBehaviour {
                 yellow = GUI.Toggle(new Rect(510, 440, 100, 30), yellow, "Yellow");
 
                 //This is to check for what type of color the security gate will look for
-                if (red && !Keys.Contains("Red")) { Keys.Add("Red"); Debug.Log("on"); }
-                else if (!red && Keys.Contains("Red")) { Keys.Remove("Red"); Debug.Log("off"); }
+                if (red && !Keys.Contains("Red")) Keys.Add("Red"); 
+                else if (!red && Keys.Contains("Red")) Keys.Remove("Red");
 
-                else if (green && !Keys.Contains("Green")) { Keys.Add("Green"); Debug.Log("on"); }
-                else if (!green && Keys.Contains("Green")) { Keys.Remove("Green"); Debug.Log("off"); }
+                else if (green && !Keys.Contains("Green")) Keys.Add("Green"); 
+                else if (!green && Keys.Contains("Green")) Keys.Remove("Green");
 
-                else if (blue && !Keys.Contains("Blue")) { Keys.Add("Blue"); Debug.Log("on"); }
-                else if (!blue && Keys.Contains("Blue")) { Keys.Remove("Blue"); Debug.Log("off"); }
+                else if (blue && !Keys.Contains("Blue"))  Keys.Add("Blue");
+                else if (!blue && Keys.Contains("Blue"))  Keys.Remove("Blue"); 
 
-                else if (yellow && !Keys.Contains("Yellow")) { Keys.Add("Yellow"); Debug.Log("on"); }
-                else if (!yellow && Keys.Contains("Yellow")) { Keys.Remove("Yellow"); Debug.Log("off"); }
+                else if (yellow && !Keys.Contains("Yellow"))  Keys.Add("Yellow");
+                else if (!yellow && Keys.Contains("Yellow"))  Keys.Remove("Yellow");
 
 
                 if (GUI.Button(new Rect(840, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
@@ -157,27 +226,27 @@ public class HoneyPot : MonoBehaviour {
                 large = GUI.Toggle(new Rect(640, 340, 100, 30), large, "Large");
 
 
-                //This is to check for what type of color the security gate will look for
-                if (red && !Keys.Contains("Red")) { Keys.Add("Red"); Debug.Log("on"); }
-                else if (!red && Keys.Contains("Red")) { Keys.Remove("Red"); Debug.Log("off"); }
 
-                else if (green && !Keys.Contains("Green")) { Keys.Add("Green"); Debug.Log("on"); }
-                else if (!green && Keys.Contains("Green")) { Keys.Remove("Green"); Debug.Log("off"); }
+                if (red && !Keys.Contains("Red"))  Keys.Add("Red");
+                else if (!red && Keys.Contains("Red"))  Keys.Remove("Red");
 
-                else if (blue && !Keys.Contains("Blue")) { Keys.Add("Blue"); Debug.Log("on"); }
-                else if (!blue && Keys.Contains("Blue")) { Keys.Remove("Blue"); Debug.Log("off"); }
+                else if (green && !Keys.Contains("Green"))  Keys.Add("Green");
+                else if (!green && Keys.Contains("Green"))  Keys.Remove("Green"); 
 
-                else if (yellow && !Keys.Contains("Yellow")) { Keys.Add("Yellow"); Debug.Log("on"); }
-                else if (!yellow && Keys.Contains("Yellow")) { Keys.Remove("Yellow"); Debug.Log("off"); }
+                else if (blue && !Keys.Contains("Blue")) Keys.Add("Blue"); 
+                else if (!blue && Keys.Contains("Blue")) Keys.Remove("Blue"); 
 
-                else if (small && !Keys.Contains("Small")) { Keys.Add("Small"); Debug.Log("on"); }
-                else if (!small && Keys.Contains("Small")) { Keys.Remove("Small"); Debug.Log("off"); }
+                else if (yellow && !Keys.Contains("Yellow"))  Keys.Add("Yellow"); 
+                else if (!yellow && Keys.Contains("Yellow"))  Keys.Remove("Yellow"); 
 
-                else if (median && !Keys.Contains("Medium")) { Keys.Add("Medium"); Debug.Log("on"); }
-                else if (!median && Keys.Contains("Medium")) { Keys.Remove("Medium"); Debug.Log("off"); }
+                else if (small && !Keys.Contains("Small"))  Keys.Add("Small"); 
+                else if (!small && Keys.Contains("Small"))  Keys.Remove("Small");
 
-                else if (large && !Keys.Contains("Large")) { Keys.Add("Large"); Debug.Log("on"); }
-                else if (!large && Keys.Contains("Large")) { Keys.Remove("Large"); Debug.Log("off"); }
+                else if (median && !Keys.Contains("Medium"))  Keys.Add("Medium"); 
+                else if (!median && Keys.Contains("Medium"))  Keys.Remove("Medium"); 
+
+                else if (large && !Keys.Contains("Large"))  Keys.Add("Large");
+                else if (!large && Keys.Contains("Large"))  Keys.Remove("Large");
 
 
                 if (GUI.Button(new Rect(840, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
@@ -220,48 +289,48 @@ public class HoneyPot : MonoBehaviour {
                 policeCar = GUI.Toggle(new Rect(740, 740, 100, 30), policeCar, "Police Car");
 
 
-                //This is to check for what type of color the security gate will look for
-                if (red && !Keys.Contains("Red")) { Keys.Add("Red"); Debug.Log("on"); }
-                else if (!red && Keys.Contains("Red")) { Keys.Remove("Red"); Debug.Log("off"); }
 
-                else if (green && !Keys.Contains("Green")) { Keys.Add("Green"); Debug.Log("on"); }
-                else if (!green && Keys.Contains("Green")) { Keys.Remove("Green"); Debug.Log("off"); }
+                if (red && !Keys.Contains("Red"))  Keys.Add("Red"); 
+                else if (!red && Keys.Contains("Red"))  Keys.Remove("Red"); 
 
-                else if (blue && !Keys.Contains("Blue")) { Keys.Add("Blue"); Debug.Log("on"); }
-                else if (!blue && Keys.Contains("Blue")) { Keys.Remove("Blue"); Debug.Log("off"); }
+                else if (green && !Keys.Contains("Green"))  Keys.Add("Green"); 
+                else if (!green && Keys.Contains("Green"))  Keys.Remove("Green"); 
 
-                else if (yellow && !Keys.Contains("Yellow")) { Keys.Add("Yellow"); Debug.Log("on"); }
-                else if (!yellow && Keys.Contains("Yellow")) { Keys.Remove("Yellow"); Debug.Log("off"); }
+                else if (blue && !Keys.Contains("Blue"))  Keys.Add("Blue");
+                else if (!blue && Keys.Contains("Blue"))  Keys.Remove("Blue"); 
 
-                else if (small && !Keys.Contains("Small")) { Keys.Add("Small"); Debug.Log("on"); }
-                else if (!small && Keys.Contains("Small")) { Keys.Remove("Small"); Debug.Log("off"); }
+                else if (yellow && !Keys.Contains("Yellow"))  Keys.Add("Yellow"); 
+                else if (!yellow && Keys.Contains("Yellow"))  Keys.Remove("Yellow"); 
 
-                else if (median && !Keys.Contains("Medium")) { Keys.Add("Medium"); Debug.Log("on"); }
-                else if (!median && Keys.Contains("Medium")) { Keys.Remove("Medium"); Debug.Log("off"); }
+                else if (small && !Keys.Contains("Small"))  Keys.Add("Small"); 
+                else if (!small && Keys.Contains("Small"))  Keys.Remove("Small"); 
 
-                else if (large && !Keys.Contains("Large")) { Keys.Add("Large"); Debug.Log("on"); }
-                else if (!large && Keys.Contains("Large")) { Keys.Remove("Large"); Debug.Log("off"); }
+                else if (median && !Keys.Contains("Medium"))  Keys.Add("Medium");
+                else if (!median && Keys.Contains("Medium"))  Keys.Remove("Medium"); 
 
-                else if (ambulance && !Keys.Contains("Ambulance")) { Keys.Add("Ambulance"); Debug.Log("on"); }
-                else if (!ambulance && Keys.Contains("Ambulance")) { Keys.Remove("Ambulance"); Debug.Log("off"); }
+                else if (large && !Keys.Contains("Large"))  Keys.Add("Large"); 
+                else if (!large && Keys.Contains("Large"))  Keys.Remove("Large"); 
 
-                else if (fireTruck && !Keys.Contains("Fire Truck")) { Keys.Add("Fire Truck"); Debug.Log("on"); }
-                else if (!fireTruck && Keys.Contains("Fire Truck")) { Keys.Remove("Fire Truck"); Debug.Log("off"); }
+                else if (ambulance && !Keys.Contains("Ambulance")) Keys.Add("Ambulance"); 
+                else if (!ambulance && Keys.Contains("Ambulance")) Keys.Remove("Ambulance");
 
-                else if (Tanker && !Keys.Contains("Tanker")) { Keys.Add("Tanker"); Debug.Log("on"); }
-                else if (!Tanker && Keys.Contains("Tanker")) { Keys.Remove("Tanker"); Debug.Log("off"); }
+                else if (fireTruck && !Keys.Contains("Fire Truck"))  Keys.Add("Fire Truck");
+                else if (!fireTruck && Keys.Contains("Fire Truck"))  Keys.Remove("Fire Truck");
 
-                else if (Truck && !Keys.Contains("Truck")) { Keys.Add("Truck"); Debug.Log("on"); }
-                else if (!Truck && Keys.Contains("Truck")) { Keys.Remove("Truck"); Debug.Log("off"); }
+                else if (Tanker && !Keys.Contains("Tanker"))  Keys.Add("Tanker");
+                else if (!Tanker && Keys.Contains("Tanker"))  Keys.Remove("Tanker");
 
-                else if (Hearse && !Keys.Contains("Hearse")) { Keys.Add("Hearse"); Debug.Log("on"); }
-                else if (!Hearse && Keys.Contains("Hearse")) { Keys.Remove("Hearse"); Debug.Log("off"); }
+                else if (Truck && !Keys.Contains("Truck"))  Keys.Add("Truck");
+                else if (!Truck && Keys.Contains("Truck"))  Keys.Remove("Truck");
 
-                else if (IceCream && !Keys.Contains("Ice Cream")) { Keys.Add("Ice Cream"); Debug.Log("on"); }
-                else if (!IceCream && Keys.Contains("Ice Cream")) { Keys.Remove("Ice Cream"); Debug.Log("off"); }
+                else if (Hearse && !Keys.Contains("Hearse"))  Keys.Add("Hearse");
+                else if (!Hearse && Keys.Contains("Hearse"))  Keys.Remove("Hearse"); 
 
-                else if (policeCar && !Keys.Contains("Police Car")) { Keys.Add("Police Car"); Debug.Log("on"); }
-                else if (!policeCar && Keys.Contains("Police Car")) { Keys.Remove("Police Car"); Debug.Log("off"); }
+                else if (IceCream && !Keys.Contains("Ice Cream"))  Keys.Add("Ice Cream");
+                else if (!IceCream && Keys.Contains("Ice Cream"))  Keys.Remove("Ice Cream"); 
+
+                else if (policeCar && !Keys.Contains("Police Car"))  Keys.Add("Police Car");
+                else if (!policeCar && Keys.Contains("Police Car"))  Keys.Remove("Police Car"); 
 
 
                 if (GUI.Button(new Rect(840, 400 - (128 * 2) + 128, 128, 50), "Purchase"))

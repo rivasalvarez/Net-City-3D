@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.IO;
 
 public class mainGame : MonoBehaviour {
 	gameManager gameMgr; // This gets the players information
@@ -10,7 +12,7 @@ public class mainGame : MonoBehaviour {
 	GUIStyle boxInformation;
 
 	bool openingShop;  // This is a bool to open up the shop
-	bool placingSecurity; // This is a bool to check for if placing security, this is ok
+	public bool placingSecurity; // This is a bool to check for if placing security, this is ok
 	public bool showSettings; // This is a bool to check for if it is on show setting
 
 	public Camera myCam; // The camera object
@@ -60,10 +62,20 @@ public class mainGame : MonoBehaviour {
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
 
-        if (timer < 0){
+        if (timer < 0){ 
+           string  fileName = "HoneyPot Log" + (gameMgr.honeyCount - 1) +   ".txt";
+           StreamWriter sr = File.CreateText(fileName);
             timer = 60;
-            foreach (var hp in gameMgr.honeyPots)
+
+            foreach (var hp in gameMgr.honeyPots) {
+                hp.writeToLog(sr); 
                 hp.carPIDS.Clear();
+
+
+            }
+
+        sr.Close();
+
         }
 			}
 
@@ -177,7 +189,7 @@ public class mainGame : MonoBehaviour {
 					// Cast a raycast from the starting position of the mouse down infinitely
 					if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
-						if (hit.collider.tag == "Building") {
+						if (hit.collider.tag == "Untagged") {
 							// These are the values for car color that it will detect what car colors are allowed
 							bool red = shopScript.red;
 							bool blue = shopScript.blue;
@@ -255,7 +267,7 @@ public class mainGame : MonoBehaviour {
                     if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
                     {
                         Debug.Log(hit.collider.tag);
-                        if (hit.collider.tag == "Building")
+                        if (hit.collider.tag == "Untagged")
                         {
 
                             // This is a variable that will hold the position of where the hit is detected for the mouse

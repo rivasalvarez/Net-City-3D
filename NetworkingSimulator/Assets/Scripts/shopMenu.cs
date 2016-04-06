@@ -8,7 +8,8 @@ public class shopMenu : MonoBehaviour {
 	private int security_one_cost; // This is the amount the player has to pay for security level 1 upgrade
 	private int security_two_cost; // This is the amount the player has to pay for security level 2 upgrade
 	private int security_three_cost; // This is the amount the player has to pay for security level 2 upgrade
-	private GUIStyle guiStyle; // This will hold the type of GUI options for the buttons and etc
+	public GUIStyle guiStyle; // This will hold the type of GUI options for the buttons and etc
+
 
 	// This is for the location of the button only for upgrades and for the purpose of organization
 	private int upgradeOneGUIRow;
@@ -135,6 +136,8 @@ public class shopMenu : MonoBehaviour {
 	}
 
 	void OnGUI(){
+
+
 		if (shopOpen == true) {
 
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
@@ -320,17 +323,17 @@ public class shopMenu : MonoBehaviour {
 
 
                     //This is to check for what type of color the security gate will look for
-                    if (red && !honeyFlags.Contains("Red")) { honeyFlags.Add("Red"); Debug.Log("on"); }
-                    else if (!red && honeyFlags.Contains("Red")) { honeyFlags.Remove("Red"); Debug.Log("off"); }
+                    if (red && !honeyFlags.Contains("Red"))  honeyFlags.Add("Red");
+                    else if (!red && honeyFlags.Contains("Red"))  honeyFlags.Remove("Red"); 
 
-                    else if (green && !honeyFlags.Contains("Green")) { honeyFlags.Add("Green"); Debug.Log("on"); }
-                    else if (!green && honeyFlags.Contains("Green")) { honeyFlags.Remove("Green"); Debug.Log("off"); }
+                    else if (green && !honeyFlags.Contains("Green"))  honeyFlags.Add("Green"); 
+                    else if (!green && honeyFlags.Contains("Green"))  honeyFlags.Remove("Green"); 
 
-                    else if (blue && !honeyFlags.Contains("Blue")) { honeyFlags.Add("Blue"); Debug.Log("on"); }
-                    else if (!blue && honeyFlags.Contains("Blue")) { honeyFlags.Remove("Blue"); Debug.Log("off"); }
+                    else if (blue && !honeyFlags.Contains("Blue"))  honeyFlags.Add("Blue");
+                    else if (!blue && honeyFlags.Contains("Blue"))  honeyFlags.Remove("Blue"); 
 
-                    else if (yellow && !honeyFlags.Contains("Yellow")) { honeyFlags.Add("Yellow"); Debug.Log("on"); }
-                    else if (!yellow && honeyFlags.Contains("Yellow")) { honeyFlags.Remove("Yellow"); Debug.Log("off"); }
+                    else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
+                    else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow"); 
 
                     if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
                         upgradeChosen = false;
@@ -362,26 +365,26 @@ public class shopMenu : MonoBehaviour {
 
 
                     //This is to check for what type of color the security gate will look for
-                    if (red && !honeyFlags.Contains("Red")) { honeyFlags.Add("Red"); Debug.Log("on"); }
-                    else if (!red && honeyFlags.Contains("Red")) { honeyFlags.Remove("Red"); Debug.Log("off"); }
+                    if (red && !honeyFlags.Contains("Red"))  honeyFlags.Add("Red");
+                    else if (!red && honeyFlags.Contains("Red"))  honeyFlags.Remove("Red");
 
-                    else if (green && !honeyFlags.Contains("Green")) { honeyFlags.Add("Green"); Debug.Log("on"); }
-                    else if (!green && honeyFlags.Contains("Green")) { honeyFlags.Remove("Green"); Debug.Log("off"); }
+                    else if (green && !honeyFlags.Contains("Green"))  honeyFlags.Add("Green"); 
+                    else if (!green && honeyFlags.Contains("Green"))  honeyFlags.Remove("Green"); 
 
-                    else if (blue && !honeyFlags.Contains("Blue")) { honeyFlags.Add("Blue"); Debug.Log("on"); }
-                    else if (!blue && honeyFlags.Contains("Blue")) { honeyFlags.Remove("Blue"); Debug.Log("off"); }
+                    else if (blue && !honeyFlags.Contains("Blue"))  honeyFlags.Add("Blue"); 
+                    else if (!blue && honeyFlags.Contains("Blue"))  honeyFlags.Remove("Blue"); 
 
-                    else if (yellow && !honeyFlags.Contains("Yellow")) { honeyFlags.Add("Yellow"); Debug.Log("on"); }
-                    else if (!yellow && honeyFlags.Contains("Yellow")) { honeyFlags.Remove("Yellow"); Debug.Log("off"); }
+                    else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
+                    else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow"); 
 
-                    else if (small && !honeyFlags.Contains("Small")) { honeyFlags.Add("Small"); Debug.Log("on"); }
-                    else if (!small && honeyFlags.Contains("Small")) { honeyFlags.Remove("Small"); Debug.Log("off"); }
+                    else if (small && !honeyFlags.Contains("Small"))  honeyFlags.Add("Small");
+                    else if (!small && honeyFlags.Contains("Small"))  honeyFlags.Remove("Small"); 
 
-                    else if (median && !honeyFlags.Contains("Medium")) { honeyFlags.Add("Medium"); Debug.Log("on"); }
-                    else if (!median && honeyFlags.Contains("Medium")) { honeyFlags.Remove("Medium"); Debug.Log("off"); }
+                    else if (median && !honeyFlags.Contains("Medium"))  honeyFlags.Add("Medium"); 
+                    else if (!median && honeyFlags.Contains("Medium"))  honeyFlags.Remove("Medium"); 
 
-                    else if (large && !honeyFlags.Contains("Large")) { honeyFlags.Add("Large"); Debug.Log("on"); }
-                    else if (!large && honeyFlags.Contains("Large")) { honeyFlags.Remove("Large"); Debug.Log("off"); }
+                    else if (large && !honeyFlags.Contains("Large"))  honeyFlags.Add("Large"); 
+                    else if (!large && honeyFlags.Contains("Large"))  honeyFlags.Remove("Large"); 
 
                     if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
                         upgradeChosen = false;
@@ -423,47 +426,47 @@ public class shopMenu : MonoBehaviour {
 
 
                     //This is to check for what type of color the security gate will look for
-                    if (red && !honeyFlags.Contains("Red")) { honeyFlags.Add("Red"); Debug.Log("on"); }
-                    else if (!red && honeyFlags.Contains("Red")) { honeyFlags.Remove("Red"); Debug.Log("off"); }
+                    if (red && !honeyFlags.Contains("Red"))  honeyFlags.Add("Red");
+                    else if (!red && honeyFlags.Contains("Red"))  honeyFlags.Remove("Red");
 
-                    else if (green && !honeyFlags.Contains("Green")) { honeyFlags.Add("Green"); Debug.Log("on"); }
-                    else if (!green && honeyFlags.Contains("Green")) { honeyFlags.Remove("Green"); Debug.Log("off"); }
+                    else if (green && !honeyFlags.Contains("Green"))  honeyFlags.Add("Green"); 
+                    else if (!green && honeyFlags.Contains("Green"))  honeyFlags.Remove("Green"); 
 
-                    else if (blue && !honeyFlags.Contains("Blue")) { honeyFlags.Add("Blue"); Debug.Log("on"); }
-                    else if (!blue && honeyFlags.Contains("Blue")) { honeyFlags.Remove("Blue"); Debug.Log("off"); }
+                    else if (blue && !honeyFlags.Contains("Blue")) honeyFlags.Add("Blue"); 
+                    else if (!blue && honeyFlags.Contains("Blue")) honeyFlags.Remove("Blue"); 
 
-                    else if (yellow && !honeyFlags.Contains("Yellow")) { honeyFlags.Add("Yellow"); Debug.Log("on"); }
-                    else if (!yellow && honeyFlags.Contains("Yellow")) { honeyFlags.Remove("Yellow"); Debug.Log("off"); }
+                    else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
+                    else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow");
 
-                    else if (small && !honeyFlags.Contains("Small")) { honeyFlags.Add("Small"); Debug.Log("on"); }
-                    else if (!small && honeyFlags.Contains("Small")) { honeyFlags.Remove("Small"); Debug.Log("off"); }
+                    else if (small && !honeyFlags.Contains("Small"))  honeyFlags.Add("Small"); 
+                    else if (!small && honeyFlags.Contains("Small"))  honeyFlags.Remove("Small"); 
 
-                    else if (median && !honeyFlags.Contains("Medium")) { honeyFlags.Add("Medium"); Debug.Log("on"); }
-                    else if (!median && honeyFlags.Contains("Medium")) { honeyFlags.Remove("Medium"); Debug.Log("off"); }
+                    else if (median && !honeyFlags.Contains("Medium"))  honeyFlags.Add("Medium"); 
+                    else if (!median && honeyFlags.Contains("Medium"))  honeyFlags.Remove("Medium"); 
 
-                    else if (large && !honeyFlags.Contains("Large")) { honeyFlags.Add("Large"); Debug.Log("on"); }
-                    else if (!large && honeyFlags.Contains("Large")) { honeyFlags.Remove("Large"); Debug.Log("off"); }
+                    else if (large && !honeyFlags.Contains("Large")) honeyFlags.Add("Large"); 
+                    else if (!large && honeyFlags.Contains("Large")) honeyFlags.Remove("Large");
 
-                    else if (ambulance && !honeyFlags.Contains("Ambulance")) { honeyFlags.Add("Ambulance"); Debug.Log("on"); }
-                    else if (!ambulance && honeyFlags.Contains("Ambulance")) { honeyFlags.Remove("Ambulance"); Debug.Log("off"); }
+                    else if (ambulance && !honeyFlags.Contains("Ambulance"))  honeyFlags.Add("Ambulance"); 
+                    else if (!ambulance && honeyFlags.Contains("Ambulance"))  honeyFlags.Remove("Ambulance"); 
 
-                    else if (fireTruck && !honeyFlags.Contains("Fire Truck")) { honeyFlags.Add("Fire Truck"); Debug.Log("on"); }
-                    else if (!fireTruck && honeyFlags.Contains("Fire Truck")) { honeyFlags.Remove("Fire Truck"); Debug.Log("off"); }
+                    else if (fireTruck && !honeyFlags.Contains("Fire Truck"))  honeyFlags.Add("Fire Truck"); 
+                    else if (!fireTruck && honeyFlags.Contains("Fire Truck"))  honeyFlags.Remove("Fire Truck"); 
 
-                    else if (Tanker && !honeyFlags.Contains("Tanker")) { honeyFlags.Add("Tanker"); Debug.Log("on"); }
-                    else if (!Tanker && honeyFlags.Contains("Tanker")) { honeyFlags.Remove("Tanker"); Debug.Log("off"); }
+                    else if (Tanker && !honeyFlags.Contains("Tanker"))  honeyFlags.Add("Tanker");
+                    else if (!Tanker && honeyFlags.Contains("Tanker"))  honeyFlags.Remove("Tanker"); 
 
-                    else if (Truck && !honeyFlags.Contains("Truck")) { honeyFlags.Add("Truck"); Debug.Log("on"); }
-                    else if (!Truck && honeyFlags.Contains("Truck")) { honeyFlags.Remove("Truck"); Debug.Log("off"); }
+                    else if (Truck && !honeyFlags.Contains("Truck"))  honeyFlags.Add("Truck"); 
+                    else if (!Truck && honeyFlags.Contains("Truck"))  honeyFlags.Remove("Truck"); 
 
-                    else if (Hearse && !honeyFlags.Contains("Hearse")) { honeyFlags.Add("Hearse"); Debug.Log("on"); }
-                    else if (!Hearse && honeyFlags.Contains("Hearse")) { honeyFlags.Remove("Hearse"); Debug.Log("off"); }
+                    else if (Hearse && !honeyFlags.Contains("Hearse"))  honeyFlags.Add("Hearse"); 
+                    else if (!Hearse && honeyFlags.Contains("Hearse"))  honeyFlags.Remove("Hearse"); 
 
-                    else if (IceCream && !honeyFlags.Contains("Ice Cream")) { honeyFlags.Add("Ice Cream"); Debug.Log("on"); }
-                    else if (!IceCream && honeyFlags.Contains("Ice Cream")) { honeyFlags.Remove("Ice Cream"); Debug.Log("off"); }
+                    else if (IceCream && !honeyFlags.Contains("Ice Cream"))  honeyFlags.Add("Ice Cream"); 
+                    else if (!IceCream && honeyFlags.Contains("Ice Cream"))  honeyFlags.Remove("Ice Cream");
 
-                    else if (policeCar && !honeyFlags.Contains("Police Car")) { honeyFlags.Add("Police Car"); Debug.Log("on"); }
-                    else if (!policeCar && honeyFlags.Contains("Police Car")) { honeyFlags.Remove("Police Car"); Debug.Log("off"); }
+                    else if (policeCar && !honeyFlags.Contains("Police Car"))  honeyFlags.Add("Police Car"); 
+                    else if (!policeCar && honeyFlags.Contains("Police Car"))  honeyFlags.Remove("Police Car"); 
 
 
                     if (GUI.Button(new Rect(340, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
