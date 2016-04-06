@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.IO;
 
 public class mainGame : MonoBehaviour {
 	gameManager gameMgr; // This gets the players information
@@ -10,14 +12,14 @@ public class mainGame : MonoBehaviour {
 	GUIStyle boxInformation;
 
 	bool openingShop;  // This is a bool to open up the shop
-	bool placingSecurity; // This is a bool to check for if placing security, this is ok
+	public bool placingSecurity; // This is a bool to check for if placing security, this is ok
 	public bool showSettings; // This is a bool to check for if it is on show setting
 
 	public Camera myCam; // The camera object
 	public GameObject obj; // This is for Save Menu!!!!! TODO
     public GameObject tmpObj; // This is for Save Menu!!!!! TODO
 
-	float timer = 60; // A timer to calculate how long the user has been playing for
+	public float timer = 60; // A timer to calculate how long the user has been playing for
 	public string time; // String of the amount of time overall that has passed
 	string mins; // String of the amount of minutes that has passed
 	string secs; // String of the amount of seconds that has passed
@@ -60,10 +62,20 @@ public class mainGame : MonoBehaviour {
 		secs = Mathf.Floor(timer % 60).ToString("00");
 		time = mins + ":" + secs;
 
-        if (timer < 0){
+        if (timer < 0){ 
+           string  fileName = "HoneyPot Log" + (gameMgr.honeyCount - 1) +   ".txt";
+           StreamWriter sr = File.CreateText(fileName);
             timer = 60;
-            foreach (var hp in gameMgr.honeyPots)
+
+            foreach (var hp in gameMgr.honeyPots) {
+                hp.writeToLog(sr); 
                 hp.carPIDS.Clear();
+
+
+            }
+
+        sr.Close();
+
         }
 			}
 
