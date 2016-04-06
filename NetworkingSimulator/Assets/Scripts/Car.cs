@@ -63,7 +63,6 @@ public class Car : MonoBehaviour {
 			// if it is then destroy the car because it has reached its destination
 			Destroy (gameObject);
 			gameMgr.cash += 300;
-            Debug.Log("collision");
 		} 
 
 /*

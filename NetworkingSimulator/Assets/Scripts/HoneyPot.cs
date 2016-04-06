@@ -60,6 +60,7 @@ public class HoneyPot : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
         if( carTags.Contains(col.gameObject.tag) ){
+
            Car colCar = col.gameObject.GetComponent<Car>();
               if (Keys.Contains(colCar.colorString) || Keys.Contains(colCar.carTypeString) || Keys.Contains(colCar.sizeString) ){
 
@@ -139,7 +140,7 @@ public class HoneyPot : MonoBehaviour {
 
     public void writeToLog(StreamWriter fout)
     {
-        fout.WriteLine("Log for HoneyPot {0}:", PID);
+        fout.WriteLine("Log for HoneyPot {0} (Level {1}):", PID, level);
 
         foreach (KeyValuePair<int, Car> kvp in carPIDS)
         {
@@ -156,16 +157,11 @@ public class HoneyPot : MonoBehaviour {
 
             if (level == 3)
             {
-                fout.WriteLine("Car Color: {0}, Car Size: {1}, Car Type: {3} Time: {4}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.carTypeString, kvp.Value.honeyPotIn);
+                fout.WriteLine("Car Color: {0}, Car Size: {1}, Car Type: {2}, Time: {3}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.carTypeString, kvp.Value.honeyPotIn);
             }
-            fout.WriteLine();
-            fout.WriteLine();
         }
-
-
-        fout.WriteLine("this is my file.");
-        fout.WriteLine("i can write ints {0} or floats {1}, and so on.",
-            1, 4.2);
+            fout.WriteLine();
+            fout.WriteLine();
     }
 
     void OnGUI(){
