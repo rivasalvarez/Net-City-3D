@@ -123,9 +123,7 @@ public class Security : MonoBehaviour {
 
 								Destroy (hit.transform.gameObject);
 							}
-					
 
-							
 					}
 			}
 		}
@@ -147,7 +145,21 @@ public class Security : MonoBehaviour {
 		yellow = y;
 	}
 
+	// This is to set the things the security gate will detect
+	public void getColors(out bool r, out bool g, out bool b,out bool y){
+		red = r;
+		green = g;
+		blue = b;
+		yellow = y;
+	}
+
 	public void setSize(bool s, bool m, bool l){
+		small = s;
+		medium = m;
+		large = l;
+	}
+
+	public void getSize(out bool s, out bool m, out bool l){
 		small = s;
 		medium = m;
 		large = l;
@@ -164,7 +176,22 @@ public class Security : MonoBehaviour {
 		taxi = ta;
 	}
 
+	public void getTypes(out bool a, out bool f,out bool t, out bool tr,out bool h,out bool i,out bool p,out bool ta){
+		ambulance = a;
+		fireTruck = f;
+		Tanker = t;
+		Truck = tr ;
+		Hearse = h; 
+		IceCream = i;
+		policeCar = p;
+		taxi = ta;
+	}
+
 	public void setSecurityType(string st){
+		securityType = st;
+	}
+
+	public void getSecurityType(out string st){
 		securityType = st;
 	}
 }

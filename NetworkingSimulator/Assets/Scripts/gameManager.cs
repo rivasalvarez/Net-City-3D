@@ -29,11 +29,7 @@ public class gameManager : MonoBehaviour {
 	private string password; // This will be used to check if the user is who he says it is, after getting the first line from the file
 
 	// These are the different list for each and everything within that specific level
-	public List<Building> buildingsInThisScene = new List<Building>() ;
-	public List<Security> securityInThisScene = new List<Security>();
-	public List<Car> carsInThisScene = new List<Car>();
-
-
+	public List<Security> securityGates = new List<Security>() ;
     public List<HoneyPot> honeyPots = new List<HoneyPot>();
     public int honeyCount = 1;
 
@@ -133,6 +129,7 @@ public class gameManager : MonoBehaviour {
 	public bool loadSave(string name){
 		fileName = @"C:\Users\murad\SP\NetworkingSimulator\" + name + ".txt";
 
+		/*
 		if (File.Exists (fileName)) {
 			setUserName(name);
 			StreamReader sr = File.OpenText(fileName);
@@ -187,6 +184,7 @@ public class gameManager : MonoBehaviour {
 					Building obj = new Building();
 					obj.setPosition(new Vector3(x, y, z));
 					//buildingsInThisScene = new List<building>();
+					/*
 					buildingsInThisScene.Add(obj);
 					print (buildingsInThisScene[0].getPosition());
 					buildings.Add(obj.getPosition());
@@ -277,6 +275,8 @@ public class gameManager : MonoBehaviour {
 		else {
 			return false;
 		}
+							*/
+
 	}
 
 	/**
@@ -305,9 +305,10 @@ public class gameManager : MonoBehaviour {
 		writer.WriteLine (cash);
 
 		//Write that the current information coming in is going to be security stuff
-
+		writer.WriteLine("Security");
 			// Loop through that information, and start placing it on the map
-
+		foreach(Security in securityGates){
+		}
 
 		// Next up is the honey pots
 			// Loop through that information, and start placing it on the map	

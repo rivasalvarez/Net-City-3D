@@ -293,6 +293,7 @@ public class shopMenu : MonoBehaviour {
 
 				if (securityType == "FL3") {
 					GUI.Box (new Rect (0, 0, 400, 300), " ");
+					red =  blue =  green = yellow = large = median =  small = ambulance = fireTruck= Tanker= Truck=  Hearse= IceCream= policeCar=  Taxi= true;
 
 					if (GUI.Button (new Rect ( 150,100, 128, 50), "Purchase")) {
 								if (playerCash >= security_three_cost) {
