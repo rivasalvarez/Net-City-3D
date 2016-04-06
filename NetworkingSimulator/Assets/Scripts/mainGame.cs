@@ -190,7 +190,7 @@ public class mainGame : MonoBehaviour {
 					// Cast a raycast from the starting position of the mouse down infinitely
 					if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
-						if (hit.collider.tag == "Untagged") {
+						if (hit.collider.tag == "Building") {
 							// These are the values for car color that it will detect what car colors are allowed
 							bool red = shopScript.red;
 							bool blue = shopScript.blue;
@@ -268,7 +268,7 @@ public class mainGame : MonoBehaviour {
                     if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
                     {
                         Debug.Log(hit.collider.tag);
-                        if (hit.collider.tag == "Untagged")
+                        if (hit.collider.tag == "Building")
                         {
 
                             // This is a variable that will hold the position of where the hit is detected for the mouse
