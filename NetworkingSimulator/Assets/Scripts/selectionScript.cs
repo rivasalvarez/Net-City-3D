@@ -18,7 +18,7 @@ public class selectionScript : MonoBehaviour {
 	void OnGUI()
 	{
 		
-		
+		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		// This button is to go to first tutorial
 		if (GUI.Button (new Rect ((Screen.width/2), (Screen.height/2 ) , 100, 50), "Start Game")) {
 			

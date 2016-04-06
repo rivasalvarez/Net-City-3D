@@ -18,7 +18,7 @@ public class gameManager : MonoBehaviour {
 
     // Car Spawn obj, pos, timer, type
 	GameObject carPre;
-	Vector3 carStartPos = new Vector3 (203.0f, 0.6f, -2.0f);
+	Vector3 carStartPos = new Vector3 (157f, 0.6f, 0f);
 	float timer = 10;
 	public int carType;
     public Color[] colorArray;
@@ -112,7 +112,7 @@ public class gameManager : MonoBehaviour {
 		if(timer < 0 && gameIsStarted){
 
             //reset timer, random type, and spawn car
-			timer = 10;
+			timer = UnityEngine.Random.Range(3,9);
 			carType = UnityEngine.Random.Range(0,8);
 			carPre = Resources.Load (carPrefabDict[carType]) as GameObject;
             Instantiate(carPre, carStartPos , Quaternion.identity);

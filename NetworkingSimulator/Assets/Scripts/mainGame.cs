@@ -89,6 +89,7 @@ public class mainGame : MonoBehaviour {
 	 * @algorithm: Checks to see if the user clicked on the gui capabilities in the menu, if so, it launches whatever option that they clicked on 
 	 */ 
 	void OnGUI(){
+			GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 			Car tempScript;
 			// Create a ray object, and have it trace the mousePosition from top down
 			Ray ray = myCam.ScreenPointToRay (Input.mousePosition);

@@ -25,18 +25,19 @@ public class newUserScript : MonoBehaviour {
 	//sets up UI and also inputs
 	void OnGUI()
 	{
+		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		//to check if the user has actually inputted things in user and password
 		bool unInput = false;
 		bool pInput = false;
 
 		//create the labels and textfields for username and password
-		GUI.color = Color.black;
+		GUI.color = Color.white;
 		GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 150, 20), "Create Username");
 
 		GUI.color = Color.white;
 		name = GUI.TextField (new Rect (Screen.width / 2, (Screen.height / 2) + 25, 200, 20), name.Trim (), 25);
 
-		GUI.color = Color.black;
+		GUI.color = Color.white;
 		GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 150, 20), "Create a Password");
 
 		GUI.color = Color.white;

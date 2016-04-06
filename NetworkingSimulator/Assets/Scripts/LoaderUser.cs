@@ -23,8 +23,9 @@ public class LoaderUser : MonoBehaviour {
 	//sets up buttons for loading user
 	void OnGUI()
 	{
+		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		//set color and create label
-		GUI.color = Color.black;
+		GUI.color = Color.white;
 		GUI.Label(new Rect (Screen.width / 2, (Screen.height / 2) - 30,150,60), "Please Insert Username to load checkpoint");
 		
 		GUI.Label(new Rect (Screen.width / 2, Screen.height / 2,150,20), "Please Insert Username to load checkpoint");
