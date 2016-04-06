@@ -255,7 +255,7 @@ public class shopMenu : MonoBehaviour {
 						blue = GUI.Toggle (new Rect (140, 240, 100, 30), blue, "Blue");
 						yellow = GUI.Toggle (new Rect (140, 340, 100, 30), yellow, "Yellow");
 
-						if ((red && blue && !green) || (red && !blue && green) || (red && !blue &&  !green && yellow)||
+						if ((red && blue && !green && !yellow) || (red && !blue && green && !yellow) || (red && !blue &&  !green && yellow)||
 										(!red && blue && green && !yellow) || (!red && blue && !green && yellow) 
 										|| (!red && !blue && green && yellow)) {
 							small = GUI.Toggle (new Rect (240, 40, 100, 30), small, "Small");
@@ -306,8 +306,6 @@ public class shopMenu : MonoBehaviour {
 					}
 
 				}
-
-	
 
 				if (securityType == "HL1") {
                     GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
@@ -495,17 +493,14 @@ public class shopMenu : MonoBehaviour {
 				// First set of upgrades for the security for the pictures
 				GUI.Label (new Rect (upgradeOneGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
 				GUI.Label (new Rect (upgradeOneGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
-				GUI.Label (new Rect (upgradeOneGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
 
 				// This is the second set of upgrades for the pictures
 				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
 				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
-				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
 
 				// This is the third set of upgrades for the pictures
 				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
 				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
-				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeThreeGUIRow, 128, 128), securityThreeImageContainer);
 
 
 
@@ -546,7 +541,7 @@ public class shopMenu : MonoBehaviour {
 				}
 
 				// This button is here to close down the shop and place the old GUI buttons on the screen
-				if (GUI.Button (new Rect (800 - 128, upgradeThreeGUICol + 128, 128, 50), "Close Shop")) {
+				if (GUI.Button (new Rect (800 - 128, upgradeThreeGUICol + 118, 128, 50), "Close Shop")) {
 					shopOpen = false;
 					upgradeChosen = false;
 					clear ();
