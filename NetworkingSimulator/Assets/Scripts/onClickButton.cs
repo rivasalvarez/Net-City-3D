@@ -14,6 +14,7 @@ public class onClickButton : MonoBehaviour {
 
 	void OnGUI()
 	{
+		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		// This button is for creating a new game with a new user
 		if (GUI.Button (new Rect (Screen.width / 2, Screen.height / 2, 100, 50), "New Game")) {
 			Application.LoadLevel("CreateNewUser");

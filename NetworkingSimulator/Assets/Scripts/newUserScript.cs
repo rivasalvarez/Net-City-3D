@@ -25,6 +25,7 @@ public class newUserScript : MonoBehaviour {
 	//sets up UI and also inputs
 	void OnGUI()
 	{
+		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		//to check if the user has actually inputted things in user and password
 		bool unInput = false;
 		bool pInput = false;
