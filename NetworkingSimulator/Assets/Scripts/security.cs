@@ -44,200 +44,212 @@ public class Security : MonoBehaviour {
 			Vector3 newPos = new Vector3 (transform.position.x, transform.position.y + 3, transform.position.z);
 		
 			Debug.DrawRay (newPos, fwd);
-			if (Physics.Raycast (newPos, fwd, out hit, 100.0F)) {
-				print (hit.collider.tag);
+		if (Physics.Raycast (newPos, fwd, out hit, 100.0F)) {
+			if (hit.collider.tag != "Building") {
 				// Check if it is security type 1, 2, or 3
-				if (securityType == "FL1" ) {
-							if (
-								// This is only for hearse
-								((hit.collider.tag == "Hearse" && Hearse == true) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && !(hit.collider.tag == "Truck" && Truck ==  false) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  (hit.collider.tag == "ambulance" && ambulance ==  true) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && !(hit.collider.tag == "Truck" && Truck ==  false) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && (hit.collider.tag == "FireTruck" && fireTruck ==  true) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && !(hit.collider.tag == "Truck" && Truck ==  false) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								(hit.collider.tag == "Tanker" && Tanker ==  true) && !(hit.collider.tag == "Truck" && Truck ==  false) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && (hit.collider.tag == "Truck" && Truck ==  true) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && !(hit.collider.tag == "Truck" && Truck ==  false) && (hit.collider.tag == "IceCream" && IceCream ==  true)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && !(hit.collider.tag == "Truck" && Truck ==  false) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& (hit.collider.tag == "PoliceCar" && policeCar ==  true) && !(hit.collider.tag == "Taxi" && taxi == false))
-								||
-								(!(hit.collider.tag == "Hearse" && Hearse == false) &&  !(hit.collider.tag == "ambulance" && ambulance ==  false) && !(hit.collider.tag == "FireTruck" && fireTruck ==  false) &&	
-								!(hit.collider.tag == "Tanker" && Tanker ==  false) && !(hit.collider.tag == "Truck" && Truck ==  false) && !(hit.collider.tag == "IceCream" && IceCream ==  false)
-								&& !(hit.collider.tag == "PoliceCar" && policeCar ==  false) && (hit.collider.tag == "Taxi" && taxi == true))
-								)
-							{
-								print ("car detected");
-							if (red ) {
-									if ("Red" == hit.collider.GetComponent <Car> ().colorString) {
-										Destroy (hit.transform.gameObject);
-									}
-							 else if (blue) {
-								if ("Blue" == hit.collider.GetComponent <Car> ().colorString || "Yellow" == hit.collider.GetComponent <Car> ().colorString ) {
-									print ("trying to stop car");
-										// This will stop the car for further surveillance
-										hit.collider.GetComponent <Car> ().setStop();
-									}
-								} 
-							else {
-							// Let the car pass
-								if ("Green" == hit.collider.GetComponent <Car> ().colorString) {
-									print ("Speeding car up");
-									hit.collider.GetComponent <Car> ().speed += 500;
-								}					
-						}
-					}
-				}
-			}
+				if (securityType == "FL1") {
+					if (
+										// This is only for hearse
+						((hit.collider.tag == "Hearse" && Hearse == true) && !(hit.collider.tag == "ambulance" && ambulance == false) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && !(hit.collider.tag == "Truck" && Truck == false) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && (hit.collider.tag == "ambulance" && ambulance == true) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && !(hit.collider.tag == "Truck" && Truck == false) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && !(hit.collider.tag == "ambulance" && ambulance == false) && (hit.collider.tag == "FireTruck" && fireTruck == true) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && !(hit.collider.tag == "Truck" && Truck == false) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && !(hit.collider.tag == "ambulance" && ambulance == false) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						(hit.collider.tag == "Tanker" && Tanker == true) && !(hit.collider.tag == "Truck" && Truck == false) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && !(hit.collider.tag == "ambulance" && ambulance == false) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && (hit.collider.tag == "Truck" && Truck == true) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && !(hit.collider.tag == "ambulance" && ambulance == false) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && !(hit.collider.tag == "Truck" && Truck == false) && (hit.collider.tag == "IceCream" && IceCream == true)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && !(hit.collider.tag == "ambulance" && ambulance == false) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && !(hit.collider.tag == "Truck" && Truck == false) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& (hit.collider.tag == "PoliceCar" && policeCar == true) && !(hit.collider.tag == "Taxi" && taxi == false))
+						||
+						(!(hit.collider.tag == "Hearse" && Hearse == false) && !(hit.collider.tag == "ambulance" && ambulance == false) && !(hit.collider.tag == "FireTruck" && fireTruck == false) &&
+						!(hit.collider.tag == "Tanker" && Tanker == false) && !(hit.collider.tag == "Truck" && Truck == false) && !(hit.collider.tag == "IceCream" && IceCream == false)
+						&& !(hit.collider.tag == "PoliceCar" && policeCar == false) && (hit.collider.tag == "Taxi" && taxi == true))) {
+						print ("car detected: " + hit.collider.tag);
+						if (red) {
 
-			if (securityType == "FL2" ) {
-				if (
-					
-					// This is only for hearse
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "ambulance" && ambulance ==  true) &&  fireTruck ==  false && Tanker ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "FireTruck" && fireTruck ==  true) &&  ambulance ==  false && Tanker ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "Tanker" && Tanker ==  true) &&  fireTruck ==  false && ambulance ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "Truck" && Truck ==  true) &&  fireTruck ==  false && Tanker ==  false && ambulance ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "IceCream" && IceCream ==  true) &&  fireTruck ==  false && Tanker ==  false && Truck ==  false && ambulance ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "PoliceCar" && policeCar==  true) &&  fireTruck ==  false && Tanker ==  false && Truck ==  false && IceCream ==  false &&  ambulance ==  false && taxi == false))
-					||
-					((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "Taxi" && taxi==  true) &&  fireTruck ==  false && Tanker ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && ambulance == false))
+							if ("Red" == hit.collider.GetComponent <Car> ().colorString) {
+								print ("Red");
 
-					// This is for ambulence and one other combination
-					||
-					((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "fireTruck" && fireTruck==  true) &&  Hearse == false && Tanker ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "Tanker" && Tanker==  true) &&  Hearse == false && fireTruck ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "Truck" && Truck==  true) &&  Hearse == false && fireTruck ==  false && Tanker ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "IceCream" && IceCream==  true) &&  Hearse == false && fireTruck ==  false && Tanker ==  false && Truck==  false &&  policeCar ==  false && taxi == false))
-					||
-					((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "PoliceCar" && policeCar==  true) &&  Hearse == false && fireTruck ==  false && Tanker ==  false && Truck==  false &&  IceCream ==  false && taxi == false))
-					||
-					((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "Taxi" && taxi==  true) &&  Hearse == false && fireTruck ==  false && Tanker ==  false && Truck==  false &&  IceCream ==  false && policeCar == false))
-
-
-					// This is for firetruck
-					||
-					(((hit.collider.tag == "fireTruck" && fireTruck==  true || hit.collider.tag == "Tanker" && Tanker == true ) &&  Hearse == false && ambulance ==  false && Truck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					(((hit.collider.tag == "fireTruck" && fireTruck==  true || hit.collider.tag == "Truck" && Truck == true ) &&  Hearse == false && ambulance ==  false && Tanker ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					(((hit.collider.tag == "fireTruck" && fireTruck==  true || hit.collider.tag == "IceCream" && IceCream == true ) &&  Hearse == false && ambulance ==  false && Tanker ==  false && Truck  ==  false &&  policeCar ==  false && taxi == false))
-					||
-					(((hit.collider.tag == "fireTruck" && fireTruck==  true || hit.collider.tag == "PoliceCar" && policeCar == true ) &&  Hearse == false && ambulance ==  false && Tanker ==  false && Truck  ==  false &&  IceCream  ==  false && taxi == false))
-					||
-					(((hit.collider.tag == "fireTruck" && fireTruck==  true || hit.collider.tag == "Taxi" && taxi == true ) &&  Hearse == false && ambulance ==  false && Tanker ==  false && Truck  ==  false &&  IceCream  ==  false && policeCar  == false))
-
-					// This is for tanker
-					||
-					((( hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "Truck" && Truck==  true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && IceCream ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((( hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "IceCream" && IceCream==  true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Truck  ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((( hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "PoliceCar" && policeCar==  true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Truck  ==  false &&  IceCream  ==  false && taxi == false))
-					||
-					((( hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "Taxi" && taxi==  true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Truck  ==  false &&  IceCream  ==  false && policeCar == false))
-
-					// This is for truck
-					||
-					((( hit.collider.tag == "Truck" && Truck==  true  ||  hit.collider.tag == "IceCream" && IceCream == true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Tanker  ==  false &&  policeCar ==  false && taxi == false))
-					||
-					((( hit.collider.tag == "Truck" && Truck==  true  ||  hit.collider.tag == "PoliceCar" && policeCar == true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Tanker  ==  false &&  IceCream  ==  false && taxi == false))
-					||
-					((( hit.collider.tag == "Truck" && Truck==  true  ||  hit.collider.tag == "Taxi" && taxi == true ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Tanker  ==  false &&  IceCream  ==  false &&  policeCar  == false))
-
-					// This is for icecream
-					||
-					((( hit.collider.tag == "IceCream" && IceCream == true  || hit.collider.tag == "PoliceCar" && policeCar==  true  ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Tanker  ==  false &&  Truck  ==  false && taxi == false))
-					||
-					((( hit.collider.tag == "IceCream" && IceCream == true  || hit.collider.tag == "Taxi" && taxi ==  true  ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Tanker  ==  false &&  Truck  ==  false && policeCar == false))
-
-					// This is for policeCar
-					||
-					(((  hit.collider.tag == "PoliceCar" && policeCar==  true ||  hit.collider.tag == "Taxi" &&  taxi  == true    ) &&  Hearse == false && ambulance ==  false && fireTruck ==  false && Tanker  ==  false &&  Truck  ==  false && IceCream == false))
-
-					)
-				{
-					print ("car detected");
-					if (red ) {
-						if ("Red" == hit.collider.GetComponent <Car> ().colorString) {
-							Destroy (hit.transform.gameObject);
-						}
-						else if (blue) {
-							if ("Blue" == hit.collider.GetComponent <Car> ().colorString || "Yellow" == hit.collider.GetComponent <Car> ().colorString ) {
-								print ("trying to stop car");
-								// This will stop the car for further surveillance
-								hit.collider.GetComponent <Car> ().setStop();
+								Destroy (hit.transform.gameObject);
 							}
-						} 
-						else {
-							// Let the car pass
-							if ("Green" == hit.collider.GetComponent <Car> ().colorString) {
-								print ("Speeding car up");
-								hit.collider.GetComponent <Car> ().speed += 500;
-							}					
 						}
-					}
-				}
-			}
+						else if (blue || yellow) {
 
-			if (securityType == "FL3" ) {
-					// This will go through all the different possible tags, and check if the incoming boolean is the same
-					if ((hit.collider.tag == "Hearse" && Hearse == true) ||
-						(hit.collider.tag == "ambulance" && ambulance == true) ||
-						(hit.collider.tag == "FireTruck" && fireTruck == true) ||
-						(hit.collider.tag == "Tanker" && Tanker == true) ||
-						(hit.collider.tag == "Truck" && Truck == true) ||
-						(hit.collider.tag == "IceCream" && IceCream == true) ||
-						(hit.collider.tag == "car" && policeCar == true)) 
-						{
-							print ("car detected");
-							if (red ) {
-								if ("Red" == hit.collider.GetComponent <Car> ().colorString) {
+								if ("Blue" == hit.collider.GetComponent <Car> ().colorString || "Yellow" == hit.collider.GetComponent <Car> ().colorString) {
+									print ("Blue");
+
+									// This will stop the car for further surveillance
 									Destroy (hit.transform.gameObject);
 								}
-								else if (blue) {
-									if ("Blue" == hit.collider.GetComponent <Car> ().colorString || "Yellow" == hit.collider.GetComponent <Car> ().colorString ) {
-										print ("trying to stop car");
-										// This will stop the car for further surveillance
-										hit.collider.GetComponent <Car> ().setStop();
-									}
-								} 
-								else {
-									// Let the car pass
-									if ("Green" == hit.collider.GetComponent <Car> ().colorString) {
-										print ("Speeding car up");
-										hit.collider.GetComponent <Car> ().speed += 500;
-									}					
-								}
-						}
+							} else if (green) {
+
+								// Let the car pass
+								if ("Green" == hit.collider.GetComponent <Car> ().colorString) {
+									print ("Green");
+
+									Destroy (hit.transform.gameObject);
+								}					
+							}
 					}
+				}
+
+				if (securityType == "FL2") {
+					if (
+							
+							// This is only for hearse
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "ambulance" && ambulance == true) && fireTruck == false && Tanker == false && Truck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "FireTruck" && fireTruck == true) && ambulance == false && Tanker == false && Truck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "Tanker" && Tanker == true) && fireTruck == false && ambulance == false && Truck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "Truck" && Truck == true) && fireTruck == false && Tanker == false && ambulance == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "IceCream" && IceCream == true) && fireTruck == false && Tanker == false && Truck == false && ambulance == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "PoliceCar" && policeCar == true) && fireTruck == false && Tanker == false && Truck == false && IceCream == false && ambulance == false && taxi == false))
+						||
+						((hit.collider.tag == "Hearse" && Hearse == true || (hit.collider.tag == "Taxi" && taxi == true) && fireTruck == false && Tanker == false && Truck == false && IceCream == false && policeCar == false && ambulance == false))
+
+							// This is for ambulence and one other combination
+						||
+						((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "fireTruck" && fireTruck == true) && Hearse == false && Tanker == false && Truck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "Tanker" && Tanker == true) && Hearse == false && fireTruck == false && Truck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "Truck" && Truck == true) && Hearse == false && fireTruck == false && Tanker == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "IceCream" && IceCream == true) && Hearse == false && fireTruck == false && Tanker == false && Truck == false && policeCar == false && taxi == false))
+						||
+						((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "PoliceCar" && policeCar == true) && Hearse == false && fireTruck == false && Tanker == false && Truck == false && IceCream == false && taxi == false))
+						||
+						((hit.collider.tag == "ambulance" && ambulance == true || (hit.collider.tag == "Taxi" && taxi == true) && Hearse == false && fireTruck == false && Tanker == false && Truck == false && IceCream == false && policeCar == false))
+
+
+							// This is for firetruck
+						||
+						(((hit.collider.tag == "fireTruck" && fireTruck == true || hit.collider.tag == "Tanker" && Tanker == true) && Hearse == false && ambulance == false && Truck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						(((hit.collider.tag == "fireTruck" && fireTruck == true || hit.collider.tag == "Truck" && Truck == true) && Hearse == false && ambulance == false && Tanker == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						(((hit.collider.tag == "fireTruck" && fireTruck == true || hit.collider.tag == "IceCream" && IceCream == true) && Hearse == false && ambulance == false && Tanker == false && Truck == false && policeCar == false && taxi == false))
+						||
+						(((hit.collider.tag == "fireTruck" && fireTruck == true || hit.collider.tag == "PoliceCar" && policeCar == true) && Hearse == false && ambulance == false && Tanker == false && Truck == false && IceCream == false && taxi == false))
+						||
+						(((hit.collider.tag == "fireTruck" && fireTruck == true || hit.collider.tag == "Taxi" && taxi == true) && Hearse == false && ambulance == false && Tanker == false && Truck == false && IceCream == false && policeCar == false))
+
+							// This is for tanker
+						||
+						(((hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "Truck" && Truck == true) && Hearse == false && ambulance == false && fireTruck == false && IceCream == false && policeCar == false && taxi == false))
+						||
+						(((hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "IceCream" && IceCream == true) && Hearse == false && ambulance == false && fireTruck == false && Truck == false && policeCar == false && taxi == false))
+						||
+						(((hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "PoliceCar" && policeCar == true) && Hearse == false && ambulance == false && fireTruck == false && Truck == false && IceCream == false && taxi == false))
+						||
+						(((hit.collider.tag == "Tanker" && Tanker == true || hit.collider.tag == "Taxi" && taxi == true) && Hearse == false && ambulance == false && fireTruck == false && Truck == false && IceCream == false && policeCar == false))
+
+							// This is for truck
+						||
+						(((hit.collider.tag == "Truck" && Truck == true || hit.collider.tag == "IceCream" && IceCream == true) && Hearse == false && ambulance == false && fireTruck == false && Tanker == false && policeCar == false && taxi == false))
+						||
+						(((hit.collider.tag == "Truck" && Truck == true || hit.collider.tag == "PoliceCar" && policeCar == true) && Hearse == false && ambulance == false && fireTruck == false && Tanker == false && IceCream == false && taxi == false))
+						||
+						(((hit.collider.tag == "Truck" && Truck == true || hit.collider.tag == "Taxi" && taxi == true) && Hearse == false && ambulance == false && fireTruck == false && Tanker == false && IceCream == false && policeCar == false))
+
+							// This is for icecream
+						||
+						(((hit.collider.tag == "IceCream" && IceCream == true || hit.collider.tag == "PoliceCar" && policeCar == true) && Hearse == false && ambulance == false && fireTruck == false && Tanker == false && Truck == false && taxi == false))
+						||
+						(((hit.collider.tag == "IceCream" && IceCream == true || hit.collider.tag == "Taxi" && taxi == true) && Hearse == false && ambulance == false && fireTruck == false && Tanker == false && Truck == false && policeCar == false))
+
+							// This is for policeCar
+						||
+						(((hit.collider.tag == "PoliceCar" && policeCar == true || hit.collider.tag == "Taxi" && taxi == true) && Hearse == false && ambulance == false && fireTruck == false && Tanker == false && Truck == false && IceCream == false))) {
+						print ("car detected: " + hit.collider.tag);
+						if (red) {
+							if ("Red" == hit.collider.GetComponent <Car> ().colorString) {
+								print ("Red");
+
+								Destroy (hit.transform.gameObject);
+							} 
+						}
+						else if (blue || yellow) {
+								if ("Blue" == hit.collider.GetComponent <Car> ().colorString || "Yellow" == hit.collider.GetComponent <Car> ().colorString) {
+									print ("Blue");
+
+									Destroy (hit.transform.gameObject);
+
+								}
+							}
+						else {
+								// Let the car pass
+								if ("Green" == hit.collider.GetComponent <Car> ().colorString) {
+									print ("Green");
+
+									Destroy (hit.transform.gameObject);
+
+								}					
+							}
+						
+					}
+				}
+
+				if (securityType == "FL3") {
+					// This will go through all the different possible tags, and check if the incoming boolean is the same
+					if ((hit.collider.tag == "Hearse" && Hearse == true) ||
+					      (hit.collider.tag == "ambulance" && ambulance == true) ||
+					      (hit.collider.tag == "FireTruck" && fireTruck == true) ||
+					      (hit.collider.tag == "Tanker" && Tanker == true) ||
+					      (hit.collider.tag == "Truck" && Truck == true) ||
+					      (hit.collider.tag == "IceCream" && IceCream == true) ||
+					      (hit.collider.tag == "car" && policeCar == true)) {
+						print ("car detected: " + hit.collider.tag);
+						if (red) {
+							if ("Red" == hit.collider.GetComponent <Car> ().colorString) {
+								print ("Red");
+
+								Destroy (hit.transform.gameObject);
+							}
+						}
+
+						else if (blue || yellow) {
+							if ("Blue" == hit.collider.GetComponent <Car> ().colorString || "Yellow" == hit.collider.GetComponent <Car> ().colorString) {
+								print ("Blue");
+
+								Destroy (hit.transform.gameObject);
+
+							}
+						} else {
+								// Let the car pass
+								if ("Green" == hit.collider.GetComponent <Car> ().colorString) {
+									print ("Green");
+
+									Destroy (hit.transform.gameObject);
+
+								}					
+							}
+						
+					}
+				}
 			}
 		}
-	
 }
 	public Vector3 getPosition(){
 		return Position;

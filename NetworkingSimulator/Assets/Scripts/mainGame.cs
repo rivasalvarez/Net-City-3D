@@ -138,13 +138,20 @@ public class mainGame : MonoBehaviour {
 					/* Saves the game data
 					 * *NOTE * shouldn't it be loading?
 					 */
-					gameMgr.saveData ();					
+					gameMgr.loadSave (".txt");					
 				}
 				// Interactable GUI button for saving the game 
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 100, 50), "Save Game")) {
+					bool saved = false;
 
 					// Calls the save functionality for the gameMgr
-					gameMgr.saveData ();					
+					saved = gameMgr.saveData ();	
+
+					if (saved) {
+						print ("File was successfully saved");
+					} else {
+						print ("File broke");
+					}
 				}
 					
 				// Interactable GUI button for quitting the game
