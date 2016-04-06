@@ -19,7 +19,7 @@ public class mainGame : MonoBehaviour {
 	public GameObject obj; // This is for Save Menu!!!!! TODO
     public GameObject tmpObj; // This is for Save Menu!!!!! TODO
 
-	float timer = 60; // A timer to calculate how long the user has been playing for
+	public float timer = 60; // A timer to calculate how long the user has been playing for
 	public string time; // String of the amount of time overall that has passed
 	string mins; // String of the amount of minutes that has passed
 	string secs; // String of the amount of seconds that has passed

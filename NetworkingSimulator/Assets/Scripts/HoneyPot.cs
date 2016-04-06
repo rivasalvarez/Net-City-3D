@@ -64,6 +64,7 @@ public class HoneyPot : MonoBehaviour {
               if (Keys.Contains(colCar.colorString) || Keys.Contains(colCar.carTypeString) || Keys.Contains(colCar.sizeString) ){
 
                 if (!carPIDS.ContainsKey(colCar.carPID)){
+                    colCar.honeyPotIn = main.time;
                     carPIDS.Add(colCar.carPID, colCar);
                     Debug.Log("Added");
                 }
@@ -84,7 +85,7 @@ public class HoneyPot : MonoBehaviour {
             if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
             {
                 Debug.Log(hit.collider.tag);
-                if (hit.collider.tag == "Untagged")
+                if (hit.collider.tag == "Building")
                 {
 
                     // This is a variable that will hold the position of where the hit is detected for the mouse
@@ -145,19 +146,20 @@ public class HoneyPot : MonoBehaviour {
             int i = 1;
             if (level == 1)
             {
-                fout.WriteLine("Entry {0}: Car Color {1}:", i++, kvp.Value.colorString);
+                fout.WriteLine("Car Color: {0},  Time: {1}", kvp.Value.colorString, kvp.Value.honeyPotIn);
             }
 
             if (level == 2)
             {
-                fout.WriteLine("Entry {0}: Car Color {1}:", i++, kvp.Value.colorString);
+                fout.WriteLine("Car Color: {0}, Car Size: {1}, Time: {2}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.honeyPotIn);
             }
 
             if (level == 3)
             {
-                fout.WriteLine("Entry {0}: Car Color {1}:", i++, kvp.Value.colorString);
+                fout.WriteLine("Car Color: {0}, Car Size: {1}, Car Type: {3} Time: {4}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.carTypeString, kvp.Value.honeyPotIn);
             }
-
+            fout.WriteLine();
+            fout.WriteLine();
         }
 
 
