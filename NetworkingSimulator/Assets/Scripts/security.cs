@@ -145,6 +145,7 @@ public class Security : MonoBehaviour {
 		yellow = y;
 	}
 
+	/*
 	// This is to set the things the security gate will detect
 	public void getColors(out bool r, out bool g, out bool b,out bool y){
 		red = r;
@@ -152,6 +153,7 @@ public class Security : MonoBehaviour {
 		blue = b;
 		yellow = y;
 	}
+	*/
 
 	public void setSize(bool s, bool m, bool l){
 		small = s;
@@ -159,11 +161,13 @@ public class Security : MonoBehaviour {
 		large = l;
 	}
 
+	/*
 	public void getSize(out bool s, out bool m, out bool l){
 		small = s;
 		medium = m;
 		large = l;
 	}
+	*/
 
 	public void setTypes(bool a, bool f, bool t, bool tr, bool h, bool i, bool p, bool ta){
 		ambulance = a;
@@ -175,7 +179,7 @@ public class Security : MonoBehaviour {
 		policeCar = p;
 		taxi = ta;
 	}
-
+	/*
 	public void getTypes(out bool a, out bool f,out bool t, out bool tr,out bool h,out bool i,out bool p,out bool ta){
 		ambulance = a;
 		fireTruck = f;
@@ -186,13 +190,15 @@ public class Security : MonoBehaviour {
 		policeCar = p;
 		taxi = ta;
 	}
+*/
 
 	public void setSecurityType(string st){
-		securityType = st;
+		//securityType = st;
 	}
-
+	/*
 	public void getSecurityType(out string st){
-		securityType = st;
+		//securityType = st;
 	}
+	*/
 }
 

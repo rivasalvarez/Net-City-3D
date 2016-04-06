@@ -277,6 +277,8 @@ public class gameManager : MonoBehaviour {
 		}
 							*/
 
+		return true;
+
 	}
 
 	/**
@@ -307,8 +309,7 @@ public class gameManager : MonoBehaviour {
 		//Write that the current information coming in is going to be security stuff
 		writer.WriteLine("Security");
 			// Loop through that information, and start placing it on the map
-		foreach(Security in securityGates){
-		}
+
 
 		// Next up is the honey pots
 			// Loop through that information, and start placing it on the map	

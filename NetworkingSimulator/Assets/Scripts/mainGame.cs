@@ -100,16 +100,27 @@ public class mainGame : MonoBehaviour {
 			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
-			if (hitDetected.collider.tag != "Building" && hitDetected .collider.tag  != "Untagged") {
-					// This gets the script from the object that it hits. 
-					tempScript = hitDetected.collider.GetComponent <Car>();
-					
+			if (hitDetected.collider.tag != "Building" && hitDetected.collider.tag != "Untagged") {
+				// This gets the script from the object that it hits. 
+				tempScript = hitDetected.collider.GetComponent <Car> ();
+						
 				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
-					GUI.Label (new Rect (Input.mousePosition.x, Screen.height-Input.mousePosition.y + 20, 100, 100), 
+				GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
 					"Car Type: " + tempScript.carTypeString +
-					" \nCar Color: "  + tempScript.colorString +
-					" \nCar Size : "  + tempScript.sizeString, boxInformation);
-				} 
+					" \nCar Color: " + tempScript.colorString +
+					" \nCar Size : " + tempScript.sizeString, boxInformation);
+			} 	/*
+				else if (hitDetected.collider.tag == "tollPre") {
+				// This gets the script from the object that it hits. 
+				tempScript = hitDetected.collider.GetComponent <Security> ();
+
+				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
+				GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
+					"Car Type: " + tempScript. +
+					" \nCar Color: " + tempScript.colorString +
+					" \nCar Size : " + tempScript.sizeString, boxInformation);
+				}
+				*/
 			}
 	
 
