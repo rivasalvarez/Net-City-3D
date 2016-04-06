@@ -67,6 +67,8 @@ public class shopMenu : MonoBehaviour {
     public List<string> honeyFlags = new List<string>();
     public int honeyLevel = 1;
 
+	public List<string> securityFlags = new List<string>();
+
 	GUIStyle guiCash;
 
 
