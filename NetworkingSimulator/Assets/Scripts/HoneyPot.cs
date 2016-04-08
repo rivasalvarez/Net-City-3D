@@ -54,9 +54,12 @@ public class HoneyPot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ( Input.GetMouseButtonDown(2))
-        upgrade = true;
 	}
+
+    void OnMouseOver(){
+        if ( Input.GetMouseButtonDown(1))
+        upgrade = true;
+    }
 
 	void OnCollisionEnter(Collision col){
         if( carTags.Contains(col.gameObject.tag) ){
@@ -81,14 +84,16 @@ public class HoneyPot : MonoBehaviour {
 
             // Create a hit variable that will store the value of whatever it hits
             RaycastHit hit;
+            int layerMask = 1 << 8;
 
             // Cast a raycast from the starting position of the mouse down infinitely
             if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
             {
-                Debug.Log(hit.collider.tag);
-                if (hit.collider.tag == "Building")
+                Debug.Log(hit.collider.gameObject);
+                Debug.Log(hit.collider.gameObject.tag);
+                if (hit.collider.tag == "Terrain" || hit.collider.tag == "Honey")
                 {
-
+                    if(hit.point.x > 0 && hit.point.x < 300 && hit.point.z > 0 && hit.point.z < 300){
                     // This is a variable that will hold the position of where the hit is detected for the mouse
                     Vector3 placePosition;
 
@@ -102,6 +107,7 @@ public class HoneyPot : MonoBehaviour {
 
                     // Change the position of it so it will be placed a little bit above the road level
                     transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+                    }
                 }
 
             }

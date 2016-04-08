@@ -48,12 +48,12 @@ public class Security : MonoBehaviour {
 		void Update () {
 			Vector3 fwd = transform.TransformDirection (Vector3.back);
 			RaycastHit hit;
-
-			Vector3 newPos = new Vector3 (transform.position.x, transform.position.y + 3, transform.position.z);
 		
-			Debug.DrawRay (newPos, fwd*100.0f, Color.green);
-		if (Physics.Raycast (newPos, fwd, out hit, 100.0F)) {
-			if (hit.collider.tag != "Building") {
+			Vector3 newPos = new Vector3 (transform.position.x-4.5f, transform.position.y + 3, transform.position.z);
+
+		Debug.DrawRay (newPos, fwd*10.0f,Color.green);
+		if (Physics.SphereCast (newPos, 3.0f, fwd, out hit, 10.0F)) {
+			if (hit.collider.tag != "Terrain") {
 				// Check for if ambulance is good, if so, add ambulance to list
 				if (ambulance && !securityFlags.Contains ("Ambulance"))
 					securityFlags.Add ("Ambulance");

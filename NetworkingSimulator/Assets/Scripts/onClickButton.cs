@@ -29,12 +29,11 @@ public class onClickButton : MonoBehaviour {
 		    ) {
 			Application.LoadLevel("CreateNewUser");
 		}
-		/*
-		// This button is for loading an existing profile
+		
+		/* This button is for loading an existing profile
 		if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 65, 100, 50), "Load Profile")) {
 			Application.LoadLevel ("SearchMenu");
-		}	
-		*/
+		}	*/
 		// This button is for quitting the game, upon click it quits the game
 		if (GUI.Button (
 				new Rect (
