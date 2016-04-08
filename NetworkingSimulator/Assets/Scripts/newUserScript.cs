@@ -27,6 +27,7 @@ public class newUserScript : MonoBehaviour {
 	{
 		float width = 300.0f;
 		float height = 35.0f;
+		float t = 20.0f;
 
 		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		//to check if the user has actually inputted things in user and password
@@ -35,14 +36,14 @@ public class newUserScript : MonoBehaviour {
 
 		//create the labels and textfields for username and password
 
-		GUI.Label (new Rect ((Screen.width / 2)-width/2, Screen.height / 4,width, height), "Create Username");
+		GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)-50,width, height), "Create Username");
 
 
-		name = GUI.TextField (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+height+5, width, height), name.Trim (), 30);
+		name = GUI.TextField (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+height+5-50, width, height), name.Trim (), 30);
 
-		GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(2*height)+5, width, height), "Create a Password");
+		GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(2*height)+5-50, width, height), "Create a Password");
 
-		pass = GUI.TextField (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(3*height)+5, width, height), pass, 30);
+		pass = GUI.TextField (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(3*height)+5-50, width, height), pass, 30);
 	
 		//check if the user has inputted the username
 		//if they have don't display line prompting for username
@@ -52,7 +53,7 @@ public class newUserScript : MonoBehaviour {
 		//else show text that prompts for the username
 		else {
 			unInput = false;
-			GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(4*height)+5, width+200, height), "Please enter a valid username");
+			GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(4*height)+5-50, width+200, height), "Please enter a valid username");
 		}
 
 		//check if the user has inputted the password
@@ -64,7 +65,7 @@ public class newUserScript : MonoBehaviour {
 		//else do display the text
 		else {	
 			pInput = false;
-			GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(5*height)+5, width+200, height), "Please enter a valid password");
+			GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(5*height)+5-50, width+200, height), "Please enter a valid password");
 
 		}
 

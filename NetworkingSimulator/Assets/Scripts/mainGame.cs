@@ -36,16 +36,6 @@ public class mainGame : MonoBehaviour {
 
 		// This is to find the gameObject that holds the shopScript
 		shopScript = GameObject.Find("GameObject").GetComponent<shopMenu>();
-	
-		// This is to allocate new GUISTYLE to the variable and set its appropriate values
-		guiStyle =  new GUIStyle();
-		guiStyle.fontSize = 20;
-		guiStyle.normal.textColor = Color.white;
-
-		// This is to allocate new GUISTYLE to the cash, and set its appropriate information
-		guiCash =  new GUIStyle();
-		guiCash.fontSize = 20;
-		guiCash.normal.textColor = Color.green;
   
 		boxInformation = new GUIStyle ();
 		boxInformation.fontSize = 18;
@@ -63,7 +53,7 @@ public class mainGame : MonoBehaviour {
 		time = mins + ":" + secs;
 
         if (timer < 0){ 
-           string  fileName = "HoneyPot Log" + (gameMgr.honeyCount - 1) +   ".txt";
+           string  fileName = "HoneyPot Log.txt";
            StreamWriter sr = File.CreateText(fileName);
             timer = 60;
 
@@ -90,6 +80,9 @@ public class mainGame : MonoBehaviour {
 	 */ 
 	void OnGUI(){
 			GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
+			GUIStyle guiStyle = GUI.skin.GetStyle ("Time");
+			GUIStyle guiCash = GUI.skin.GetStyle ("Money");
+
 			Car tempScript;
 			// Create a ray object, and have it trace the mousePosition from top down
 			Ray ray = myCam.ScreenPointToRay (Input.mousePosition);
@@ -126,10 +119,10 @@ public class mainGame : MonoBehaviour {
 	
 
 		// This is going to create a label with a rectangle size with the appropriate guiStyle along with the current time after retreiving it from update
-        GUI.Label(new Rect(Screen.width / 2, 0, 150, 20), time, guiStyle);
+		GUI.Label(new Rect((Screen.width / 2)-guiStyle.fixedWidth, 5, 150, 20), time, guiStyle);
         // This displays cash on GUI
         string moneyString = "$" + gameMgr.cash;
-        GUI.Label(new Rect(Screen.width - 100, 0, 150, 20), moneyString, guiCash);
+        GUI.Label(new Rect(Screen.width/2, 5, 10+moneyString.Length * 23, 20), moneyString, guiCash);
  
 		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
 		// This checks if the security button was not pressed
@@ -138,7 +131,7 @@ public class mainGame : MonoBehaviour {
 			if (showSettings == false) 	{
 						
 					// Otherwise, place an interactable GUI button onto the screen called OpenShop
-					if (GUI.Button (new Rect (Screen.width - 100, 35, 100, 50), "Open Shop")) {
+				if (GUI.Button (new Rect (Screen.width - GUI.skin.button.fixedWidth, 5, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Open Shop")) {
 						// This retrieves the cash amount and gives it to the shopMenu
 						shopScript.playerCash = gameMgr.getCash ();
 
@@ -148,7 +141,7 @@ public class mainGame : MonoBehaviour {
 					}
 
 					// Or check if the user interacts with the GUI button called settings on the screen
-					if (GUI.Button (new Rect (5, 5, 75, 50), "Settings")) {
+				if (GUI.Button (new Rect (5, 5, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Settings")) {
 						
 						// This is a boolean utilized to open up another set of GUI's for loading and saving, settings
 						showSettings = true;							
