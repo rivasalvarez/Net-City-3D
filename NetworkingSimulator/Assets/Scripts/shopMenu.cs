@@ -131,7 +131,7 @@ public class shopMenu : MonoBehaviour {
 		if (shopOpen == true) {
 
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
-			GUI.BeginGroup(new Rect((Screen.width/2)-400, Screen.height/2 -350, 800, 800));
+			GUI.BeginGroup(new Rect((Screen.width/2)-400, Screen.height/2 -300, 800, 750));
 
 			if (upgradeChosen) {
 				if (securityType == "FL1") {
@@ -195,14 +195,14 @@ public class shopMenu : MonoBehaviour {
 				if (securityType == "FL2") {
 					GUI.Box (new Rect (0, 0, 700, 800), "Purchase Options");
 
-					ambulance  = GUI.Toggle (new Rect (10, 40, 100, 30), ambulance, "Ambulance", guiStyle);
-					fireTruck = GUI.Toggle (new Rect (10, 140, 100, 30), fireTruck, "fireTruck", guiStyle);
-					Tanker = GUI.Toggle (new Rect (10, 240, 100, 30), Tanker, "Tanker", guiStyle);
-					Truck =GUI.Toggle (new Rect (10, 340, 100, 30), Truck, "Truck", guiStyle); 
-					Hearse = GUI.Toggle (new Rect (10, 440, 100, 30), Hearse, "Hearse", guiStyle);
-					IceCream = GUI.Toggle (new Rect (10, 540, 100, 30), IceCream, "IceCream", guiStyle);
-					policeCar = GUI.Toggle (new Rect (10, 640, 100, 30), policeCar, "policeCar", guiStyle);
-					Taxi = GUI.Toggle (new Rect (10, 740, 100, 30), Taxi, "Taxi", guiStyle);
+                    ambulance = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
+                    fireTruck = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
+                    Tanker = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Tanker");
+                    Truck = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
+                    Hearse = GUI.Toggle(new Rect(10, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
+                    IceCream = GUI.Toggle(new Rect(10, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream");
+                    policeCar = GUI.Toggle(new Rect(10, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
+                    Taxi = GUI.Toggle(new Rect(10, 605, GUI.skin.toggle.fixedWidth, 30), Taxi, "Taxi");
 
 					if (
 						// For ambulances and anything matching with that one
@@ -243,21 +243,22 @@ public class shopMenu : MonoBehaviour {
 						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && IceCream && policeCar && !Taxi) ||
 						(!ambulance && !fireTruck && !Tanker && !Truck && !Hearse && !IceCream && policeCar && Taxi)) {
 
-						red = GUI.Toggle (new Rect (140, 40, 100, 30), red, "Red", guiStyle);
-						green = GUI.Toggle (new Rect (140, 140, 100, 30), green, "Green", guiStyle);
-						blue = GUI.Toggle (new Rect (140, 240, 100, 30), blue, "Blue", guiStyle);
-						yellow = GUI.Toggle (new Rect (140, 340, 100, 30), yellow, "Yellow", guiStyle);
+                            red = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                            green = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                            blue = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                            yellow = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
 						if ((red && blue && !green && !yellow) || (red && !blue && green && !yellow) || (red && !blue &&  !green && yellow)||
-										(!red && blue && green && !yellow) || (!red && blue && !green && yellow) 
-										|| (!red && !blue && green && yellow)) {
-							small = GUI.Toggle (new Rect (240, 40, 100, 30), small, "Small", guiStyle);
-							median = GUI.Toggle (new Rect (240, 140, 100, 30), median, "Medium", guiStyle);
-							large = GUI.Toggle (new Rect (240, 240, 100, 30), large, "Large", guiStyle);
+										(!red && blue && green && !yellow) || (!red && blue && !green && yellow)
+                                        || (!red && !blue && green && yellow))
+                        {
+                            small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+                            median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Medium");
+                            large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
 							if ((small && median && !large) || (!small && median && large) || (small && !median && large)) {
 								{
-									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase", guiStyle)) {
+									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
 										if (playerCash >= security_two_cost) {
 											playerCash -= security_two_cost;
 											upgradeChosen = false;
@@ -269,7 +270,7 @@ public class shopMenu : MonoBehaviour {
 							}
 						}
 					}
-					if (GUI.Button (new Rect (240, 400-128 + 128, 128, 50), "Cancel Purchase", guiStyle)) {
+					if (GUI.Button (new Rect (240, 400-128 + 128, 128, 50), "Cancel Purchase")) {
 						clear ();
 						upgradeChosen = false;
 						Time.timeScale = 1;
@@ -280,10 +281,10 @@ public class shopMenu : MonoBehaviour {
 
 
 				if (securityType == "FL3") {
-					GUI.Box (new Rect (0, 0, 400, 300), " ", guiStyle);
+					GUI.Box (new Rect (0, 0, 400, 300), " ");
 					red =  blue =  green = yellow = large = median =  small = ambulance = fireTruck= Tanker= Truck=  Hearse= IceCream= policeCar=  Taxi= true;
 
-					if (GUI.Button (new Rect ( 150,100, 128, 50), "Purchase", guiStyle)) {
+					if (GUI.Button (new Rect ( 150,100, 128, 50), "Purchase")) {
 								if (playerCash >= security_three_cost) {
 									playerCash -= security_three_cost;
 									upgradeChosen = false;
@@ -292,7 +293,7 @@ public class shopMenu : MonoBehaviour {
 								}
 							}
 						
-					if (GUI.Button (new Rect (150, 100+ 60, 128, 50), "Cancel Purchase", guiStyle)) {
+					if (GUI.Button (new Rect (150, 100+ 60, 128, 50), "Cancel Purchase")) {
 						clear ();
 						upgradeChosen = false;
 						Time.timeScale = 1;
@@ -305,10 +306,10 @@ public class shopMenu : MonoBehaviour {
 					GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
                     honeyLevel = 1;
 
-					red = GUI.Toggle(new Rect(140, 40, 100, 30), red, "Red", guiStyle);
-					green = GUI.Toggle(new Rect(140, 140, 100, 30), green, "Green", guiStyle);
-					blue = GUI.Toggle(new Rect(140, 240, 100, 30), blue, "Blue", guiStyle);
-					yellow = GUI.Toggle(new Rect(140, 340, 100, 30), yellow, "Yellow", guiStyle);
+                    red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                    green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                    blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
 
                     //This is to check for what type of color the security gate will look for
@@ -324,13 +325,13 @@ public class shopMenu : MonoBehaviour {
                     else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
                     else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow"); 
 
-					if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase", guiStyle)){
+					if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
                         upgradeChosen = false;
                         shopOpen = false;
                         Time.timeScale = 1;
                     }
 
-					if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase", guiStyle)){
+					if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
                         honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
@@ -341,16 +342,16 @@ public class shopMenu : MonoBehaviour {
 
 				if (securityType == "HL2") {
 					GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
-                    honeyLevel = 2; 
+                    honeyLevel = 2;
 
-					red = GUI.Toggle(new Rect(10, 40, 100, 30), red, "Red", guiStyle);
-					green = GUI.Toggle(new Rect(10, 140, 100, 30), green, "Green", guiStyle);
-					blue = GUI.Toggle(new Rect(10, 240, 100, 30), blue, "Blue", guiStyle);
-					yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Yellow", guiStyle);
+                    red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                    green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                    blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
-					small = GUI.Toggle(new Rect(140, 40, 100, 30), small, "Small", guiStyle);
-					median = GUI.Toggle(new Rect(140, 140, 100, 30), median, "Meduim", guiStyle);
-					large = GUI.Toggle(new Rect(140, 240, 100, 30), large, "Large", guiStyle);
+                    small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+                    median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
+                    large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
 
                     //This is to check for what type of color the security gate will look for
@@ -375,13 +376,13 @@ public class shopMenu : MonoBehaviour {
                     else if (large && !honeyFlags.Contains("Large"))  honeyFlags.Add("Large"); 
                     else if (!large && honeyFlags.Contains("Large"))  honeyFlags.Remove("Large"); 
 
-					if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase", guiStyle)){
+					if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
                         upgradeChosen = false;
                         shopOpen = false;
                         Time.timeScale = 1;
                     }
 
-					if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase", guiStyle)){
+					if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
                         honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
@@ -396,22 +397,22 @@ public class shopMenu : MonoBehaviour {
 					GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
                     honeyLevel = 3;
 
-					red = GUI.Toggle(new Rect(10, 40, 100, 30), red, "Red", guiStyle);
-					green = GUI.Toggle(new Rect(10, 140, 100, 30), green, "Green", guiStyle);
-					blue = GUI.Toggle(new Rect(10, 240, 100, 30), blue, "Blue", guiStyle);
-					yellow = GUI.Toggle(new Rect(10, 340, 100, 30), yellow, "Yellow", guiStyle);
+                    red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                    green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                    blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
-					small = GUI.Toggle(new Rect(140, 40, 100, 30), small, "Small", guiStyle);
-					median = GUI.Toggle(new Rect(140, 140, 100, 30), median, "Meduim", guiStyle);
-					large = GUI.Toggle(new Rect(140, 240, 100, 30), large, "Large", guiStyle);
+                    small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+                    median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
+                    large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
-					ambulance = GUI.Toggle(new Rect(240, 40, 100, 30), ambulance, "Ambulance", guiStyle);
-					fireTruck = GUI.Toggle(new Rect(240, 140, 100, 30), fireTruck, "Fire Truck", guiStyle);
-					Tanker = GUI.Toggle(new Rect(240, 240, 100, 30), Tanker, "Oil Truck", guiStyle);
-					Truck = GUI.Toggle(new Rect(240, 340, 100, 30), Truck, "Truck", guiStyle);
-					Hearse = GUI.Toggle(new Rect(240, 440, 100, 30), Hearse, "Hearse", guiStyle);
-					IceCream = GUI.Toggle(new Rect(240, 540, 100, 30), IceCream, "Ice Cream Truck", guiStyle);
-					policeCar = GUI.Toggle(new Rect(240, 640, 100, 30), policeCar, "Police Car", guiStyle);
+                    ambulance = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
+                    fireTruck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
+                    Tanker = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Oil Truck");
+                    Truck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
+                    Hearse = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
+                    IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream Truck");
+                    policeCar = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
 
 
                     //This is to check for what type of color the security gate will look for
@@ -458,14 +459,14 @@ public class shopMenu : MonoBehaviour {
                     else if (!policeCar && honeyFlags.Contains("Police Car"))  honeyFlags.Remove("Police Car"); 
 
 
-					if (GUI.Button(new Rect(340, 400 - (128 * 2) + 128, 128, 50), "Purchase", guiStyle))
+					if (GUI.Button(new Rect(340, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
                     {
                         upgradeChosen = false;
                         shopOpen = false;
                         Time.timeScale = 1;
                     }
 
-					if (GUI.Button(new Rect(340, 400 - 128 + 128, 128, 50), "Cancel Purchase", guiStyle))
+					if (GUI.Button(new Rect(340, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
                     {
                         honeyFlags.Clear();
                         upgradeChosen = false;
