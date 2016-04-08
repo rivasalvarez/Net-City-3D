@@ -180,10 +180,10 @@ public class HoneyPot : MonoBehaviour {
             {
                 GUI.Box(new Rect(500, 100, 700, 700), "Upgrade Options");
 
-                red = GUI.Toggle(new Rect(510, 140, 100, 30), red, "Red");
-                green = GUI.Toggle(new Rect(510, 240, 100, 30), green, "Green");
-                blue = GUI.Toggle(new Rect(510, 340, 100, 30), blue, "Blue");
-                yellow = GUI.Toggle(new Rect(510, 440, 100, 30), yellow, "Yellow");
+                red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
                 //This is to check for what type of color the security gate will look for
                 if (red && !Keys.Contains("Red")) Keys.Add("Red"); 
@@ -220,14 +220,14 @@ public class HoneyPot : MonoBehaviour {
             {
                 GUI.Box(new Rect(500, 100, 700, 700), "Upgrade Options");
 
-                red = GUI.Toggle(new Rect(510, 140, 100, 30), red, "Red");
-                green = GUI.Toggle(new Rect(510, 240, 100, 30), green, "Green");
-                blue = GUI.Toggle(new Rect(510, 340, 100, 30), blue, "Blue");
-                yellow = GUI.Toggle(new Rect(510, 440, 100, 30), yellow, "Yellow");
+                red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
-                small = GUI.Toggle(new Rect(640, 140, 100, 30), small, "Small");
-                median = GUI.Toggle(new Rect(640, 240, 100, 30), median, "Meduim");
-                large = GUI.Toggle(new Rect(640, 340, 100, 30), large, "Large");
+                small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+                median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
+                large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
 
 
@@ -275,22 +275,22 @@ public class HoneyPot : MonoBehaviour {
             {
                 GUI.Box(new Rect(500, 100, 700, 700), "Upgrade Options");
 
-                red = GUI.Toggle(new Rect(510, 140, 100, 30), red, "Red");
-                green = GUI.Toggle(new Rect(510, 240, 100, 30), green, "Green");
-                blue = GUI.Toggle(new Rect(510, 340, 100, 30), blue, "Blue");
-                yellow = GUI.Toggle(new Rect(510, 440, 100, 30), yellow, "Yellow");
+                red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
-                small = GUI.Toggle(new Rect(640, 140, 100, 30), small, "Small");
-                median = GUI.Toggle(new Rect(640, 240, 100, 30), median, "Meduim");
-                large = GUI.Toggle(new Rect(640, 340, 100, 30), large, "Large");
+                small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+                median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
+                large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
-                ambulance = GUI.Toggle(new Rect(740, 140, 100, 30), ambulance, "Ambulance");
-                fireTruck = GUI.Toggle(new Rect(740, 240, 100, 30), fireTruck, "Fire Truck");
-                Tanker = GUI.Toggle(new Rect(740, 340, 100, 30), Tanker, "Oil Truck");
-                Truck = GUI.Toggle(new Rect(740, 440, 100, 30), Truck, "Truck");
-                Hearse = GUI.Toggle(new Rect(740, 540, 100, 30), Hearse, "Hearse");
-                IceCream = GUI.Toggle(new Rect(740, 640, 100, 30), IceCream, "Ice Cream Truck");
-                policeCar = GUI.Toggle(new Rect(740, 740, 100, 30), policeCar, "Police Car");
+                ambulance = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
+                fireTruck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
+                Tanker = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Oil Truck");
+                Truck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
+                Hearse = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
+                IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream Truck");
+                policeCar = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
 
 
 
