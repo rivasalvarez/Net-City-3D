@@ -8,16 +8,7 @@ public class shopMenu : MonoBehaviour {
 	private int security_one_cost; // This is the amount the player has to pay for security level 1 upgrade
 	private int security_two_cost; // This is the amount the player has to pay for security level 2 upgrade
 	private int security_three_cost; // This is the amount the player has to pay for security level 2 upgrade
-
-	// This is for the location of the button only for upgrades and for the purpose of organization
-	private int upgradeOneGUIRow;
-	private int upgradeTwoGUIRow;
-	private int upgradeThreeGUIRow;
-
-	// This is for the y location of the buttons for the upgrades and organization
-	private int upgradeOneGUICol;
-	private int upgradeTwoGUICol;
-	private int upgradeThreeGUICol;
+	
 
 	// This will be for the size of the GUI buttons
 	private int guiWidth;
@@ -80,14 +71,6 @@ public class shopMenu : MonoBehaviour {
 		playerCash = 0;
 
 
-		// This is to set the current x and y boundaries of the gui's
-		upgradeOneGUIRow =  10;
-		upgradeTwoGUIRow = 200;
-		upgradeThreeGUIRow  = 400;
-
-		upgradeOneGUICol = 30;
-		upgradeTwoGUICol = 230;
-		upgradeThreeGUICol = 430;
 
 
 		// Initialize the images
@@ -125,8 +108,15 @@ public class shopMenu : MonoBehaviour {
 
 	void OnGUI(){
 
+		int upgradeOneGUIRow =  75;
+		int upgradeTwoGUIRow = 345;
+		int upgradeThreeGUIRow  = 615;
 		
-		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
+		int upgradeOneGUICol = 50;
+		int upgradeTwoGUICol = 250;
+		int upgradeThreeGUICol = 450;
+
+		GUI.skin = Resources.Load ("Buttons/ShopSkin") as GUISkin;
 		GUIStyle guiStyle = GUI.skin.GetStyle ("Shop");
 		if (shopOpen == true) {
 
@@ -481,57 +471,57 @@ public class shopMenu : MonoBehaviour {
 				GUI.Box (new Rect (0, 0, 800, 1000), "Shop");
 
 				// First set of upgrades for the security for the pictures
-				GUI.Label (new Rect (upgradeOneGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer, guiStyle );
-				GUI.Label (new Rect (upgradeOneGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer, guiStyle );
+				GUI.Label (new Rect (upgradeOneGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
+				GUI.Label (new Rect (upgradeOneGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
 
 				// This is the second set of upgrades for the pictures
-				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer, guiStyle);
-				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer, guiStyle);
+				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
+				GUI.Label (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
 
 				// This is the third set of upgrades for the pictures
-				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer, guiStyle);
-				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer, guiStyle);
+				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeOneGUICol, 128, 128), securityOneImageContainer);
+				GUI.Label (new Rect (upgradeThreeGUIRow, upgradeTwoGUICol, 128, 128), securityTwoImageContainer);
 
 
 
 				// This button is here for upgrading to security option 1
-				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeOneGUICol + 128, 128, 50), "Firewall One", guiStyle)) {
+				if (GUI.Button (new Rect (10, upgradeOneGUICol + 128, GUI.skin.button.fixedWidth, 50), "Firewall One")) {
 					securityType = "FL1";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button (new Rect (upgradeOneGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot One", guiStyle)) {
+				if (GUI.Button (new Rect (10, upgradeTwoGUICol + 128,GUI.skin.button.fixedWidth, 50), "HoneyPot One")) {
 					securityType = "HL1";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 1
-				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeOneGUICol + 128, 128, 50), "Firewall Two", guiStyle)) {
+				if (GUI.Button (new Rect (270, upgradeOneGUICol + 128, GUI.skin.button.fixedWidth, 50), "Firewall Two")) {
 					securityType = "FL2";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button (new Rect (upgradeTwoGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Two", guiStyle)) {
+				if (GUI.Button (new Rect (270, upgradeTwoGUICol + 128, GUI.skin.button.fixedWidth, 50), "HoneyPot Two")) {
 					securityType = "HL2";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 1
-				if (GUI.Button (new Rect (upgradeThreeGUIRow, upgradeOneGUICol + 128, 128, 50), "Firewall Three", guiStyle)) {
+				if (GUI.Button (new Rect (540, upgradeOneGUICol + 128, GUI.skin.button.fixedWidth, 50), "Firewall Three")) {
 					securityType = "FL3";
 					upgradeChosen = true;
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button(new Rect(upgradeThreeGUIRow, upgradeTwoGUICol + 128, 128, 50), "HoneyPot Three", guiStyle)){
+				if (GUI.Button(new Rect(540, upgradeTwoGUICol + 128, GUI.skin.button.fixedWidth, 50), "HoneyPot Three")){
                     securityType = "HL3";
                     upgradeChosen = true;
 				}
 
 				// This button is here to close down the shop and place the old GUI buttons on the screen
-				if (GUI.Button (new Rect (800 - 128, upgradeThreeGUICol + 118, 128, 50), "Close Shop", guiStyle)) {
+				if (GUI.Button (new Rect (540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Close Shop")) {
 					shopOpen = false;
 					upgradeChosen = false;
 					clear ();
