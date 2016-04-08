@@ -25,26 +25,25 @@ public class newUserScript : MonoBehaviour {
 	//sets up UI and also inputs
 	void OnGUI()
 	{
+		float width = 300.0f;
+		float height = 35.0f;
+
 		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		//to check if the user has actually inputted things in user and password
 		bool unInput = false;
 		bool pInput = false;
 
 		//create the labels and textfields for username and password
-		GUI.color = Color.white;
-		GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 150, 20), "Create Username");
 
-		GUI.color = Color.white;
-		name = GUI.TextField (new Rect (Screen.width / 2, (Screen.height / 2) + 25, 200, 20), name.Trim (), 25);
-
-		GUI.color = Color.white;
-		GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 150, 20), "Create a Password");
-
-		GUI.color = Color.white;
-		pass = GUI.TextField (new Rect (Screen.width / 2, (Screen.height / 2) + 75, 200, 20), pass, 25);
+		GUI.Label (new Rect ((Screen.width / 2)-width/2, Screen.height / 4,width, height), "Create Username");
 
 
+		name = GUI.TextField (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+height+5, width, height), name.Trim (), 30);
 
+		GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(2*height)+5, width, height), "Create a Password");
+
+		pass = GUI.TextField (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(3*height)+5, width, height), pass, 30);
+	
 		//check if the user has inputted the username
 		//if they have don't display line prompting for username
 		if (name != "") {
@@ -53,7 +52,7 @@ public class newUserScript : MonoBehaviour {
 		//else show text that prompts for the username
 		else {
 			unInput = false;
-			GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 165, 190, 60), "Please enter a valid username");
+			GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(4*height)+5, width+200, height), "Please enter a valid username");
 		}
 
 		//check if the user has inputted the password
@@ -65,14 +64,14 @@ public class newUserScript : MonoBehaviour {
 		//else do display the text
 		else {	
 			pInput = false;
-			GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 185, 190, 40), "Please enter a valid password");
+			GUI.Label (new Rect ((Screen.width / 2)-width/2, (Screen.height / 4)+(5*height)+5, width+200, height), "Please enter a valid password");
 
 		}
 
 		GUI.color = Color.white;
 
 		// This button is for create Profile
-		if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 105, 100, 50), "Create Profile")) {
+		if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 105, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Create Profile")) {
 			//check if username is taken or not
 			if(playerScript.checkForUser( name))
 			{ 		
@@ -96,7 +95,7 @@ public class newUserScript : MonoBehaviour {
 		}
 
 		// This button is for going back to the mainMenu
-		if (GUI.Button (new Rect ((Screen.width )/10, (Screen.height )/10 , 100, 50), "Main Menu")) {
+		if (GUI.Button (new Rect ((Screen.width )/10, (Screen.height )/10 , GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Main Menu")) {
 			Application.LoadLevel("StartMenu");
 			
 		}
