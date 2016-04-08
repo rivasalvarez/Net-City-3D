@@ -118,6 +118,13 @@ public class shopMenu : MonoBehaviour {
 
 		GUI.skin = Resources.Load ("Buttons/ShopSkin") as GUISkin;
 		GUIStyle guiStyle = GUI.skin.GetStyle ("Shop");
+
+
+        int offset = 20;
+        float Twidth = GUI.skin.toggle.fixedWidth;
+        float Theight = 30f;
+
+
 		if (shopOpen == true) {
 
 			// Otherwise, place an interactable GUI button onto the screen called OpenShop
@@ -292,181 +299,96 @@ public class shopMenu : MonoBehaviour {
 
 				}
 
-				if (securityType == "HL1") {
-					GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
+                if (securityType == "HL1" || securityType == "HL2"  || securityType == "HL3"){
+                    GUI.Box(new Rect(0, 0, 0, 0), "Purchase Options");
                     honeyLevel = 1;
 
-                    red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
-                    green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
-                    blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
-                    yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
-
-
-                    //This is to check for what type of color the security gate will look for
-                    if (red && !honeyFlags.Contains("Red"))  honeyFlags.Add("Red");
-                    else if (!red && honeyFlags.Contains("Red"))  honeyFlags.Remove("Red"); 
-
-                    else if (green && !honeyFlags.Contains("Green"))  honeyFlags.Add("Green"); 
-                    else if (!green && honeyFlags.Contains("Green"))  honeyFlags.Remove("Green"); 
-
-                    else if (blue && !honeyFlags.Contains("Blue"))  honeyFlags.Add("Blue");
-                    else if (!blue && honeyFlags.Contains("Blue"))  honeyFlags.Remove("Blue"); 
-
-                    else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
-                    else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow"); 
-
-					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")){
-                        upgradeChosen = false;
-                        shopOpen = false;
-                        Time.timeScale = 1;
-                    }
-
-					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
-                        honeyFlags.Clear();
-                        upgradeChosen = false;
-                        Time.timeScale = 1;
-
-                    }
-
-				}
-
-				if (securityType == "HL2") {
-					GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
-                    honeyLevel = 2;
-
-                    red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
-                    green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
-                    blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
-                    yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
-
-                    small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
-                    median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
-                    large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
-
+                    red    = GUI.Toggle(new Rect(offset, 80, Twidth, Theight), red, "Red");
+                    green  = GUI.Toggle(new Rect(offset, 155, Twidth, Theight), green, "Green");
+                    blue   = GUI.Toggle(new Rect(offset, 230, Twidth, Theight), blue, "Blue");
+                    yellow = GUI.Toggle(new Rect(offset, 305, Twidth, Theight), yellow, "Yellow");
 
                     //This is to check for what type of color the security gate will look for
-                    if (red && !honeyFlags.Contains("Red"))  honeyFlags.Add("Red");
-                    else if (!red && honeyFlags.Contains("Red"))  honeyFlags.Remove("Red");
+                    if (red && !honeyFlags.Contains("Red")) honeyFlags.Add("Red");
+                    else if (!red && honeyFlags.Contains("Red")) honeyFlags.Remove("Red");
 
-                    else if (green && !honeyFlags.Contains("Green"))  honeyFlags.Add("Green"); 
-                    else if (!green && honeyFlags.Contains("Green"))  honeyFlags.Remove("Green"); 
+                    else if (green && !honeyFlags.Contains("Green")) honeyFlags.Add("Green");
+                    else if (!green && honeyFlags.Contains("Green")) honeyFlags.Remove("Green");
 
-                    else if (blue && !honeyFlags.Contains("Blue"))  honeyFlags.Add("Blue"); 
-                    else if (!blue && honeyFlags.Contains("Blue"))  honeyFlags.Remove("Blue"); 
+                    else if (blue && !honeyFlags.Contains("Blue")) honeyFlags.Add("Blue");
+                    else if (!blue && honeyFlags.Contains("Blue")) honeyFlags.Remove("Blue");
 
-                    else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
-                    else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow"); 
+                    else if (yellow && !honeyFlags.Contains("Yellow")) honeyFlags.Add("Yellow");
+                    else if (!yellow && honeyFlags.Contains("Yellow")) honeyFlags.Remove("Yellow");
 
-                    else if (small && !honeyFlags.Contains("Small"))  honeyFlags.Add("Small");
-                    else if (!small && honeyFlags.Contains("Small"))  honeyFlags.Remove("Small"); 
+                    if (securityType == "HL2" || securityType == "HL3"){
+                        honeyLevel = 2;
 
-                    else if (median && !honeyFlags.Contains("Medium"))  honeyFlags.Add("Medium"); 
-                    else if (!median && honeyFlags.Contains("Medium"))  honeyFlags.Remove("Medium"); 
+                        small  = GUI.Toggle(new Rect(Twidth + offset, 80, Twidth, Theight), small, "Small");
+                        median = GUI.Toggle(new Rect(Twidth + offset, 155, Twidth, Theight), median, "Meduim");
+                        large  = GUI.Toggle(new Rect(Twidth + offset, 230, Twidth, Theight), large, "Large");
 
-                    else if (large && !honeyFlags.Contains("Large"))  honeyFlags.Add("Large"); 
-                    else if (!large && honeyFlags.Contains("Large"))  honeyFlags.Remove("Large"); 
+                        //This is to check for what type of color the security gate will look for
+                        if (small && !honeyFlags.Contains("Small")) honeyFlags.Add("Small");
+                        else if (!small && honeyFlags.Contains("Small")) honeyFlags.Remove("Small");
 
-					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")){
-                        upgradeChosen = false;
-                        shopOpen = false;
-                        Time.timeScale = 1;
-                    }
+                        else if (median && !honeyFlags.Contains("Medium")) honeyFlags.Add("Medium");
+                        else if (!median && honeyFlags.Contains("Medium")) honeyFlags.Remove("Medium");
 
-					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
-                        honeyFlags.Clear();
-                        upgradeChosen = false;
-                        Time.timeScale = 1;
+                        else if (large && !honeyFlags.Contains("Large")) honeyFlags.Add("Large");
+                        else if (!large && honeyFlags.Contains("Large")) honeyFlags.Remove("Large");
 
                     }
 
-				}
+                    if (securityType == "HL3"){
+                        honeyLevel = 3;
 
+                        ambulance = GUI.Toggle(new Rect(Twidth * 2 + offset, 80, Twidth, Theight), ambulance, "Ambulance");
+                        fireTruck = GUI.Toggle(new Rect(Twidth * 2 + offset, 155, Twidth, Theight), fireTruck, "Fire Truck");
+                        Tanker    = GUI.Toggle(new Rect(Twidth * 2 + offset, 230, Twidth, Theight), Tanker, "Oil Truck");
+                        Truck     = GUI.Toggle(new Rect(Twidth * 2 + offset, 305, Twidth, Theight), Truck, "Truck");
+                        Hearse    = GUI.Toggle(new Rect(Twidth * 2 + offset, 380, Twidth, Theight), Hearse, "Hearse");
+                        IceCream  = GUI.Toggle(new Rect(Twidth * 2 + offset, 455, Twidth, Theight), IceCream, "Ice Cream");
+                        policeCar = GUI.Toggle(new Rect(Twidth * 2 + offset, 530, Twidth, Theight), policeCar, "Police Car");
 
-                if (securityType == "HL3")
-                {
-					GUI.Box(new Rect(0, 0, 700, 700), "Purchase Options");
-                    honeyLevel = 3;
+                        //This is to check for what type of color the security gate will look for
+                        if (ambulance && !honeyFlags.Contains("Ambulance")) honeyFlags.Add("Ambulance");
+                        else if (!ambulance && honeyFlags.Contains("Ambulance")) honeyFlags.Remove("Ambulance");
 
-                    red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
-                    green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
-                    blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
-                    yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
+                        else if (fireTruck && !honeyFlags.Contains("Fire Truck")) honeyFlags.Add("Fire Truck");
+                        else if (!fireTruck && honeyFlags.Contains("Fire Truck")) honeyFlags.Remove("Fire Truck");
 
-                    small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
-                    median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
-                    large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
+                        else if (Tanker && !honeyFlags.Contains("Tanker")) honeyFlags.Add("Tanker");
+                        else if (!Tanker && honeyFlags.Contains("Tanker")) honeyFlags.Remove("Tanker");
 
-                    ambulance = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
-                    fireTruck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
-                    Tanker = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Oil Truck");
-                    Truck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
-                    Hearse = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
-                    IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream");
-                    policeCar = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
+                        else if (Truck && !honeyFlags.Contains("Truck")) honeyFlags.Add("Truck");
+                        else if (!Truck && honeyFlags.Contains("Truck")) honeyFlags.Remove("Truck");
 
+                        else if (Hearse && !honeyFlags.Contains("Hearse")) honeyFlags.Add("Hearse");
+                        else if (!Hearse && honeyFlags.Contains("Hearse")) honeyFlags.Remove("Hearse");
 
-                    //This is to check for what type of color the security gate will look for
-                    if (red && !honeyFlags.Contains("Red"))  honeyFlags.Add("Red");
-                    else if (!red && honeyFlags.Contains("Red"))  honeyFlags.Remove("Red");
+                        else if (IceCream && !honeyFlags.Contains("Ice Cream")) honeyFlags.Add("Ice Cream");
+                        else if (!IceCream && honeyFlags.Contains("Ice Cream")) honeyFlags.Remove("Ice Cream");
 
-                    else if (green && !honeyFlags.Contains("Green"))  honeyFlags.Add("Green"); 
-                    else if (!green && honeyFlags.Contains("Green"))  honeyFlags.Remove("Green"); 
-
-                    else if (blue && !honeyFlags.Contains("Blue")) honeyFlags.Add("Blue"); 
-                    else if (!blue && honeyFlags.Contains("Blue")) honeyFlags.Remove("Blue"); 
-
-                    else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
-                    else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow");
-
-                    else if (small && !honeyFlags.Contains("Small"))  honeyFlags.Add("Small"); 
-                    else if (!small && honeyFlags.Contains("Small"))  honeyFlags.Remove("Small"); 
-
-                    else if (median && !honeyFlags.Contains("Medium"))  honeyFlags.Add("Medium"); 
-                    else if (!median && honeyFlags.Contains("Medium"))  honeyFlags.Remove("Medium"); 
-
-                    else if (large && !honeyFlags.Contains("Large")) honeyFlags.Add("Large"); 
-                    else if (!large && honeyFlags.Contains("Large")) honeyFlags.Remove("Large");
-
-                    else if (ambulance && !honeyFlags.Contains("Ambulance"))  honeyFlags.Add("Ambulance"); 
-                    else if (!ambulance && honeyFlags.Contains("Ambulance"))  honeyFlags.Remove("Ambulance"); 
-
-                    else if (fireTruck && !honeyFlags.Contains("Fire Truck"))  honeyFlags.Add("Fire Truck"); 
-                    else if (!fireTruck && honeyFlags.Contains("Fire Truck"))  honeyFlags.Remove("Fire Truck"); 
-
-                    else if (Tanker && !honeyFlags.Contains("Tanker"))  honeyFlags.Add("Tanker");
-                    else if (!Tanker && honeyFlags.Contains("Tanker"))  honeyFlags.Remove("Tanker"); 
-
-                    else if (Truck && !honeyFlags.Contains("Truck"))  honeyFlags.Add("Truck"); 
-                    else if (!Truck && honeyFlags.Contains("Truck"))  honeyFlags.Remove("Truck"); 
-
-                    else if (Hearse && !honeyFlags.Contains("Hearse"))  honeyFlags.Add("Hearse"); 
-                    else if (!Hearse && honeyFlags.Contains("Hearse"))  honeyFlags.Remove("Hearse"); 
-
-                    else if (IceCream && !honeyFlags.Contains("Ice Cream"))  honeyFlags.Add("Ice Cream"); 
-                    else if (!IceCream && honeyFlags.Contains("Ice Cream"))  honeyFlags.Remove("Ice Cream");
-
-                    else if (policeCar && !honeyFlags.Contains("Police Car"))  honeyFlags.Add("Police Car"); 
-                    else if (!policeCar && honeyFlags.Contains("Police Car"))  honeyFlags.Remove("Police Car"); 
-
-
-					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase"))
-                    {
-                        upgradeChosen = false;
-                        shopOpen = false;
-                        Time.timeScale = 1;
+                        else if (policeCar && !honeyFlags.Contains("Police Car")) honeyFlags.Add("Police Car");
+                        else if (!policeCar && honeyFlags.Contains("Police Car")) honeyFlags.Remove("Police Car");
                     }
 
-					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase"))
-                    {
-                        honeyFlags.Clear();
-                        upgradeChosen = false;
-                        Time.timeScale = 1;
+                  if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
+                     upgradeChosen = false;
+                     shopOpen = false;
+                     Time.timeScale = 1;
+                  }
 
-                    }
-
-                }
-
+                 if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
+                            honeyFlags.Clear();
+                            clear();
+                            upgradeChosen = false;
+                            Time.timeScale = 1;
+                 }
+               }
 			}
+
 			else {
 				// This is to contain all of the different buying options
 				GUI.Box (new Rect (0, 0, 800, 1000), "Shop");
