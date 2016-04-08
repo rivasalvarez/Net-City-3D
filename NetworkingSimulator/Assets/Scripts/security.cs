@@ -53,7 +53,7 @@ public class Security : MonoBehaviour {
 
 		Debug.DrawRay (newPos, fwd*10.0f,Color.green);
 		if (Physics.SphereCast (newPos, 3.0f, fwd, out hit, 10.0F)) {
-			if (hit.collider.tag != "Building") {
+			if (hit.collider.tag != "Terrain") {
 				// Check for if ambulance is good, if so, add ambulance to list
 				if (ambulance && !securityFlags.Contains ("Ambulance"))
 					securityFlags.Add ("Ambulance");

@@ -100,7 +100,8 @@ public class mainGame : MonoBehaviour {
 			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
-			if (hitDetected.collider.tag != "Building" && hitDetected.collider.tag != "Untagged") {
+                if (hitDetected.collider.tag != "Terrain" && hitDetected.collider.tag != "Untagged" && hitDetected.collider.tag != "Building" && hitDetected.collider.tag != "Honey" && hitDetected.collider.tag != "Extra")
+                {
 				// This gets the script from the object that it hits. 
 				tempScript = hitDetected.collider.GetComponent <Car> ();
 						
@@ -156,11 +157,11 @@ public class mainGame : MonoBehaviour {
 
 			// If showSettings is true, then a set of different functionalities will be displayed
 			else {
-				// Interactable GUI button for load game
+				/* Interactable GUI button for load game
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2), 100, 50), "Load Game")) {
 					/* Saves the game data
 					 * *NOTE * shouldn't it be loading?
-					 */
+					
 					gameMgr.loadSave (".txt");					
 				}
 				// Interactable GUI button for saving the game 
@@ -175,7 +176,7 @@ public class mainGame : MonoBehaviour {
 					} else {
 						print ("File broke");
 					}
-				}
+				} */
 					
 				// Interactable GUI button for quitting the game
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 150, 100, 50), "Quit Game")) {
@@ -208,7 +209,7 @@ public class mainGame : MonoBehaviour {
 					// Cast a raycast from the starting position of the mouse down infinitely
 					if (Physics.Raycast (vRay, out hit, Mathf.Infinity)) {
 
-						if (hit.collider.tag == "Building") {
+						if (hit.collider.tag == "Terrain") {
 					
 							// This is a variable that will hold the position of where the hit is detected for the mouse
 							Vector3 placePosition;
@@ -253,7 +254,7 @@ public class mainGame : MonoBehaviour {
             placingSecurity = true;
 
                 // This checks if the user pressed the G key on the keyboard
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(0) && !shopScript.upgradeChosen)
                 {
                     // Create a ray object, and have it trace the mousePosition from top down
                     Ray vRay = myCam.ScreenPointToRay(Input.mousePosition);
@@ -265,7 +266,7 @@ public class mainGame : MonoBehaviour {
                     if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
                     {
                         Debug.Log(hit.collider.tag);
-                        if (hit.collider.tag == "Building")
+                        if (hit.collider.tag == "Terrain")
                         {
 
                             // This is a variable that will hold the position of where the hit is detected for the mouse
