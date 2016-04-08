@@ -172,7 +172,7 @@ public class mainGame : MonoBehaviour {
 				} */
 					
 				// Interactable GUI button for quitting the game
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 150, 100, 50), "Quit Game")) {
+				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Quit Game")) {
 					// Check to see if the user wants to save, if so, then called gameMgr.saveData, or something along those lines
 
 					// Then quit the game entirely
@@ -180,7 +180,7 @@ public class mainGame : MonoBehaviour {
 				}
 
 				// Interactable GUI button for back
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, 100, 50), "Back ")) {
+				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Back ")) {
 					// Sets this to false, so the setting gui options will not appear
 					showSettings = false;					
 				}

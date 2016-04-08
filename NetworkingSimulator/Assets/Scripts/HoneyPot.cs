@@ -171,6 +171,11 @@ public class HoneyPot : MonoBehaviour {
     }
 
     void OnGUI(){
+
+		
+		GUI.skin = Resources.Load ("Buttons/ShopSkin") as GUISkin;
+		GUIStyle guiStyle = GUI.skin.GetStyle ("Shop");
+
         if (upgrade == true)
         {
             Time.timeScale = 0;
@@ -179,11 +184,11 @@ public class HoneyPot : MonoBehaviour {
             if (level == 1)
             {
                 GUI.Box(new Rect(500, 100, 700, 700), "Upgrade Options");
-
-                red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
-                green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
-                blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
-                yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
+				
+				red = GUI.Toggle(new Rect(510, 140, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+				green = GUI.Toggle(new Rect(510, 215, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+				blue = GUI.Toggle(new Rect(510, 290, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+				yellow = GUI.Toggle(new Rect(510, 365, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
                 //This is to check for what type of color the security gate will look for
                 if (red && !Keys.Contains("Red")) Keys.Add("Red"); 
@@ -199,13 +204,13 @@ public class HoneyPot : MonoBehaviour {
                 else if (!yellow && Keys.Contains("Yellow"))  Keys.Remove("Yellow");
 
 
-                if (GUI.Button(new Rect(840, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
+				if (GUI.Button(new Rect(510, 550, GUI.skin.button.fixedWidth, 50), "Purchase"))
                 {
                     upgrade = false;
                     Time.timeScale = 1;
                 }
 
-                if (GUI.Button(new Rect(840, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
+				if (GUI.Button(new Rect(510, 650, GUI.skin.button.fixedWidth, 50), "Cancel Purchase"))
                 {
                     //clear();
                     upgrade = false;
@@ -220,14 +225,14 @@ public class HoneyPot : MonoBehaviour {
             {
                 GUI.Box(new Rect(500, 100, 700, 700), "Upgrade Options");
 
-                red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
-                green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
-                blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
-                yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
+                red = GUI.Toggle(new Rect(510, 140, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+                green = GUI.Toggle(new Rect(510, 215, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+                blue = GUI.Toggle(new Rect(510, 290, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+                yellow = GUI.Toggle(new Rect(510, 365, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
 
-                small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
-                median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
-                large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
+                small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 530, 140, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+                median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 530, 215, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
+                large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 530, 290, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
 
 
@@ -253,13 +258,13 @@ public class HoneyPot : MonoBehaviour {
                 else if (!large && Keys.Contains("Large"))  Keys.Remove("Large");
 
 
-                if (GUI.Button(new Rect(840, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
+				if (GUI.Button(new Rect(510, 550, GUI.skin.button.fixedWidth, 50), "Purchase"))
                 {
                     upgrade = false;
                     Time.timeScale = 1;
                 }
 
-                if (GUI.Button(new Rect(840, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
+				if (GUI.Button(new Rect(510, 650, GUI.skin.button.fixedWidth, 50), "Cancel Purchase"))
                 {
                     //clear();
                     upgrade = false;
@@ -274,23 +279,23 @@ public class HoneyPot : MonoBehaviour {
             if (level == 3)
             {
                 GUI.Box(new Rect(500, 100, 700, 700), "Upgrade Options");
+				
+				red = GUI.Toggle(new Rect(510, 140, GUI.skin.toggle.fixedWidth, 30), red, "Red");
+				green = GUI.Toggle(new Rect(510, 215, GUI.skin.toggle.fixedWidth, 30), green, "Green");
+				blue = GUI.Toggle(new Rect(510, 290, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
+				yellow = GUI.Toggle(new Rect(510, 365, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
+				
+				small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 530, 140, GUI.skin.toggle.fixedWidth, 30), small, "Small");
+				median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 530, 215, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
+				large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 530, 290, GUI.skin.toggle.fixedWidth, 30), large, "Large");
 
-                red = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), red, "Red");
-                green = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), green, "Green");
-                blue = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), blue, "Blue");
-                yellow = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), yellow, "Yellow");
-
-                small = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 80, GUI.skin.toggle.fixedWidth, 30), small, "Small");
-                median = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 155, GUI.skin.toggle.fixedWidth, 30), median, "Meduim");
-                large = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth + 20, 230, GUI.skin.toggle.fixedWidth, 30), large, "Large");
-
-                ambulance = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
-                fireTruck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
-                Tanker = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Oil Truck");
-                Truck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
-                Hearse = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
-                IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream Truck");
-                policeCar = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
+                ambulance = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 140, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
+                fireTruck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 215, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
+                Tanker = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 290, GUI.skin.toggle.fixedWidth, 30), Tanker, "Oil Truck");
+                Truck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 365, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
+                Hearse = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 440, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
+                IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 515, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream");
+                policeCar = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 530, 590, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
 
 
 
@@ -337,13 +342,13 @@ public class HoneyPot : MonoBehaviour {
                 else if (!policeCar && Keys.Contains("Police Car"))  Keys.Remove("Police Car"); 
 
 
-                if (GUI.Button(new Rect(840, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
+				if (GUI.Button(new Rect(510, 550, GUI.skin.button.fixedWidth, 50), "Purchase"))
                 {
                     upgrade = false;
                     Time.timeScale = 1;
                 }
 
-                if (GUI.Button(new Rect(840, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
+				if (GUI.Button(new Rect(510, 650, GUI.skin.button.fixedWidth, 50), "Cancel Purchase"))
                 {
                     //clear();
                     upgrade = false;

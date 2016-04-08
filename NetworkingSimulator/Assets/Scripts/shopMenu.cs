@@ -162,7 +162,7 @@ public class shopMenu : MonoBehaviour {
 							// This checks if an option is picked
 							if ((small && !median && !large) || (!small && median && !large) || (!small && !median && large)) {
 								{
-									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
+									if (GUI.Button (new Rect (540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")) {
 										if (playerCash >= security_one_cost) {
 											upgradeChosen = false;
 											shopOpen = false;
@@ -174,7 +174,7 @@ public class shopMenu : MonoBehaviour {
 							}
 						}
 					}
-					if (GUI.Button (new Rect (240, 400-128 + 128, 128, 50), "Cancel Purchase")) {
+					if (GUI.Button (new Rect (540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")) {
 						clear ();
 						upgradeChosen = false;
 						Time.timeScale = 1;
@@ -248,7 +248,7 @@ public class shopMenu : MonoBehaviour {
 
 							if ((small && median && !large) || (!small && median && large) || (small && !median && large)) {
 								{
-									if (GUI.Button (new Rect (240, 400 - (128 * 2) + 128, 128, 50), "Purchase")) {
+									if (GUI.Button (new Rect (540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")) {
 										if (playerCash >= security_two_cost) {
 											playerCash -= security_two_cost;
 											upgradeChosen = false;
@@ -260,7 +260,7 @@ public class shopMenu : MonoBehaviour {
 							}
 						}
 					}
-					if (GUI.Button (new Rect (240, 400-128 + 128, 128, 50), "Cancel Purchase")) {
+					if (GUI.Button (new Rect (540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")) {
 						clear ();
 						upgradeChosen = false;
 						Time.timeScale = 1;
@@ -274,7 +274,7 @@ public class shopMenu : MonoBehaviour {
 					GUI.Box (new Rect (0, 0, 400, 300), " ");
 					red =  blue =  green = yellow = large = median =  small = ambulance = fireTruck= Tanker= Truck=  Hearse= IceCream= policeCar=  Taxi= true;
 
-					if (GUI.Button (new Rect ( 150,100, 128, 50), "Purchase")) {
+					if (GUI.Button (new Rect (540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")) {
 								if (playerCash >= security_three_cost) {
 									playerCash -= security_three_cost;
 									upgradeChosen = false;
@@ -283,7 +283,7 @@ public class shopMenu : MonoBehaviour {
 								}
 							}
 						
-					if (GUI.Button (new Rect (150, 100+ 60, 128, 50), "Cancel Purchase")) {
+					if (GUI.Button (new Rect (540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")) {
 						clear ();
 						upgradeChosen = false;
 						Time.timeScale = 1;
@@ -315,13 +315,13 @@ public class shopMenu : MonoBehaviour {
                     else if (yellow && !honeyFlags.Contains("Yellow"))  honeyFlags.Add("Yellow"); 
                     else if (!yellow && honeyFlags.Contains("Yellow"))  honeyFlags.Remove("Yellow"); 
 
-					if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")){
                         upgradeChosen = false;
                         shopOpen = false;
                         Time.timeScale = 1;
                     }
 
-					if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
                         honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
@@ -366,13 +366,13 @@ public class shopMenu : MonoBehaviour {
                     else if (large && !honeyFlags.Contains("Large"))  honeyFlags.Add("Large"); 
                     else if (!large && honeyFlags.Contains("Large"))  honeyFlags.Remove("Large"); 
 
-					if (GUI.Button(new Rect(240, 400 - (128 * 2) + 128, 128, 50), "Purchase")){
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 50, GUI.skin.button.fixedWidth, 50), "Purchase")){
                         upgradeChosen = false;
                         shopOpen = false;
                         Time.timeScale = 1;
                     }
 
-					if (GUI.Button(new Rect(240, 400 - 128 + 128, 128, 50), "Cancel Purchase")){
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 118, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
                         honeyFlags.Clear();
                         upgradeChosen = false;
                         Time.timeScale = 1;
@@ -401,7 +401,7 @@ public class shopMenu : MonoBehaviour {
                     Tanker = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Oil Truck");
                     Truck = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
                     Hearse = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
-                    IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream Truck");
+                    IceCream = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream");
                     policeCar = GUI.Toggle(new Rect(GUI.skin.toggle.fixedWidth * 2 + 20, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
 
 
@@ -449,14 +449,14 @@ public class shopMenu : MonoBehaviour {
                     else if (!policeCar && honeyFlags.Contains("Police Car"))  honeyFlags.Remove("Police Car"); 
 
 
-					if (GUI.Button(new Rect(340, 400 - (128 * 2) + 128, 128, 50), "Purchase"))
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase"))
                     {
                         upgradeChosen = false;
                         shopOpen = false;
                         Time.timeScale = 1;
                     }
 
-					if (GUI.Button(new Rect(340, 400 - 128 + 128, 128, 50), "Cancel Purchase"))
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase"))
                     {
                         honeyFlags.Clear();
                         upgradeChosen = false;
