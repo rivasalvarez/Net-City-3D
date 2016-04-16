@@ -93,28 +93,18 @@ public class mainGame : MonoBehaviour {
 			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
-                if (hitDetected.collider.tag != "Terrain" && hitDetected.collider.tag != "Untagged" && hitDetected.collider.tag != "Building" && hitDetected.collider.tag != "Honey" && hitDetected.collider.tag != "Extra")
-                {
-				// This gets the script from the object that it hits. 
-				tempScript = hitDetected.collider.GetComponent <Car> ();
-						
-				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
-				GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
-					"Car Type: " + tempScript.carTypeString +
-					" \nCar Color: " + tempScript.colorString +
-					" \nCar Size : " + tempScript.sizeString, boxInformation);
-			} 	/*
-				else if (hitDetected.collider.tag == "tollPre") {
-				// This gets the script from the object that it hits. 
-				tempScript = hitDetected.collider.GetComponent <Security> ();
-
-				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
-				GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
-					"Car Type: " + tempScript. +
-					" \nCar Color: " + tempScript.colorString +
-					" \nCar Size : " + tempScript.sizeString, boxInformation);
-				}
-				*/
+				if (hitDetected.collider.tag != "tollPre" && hitDetected.collider.tag != "Terrain" && hitDetected.collider.tag != "Untagged" && hitDetected.collider.tag != "Building" && hitDetected.collider.tag != "Honey" && hitDetected.collider.tag != "Extra")
+		                {
+						// This gets the script from the object that it hits. 
+						tempScript = hitDetected.collider.GetComponent <Car> ();
+								
+						GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
+						GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
+							"Car Type: " + tempScript.carTypeString +
+							" \nCar Color: " + tempScript.colorString +
+							" \nCar Size : " + tempScript.sizeString, boxInformation);
+					} 	
+				
 			}
 	
 
@@ -173,7 +163,7 @@ public class mainGame : MonoBehaviour {
 					
 				// Interactable GUI button for quitting the game
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Quit Game")) {
-					// Check to see if the user wants to save, if so, then called gameMgr.saveData, or something along those lines
+					Application.Quit ();
 
 					// Then quit the game entirely
 
@@ -223,6 +213,8 @@ public class mainGame : MonoBehaviour {
 							obj.GetComponent <Security> ().setColors (shopScript.red,  shopScript.green, shopScript.blue, shopScript.yellow);
 							obj.GetComponent <Security> ().setSize (shopScript.small, shopScript.median, shopScript.large);
 							obj.GetComponent <Security> ().setSecurityType (shopScript.getSecurityType());
+							obj.GetComponent <Security> ().level = shopScript.firewallLevel;
+							shopScript.securityFlags.Clear ();
 
 							// Change the position of it so it will be placed a little bit above the road level
 							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	

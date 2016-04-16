@@ -34,14 +34,25 @@ public class Security : MonoBehaviour {
 	private bool IceCream;
 	private bool policeCar;
 	private bool taxi;
+	bool upgrade = false;
 
 	public List<string> securityFlags = new List<string>();
+	public int level; // This is the level
+	public Camera myCam; // The camera object
 
 
 	// Use this for initialization
 	void Start () {
+		myCam = GameObject.Find("Main Camera").GetComponent<Camera>();
 		animation = GetComponent<Animator> ();
 		objectDetected = false;
+	}
+
+	void OnMouseOver(){
+		if (Input.GetMouseButtonDown (1)) {
+			Debug.Log ("Works");
+			upgrade = true;
+		}
 	}
 
 	// Update is called once per frame
@@ -50,7 +61,6 @@ public class Security : MonoBehaviour {
 			RaycastHit hit;
 		
 			Vector3 newPos = new Vector3 (transform.position.x-4.5f, transform.position.y + 3, transform.position.z);
-
 		Debug.DrawRay (newPos, fwd*10.0f,Color.green);
 		if (Physics.SphereCast (newPos, 3.0f, fwd, out hit, 10.0F)) {
 			if (hit.collider.tag != "Terrain") {
@@ -113,21 +123,145 @@ public class Security : MonoBehaviour {
 				else if (!yellow && securityFlags.Contains("Yellow"))  securityFlags.Remove("Yellow"); 
 
 				// Check if it is security type 1, 2, or 3
-					if (securityFlags.Contains(hit.collider.tag))
+				if (securityFlags.Contains(hit.collider.tag ) || securityFlags.Contains(hit.collider.GetComponent <Car> ().colorString))
 						{
-					print ("security Type: " + securityType);
-						print ("car detected: " + hit.collider.tag);
+						print ("security Type: " + securityType);
+							print ("car detected: " + hit.collider.tag);
 
-						if (securityFlags.Contains(hit.collider.GetComponent <Car> ().colorString)) {
-							print (hit.collider.GetComponent <Car> ().colorString);
-
-								Destroy (hit.transform.gameObject);
-							}
-
+						Destroy(hit.transform.transform.gameObject);
 					}
 			}
 		}
-}
+	}
+
+	void OnMouseDrag(){
+
+		Ray vRay = myCam.ScreenPointToRay(Input.mousePosition);
+
+		// Create a hit variable that will store the value of whatever it hits
+		RaycastHit hit;
+
+		// Cast a raycast from the starting position of the mouse down infinitely
+		if (Physics.Raycast(vRay, out hit, Mathf.Infinity)){
+			Debug.Log(hit.collider.gameObject);
+			Debug.Log(hit.collider.gameObject.tag);
+			if (hit.collider.tag == "Terrain" || hit.collider.tag == "tollPre") {
+				if(hit.point.x > 0 && hit.point.x < 300 && hit.point.z > 0 && hit.point.z < 300){
+					// This is a variable that will hold the position of where the hit is detected for the mouse
+					Vector3 placePosition;
+
+					// Store the hit position into the placePosition
+					placePosition = hit.point;
+
+					// This will round the x and z variable, not sure if this is needed though since accuracy is much better than inaccuracy for object placement
+					placePosition.x = Mathf.Round(placePosition.x);
+					placePosition.z = Mathf.Round(placePosition.z);
+
+					// Change the position of it so it will be placed a little bit above the road level
+					transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+				}
+			}
+
+		}    
+	}
+
+	void OnGUI(){
+
+		GUI.skin = Resources.Load ("Buttons/ShopSkin") as GUISkin;
+		GUIStyle guiStyle = GUI.skin.GetStyle ("Shop");
+
+		int offset = 360;
+		float Twidth = GUI.skin.toggle.fixedWidth;
+		float Theight = 30f;
+
+		if (upgrade == true){
+			Debug.Log ("This is working");
+			Time.timeScale = 0;
+			GUI.Box(new Rect(350, 100, 700, 700), "Upgrade Options");
+
+
+			red = GUI.Toggle(new Rect(offset, 140, Twidth, Theight), red, "Red");
+			green = GUI.Toggle(new Rect(offset, 215, Twidth, Theight), green, "Green");
+			blue = GUI.Toggle(new Rect(offset, 290, Twidth, Theight), blue, "Blue");
+			yellow = GUI.Toggle(new Rect(offset, 365, Twidth, Theight), yellow, "Yellow");
+
+			//This is to check for what type of color the security gate will look for
+			if (red && !securityFlags.Contains("Red")) securityFlags.Add("Red"); 
+			else if (!red && securityFlags.Contains("Red")) securityFlags.Remove("Red");
+
+			else if (green && !securityFlags.Contains("Green")) securityFlags.Add("Green"); 
+			else if (!green && securityFlags.Contains("Green")) securityFlags.Remove("Green");
+
+			else if (blue && !securityFlags.Contains("Blue"))  securityFlags.Add("Blue");
+			else if (!blue && securityFlags.Contains("Blue"))  securityFlags.Remove("Blue"); 
+
+			else if (yellow && !securityFlags.Contains("Yellow"))  securityFlags.Add("Yellow");
+			else if (!yellow && securityFlags.Contains("Yellow"))  securityFlags.Remove("Yellow");
+
+
+			if (level >= 2){
+
+				small = GUI.Toggle(new Rect(Twidth + offset, 140, Twidth, Theight), small, "Small");
+				medium = GUI.Toggle(new Rect(Twidth + offset, 215, Twidth, Theight), medium, "Medium");
+				large = GUI.Toggle(new Rect(Twidth + offset, 290, Twidth, Theight), large, "Large");
+
+				if (small && !securityFlags.Contains("Small"))  securityFlags.Add("Small"); 
+				else if (!small && securityFlags.Contains("Small"))  securityFlags.Remove("Small");
+
+				else if (medium && !securityFlags.Contains("Medium"))  securityFlags.Add("Medium"); 
+				else if (!medium && securityFlags.Contains("Medium"))  securityFlags.Remove("Medium"); 
+
+				else if (large && !securityFlags.Contains("Large"))  securityFlags.Add("Large");
+				else if (!large && securityFlags.Contains("Large"))  securityFlags.Remove("Large");
+			}
+
+
+
+			if (level >= 3){
+				ambulance = GUI.Toggle(new Rect(Twidth * 2 + offset, 140, Twidth, Theight), ambulance, "Ambulance");
+				fireTruck = GUI.Toggle(new Rect(Twidth * 2 + offset, 215, Twidth, Theight), fireTruck, "Fire Truck");
+				Tanker = GUI.Toggle(new Rect(Twidth * 2 + offset, 290, Twidth, Theight), Tanker, "Oil Truck");
+				Truck = GUI.Toggle(new Rect(Twidth * 2 + offset, 365, Twidth, Theight), Truck, "Truck");
+				Hearse = GUI.Toggle(new Rect(Twidth * 2 + offset, 440, Twidth, Theight), Hearse, "Hearse");
+				IceCream = GUI.Toggle(new Rect(Twidth * 2 + offset, 515, Twidth, Theight), IceCream, "Ice Cream");
+				policeCar = GUI.Toggle(new Rect(Twidth * 2 + offset, 590, Twidth, Theight), policeCar, "Police Car");
+
+
+				if (ambulance && !securityFlags.Contains("Ambulance")) securityFlags.Add("Ambulance"); 
+				else if (!ambulance && securityFlags.Contains("Ambulance")) securityFlags.Remove("Ambulance");
+
+				else if (fireTruck && !securityFlags.Contains("Fire Truck"))  securityFlags.Add("Fire Truck");
+				else if (!fireTruck && securityFlags.Contains("Fire Truck"))  securityFlags.Remove("Fire Truck");
+
+				else if (Tanker && !securityFlags.Contains("Tanker"))  securityFlags.Add("Tanker");
+				else if (!Tanker && securityFlags.Contains("Tanker"))  securityFlags.Remove("Tanker");
+
+				else if (Truck && !securityFlags.Contains("Truck"))  securityFlags.Add("Truck");
+				else if (!Truck && securityFlags.Contains("Truck"))  securityFlags.Remove("Truck");
+
+				else if (Hearse && !securityFlags.Contains("Hearse"))  securityFlags.Add("Hearse");
+				else if (!Hearse && securityFlags.Contains("Hearse"))  securityFlags.Remove("Hearse"); 
+
+				else if (IceCream && !securityFlags.Contains("Ice Cream"))  securityFlags.Add("Ice Cream");
+				else if (!IceCream && securityFlags.Contains("Ice Cream"))  securityFlags.Remove("Ice Cream"); 
+
+				else if (policeCar && !securityFlags.Contains("Police Car"))  securityFlags.Add("Police Car");
+				else if (!policeCar && securityFlags.Contains("Police Car"))  securityFlags.Remove("Police Car"); 
+			}
+
+			if (GUI.Button(new Rect(offset, 550, GUI.skin.button.fixedWidth, 50), "Change")){
+				upgrade = false;
+				Time.timeScale = 1;
+			}
+
+			if (GUI.Button(new Rect(offset, 650, GUI.skin.button.fixedWidth, 50), "Cancel Change")){
+				//clear();
+				upgrade = false;
+				Time.timeScale = 1;
+
+			}
+		}
+	}
 	public Vector3 getPosition(){
 		return Position;
 	}
@@ -145,29 +279,11 @@ public class Security : MonoBehaviour {
 		yellow = y;
 	}
 
-	/*
-	// This is to set the things the security gate will detect
-	public void getColors(out bool r, out bool g, out bool b,out bool y){
-		red = r;
-		green = g;
-		blue = b;
-		yellow = y;
-	}
-	*/
-
 	public void setSize(bool s, bool m, bool l){
 		small = s;
 		medium = m;
 		large = l;
 	}
-
-	/*
-	public void getSize(out bool s, out bool m, out bool l){
-		small = s;
-		medium = m;
-		large = l;
-	}
-	*/
 
 	public void setTypes(bool a, bool f, bool t, bool tr, bool h, bool i, bool p, bool ta){
 		ambulance = a;
@@ -179,26 +295,9 @@ public class Security : MonoBehaviour {
 		policeCar = p;
 		taxi = ta;
 	}
-	/*
-	public void getTypes(out bool a, out bool f,out bool t, out bool tr,out bool h,out bool i,out bool p,out bool ta){
-		ambulance = a;
-		fireTruck = f;
-		Tanker = t;
-		Truck = tr ;
-		Hearse = h; 
-		IceCream = i;
-		policeCar = p;
-		taxi = ta;
-	}
-*/
 
 	public void setSecurityType(string st){
 		//securityType = st;
 	}
-	/*
-	public void getSecurityType(out string st){
-		//securityType = st;
-	}
-	*/
 }
 

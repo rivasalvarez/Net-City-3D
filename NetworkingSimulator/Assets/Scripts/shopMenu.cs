@@ -57,7 +57,7 @@ public class shopMenu : MonoBehaviour {
     public int honeyLevel = 1;
 
 	public List<string> securityFlags = new List<string>();
-
+	public int firewallLevel = 1;
 
 
 	// Use this for initialization
@@ -131,6 +131,96 @@ public class shopMenu : MonoBehaviour {
 			GUI.BeginGroup(new Rect((Screen.width/2)-400, Screen.height/2 -300, 800, 750));
 
 			if (upgradeChosen) {
+
+				if (securityType == "FL1" || securityType == "FL2"  || securityType == "FL3"){
+					GUI.Box(new Rect(0, 0, 0, 0), "Purchase Options");
+					honeyLevel = 1;
+
+					red    = GUI.Toggle(new Rect(offset, 80, Twidth, Theight), red, "Red");
+					green  = GUI.Toggle(new Rect(offset, 155, Twidth, Theight), green, "Green");
+					blue   = GUI.Toggle(new Rect(offset, 230, Twidth, Theight), blue, "Blue");
+					yellow = GUI.Toggle(new Rect(offset, 305, Twidth, Theight), yellow, "Yellow");
+
+					//This is to check for what type of color the security gate will look for
+					if (red && !securityFlags.Contains("Red")) securityFlags.Add("Red");
+					else if (!red && securityFlags.Contains("Red")) securityFlags.Remove("Red");
+
+					else if (green && !securityFlags.Contains("Green")) securityFlags.Add("Green");
+					else if (!green && securityFlags.Contains("Green")) securityFlags.Remove("Green");
+
+					else if (blue && !securityFlags.Contains("Blue")) securityFlags.Add("Blue");
+					else if (!blue && securityFlags.Contains("Blue")) securityFlags.Remove("Blue");
+
+					else if (yellow && !securityFlags.Contains("Yellow")) securityFlags.Add("Yellow");
+					else if (!yellow && securityFlags.Contains("Yellow")) securityFlags.Remove("Yellow");
+
+					if (securityType == "FL2" || securityType == "FL3"){
+						firewallLevel = 2;
+
+						small  = GUI.Toggle(new Rect(Twidth + offset, 80, Twidth, Theight), small, "Small");
+						median = GUI.Toggle(new Rect(Twidth + offset, 155, Twidth, Theight), median, "Medium");
+						large  = GUI.Toggle(new Rect(Twidth + offset, 230, Twidth, Theight), large, "Large");
+
+						//This is to check for what type of color the security gate will look for
+						if (small && !securityFlags.Contains("Small")) securityFlags.Add("Small");
+						else if (!small && securityFlags.Contains("Small")) securityFlags.Remove("Small");
+
+						else if (median && !securityFlags.Contains("Medium")) securityFlags.Add("Medium");
+						else if (!median && securityFlags.Contains("Medium")) securityFlags.Remove("Medium");
+
+						else if (large && !securityFlags.Contains("Large")) securityFlags.Add("Large");
+						else if (!large && securityFlags.Contains("Large")) securityFlags.Remove("Large");
+
+					}
+
+					if (securityType == "FL3"){
+						firewallLevel = 3;
+
+						ambulance = GUI.Toggle(new Rect(Twidth * 2 + offset, 80, Twidth, Theight), ambulance, "Ambulance");
+						fireTruck = GUI.Toggle(new Rect(Twidth * 2 + offset, 155, Twidth, Theight), fireTruck, "Fire Truck");
+						Tanker    = GUI.Toggle(new Rect(Twidth * 2 + offset, 230, Twidth, Theight), Tanker, "Oil Truck");
+						Truck     = GUI.Toggle(new Rect(Twidth * 2 + offset, 305, Twidth, Theight), Truck, "Truck");
+						Hearse    = GUI.Toggle(new Rect(Twidth * 2 + offset, 380, Twidth, Theight), Hearse, "Hearse");
+						IceCream  = GUI.Toggle(new Rect(Twidth * 2 + offset, 455, Twidth, Theight), IceCream, "Ice Cream");
+						policeCar = GUI.Toggle(new Rect(Twidth * 2 + offset, 530, Twidth, Theight), policeCar, "Police Car");
+
+						//This is to check for what type of color the security gate will look for
+						if (ambulance && !securityFlags.Contains("Ambulance")) securityFlags.Add("Ambulance");
+						else if (!ambulance && securityFlags.Contains("Ambulance")) securityFlags.Remove("Ambulance");
+
+						else if (fireTruck && !securityFlags.Contains("Fire Truck")) securityFlags.Add("Fire Truck");
+						else if (!fireTruck && securityFlags.Contains("Fire Truck")) securityFlags.Remove("Fire Truck");
+
+						else if (Tanker && !securityFlags.Contains("Tanker")) securityFlags.Add("Tanker");
+						else if (!Tanker && securityFlags.Contains("Tanker")) securityFlags.Remove("Tanker");
+
+						else if (Truck && !securityFlags.Contains("Truck")) securityFlags.Add("Truck");
+						else if (!Truck && securityFlags.Contains("Truck")) securityFlags.Remove("Truck");
+
+						else if (Hearse && !securityFlags.Contains("Hearse")) securityFlags.Add("Hearse");
+						else if (!Hearse && securityFlags.Contains("Hearse")) securityFlags.Remove("Hearse");
+
+						else if (IceCream && !securityFlags.Contains("Ice Cream")) securityFlags.Add("Ice Cream");
+						else if (!IceCream && securityFlags.Contains("Ice Cream")) securityFlags.Remove("Ice Cream");
+
+						else if (policeCar && !securityFlags.Contains("Police Car")) securityFlags.Add("Police Car");
+						else if (!policeCar && securityFlags.Contains("Police Car")) securityFlags.Remove("Police Car");
+					}
+
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
+						upgradeChosen = false;
+						shopOpen = false;
+						Time.timeScale = 1;
+					}
+
+					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
+						//securityFlags.Clear();
+						clear();
+						upgradeChosen = false;
+						Time.timeScale = 1;
+					}
+				}
+				/*
 				if (securityType == "FL1") {
 
 					GUI.Box (new Rect (0, 0, 0, 0), "Purchase Options");
@@ -298,6 +388,7 @@ public class shopMenu : MonoBehaviour {
 					}
 
 				}
+			*/
 
                 if (securityType == "HL1" || securityType == "HL2"  || securityType == "HL3"){
                     GUI.Box(new Rect(0, 0, 0, 0), "Purchase Options");
@@ -325,7 +416,7 @@ public class shopMenu : MonoBehaviour {
                         honeyLevel = 2;
 
                         small  = GUI.Toggle(new Rect(Twidth + offset, 80, Twidth, Theight), small, "Small");
-                        median = GUI.Toggle(new Rect(Twidth + offset, 155, Twidth, Theight), median, "Meduim");
+                        median = GUI.Toggle(new Rect(Twidth + offset, 155, Twidth, Theight), median, "Medium");
                         large  = GUI.Toggle(new Rect(Twidth + offset, 230, Twidth, Theight), large, "Large");
 
                         //This is to check for what type of color the security gate will look for
