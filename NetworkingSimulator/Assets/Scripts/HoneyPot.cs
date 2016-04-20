@@ -12,7 +12,7 @@ public class HoneyPot : MonoBehaviour {
   public List<string> Keys = new List<string>();
   public List<string> carTags = new List<string>();
 
-  int level = 1;
+  public int level = 1;
   int PID;
 
   bool upgrade = false;
@@ -84,8 +84,6 @@ public class HoneyPot : MonoBehaviour {
 
             // Cast a raycast from the starting position of the mouse down infinitely
             if (Physics.Raycast(vRay, out hit, Mathf.Infinity)){
-                Debug.Log(hit.collider.gameObject);
-                Debug.Log(hit.collider.gameObject.tag);
                 if (hit.collider.tag == "Terrain" || hit.collider.tag == "Honey") {
                     if(hit.point.x > 0 && hit.point.x < 300 && hit.point.z > 0 && hit.point.z < 300){
                     // This is a variable that will hold the position of where the hit is detected for the mouse

@@ -25,6 +25,11 @@ public class mainGame : MonoBehaviour {
 	string secs; // String of the amount of seconds that has passed
 
 
+	int highestHP = 0;
+	float moneyTimer = 60;
+	float moneyTimerReset = 60;
+	Dictionary<string,int> moneyHistory = new Dictionary<string,int>();
+
 	// Use this for initialization
 	void Start () {
 
@@ -46,27 +51,53 @@ public class mainGame : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		// This is the timer, calculates the minutes, seconds, and the overall time.
-	    timer -= Time.deltaTime;
-		mins = Mathf.Floor(timer / 60).ToString("00");
-		secs = Mathf.Floor(timer % 60).ToString("00");
-		time = mins + ":" + secs;
+		  // This is the timer, calculates the minutes, seconds, and the overall time.
+	      timer -= Time.deltaTime;
+		     if (gameMgr.honeyCount != 0) 
+			    moneyTimer -= Time.deltaTime;
+		
+		  mins = Mathf.Floor(timer / 60).ToString("00");
+		  secs = Mathf.Floor(timer % 60).ToString("00");
+		  time = mins + ":" + secs;
 
-        if (timer < 0){ 
-           string  fileName = "HoneyPot Log.txt";
-           StreamWriter sr = File.CreateText(fileName);
-            timer = 60;
+		     if (moneyTimer < 0 && gameMgr.honeyCount != 0) {
+			    moneyTimer = moneyTimerReset;
+			    moneyHistory.Add (time, gameMgr.cash);
+		     }
 
-            foreach (var hp in gameMgr.honeyPots) {
-                hp.writeToLog(sr); 
-                hp.carPIDS.Clear();
+             if (timer < 0){ 
+                string  fileName = "HoneyPot Log.txt";
+                StreamWriter sr = File.CreateText(fileName);
+                timer = 60;
 
+			        foreach (KeyValuePair<string, int> kvp in moneyHistory) 
+				        sr.WriteLine("Money Amount: {0},  Time: {1}", kvp.Value, kvp.Key);
+			
+			    moneyHistory.Clear ();
+                sr.WriteLine();
 
-            }
+                    foreach (var hp in gameMgr.honeyPots) {
+                        hp.writeToLog(sr); 
+                        hp.carPIDS.Clear();
+                    }
 
-        sr.Close();
+                sr.Close();
+              }
 
-        }
+             if (Input.GetKey(KeyCode.Alpha0)) 
+                 Time.timeScale = 0;
+
+             if (Input.GetKey(KeyCode.Alpha1))
+                 Time.timeScale = 1;
+
+             if (Input.GetKey(KeyCode.Alpha2))
+                 Time.timeScale = 2;
+
+             if (Input.GetKey(KeyCode.Alpha3))
+                 Time.timeScale = 3;
+
+             if (Input.GetKey(KeyCode.Alpha4))
+                 Time.timeScale = 4;
 			}
 
 	/**
@@ -281,6 +312,29 @@ public class mainGame : MonoBehaviour {
                             placingSecurity = false;
                             shopScript.clear();
                             shopScript.honeyFlags.Clear();
+
+                            print(obj.GetComponent<HoneyPot>().level);
+
+                            print(highestHP);
+						    if (obj.GetComponent<HoneyPot> ().level > highestHP) {
+							   highestHP = obj.GetComponent<HoneyPot> ().level;
+                               print("in if state");
+                               if (moneyTimer > 29 && obj.GetComponent<HoneyPot>().level == 1){
+                                   moneyTimer = moneyTimerReset = 29;
+                                   print("in first");
+                               }
+
+                               if (moneyTimer > 20 && obj.GetComponent<HoneyPot>().level == 2) {
+                                   print("in second");
+								    moneyTimer = moneyTimerReset = 20;
+                               }
+
+                               if (moneyTimer > 10 && obj.GetComponent<HoneyPot>().level == 3) {
+                                   print("in third");
+								    moneyTimer = moneyTimerReset = 10;  
+                               }
+						     }
+
                         }
                     }
                 }

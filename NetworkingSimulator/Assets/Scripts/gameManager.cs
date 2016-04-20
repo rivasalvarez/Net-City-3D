@@ -31,7 +31,7 @@ public class gameManager : MonoBehaviour {
 	// These are the different list for each and everything within that specific level
 	public List<Security> securityGates = new List<Security>() ;
     public List<HoneyPot> honeyPots = new List<HoneyPot>();
-    public int honeyCount = 1;
+    public int honeyCount = 0;
 
 	public List<Vector3> buildings;
 	public List<Vector3> security;
