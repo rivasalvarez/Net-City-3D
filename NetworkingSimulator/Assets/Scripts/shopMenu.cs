@@ -210,7 +210,7 @@ public class shopMenu : MonoBehaviour {
 					}
 
 					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
-						//securityFlags.Clear();
+						securityFlags.Clear();
 						clear();
 						upgradeChosen = false;
 						Time.timeScale = 1;

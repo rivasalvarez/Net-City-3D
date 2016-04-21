@@ -121,7 +121,7 @@ public class mainGame : MonoBehaviour {
 			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
-				if (hitDetected.collider.tag != "tollPre" && hitDetected.collider.tag != "Terrain" && hitDetected.collider.tag != "Untagged" && hitDetected.collider.tag != "Building" && hitDetected.collider.tag != "Honey" && hitDetected.collider.tag != "Extra")
+				if (hitDetected.collider.tag == "car")
 		                {
 						// This gets the script from the object that it hits. 
 						tempScript = hitDetected.collider.GetComponent <Car> ();
@@ -187,7 +187,7 @@ public class mainGame : MonoBehaviour {
 			// This will branch into placing a security gate onto the map
 			if (placingSecurity == true) {
 				// This checks if the user pressed the G key on the keyboard
-				if (Input.GetMouseButtonDown(1)) {
+                if (Input.GetMouseButtonDown(0) && !shopScript.upgradeChosen) {
 					// Create a ray object, and have it trace the mousePosition from top down
 					Ray vRay = myCam.ScreenPointToRay (Input.mousePosition);
 
@@ -214,16 +214,19 @@ public class mainGame : MonoBehaviour {
 							// instantiate a tollgate prefab as gameObject into the world (Will be called tollPre(clone), I think
 							obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
 
-							obj.GetComponent <Security> ().setTypes ( shopScript.ambulance, shopScript.fireTruck, shopScript.Tanker, shopScript.Truck, shopScript.Hearse, shopScript.IceCream, shopScript.policeCar,  shopScript.Taxi );
-							obj.GetComponent <Security> ().setColors (shopScript.red,  shopScript.green, shopScript.blue, shopScript.yellow);
-							obj.GetComponent <Security> ().setSize (shopScript.small, shopScript.median, shopScript.large);
+
+                            obj.GetComponent<Security>().setList(shopScript.securityFlags);
+
+                            obj.GetComponent<Security>().setMenuBools(shopScript.red, shopScript.green, shopScript.blue, shopScript.yellow,
+                                shopScript.small, shopScript.median, shopScript.large, shopScript.ambulance, shopScript.fireTruck, shopScript.Tanker,
+                                shopScript.Truck, shopScript.Hearse, shopScript.policeCar, shopScript.IceCream);
+
 							obj.GetComponent <Security> ().setSecurityType (shopScript.getSecurityType());
 							obj.GetComponent <Security> ().level = shopScript.firewallLevel;
 							shopScript.securityFlags.Clear ();
 
 							// Change the position of it so it will be placed a little bit above the road level
 							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
-							obj.transform.localScale *= 6;
 
 							// This will add the gate to the list for it to be saved
 							gameMgr.securityGates.Add (obj.GetComponent<Security> ());

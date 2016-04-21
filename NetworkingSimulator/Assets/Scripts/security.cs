@@ -56,82 +56,20 @@ public class Security : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-		void Update () {
-			Vector3 fwd = transform.TransformDirection (Vector3.back);
-			RaycastHit hit;
-		
-			Vector3 newPos = new Vector3 (transform.position.x-4.5f, transform.position.y + 3, transform.position.z);
-		if (Physics.SphereCast (newPos, 3.0f, fwd, out hit, 10.0F)) {
-			if (hit.collider.tag != "Terrain") {
-				// Check for if ambulance is good, if so, add ambulance to list
-				if (ambulance && !securityFlags.Contains ("Ambulance"))
-					securityFlags.Add ("Ambulance");
-				// Otherwise, remove it
-				else if (!ambulance && securityFlags.Contains ("Ambulance"))
-					securityFlags.Remove ("Ambulance");
-
-				// Rinse and repeat for everything else
-				if (Hearse && !securityFlags.Contains ("Hearse"))
-					securityFlags.Add ("Hearse");
-				else if (!ambulance && securityFlags.Contains ("Hearse"))
-					securityFlags.Remove ("Hearse");
-				
-				if (fireTruck && !securityFlags.Contains ("FireTruck"))
-					securityFlags.Add ("FireTruck");
-				else if (!fireTruck && securityFlags.Contains ("FireTruck"))
-					securityFlags.Remove ("FireTruck");
-				
-				if (Tanker && !securityFlags.Contains ("Tanker"))
-					securityFlags.Add ("Tanker");
-				else if (!Tanker && securityFlags.Contains ("Tanker"))
-					securityFlags.Remove ("Tanker");
-
-
-				if (Truck && !securityFlags.Contains ("Truck"))
-					securityFlags.Add ("Truck");
-				else if (!Truck && securityFlags.Contains ("Truck"))
-					securityFlags.Remove ("Truck");
-
-
-				if (IceCream && !securityFlags.Contains ("IceCream"))
-					securityFlags.Add ("IceCream");
-				else if (!IceCream && securityFlags.Contains ("IceCream"))
-					securityFlags.Remove ("IceCream");
-				
-				if (policeCar && !securityFlags.Contains ("PoliceCar"))
-					securityFlags.Add ("PoliceCar");
-				else if (!policeCar && securityFlags.Contains ("PoliceCar"))
-					securityFlags.Remove ("PoliceCar");
-
-				if (taxi && !securityFlags.Contains ("Taxi"))
-					securityFlags.Add ("Taxi");
-				else if (!taxi && securityFlags.Contains ("Taxi"))
-					securityFlags.Remove ("Taxi");
-			
-				// Add the colors this time around
-				if (red && !securityFlags.Contains("Red"))  securityFlags.Add("Red");
-				else if (!red && securityFlags.Contains("Red"))  securityFlags.Remove("Red"); 
-
-				else if (green && !securityFlags.Contains("Green"))  securityFlags.Add("Green"); 
-				else if (!green && securityFlags.Contains("Green"))  securityFlags.Remove("Green"); 
-
-				else if (blue && !securityFlags.Contains("Blue"))  securityFlags.Add("Blue");
-				else if (!blue && securityFlags.Contains("Blue"))  securityFlags.Remove("Blue"); 
-
-				else if (yellow && !securityFlags.Contains("Yellow"))  securityFlags.Add("Yellow"); 
-				else if (!yellow && securityFlags.Contains("Yellow"))  securityFlags.Remove("Yellow"); 
-
-				// Check if it is security type 1, 2, or 3
-				if (securityFlags.Contains(hit.collider.tag ) || securityFlags.Contains(hit.collider.GetComponent <Car> ().colorString))
-						{
-						print ("security Type: " + securityType);
-							print ("car detected: " + hit.collider.tag);
-
-						Destroy(hit.transform.transform.gameObject);
-					}
-			}
-		}
+    void Update () {
 	}
+
+
+    void OnCollisionEnter(Collision col) {
+     // Check if it is security type 1, 2, or 3
+     if (col.gameObject.tag == "car") {
+        Car colCar = col.gameObject.GetComponent<Car>();
+            if (securityFlags.Contains(colCar.colorString) || securityFlags.Contains(colCar.carTypeString) || securityFlags.Contains(colCar.sizeString))
+                        Destroy(col.gameObject);
+     }
+
+   }
+
 
 	void OnMouseDrag(){
 
@@ -255,7 +193,6 @@ public class Security : MonoBehaviour {
 				//clear();
 				upgrade = false;
 				Time.timeScale = 1;
-
 			}
 		}
 	}
@@ -267,34 +204,19 @@ public class Security : MonoBehaviour {
 		Position = inVect;
 	}
 
-		
-	// This is to set the things the security gate will detect
-	public void setColors(bool r, bool g, bool b, bool y){
-		red = r;
-		green = g;
-		blue = b;
-		yellow = y;
-	}
-
-	public void setSize(bool s, bool m, bool l){
-		small = s;
-		medium = m;
-		large = l;
-	}
-
-	public void setTypes(bool a, bool f, bool t, bool tr, bool h, bool i, bool p, bool ta){
-		ambulance = a;
-		fireTruck = f;
-		Tanker = t;
-		Truck = tr ;
-		Hearse = h; 
-		IceCream = i;
-		policeCar = p;
-		taxi = ta;
-	}
-
 	public void setSecurityType(string st){
 		//securityType = st;
 	}
+
+    public void setMenuBools(bool r, bool g, bool b, bool y, bool s, bool m, bool l, bool a, bool f, bool ta, bool tr, bool h, bool p, bool i) {
+        red = r; blue = b; yellow = y; green = g;
+        small = s; medium = m; large = l;
+        ambulance = a; fireTruck = f; Tanker = ta; Truck = tr;
+        Hearse = h; policeCar = p; IceCream = i;
+    }
+
+    public void setList(List<string> purchasedList) {
+        securityFlags.AddRange(purchasedList);
+    }
 }
 

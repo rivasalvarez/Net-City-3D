@@ -10,7 +10,6 @@ public class HoneyPot : MonoBehaviour {
   mainGame main;
   public Dictionary<int, Car> carPIDS = new Dictionary<int, Car>();
   public List<string> Keys = new List<string>();
-  public List<string> carTags = new List<string>();
 
   public int level = 1;
   int PID;
@@ -41,14 +40,6 @@ public class HoneyPot : MonoBehaviour {
       PID = gameMgr.honeyCount++;
       myCam = GameObject.Find("Main Camera").GetComponent<Camera>();
 
-      carTags.Add("Ambulance");
-      carTags.Add("FireTruck");
-      carTags.Add("Hearse");
-      carTags.Add("IceCream");
-      carTags.Add("PoliceCar");
-      carTags.Add("Tanker");
-      carTags.Add("Taxi");
-      carTags.Add("Truck");
 	}
 	
 	// Update is called once per frame
@@ -61,7 +52,7 @@ public class HoneyPot : MonoBehaviour {
     }
 
 	void OnCollisionEnter(Collision col){
-        if( carTags.Contains(col.gameObject.tag) ){
+        if( col.gameObject.tag == "car" ){
            Car colCar = col.gameObject.GetComponent<Car>();
 
               if (Keys.Contains(colCar.colorString) || Keys.Contains(colCar.carTypeString) || Keys.Contains(colCar.sizeString) ){
