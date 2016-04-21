@@ -539,9 +539,7 @@ public class shopMenu : MonoBehaviour {
 					shopOpen = false;
 					upgradeChosen = false;
 					clear ();
-					print (securityType);
 					Time.timeScale = 1;
-					print ("Closing down Shop");
 				}
 			}
 			// necessary function call for beginGroup

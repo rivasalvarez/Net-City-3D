@@ -171,27 +171,6 @@ public class mainGame : MonoBehaviour {
 
 			// If showSettings is true, then a set of different functionalities will be displayed
 			else {
-				/* Interactable GUI button for load game
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2), 100, 50), "Load Game")) {
-					/* Saves the game data
-					 * *NOTE * shouldn't it be loading?
-					
-					gameMgr.loadSave (".txt");					
-				}
-				// Interactable GUI button for saving the game 
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 50, 100, 50), "Save Game")) {
-					bool saved = false;
-
-					// Calls the save functionality for the gameMgr
-					saved = gameMgr.saveData ();	
-
-					if (saved) {
-						print ("File was successfully saved");
-					} else {
-						print ("File broke");
-					}
-				} */
-					
 				// Interactable GUI button for quitting the game
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Quit Game")) {
 					Application.Quit ();
@@ -281,7 +260,6 @@ public class mainGame : MonoBehaviour {
                     // Cast a raycast from the starting position of the mouse down infinitely
                     if (Physics.Raycast(vRay, out hit, Mathf.Infinity))
                     {
-                        Debug.Log(hit.collider.tag);
                         if (hit.collider.tag == "Terrain")
                         {
 
@@ -313,24 +291,17 @@ public class mainGame : MonoBehaviour {
                             shopScript.clear();
                             shopScript.honeyFlags.Clear();
 
-                            print(obj.GetComponent<HoneyPot>().level);
-
-                            print(highestHP);
 						    if (obj.GetComponent<HoneyPot> ().level > highestHP) {
 							   highestHP = obj.GetComponent<HoneyPot> ().level;
-                               print("in if state");
                                if (moneyTimer > 29 && obj.GetComponent<HoneyPot>().level == 1){
                                    moneyTimer = moneyTimerReset = 29;
-                                   print("in first");
                                }
 
                                if (moneyTimer > 20 && obj.GetComponent<HoneyPot>().level == 2) {
-                                   print("in second");
 								    moneyTimer = moneyTimerReset = 20;
                                }
 
                                if (moneyTimer > 10 && obj.GetComponent<HoneyPot>().level == 3) {
-                                   print("in third");
 								    moneyTimer = moneyTimerReset = 10;  
                                }
 						     }

@@ -127,155 +127,6 @@ public class gameManager : MonoBehaviour {
 	 */ 
 	// Function that saves and loads the user information to a file
 	public bool loadSave(string name){
-		fileName = @"C:\Users\murad\SP\NetworkingSimulator\" + name + ".txt";
-
-		/*
-		if (File.Exists (fileName)) {
-			setUserName(name);
-			StreamReader sr = File.OpenText(fileName);
-			Debug.Log (fileName + " Exist");
-
-			string input;
-			float x, y, z;
-			x = y =z = 0.0f;
-	
-			print ("STARTING");
-
-			input = sr.ReadLine();
-			char[] delimiterChars =  { ' ', '\t' };
-			char[] secondDelimiter = { ',', '\t' };
-
-			string[] words = input.Split(delimiterChars);
-
-			print (words[0]);
-			print ('\n');
-
-
-
-			if(words[0] == password)
-			{
-				input = sr.ReadLine();
-
-				print (input);
-				levelLoaded = true;
-
-				input = sr.ReadLine();
-				input = sr.ReadLine();
-
-
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-				int numberOfStuff = 0;
-				int.TryParse(words[0], out numberOfStuff);
-
-				for(int i = 0; i < numberOfStuff; i++)
-				{
-
-					input = sr.ReadLine();
-					words = input.Split(secondDelimiter);
-
-					words[0] = words[0].Trim('(');
-					words[2] = words[2].Trim(')');
-
-					float.TryParse(words[0], out x);
-					float.TryParse(words[1], out y);
-					float.TryParse(words[2], out z);
-
-					Building obj = new Building();
-					obj.setPosition(new Vector3(x, y, z));
-					//buildingsInThisScene = new List<building>();
-					/*
-					buildingsInThisScene.Add(obj);
-					print (buildingsInThisScene[0].getPosition());
-					buildings.Add(obj.getPosition());
-				}
-
-
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-
-				numberOfStuff = 0;
-				int.TryParse(words[0], out numberOfStuff);
-
-
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-				
-				numberOfStuff = 0;
-				int.TryParse(words[0], out numberOfStuff);
-				
-				print (words[0]);
-				for(int i = 0; i < numberOfStuff; i++)
-				{
-					
-					input = sr.ReadLine();
-					words = input.Split(secondDelimiter);
-					
-					words[0] = words[0].Trim('(');
-					words[2] = words[2].Trim(')');
-					
-					float.TryParse(words[0], out x);
-					float.TryParse(words[1], out y);
-					float.TryParse(words[2], out z);
-					
-					Security obj = new Security();
-					obj.setPosition(new Vector3(x, y, z));
-					securityInThisScene = new List<Security>();
-					securityInThisScene.Add(obj);
-	
-					security.Add(obj.getPosition());
-					print (securityInThisScene[0].getPosition());
-				}
-
-
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-				input = sr.ReadLine();
-				words = input.Split(delimiterChars);
-				
-				numberOfStuff = 0;
-				int.TryParse(words[0], out numberOfStuff);
-				
-				print (words[0]);
-				for(int i = 0; i < numberOfStuff; i++)
-				{
-					
-					input = sr.ReadLine();
-					words = input.Split(secondDelimiter);
-					
-					words[0] = words[0].Trim('(');
-					words[2] = words[2].Trim(')');
-					
-					float.TryParse(words[0], out x);
-					float.TryParse(words[1], out y);
-					float.TryParse(words[2], out z);
-					
-					Car obj = new Car();
-					obj.setPosition(new Vector3(x, y, z));
-					carsInThisScene = new List<Car>();
-					carsInThisScene.Add(obj);
-					
-					car.Add(obj.getPosition());
-					print (carsInThisScene[0].getPosition());
-				}
-				sr.Close();
-				return true;
-			}
-		
-			else{
-				sr.Close();
-				print("FILE NOT FOUND");
-			return false;
-			}
-		} 
-		else {
-			return false;
-		}
-							*/
 
 		return true;
 
@@ -290,71 +141,16 @@ public class gameManager : MonoBehaviour {
 	 * @algorithm: Called from the gui save button in which it gets the username of the player after being set somewhere else. Opens the file, writes the different things for the different levels
 	 */ 
 	public bool saveData(){
-		// Create the name of the file. it will be the username along with a .txt at the end, not necessary but windows likes extension
-		fileName = username + ".txt";
-
-		// Create a streamwriter, in order to open up the file 
-		StreamWriter writer = new StreamWriter (fileName);
-
-		// Trim the password so it does not have uncessary data like whitespace
-		password = password.Trim ();
-
-
-		// Write the password onto the line in the file
-		writer.WriteLine (password);
-
-		// Write the cash 
-		writer.WriteLine (cash);
-
-		//Write that the current information coming in is going to be security stuff
-		writer.WriteLine("Security");
-			// Loop through that information, and start placing it on the map
-
-
-		// Next up is the honey pots
-			// Loop through that information, and start placing it on the map	
-
-
-		// Close the file
-		writer.Close();
-		return true;
-		/*
-		writer.WriteLine ("Buildings");
-		
-		writer.WriteLine (buildingsInThisScene.Count);
-		for (int i = 0; i < buildingsInThisScene.Count; i++) {
-			//writer.WriteLine (buildingsInThisScene [i].getMonetary ());
-			writer.WriteLine (buildingsInThisScene [i].getPosition ());
-		}		
-
-		writer.WriteLine ("Security");
-		writer.WriteLine (securityInThisScene.Count);
-		for (int i = 0; i < securityInThisScene.Count; i++) {
-			writer.WriteLine(securityInThisScene[i].getPosition());
-		}	
-
-		writer.WriteLine ("Cars");
-		writer.WriteLine (carsInThisScene.Count);
-		for (int i = 0; i < carsInThisScene.Count; i++) {
-			writer.WriteLine(carsInThisScene[i].getPosition());
-		}	
-		writer.Close ();
-
-		return true;
-		*/
+        return true;
 	}
 
 	//sets and gets of user attributes
 	public void setUserName(string name){
 		username = name;
-
-		print ("UserName: " + username);
 	}
 
 	public void setPassword(string inPassword){
 		password = inPassword;
-
-		print ("Users password: " + password);
 	}
 
 	public void setCash(int money)

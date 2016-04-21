@@ -65,29 +65,8 @@ public class Car : MonoBehaviour {
 			gameMgr.cash += 300;
 		} 
 
-/*
-		// Check tag to see if colliding with the gate
-		else if (col.gameObject.tag == "gatePre")  
-		{
-			//set flag so the car won't move and also start coroutine
-			flag = false;
-			StartCoroutine(moveGate(col));
-		}
-*/
 	}
 
-	//calls a timer and then moves gate to the side and lets car pass
-	/*IEnumerator moveGate(Collision other){
-
-		//set timer for 5secs
-		yield return new WaitForSeconds (5);
-		//move gate
-		other.gameObject.transform.position += new Vector3(10,0,0);
-		//set flag to move car forward
-		flag = true;
-		
-	}
-*/
 	//gets and sets of car
 	public string getName(){
 		return name;

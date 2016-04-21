@@ -61,7 +61,6 @@ public class Security : MonoBehaviour {
 			RaycastHit hit;
 		
 			Vector3 newPos = new Vector3 (transform.position.x-4.5f, transform.position.y + 3, transform.position.z);
-		Debug.DrawRay (newPos, fwd*10.0f,Color.green);
 		if (Physics.SphereCast (newPos, 3.0f, fwd, out hit, 10.0F)) {
 			if (hit.collider.tag != "Terrain") {
 				// Check for if ambulance is good, if so, add ambulance to list
@@ -143,8 +142,6 @@ public class Security : MonoBehaviour {
 
 		// Cast a raycast from the starting position of the mouse down infinitely
 		if (Physics.Raycast(vRay, out hit, Mathf.Infinity)){
-			Debug.Log(hit.collider.gameObject);
-			Debug.Log(hit.collider.gameObject.tag);
 			if (hit.collider.tag == "Terrain" || hit.collider.tag == "tollPre") {
 				if(hit.point.x > 0 && hit.point.x < 300 && hit.point.z > 0 && hit.point.z < 300){
 					// This is a variable that will hold the position of where the hit is detected for the mouse
