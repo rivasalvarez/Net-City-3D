@@ -51,7 +51,7 @@ public class shopMenu : MonoBehaviour {
 	public bool policeCar;
 	public bool Taxi;
 
-	public int playerCash;
+	public int cost = 0;
 
     public List<string> honeyFlags = new List<string>();
     public int honeyLevel = 1;
@@ -67,10 +67,6 @@ public class shopMenu : MonoBehaviour {
 		security_one_cost = 75; // This is the amount the player has to pay for security level 1 upgrade
 		security_two_cost = 75*2; // This is the amount the player has to pay for security level 2 upgrade
 		security_three_cost = 75*3; // This is the amount the player has to pay for security level 2 upgrade
-
-		playerCash = 0;
-
-
 
 
 		// Initialize the images

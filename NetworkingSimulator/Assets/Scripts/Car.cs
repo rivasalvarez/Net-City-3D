@@ -2,10 +2,6 @@
 using System.Collections;
 
 public class Car : MonoBehaviour {
-	public bool stop; // This variable is to make sure that the car is stopped before the security gate
-	public Rigidbody rb;
-	private bool flag = true;
-	GameObject playerMemory;
 	gameManager gameMgr;
 
 	//WavePoint Stuff
@@ -23,17 +19,12 @@ public class Car : MonoBehaviour {
 	public float speed = 10.0f;
     public int carPID;
 
-    string name; // This is if the car is a potential attacker
 	Vector3 position; // The position of the vehicle
     public string honeyPotIn;
 
 	// Use this for initialization
 	void Start () {
-		playerMemory = GameObject.Find ("GameObject");
-		gameMgr = playerMemory.GetComponent<gameManager> ();	
-
-		//assign the rigid body of the car to use in collisions
-		rb = GetComponent<Rigidbody>();
+        gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();	
 
 		//Random Path for now
 		route = Random.Range(0,7);
@@ -58,30 +49,6 @@ public class Car : MonoBehaviour {
 	//Called when two objects touch
 	void OnCollisionEnter(Collision col){
 
-		//Check tag to see if colliding with building
-		if (col.gameObject.tag == "Building") {
-			// if it is then destroy the car because it has reached its destination
-			Destroy (gameObject);
-			gameMgr.cash += 300;
-		} 
-
-	}
-
-	//gets and sets of car
-	public string getName(){
-		return name;
-	}
-
-	public void setName(string inName){
-		name = inName;
-	}
-
-	public Vector3 getPosition(){
-		return position;
-	}
-
-	public void setPosition(Vector3 newPosition){
-		position = newPosition;
 	}
 
 	void drive(){
@@ -155,10 +122,6 @@ public class Car : MonoBehaviour {
 		}
 
 		targetWayPoint = wayPointList[currentWayPoint];
-	}
-
-	public void setStop(){
-		stop = true;
 	}
 
 }

@@ -45,9 +45,6 @@ public class mainGame : MonoBehaviour {
 		boxInformation = new GUIStyle ();
 		boxInformation.fontSize = 18;
 		boxInformation.normal.textColor = Color.green;
-
-
-		gameMgr.setCash (300);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -153,8 +150,6 @@ public class mainGame : MonoBehaviour {
 						
 					// Otherwise, place an interactable GUI button onto the screen called OpenShop
 				if (GUI.Button (new Rect (Screen.width - GUI.skin.button.fixedWidth, 5, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Open Shop")) {
-						// This retrieves the cash amount and gives it to the shopMenu
-						shopScript.playerCash = gameMgr.getCash ();
 
 						// This will set the shopMenu Script to be true, in which it will display the appropriate GUI
 						shopScript.setShopOpen (true);
@@ -207,7 +202,7 @@ public class mainGame : MonoBehaviour {
 							// This is a variable that will hold the position of where the hit is detected for the mouse
 							Vector3 placePosition;
 
-							gameMgr.setCash (shopScript.playerCash);
+                            gameMgr.cash -= shopScript.cost ;
 
 							// Store the hit position into the placePosition
 							placePosition = hit.point;

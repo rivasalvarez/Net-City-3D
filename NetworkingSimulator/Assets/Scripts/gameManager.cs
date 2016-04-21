@@ -17,7 +17,6 @@ public class gameManager : MonoBehaviour {
 	public Dictionary<string, int> carMoneyDict = new Dictionary<string, int>();
 
     // Car Spawn obj, pos, timer, type
-	GameObject carPre;
 	Vector3 carStartPos = new Vector3 (157f, 0.6f, 0f);
 	float timer = 10;
 	public int carType;
@@ -33,12 +32,8 @@ public class gameManager : MonoBehaviour {
     public List<HoneyPot> honeyPots = new List<HoneyPot>();
     public int honeyCount = 0;
 
-	public List<Vector3> buildings;
-	public List<Vector3> security;
-	public List<Vector3> car;
-
 	// Player variable information pertaining to the level
-	public int cash;
+	public int cash = 300;
 	int securityLevel;
     public bool gameIsStarted = false;
     public int count = 0;
@@ -59,6 +54,8 @@ public class gameManager : MonoBehaviour {
 	 * @algorithm: Checks to see if at the selection menu, if so, loads the first level possible within the game, otherwise, it loads the level the user was at last 
 	 */ 
 	void Start () {
+        cash = 300;
+
 		colorArray = new Color[4];
 
 		colorArray[0] = Color.green;
@@ -110,8 +107,7 @@ public class gameManager : MonoBehaviour {
             //reset timer, random type, and spawn car
 			timer = UnityEngine.Random.Range(3,9);
 			carType = UnityEngine.Random.Range(0,8);
-			carPre = Resources.Load (carPrefabDict[carType]) as GameObject;
-            Instantiate(carPre, carStartPos , Quaternion.identity);
+            Instantiate(Resources.Load(carPrefabDict[carType]) as GameObject, carStartPos, Quaternion.identity);
             count++;
 		}
 	}
@@ -153,16 +149,6 @@ public class gameManager : MonoBehaviour {
 		password = inPassword;
 	}
 
-	public void setCash(int money)
-	{
-		cash = money;
-	}
-
-	public int getCash()
-	{
-		return cash;
-	}
-
 	public int getSecurityLevel (){
 		return securityLevel;
 	}
@@ -185,21 +171,10 @@ public class gameManager : MonoBehaviour {
 			
 	}
 
-	//decrement players currency
-	public void minusCash(int money)
-	{
-		cash -= money;
-	}
-
-	public void addCash(int money)
-	{
-		cash += money;
-	}
-
 	//will check if the user exists
 	public bool checkForUser(string name)
 	{
-		fileName = @"C:\Users\murad\SP\NetworkingSimulator\" + name + ".txt";
+		fileName = name + ".txt";
 
 		if (File.Exists (fileName)) {
 			return true;

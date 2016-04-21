@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Building : MonoBehaviour {
-	// The position of the building in the scene
-	private Vector3 position;
-
 	// The name of the building
-	private string name;
+	public string BuildingName;
+    gameManager gameMgr;
 
-	// Monetary value of the building 
-	private int monetary;
-
+    public List<string> carTags = new List<string>();
 
 	// Use this for initialization
 	void Start () {
 	
+    gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();
+
+    carTags.Add("Ambulance");
+    carTags.Add("FireTruck");
+    carTags.Add("Hearse");
+    carTags.Add("IceCream");
+    carTags.Add("PoliceCar");
+    carTags.Add("Tanker");
+    carTags.Add("Taxi");
+    carTags.Add("Truck");
 	}
 	
 	// Update is called once per frame
@@ -22,30 +29,13 @@ public class Building : MonoBehaviour {
 	
 	}
 
-	// Get functions
-	public  int getMonetary(){
-		return monetary ;
-	}
-	
-	public string getName(){
-		return name;
-	}
-	
-	public Vector3 getPosition(){
-		return position ;
-	}
+    void OnCollisionEnter(Collision col) {
+        //Check tag to see if colliding with building
+        if (carTags.Contains(col.gameObject.tag)) {
+            // if it is then destroy the car because it has reached its destination
+            Destroy(col.gameObject);
+            gameMgr.cash += 300;
+        } 
+    }
 
-
-	// Set function
-	public  void setMonetary(int money){
-		monetary = money;
-	}
-
-	public void setName(string buildingName){
-		name = buildingName;
-	}
-
-	public void setPosition(Vector3 loc){
-		position = new Vector3(loc.x, loc.y, loc.z);
-	}
 }
