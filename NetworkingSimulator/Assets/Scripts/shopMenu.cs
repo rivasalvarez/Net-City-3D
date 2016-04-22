@@ -184,8 +184,8 @@ public class shopMenu : MonoBehaviour {
 						if (ambulance && !securityFlags.Contains("Ambulance")) securityFlags.Add("Ambulance");
 						else if (!ambulance && securityFlags.Contains("Ambulance")) securityFlags.Remove("Ambulance");
 
-						else if (fireTruck && !securityFlags.Contains("Fire Truck")) securityFlags.Add("Fire Truck");
-						else if (!fireTruck && securityFlags.Contains("Fire Truck")) securityFlags.Remove("Fire Truck");
+						else if (fireTruck && !securityFlags.Contains("FireTruck")) securityFlags.Add("FireTruck");
+						else if (!fireTruck && securityFlags.Contains("FireTruck")) securityFlags.Remove("FireTruck");
 
 						else if (Tanker && !securityFlags.Contains("Tanker")) securityFlags.Add("Tanker");
 						else if (!Tanker && securityFlags.Contains("Tanker")) securityFlags.Remove("Tanker");
@@ -196,11 +196,11 @@ public class shopMenu : MonoBehaviour {
 						else if (Hearse && !securityFlags.Contains("Hearse")) securityFlags.Add("Hearse");
 						else if (!Hearse && securityFlags.Contains("Hearse")) securityFlags.Remove("Hearse");
 
-						else if (IceCream && !securityFlags.Contains("Ice Cream")) securityFlags.Add("Ice Cream");
-						else if (!IceCream && securityFlags.Contains("Ice Cream")) securityFlags.Remove("Ice Cream");
+						else if (IceCream && !securityFlags.Contains("IceCream")) securityFlags.Add("IceCream");
+						else if (!IceCream && securityFlags.Contains("IceCream")) securityFlags.Remove("IceCream");
 
-						else if (policeCar && !securityFlags.Contains("Police Car")) securityFlags.Add("Police Car");
-						else if (!policeCar && securityFlags.Contains("Police Car")) securityFlags.Remove("Police Car");
+						else if (policeCar && !securityFlags.Contains("PoliceCar")) securityFlags.Add("PoliceCar");
+						else if (!policeCar && securityFlags.Contains("PoliceCar")) securityFlags.Remove("PoliceCar");
 					}
 
 					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
@@ -222,12 +222,12 @@ public class shopMenu : MonoBehaviour {
 					GUI.Box (new Rect (0, 0, 0, 0), "Purchase Options");
 
 					ambulance  = GUI.Toggle (new Rect (10, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
-					fireTruck = GUI.Toggle (new Rect (10, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
+					fireTruck = GUI.Toggle (new Rect (10, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "FireTruck");
 					Tanker = GUI.Toggle (new Rect (10, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Tanker");
 					Truck =GUI.Toggle (new Rect (10, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck"); 
 					Hearse = GUI.Toggle (new Rect (10, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
-					IceCream = GUI.Toggle (new Rect (10, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream");
-					policeCar = GUI.Toggle (new Rect (10, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
+					IceCream = GUI.Toggle (new Rect (10, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "IceCream");
+					policeCar = GUI.Toggle (new Rect (10, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "PoliceCar");
 					Taxi = GUI.Toggle (new Rect (10, 605, GUI.skin.toggle.fixedWidth, 30), Taxi, "Taxi");
 
 					if (
@@ -279,12 +279,12 @@ public class shopMenu : MonoBehaviour {
 					GUI.Box (new Rect (0, 0, 700, 800), "Purchase Options");
 
                     ambulance = GUI.Toggle(new Rect(10, 80, GUI.skin.toggle.fixedWidth, 30), ambulance, "Ambulance");
-                    fireTruck = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "Fire Truck");
+                    fireTruck = GUI.Toggle(new Rect(10, 155, GUI.skin.toggle.fixedWidth, 30), fireTruck, "FireTruck");
                     Tanker = GUI.Toggle(new Rect(10, 230, GUI.skin.toggle.fixedWidth, 30), Tanker, "Tanker");
                     Truck = GUI.Toggle(new Rect(10, 305, GUI.skin.toggle.fixedWidth, 30), Truck, "Truck");
                     Hearse = GUI.Toggle(new Rect(10, 380, GUI.skin.toggle.fixedWidth, 30), Hearse, "Hearse");
-                    IceCream = GUI.Toggle(new Rect(10, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "Ice Cream");
-                    policeCar = GUI.Toggle(new Rect(10, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "Police Car");
+                    IceCream = GUI.Toggle(new Rect(10, 455, GUI.skin.toggle.fixedWidth, 30), IceCream, "IceCream");
+                    policeCar = GUI.Toggle(new Rect(10, 530, GUI.skin.toggle.fixedWidth, 30), policeCar, "PoliceCar");
                     Taxi = GUI.Toggle(new Rect(10, 605, GUI.skin.toggle.fixedWidth, 30), Taxi, "Taxi");
 
 					if (
@@ -442,8 +442,8 @@ public class shopMenu : MonoBehaviour {
                         if (ambulance && !honeyFlags.Contains("Ambulance")) honeyFlags.Add("Ambulance");
                         else if (!ambulance && honeyFlags.Contains("Ambulance")) honeyFlags.Remove("Ambulance");
 
-                        else if (fireTruck && !honeyFlags.Contains("Fire Truck")) honeyFlags.Add("Fire Truck");
-                        else if (!fireTruck && honeyFlags.Contains("Fire Truck")) honeyFlags.Remove("Fire Truck");
+                        else if (fireTruck && !honeyFlags.Contains("FireTruck")) honeyFlags.Add("FireTruck");
+                        else if (!fireTruck && honeyFlags.Contains("FireTruck")) honeyFlags.Remove("FireTruck");
 
                         else if (Tanker && !honeyFlags.Contains("Tanker")) honeyFlags.Add("Tanker");
                         else if (!Tanker && honeyFlags.Contains("Tanker")) honeyFlags.Remove("Tanker");
@@ -454,11 +454,11 @@ public class shopMenu : MonoBehaviour {
                         else if (Hearse && !honeyFlags.Contains("Hearse")) honeyFlags.Add("Hearse");
                         else if (!Hearse && honeyFlags.Contains("Hearse")) honeyFlags.Remove("Hearse");
 
-                        else if (IceCream && !honeyFlags.Contains("Ice Cream")) honeyFlags.Add("Ice Cream");
-                        else if (!IceCream && honeyFlags.Contains("Ice Cream")) honeyFlags.Remove("Ice Cream");
+                        else if (IceCream && !honeyFlags.Contains("IceCream")) honeyFlags.Add("IceCream");
+                        else if (!IceCream && honeyFlags.Contains("IceCream")) honeyFlags.Remove("IceCream");
 
-                        else if (policeCar && !honeyFlags.Contains("Police Car")) honeyFlags.Add("Police Car");
-                        else if (!policeCar && honeyFlags.Contains("Police Car")) honeyFlags.Remove("Police Car");
+                        else if (policeCar && !honeyFlags.Contains("PoliceCar")) honeyFlags.Add("PoliceCar");
+                        else if (!policeCar && honeyFlags.Contains("PoliceCar")) honeyFlags.Remove("PoliceCar");
                     }
 
                   if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){

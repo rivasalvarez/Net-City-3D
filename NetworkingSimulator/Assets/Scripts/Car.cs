@@ -29,14 +29,15 @@ public class Car : MonoBehaviour {
 		//Random Path for now
 		route = Random.Range(0,7);
 		carColor = Random.Range(0,4);
-		gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
-
 
 		carTypeString = gameMgr.carTypeDict[gameMgr.carType];
         sizeString = gameMgr.carSizeDict[gameMgr.carType];
         colorString = gameMgr.carColorDict[carColor];
         carPID = gameMgr.count;
 		setWavePoints (route);
+
+        gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
+        //gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/IceCream") as Material;
 	}
 	
 	// Update is called once per frame

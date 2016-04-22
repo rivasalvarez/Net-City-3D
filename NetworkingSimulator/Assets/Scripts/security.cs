@@ -49,10 +49,8 @@ public class Security : MonoBehaviour {
 	}
 
 	void OnMouseOver(){
-		if (Input.GetMouseButtonDown (1)) {
-			Debug.Log ("Works");
+		if (Input.GetMouseButtonDown (1)) 
 			upgrade = true;
-		}
 	}
 
 	// Update is called once per frame
@@ -110,7 +108,6 @@ public class Security : MonoBehaviour {
 		float Theight = 30f;
 
 		if (upgrade == true){
-			Debug.Log ("This is working");
 			Time.timeScale = 0;
 			GUI.Box(new Rect(350, 100, 700, 700), "Upgrade Options");
 
@@ -165,8 +162,8 @@ public class Security : MonoBehaviour {
 				if (ambulance && !securityFlags.Contains("Ambulance")) securityFlags.Add("Ambulance"); 
 				else if (!ambulance && securityFlags.Contains("Ambulance")) securityFlags.Remove("Ambulance");
 
-				else if (fireTruck && !securityFlags.Contains("Fire Truck"))  securityFlags.Add("Fire Truck");
-				else if (!fireTruck && securityFlags.Contains("Fire Truck"))  securityFlags.Remove("Fire Truck");
+				else if (fireTruck && !securityFlags.Contains("FireTruck"))  securityFlags.Add("FireTruck");
+				else if (!fireTruck && securityFlags.Contains("FireTruck"))  securityFlags.Remove("FireTruck");
 
 				else if (Tanker && !securityFlags.Contains("Tanker"))  securityFlags.Add("Tanker");
 				else if (!Tanker && securityFlags.Contains("Tanker"))  securityFlags.Remove("Tanker");
@@ -177,11 +174,11 @@ public class Security : MonoBehaviour {
 				else if (Hearse && !securityFlags.Contains("Hearse"))  securityFlags.Add("Hearse");
 				else if (!Hearse && securityFlags.Contains("Hearse"))  securityFlags.Remove("Hearse"); 
 
-				else if (IceCream && !securityFlags.Contains("Ice Cream"))  securityFlags.Add("Ice Cream");
-				else if (!IceCream && securityFlags.Contains("Ice Cream"))  securityFlags.Remove("Ice Cream"); 
+				else if (IceCream && !securityFlags.Contains("IceCream"))  securityFlags.Add("IceCream");
+				else if (!IceCream && securityFlags.Contains("IceCream"))  securityFlags.Remove("IceCream"); 
 
-				else if (policeCar && !securityFlags.Contains("Police Car"))  securityFlags.Add("Police Car");
-				else if (!policeCar && securityFlags.Contains("Police Car"))  securityFlags.Remove("Police Car"); 
+				else if (policeCar && !securityFlags.Contains("PoliceCar"))  securityFlags.Add("PoliceCar");
+				else if (!policeCar && securityFlags.Contains("PoliceCar"))  securityFlags.Remove("PoliceCar"); 
 			}
 
 			if (GUI.Button(new Rect(offset, 550, GUI.skin.button.fixedWidth, 50), "Change")){

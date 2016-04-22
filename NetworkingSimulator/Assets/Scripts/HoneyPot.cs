@@ -196,8 +196,8 @@ public class HoneyPot : MonoBehaviour {
                 if (ambulance && !Keys.Contains("Ambulance")) Keys.Add("Ambulance"); 
                 else if (!ambulance && Keys.Contains("Ambulance")) Keys.Remove("Ambulance");
 
-                else if (fireTruck && !Keys.Contains("Fire Truck"))  Keys.Add("Fire Truck");
-                else if (!fireTruck && Keys.Contains("Fire Truck"))  Keys.Remove("Fire Truck");
+                else if (fireTruck && !Keys.Contains("FireTruck"))  Keys.Add("FireTruck");
+                else if (!fireTruck && Keys.Contains("FireTruck"))  Keys.Remove("FireTruck");
 
                 else if (Tanker && !Keys.Contains("Tanker"))  Keys.Add("Tanker");
                 else if (!Tanker && Keys.Contains("Tanker"))  Keys.Remove("Tanker");
@@ -208,11 +208,11 @@ public class HoneyPot : MonoBehaviour {
                 else if (Hearse && !Keys.Contains("Hearse"))  Keys.Add("Hearse");
                 else if (!Hearse && Keys.Contains("Hearse"))  Keys.Remove("Hearse"); 
 
-                else if (IceCream && !Keys.Contains("Ice Cream"))  Keys.Add("Ice Cream");
-                else if (!IceCream && Keys.Contains("Ice Cream"))  Keys.Remove("Ice Cream"); 
+                else if (IceCream && !Keys.Contains("IceCream"))  Keys.Add("IceCream");
+                else if (!IceCream && Keys.Contains("IceCream"))  Keys.Remove("IceCream"); 
 
-                else if (policeCar && !Keys.Contains("Police Car"))  Keys.Add("Police Car");
-                else if (!policeCar && Keys.Contains("Police Car"))  Keys.Remove("Police Car"); 
+                else if (policeCar && !Keys.Contains("PoliceCar"))  Keys.Add("PoliceCar");
+                else if (!policeCar && Keys.Contains("PoliceCar"))  Keys.Remove("PoliceCar"); 
             }
 
             if (GUI.Button(new Rect(offset, 550, GUI.skin.button.fixedWidth, 50), "Purchase")){

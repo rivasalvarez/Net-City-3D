@@ -40,6 +40,8 @@ public class gameManager : MonoBehaviour {
 
 	bool levelLoaded; // This is used to tell the different tutorial that a profile has been loaded
 
+    AudioSource Background;
+
 	// Function that makes sure the script that the object is attached to stays alive
 	void Awake(){
 		// Don't destroy this object, self explanatory
@@ -55,6 +57,11 @@ public class gameManager : MonoBehaviour {
 	 */ 
 	void Start () {
         cash = 300;
+
+        Background = gameObject.AddComponent<AudioSource>();
+        Background.clip = Resources.Load("Audio/Background") as AudioClip;
+        Background.loop = true;
+        Background.Play();
 
 		colorArray = new Color[4];
 
@@ -78,10 +85,10 @@ public class gameManager : MonoBehaviour {
 		carPrefabDict.Add(7,"Prefabs/Truck");
 
 		carTypeDict.Add(0,"Ambulance");
-		carTypeDict.Add(1,"Fire Truck");
+		carTypeDict.Add(1,"FireTruck");
 		carTypeDict.Add(2,"Hearse");
-		carTypeDict.Add(3,"Ice Cream");
-		carTypeDict.Add(4,"Police Car");
+		carTypeDict.Add(3,"IceCream");
+		carTypeDict.Add(4,"PoliceCar");
 		carTypeDict.Add(5,"Tanker");
 		carTypeDict.Add(6,"Taxi");
 		carTypeDict.Add(7,"Truck");
