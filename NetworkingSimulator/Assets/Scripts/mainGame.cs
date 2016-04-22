@@ -28,7 +28,8 @@ public class mainGame : MonoBehaviour {
 	int highestHP = 0;
 	float moneyTimer = 60;
 	float moneyTimerReset = 60;
-	Dictionary<string,int> moneyHistory = new Dictionary<string,int>();
+    Dictionary<string, int> moneyHistory = new Dictionary<string, int>();
+    public List<Building> buildings = new List<Building>();
 
 	// Use this for initialization
 	void Start () {
