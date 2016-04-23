@@ -23,21 +23,19 @@ public class Building : MonoBehaviour {
 	}
 
     void OnCollisionEnter(Collision col) {
-
+        int amount = 300;
         if ( col.gameObject.tag == "car" ) {
             Car colCar = col.gameObject.GetComponent<Car>();
 
             if (badCars.Contains(colCar.carTypeString)) {
+                badNumberCars++;
                 print("That's a Bad Car!!!!!!!");
-
-
+                amount = amount - (100 * badNumberCars);
+                print(amount);
             }
 
-
-
-
             Destroy(col.gameObject);
-            gameMgr.cash += 300;
+            gameMgr.cash += amount;
         } 
     }
 
