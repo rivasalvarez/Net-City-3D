@@ -17,8 +17,9 @@ public class gameManager : MonoBehaviour {
 	public Dictionary<string, int> carMoneyDict = new Dictionary<string, int>();
 
     // Car Spawn obj, pos, timer, type
-	Vector3 carStartPos = new Vector3 (157f, 0.6f, 0f);
+	public Vector3[] carStartPosArray;
 	float timer = 10;
+	public int carStartIndex;
 	public int carType;
     public Color[] colorArray;
 
@@ -62,6 +63,12 @@ public class gameManager : MonoBehaviour {
         Background.clip = Resources.Load("Audio/Background") as AudioClip;
         Background.loop = true;
         Background.Play();
+
+		carStartPosArray = new Vector3[3];
+		carStartPosArray[0] = new Vector3 (157f, 0.6f, 0f);
+		carStartPosArray[1] = new Vector3 (0f, 0.6f, 137.7f);
+		carStartPosArray[2] = new Vector3 (300f, 0.6f, 152.1f);
+
 
 		colorArray = new Color[4];
 
@@ -114,7 +121,8 @@ public class gameManager : MonoBehaviour {
             //reset timer, random type, and spawn car
 			timer = UnityEngine.Random.Range(3,9);
 			carType = UnityEngine.Random.Range(0,8);
-            Instantiate(Resources.Load(carPrefabDict[carType]) as GameObject, carStartPos, Quaternion.identity);
+			carStartIndex= UnityEngine.Random.Range(0,3);
+            Instantiate(Resources.Load(carPrefabDict[carType]) as GameObject, carStartPosArray[carStartIndex], Quaternion.identity);
             count++;
 		}
 	}

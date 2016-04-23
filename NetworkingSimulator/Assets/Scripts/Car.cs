@@ -27,7 +27,16 @@ public class Car : MonoBehaviour {
         gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();	
 
 		//Random Path for now
-		route = Random.Range(0,7);
+		if (gameMgr.carStartIndex == 0) {
+			route = Random.Range (0, 7);
+		} 
+		else if (gameMgr.carStartIndex == 1) {
+			route = Random.Range (7, 14);
+		} 
+		else {
+			route = Random.Range(14,21);
+		}
+
 		carColor = Random.Range(0,4);
 
 		carTypeString = gameMgr.carTypeDict[gameMgr.carType];
@@ -67,7 +76,7 @@ public class Car : MonoBehaviour {
 	void setWavePoints(int ro){
   
 		switch( ro ){
-
+			//startPos0
             case 0:
                  wayPointList = new Transform[4];
   			     wayPointList[0] = GameObject.Find ("WayPoint1").transform;
@@ -101,14 +110,14 @@ public class Car : MonoBehaviour {
  	    	case 4:
  		    	wayPointList = new Transform[2];
  		    	wayPointList[0] = GameObject.Find ("WayPoint1").transform;
- 			    wayPointList[1] = GameObject.Find ("PharmacyPoint").transform;
+ 			    wayPointList[1] = GameObject.Find ("PetrolPoint").transform;
                 break;
   
  	    	case 5:
  		    	wayPointList = new Transform[4];
  		    	wayPointList[0] = GameObject.Find ("WayPoint1").transform;
  		    	wayPointList[1] = GameObject.Find ("WayPoint5").transform;
- 		    	wayPointList[2] = GameObject.Find ("WayPoint6").transform;
+ 		    	wayPointList[2] = GameObject.Find ("WayPoint16").transform;
  		    	wayPointList[3] = GameObject.Find ("SchoolPoint").transform;
  		    	break;
  
@@ -119,6 +128,130 @@ public class Car : MonoBehaviour {
  		    	wayPointList[2] = GameObject.Find ("WayPoint14").transform;
  		    	wayPointList[3] = GameObject.Find ("HospitalPoint").transform;
                 break;
+			//startPos1
+			case 7:
+				wayPointList = new Transform[5];
+				wayPointList[0] = GameObject.Find ("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint18").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint19").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint20").transform;
+				wayPointList[4] = GameObject.Find ("BankPoint2").transform;
+				break;
+
+			case 8:
+				wayPointList = new Transform[3];
+				wayPointList[0] = GameObject.Find("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find("WayPoint18").transform;
+				wayPointList[2] = GameObject.Find("HousePoint2").transform;
+				break;
+
+			case 9:
+				wayPointList = new Transform[6];
+				wayPointList[0] = GameObject.Find ("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint23").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint24").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint25").transform;
+				wayPointList[4] = GameObject.Find ("WayPoint26").transform;
+				wayPointList[5] = GameObject.Find ("PolicePoint").transform;
+				break;
+				
+			case 10:
+				wayPointList = new Transform[6];
+				wayPointList[0] = GameObject.Find ("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint23").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint24").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint25").transform;
+				wayPointList[4] = GameObject.Find ("WayPoint27").transform;
+				wayPointList[5] = GameObject.Find ("StorePoint2").transform;
+				break;
+				
+			case 11:
+				wayPointList = new Transform[5];
+				wayPointList[0] = GameObject.Find ("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint23").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint24").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint29").transform;
+				wayPointList[4] = GameObject.Find ("PetrolPoint2").transform;
+				break;
+				
+			case 12:
+				wayPointList = new Transform[3];
+				wayPointList[0] = GameObject.Find ("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint23").transform;
+				wayPointList[2] = GameObject.Find ("SchoolPoint2").transform;
+				break;
+				
+			case 13:
+				wayPointList = new Transform[5];
+				wayPointList[0] = GameObject.Find ("WayPoint17").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint23").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint24").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint32").transform;
+				wayPointList[4] = GameObject.Find ("HospitalPoint").transform;
+				break;
+
+			//startPos2
+			case 14:
+				wayPointList = new Transform[3];
+				wayPointList[0] = GameObject.Find ("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint34").transform;
+				wayPointList[2] = GameObject.Find ("BankPoint").transform;
+				break;
+				
+			case 15:
+				wayPointList = new Transform[5];
+				wayPointList[0] = GameObject.Find("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find("WayPoint34").transform;
+				wayPointList[2] = GameObject.Find("WayPoint35").transform;
+				wayPointList[3] = GameObject.Find("WayPoint36").transform;
+				wayPointList[4] = GameObject.Find("HousePoint").transform;
+				break;
+				
+			case 16:
+				wayPointList = new Transform[6];
+				wayPointList[0] = GameObject.Find ("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint37").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint38").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint39").transform;
+				wayPointList[4] = GameObject.Find ("WayPoint41").transform;
+				wayPointList[5] = GameObject.Find ("PolicePoint2").transform;
+				break;
+				
+			case 17:
+				wayPointList = new Transform[6];
+				wayPointList[0] = GameObject.Find ("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint37").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint38").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint39").transform;
+				wayPointList[4] = GameObject.Find ("WayPoint40").transform;
+				wayPointList[5] = GameObject.Find ("StorePoint2").transform;
+				break;
+				
+			case 18:
+				wayPointList = new Transform[5];
+				wayPointList[0] = GameObject.Find ("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint37").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint38").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint43").transform;
+				wayPointList[4] = GameObject.Find ("PetrolPoint").transform;
+				break;
+				
+			case 19:
+				wayPointList = new Transform[5];
+				wayPointList[0] = GameObject.Find ("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint37").transform;
+				wayPointList[2] = GameObject.Find ("WayPoint38").transform;
+				wayPointList[3] = GameObject.Find ("WayPoint44").transform;	
+				wayPointList[4] = GameObject.Find ("SchoolPoint").transform;
+				break;
+				
+			case 20:
+				wayPointList = new Transform[3];
+				wayPointList[0] = GameObject.Find ("WayPoint33").transform;
+				wayPointList[1] = GameObject.Find ("WayPoint37").transform;
+				wayPointList[2] = GameObject.Find ("HospitalPoint2").transform;
+				break;
+
 
 		}
 
