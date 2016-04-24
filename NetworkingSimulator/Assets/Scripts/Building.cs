@@ -91,10 +91,10 @@ public class Building : MonoBehaviour {
 	}
 
     void OnCollisionEnter(Collision col) {
-
+		print ("this is working");
         if ( col.gameObject.tag == "car" ) {
             Car colCar = col.gameObject.GetComponent<Car>();
-
+			print ("this is not working");
 			if (badCars.Contains (colCar.carTypeString)) {
 				print ("That's a Bad Car!!!!!!!" + colCar.carTypeString);
 			}	
@@ -113,5 +113,12 @@ public class Building : MonoBehaviour {
             gameMgr.cash += 300;
         } 
     }
+
+	public void setBuildingBools(bool r, bool g, bool b, bool y, bool s, bool m, bool l, bool a, bool f, bool ta, bool tr, bool h, bool p, bool i) {
+		red = r; blue = b; yellow = y; green = g;
+		small = s; median = m; large = l;
+		ambulance = a; fireTruck = f; Tanker = ta; Truck = tr;
+		Hearse = h; policeCar = p; IceCream = i;
+	}
 
 }
