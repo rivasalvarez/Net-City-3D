@@ -13,6 +13,33 @@ public class newUserScript : MonoBehaviour {
 	// This is if the user is the professor and they want to change the values for soemthings
 	bool professor;
 
+	// These are the values for the car color that might be bad based on the professor preference
+	public bool red;
+	public bool blue;
+	public bool green;
+	public bool yellow;
+
+	// These are the values for the car size that might be bad based on the professor preference	\
+	public bool large;
+	public bool median;
+	public bool small;
+
+	// Bool if the bad car upgrades have been chosen
+	public bool badCarsChosen;
+
+	// Bool if the good car upgrades have been chosen
+	public bool goodCarsChosen;
+
+	// These variables are used for toggling what the professor wants in terms of the type of car it is
+	public bool ambulance;
+	public bool fireTruck;
+	public bool Tanker;
+	public bool Truck;
+	public bool Hearse;
+	public bool IceCream;
+	public bool policeCar;
+	public bool Taxi;
+
 	// Use this for initialization
 	void Start () {
 		//assigns playerManager which is not destroyed throughout scenes
@@ -107,7 +134,33 @@ public class newUserScript : MonoBehaviour {
 			}
 		} 
 	else {
-			GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 195, 190, 60), "Username is already taken");
+			int upgradeOneGUIRow =  75;
+			int upgradeTwoGUIRow = 345;
+			int upgradeThreeGUIRow  = 615;
+
+			int upgradeOneGUICol = 50;
+			int upgradeTwoGUICol = 250;
+			int upgradeThreeGUICol = 450;
+
+			GUI.skin = Resources.Load ("Buttons/ShopSkin") as GUISkin;
+			GUIStyle guiStyle = GUI.skin.GetStyle ("Shop");
+
+
+			int offset = 20;
+			float Twidth = GUI.skin.toggle.fixedWidth;
+			float Theight = 30f;
+
+
+			// Otherwise, place an interactable GUI button onto the screen called OpenShop
+			GUI.BeginGroup(new Rect((Screen.width/2)-400, Screen.height/2 -300, 800, 750));
+
+
+				GUI.Box (new Rect (0, 0, 0, 0), "Bad Car Options");
+
+				red = GUI.Toggle (new Rect (offset, 80, Twidth, Theight), red, "Red");
+				green = GUI.Toggle (new Rect (offset, 155, Twidth, Theight), green, "Green");
+				blue = GUI.Toggle (new Rect (offset, 230, Twidth, Theight), blue, "Blue");
+				yellow = GUI.Toggle (new Rect (offset, 305, Twidth, Theight), yellow, "Yellow");
 
 
 		}
