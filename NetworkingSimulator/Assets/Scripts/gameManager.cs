@@ -41,7 +41,32 @@ public class gameManager : MonoBehaviour {
 
 	bool levelLoaded; // This is used to tell the different tutorial that a profile has been loaded
 
+	// These are the values for the car color that might be bad based on the professor preference
+	public bool red;
+	public bool blue;
+	public bool green;
+	public bool yellow;
+
+	// These are the values for the car size that might be bad based on the professor preference	\
+	public bool large;
+	public bool median;
+	public bool small;
+
+	// Bool if the bad car upgrades have been chosen
+	public bool badCarsChosen;
+
+	// These variables are used for toggling what the professor wants in terms of the type of car it is
+	public bool ambulance;
+	public bool fireTruck;
+	public bool Tanker;
+	public bool Truck;
+	public bool Hearse;
+	public bool IceCream;
+	public bool policeCar;
+	public bool Taxi;
+
     AudioSource Background;
+
 
 	// Function that makes sure the script that the object is attached to stays alive
 	void Awake(){
@@ -196,4 +221,11 @@ public class gameManager : MonoBehaviour {
 		} 
 		return false;
 	}
-}
+		
+	// Set the professor information bools
+	public void setGameMangerBools(bool r, bool g, bool b, bool y, bool s, bool m, bool l, bool a, bool f, bool ta, bool tr, bool h, bool p, bool i) {
+		red = r; blue = b; yellow = y; green = g;
+		small = s; median = m; large = l;
+		ambulance = a; fireTruck = f; Tanker = ta; Truck = tr;
+		Hearse = h; policeCar = p; IceCream = i;
+	}}

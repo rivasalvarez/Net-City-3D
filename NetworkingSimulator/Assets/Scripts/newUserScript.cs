@@ -27,9 +27,6 @@ public class newUserScript : MonoBehaviour {
 	// Bool if the bad car upgrades have been chosen
 	public bool badCarsChosen;
 
-	// Bool if the good car upgrades have been chosen
-	public bool goodCarsChosen;
-
 	// These variables are used for toggling what the professor wants in terms of the type of car it is
 	public bool ambulance;
 	public bool fireTruck;
@@ -155,14 +152,49 @@ public class newUserScript : MonoBehaviour {
 			GUI.BeginGroup(new Rect((Screen.width/2)-400, Screen.height/2 -300, 800, 750));
 
 
-				GUI.Box (new Rect (0, 0, 0, 0), "Bad Car Options");
+			GUI.Box (new Rect (0, 0, 0, 0), "Bad Car Options");
 
-				red = GUI.Toggle (new Rect (offset, 80, Twidth, Theight), red, "Red");
-				green = GUI.Toggle (new Rect (offset, 155, Twidth, Theight), green, "Green");
-				blue = GUI.Toggle (new Rect (offset, 230, Twidth, Theight), blue, "Blue");
-				yellow = GUI.Toggle (new Rect (offset, 305, Twidth, Theight), yellow, "Yellow");
+			ambulance = GUI.Toggle(new Rect(Twidth * 2 + offset, 140, Twidth, Theight), ambulance, "Ambulance");
+			fireTruck = GUI.Toggle(new Rect(Twidth * 2 + offset, 215, Twidth, Theight), fireTruck, "Fire Truck");
+			Tanker = GUI.Toggle(new Rect(Twidth * 2 + offset, 290, Twidth, Theight), Tanker, "Oil Truck");
+			Truck = GUI.Toggle(new Rect(Twidth * 2 + offset, 365, Twidth, Theight), Truck, "Truck");
+			Hearse = GUI.Toggle(new Rect(Twidth * 2 + offset, 440, Twidth, Theight), Hearse, "Hearse");
+			IceCream = GUI.Toggle(new Rect(Twidth * 2 + offset, 515, Twidth, Theight), IceCream, "Ice Cream");
+			policeCar = GUI.Toggle(new Rect(Twidth * 2 + offset, 590, Twidth, Theight), policeCar, "Police Car");
 
+			small = GUI.Toggle(new Rect(Twidth + offset, 140, Twidth, Theight), small, "Small");
+			median = GUI.Toggle(new Rect(Twidth + offset, 215, Twidth, Theight), median, "Medium");
+			large = GUI.Toggle(new Rect(Twidth + offset, 290, Twidth, Theight), large, "Large");
+
+			red = GUI.Toggle (new Rect (offset, 80, Twidth, Theight), red, "Red");
+			green = GUI.Toggle (new Rect (offset, 155, Twidth, Theight), green, "Green");
+			blue = GUI.Toggle (new Rect (offset, 230, Twidth, Theight), blue, "Blue");
+			yellow = GUI.Toggle (new Rect (offset, 305, Twidth, Theight), yellow, "Yellow");
+
+
+			if (GUI.Button(new Rect(offset, 550, GUI.skin.button.fixedWidth, 50), "Change")){
+				// Send the information to the game manager
+				playerScript.setGameMangerBools (red, green, blue, yellow, small, median, large, ambulance, fireTruck, Tanker, Truck, Hearse, IceCream, policeCar);
+
+				// Clear the booleans
+				clear();
+
+				// Set professor to false so the normal gui layout appears
+				professor = false;
+			}
+
+			if (GUI.Button(new Rect(offset, 650, GUI.skin.button.fixedWidth, 50), "Cancel Change")){
+				clear();
+				professor = false;
+			}
+			GUI.EndGroup ();	
 
 		}
 	}
+
+	// This function is used to clear all of the boolean variables to false
+	void clear(){
+		red = green = blue = yellow = small = median = large = ambulance = fireTruck = Tanker = Truck = Hearse = IceCream = policeCar = false;
+	}
+
 }
