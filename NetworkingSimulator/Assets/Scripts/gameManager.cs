@@ -230,4 +230,6 @@ public class gameManager : MonoBehaviour {
 		Hearse = h; policeCar = p; IceCream = i;
 
 	}
+
+
 }

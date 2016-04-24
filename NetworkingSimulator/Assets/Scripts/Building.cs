@@ -40,8 +40,22 @@ public class Building : MonoBehaviour {
 	void Start () {
 
 		gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();
+		red = gameMgr.red;
+		blue = gameMgr.blue;
+		green = gameMgr.green;
 
+		large = gameMgr.large;
+		median = gameMgr.median;
+		small = gameMgr.small;
 
+		ambulance = gameMgr.ambulance;
+		fireTruck = gameMgr.fireTruck;
+		Tanker = gameMgr.Tanker;
+		Truck = gameMgr.Truck;
+		Hearse = gameMgr.Hearse;
+		IceCream = gameMgr.IceCream;
+		policeCar = gameMgr.policeCar;
+		Taxi = gameMgr.Taxi;
 	}
 	
 	// Update is called once per frame
@@ -91,10 +105,9 @@ public class Building : MonoBehaviour {
 	}
 
     void OnCollisionEnter(Collision col) {
-		print ("this is working");
         if ( col.gameObject.tag == "car" ) {
+			print (red);
             Car colCar = col.gameObject.GetComponent<Car>();
-			print ("this is not working");
 			if (badCars.Contains (colCar.carTypeString)) {
 				print ("That's a Bad Car!!!!!!!" + colCar.carTypeString);
 			}	
