@@ -228,4 +228,6 @@ public class gameManager : MonoBehaviour {
 		small = s; median = m; large = l;
 		ambulance = a; fireTruck = f; Tanker = ta; Truck = tr;
 		Hearse = h; policeCar = p; IceCream = i;
-	}}
+
+	}
+}
