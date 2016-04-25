@@ -115,9 +115,9 @@ public class HoneyPot : MonoBehaviour {
         fout.WriteLine("Log for HoneyPot {0} (Level {1}):", PID, level);
 
         foreach (KeyValuePair<int, Car> kvp in carPIDS){
-
+            string temp;/*
             if (level == 1){
-                fout.WriteLine("Car Color: {0},  Time: {1}", kvp.Value.colorString, kvp.Value.honeyPotIn);
+                temp = "Car Color: " + kvp.Value.colorString  Time: {1}", , kvp.Value.honeyPotIn);
             }
 
             if (level == 2){
@@ -126,10 +126,8 @@ public class HoneyPot : MonoBehaviour {
 
             if (level == 3){
                 fout.WriteLine("Car Color: {0}, Car Size: {1}, Car Type: {2}, Time: {3}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.carTypeString, kvp.Value.honeyPotIn);
-            }
+            } */
         }
-            fout.WriteLine();
-            fout.WriteLine();
     }
 
     void OnGUI(){

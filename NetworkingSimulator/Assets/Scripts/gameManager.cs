@@ -125,17 +125,14 @@ public class gameManager : MonoBehaviour {
             Instantiate(Resources.Load(carPrefabDict[carType]) as GameObject, carStartPosArray[carStartIndex], Quaternion.identity);
             count++;
 		}
+
 	}
 
 
-		/**
-	 * Function to load the file from the computer based on the user
-	 * @param: A string which is the name of the user
-	 * @pre: Has to have a name of a user.
-	 * @post: Checks to see if profile exist, and loads the data specific to the save file
-	 * @return: returns true if successful, otherwise, reads out false.
-	 * @algorithm: Checks to see if the user's file exist, if so, read in the data accurately, and return true. Otherwise, return false, meaning the user does not exist in the current computer
-	 */ 
+    void OnGUI() {
+
+    }
+
 	// Function that saves and loads the user information to a file
 	public bool loadSave(string name){
 
@@ -143,14 +140,6 @@ public class gameManager : MonoBehaviour {
 
 	}
 
-	/**
-	 * Function to save the users data to a file based on the users name
-	 * @param: None
-	 * @pre: Has to have accurate data and syntax?
-	 * @post: Saves accurate data to a file
-	 * @return: returns true if successful, otherwise, reads out false.
-	 * @algorithm: Called from the gui save button in which it gets the username of the player after being set somewhere else. Opens the file, writes the different things for the different levels
-	 */ 
 	public bool saveData(){
         return true;
 	}
@@ -187,8 +176,7 @@ public class gameManager : MonoBehaviour {
 	}
 
 	//will check if the user exists
-	public bool checkForUser(string name)
-	{
+	public bool checkForUser(string name){
 		fileName = name + ".txt";
 
 		if (File.Exists (fileName)) {

@@ -31,9 +31,13 @@ public class mainGame : MonoBehaviour {
     Dictionary<string, int> moneyHistory = new Dictionary<string, int>();
     public List<Building> buildings = new List<Building>();
 
+
+    private bool endOfDay = false;
+    private float scrollValue;
+    public Vector2 scrollPos = Vector2.zero;
+
 	// Use this for initialization
 	void Start () {
-
 		// This gets the component known as gameManager and sets it to the variable
 		gameMgr = GameObject.Find ("GameObject").GetComponent<gameManager> ();
 
@@ -48,55 +52,41 @@ public class mainGame : MonoBehaviour {
 		boxInformation.normal.textColor = Color.green;
 	}
 	// Update is called once per frame
-	void Update () {
-		  // This is the timer, calculates the minutes, seconds, and the overall time.
-	      timer -= Time.deltaTime;
-		     if (gameMgr.honeyCount != 0) 
-			    moneyTimer -= Time.deltaTime;
-		
-		  mins = Mathf.Floor(timer / 60).ToString("00");
-		  secs = Mathf.Floor(timer % 60).ToString("00");
-		  time = mins + ":" + secs;
+    void Update() {
+        // This is the timer, calculates the minutes, seconds, and the overall time.
+        timer -= Time.deltaTime;
+        if (gameMgr.honeyCount != 0)
+            moneyTimer -= Time.deltaTime;
 
-		     if (moneyTimer < 0 && gameMgr.honeyCount != 0) {
-			    moneyTimer = moneyTimerReset;
-			    moneyHistory.Add (time, gameMgr.cash);
-		     }
+        mins = Mathf.Floor(timer / 60).ToString("00");
+        secs = Mathf.Floor(timer % 60).ToString("00");
+        time = mins + ":" + secs;
 
-             if (timer < 0){ 
-                string  fileName = "HoneyPot Log.txt";
-                StreamWriter sr = File.CreateText(fileName);
-                timer = 60;
+        if (moneyTimer < 0 && gameMgr.honeyCount != 0) {
+            moneyTimer = moneyTimerReset;
+            moneyHistory.Add(time, gameMgr.cash);
+        }
 
-			        foreach (KeyValuePair<string, int> kvp in moneyHistory) 
-				        sr.WriteLine("Money Amount: {0},  Time: {1}", kvp.Value, kvp.Key);
-			
-			    moneyHistory.Clear ();
-                sr.WriteLine();
+        if (timer < 0) {
+            endOfDay = true;
+            Time.timeScale = 0;
+        }
 
-                    foreach (var hp in gameMgr.honeyPots) {
-                        hp.writeToLog(sr); 
-                        hp.carPIDS.Clear();
-                    }
+        if (Input.GetKey(KeyCode.Alpha0))
+            Time.timeScale = 0;
 
-                sr.Close();
-              }
+        if (Input.GetKey(KeyCode.Alpha1))
+            Time.timeScale = 1;
 
-             if (Input.GetKey(KeyCode.Alpha0)) 
-                 Time.timeScale = 0;
+        if (Input.GetKey(KeyCode.Alpha2))
+            Time.timeScale = 2;
 
-             if (Input.GetKey(KeyCode.Alpha1))
-                 Time.timeScale = 1;
+        if (Input.GetKey(KeyCode.Alpha3))
+            Time.timeScale = 3;
 
-             if (Input.GetKey(KeyCode.Alpha2))
-                 Time.timeScale = 2;
-
-             if (Input.GetKey(KeyCode.Alpha3))
-                 Time.timeScale = 3;
-
-             if (Input.GetKey(KeyCode.Alpha4))
-                 Time.timeScale = 4;
-			}
+        if (Input.GetKey(KeyCode.Alpha4))
+            Time.timeScale = 4;
+    }
 
 	/**
 	 * Function to calculate all of the GUI stuff for the main portion of the game
@@ -107,10 +97,13 @@ public class mainGame : MonoBehaviour {
 	 * 		If user presses Open Shop, the call the function to open up the menu
 	 * @algorithm: Checks to see if the user clicked on the gui capabilities in the menu, if so, it launches whatever option that they clicked on 
 	 */ 
+
 	void OnGUI(){
 			GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 			GUIStyle guiStyle = GUI.skin.GetStyle ("Time");
 			GUIStyle guiCash = GUI.skin.GetStyle ("Money");
+
+
 
 			Car tempScript;
 			// Create a ray object, and have it trace the mousePosition from top down
@@ -135,7 +128,6 @@ public class mainGame : MonoBehaviour {
 					} 	
 				
 			}
-	
 
 		// This is going to create a label with a rectangle size with the appropriate guiStyle along with the current time after retreiving it from update
 		GUI.Label(new Rect((Screen.width / 2)-guiStyle.fixedWidth, 5, 150, 20), time, guiStyle);
@@ -144,6 +136,41 @@ public class mainGame : MonoBehaviour {
         GUI.Label(new Rect(Screen.width/2, 5, 10+moneyString.Length * 23, 20), moneyString, guiCash);
  
 		// This outside if statement checks for if the GUI buttons should be shown onto the screen or not.
+
+        if (endOfDay) {
+
+            scrollPos = GUI.BeginScrollView(new Rect(200, 400, 300, 300), scrollPos, new Rect(0, 0, 190, 200));
+            GUI.Label(new Rect(0, 0, 100, 100), "HoneyPot Log", boxInformation);
+            timer = 60;
+
+            int ypos = 20;
+            foreach (KeyValuePair<string, int> kvp in moneyHistory) {
+                string temp = "Money Amount: " + kvp.Value + "  Time: " + kvp.Key;
+                GUI.Label(new Rect(0, ypos, 100, 100), temp, boxInformation);
+                ypos += 15;
+            }
+            moneyHistory.Clear();
+
+            foreach (var hp in gameMgr.honeyPots) {
+                //hp.writeToLog(sr);
+                hp.carPIDS.Clear();
+            } 
+
+
+
+
+
+
+            GUI.EndScrollView();
+
+            if (GUI.Button(new Rect(540, 125, 300, 50), "Exit")) {
+                print("Exit hit");
+                endOfDay = false;
+                Time.timeScale = 1;
+            }
+        }
+
+
 		// This checks if the security button was not pressed
 		if ( (shopScript.getShopOpen() == false) && (shopScript.getSecurityType() == " ")){
 			// This checks if the showSettings button was not pushed
@@ -309,8 +336,6 @@ public class mainGame : MonoBehaviour {
                     }
                 }
         }
-
-
 
 		if (shopScript.getShopOpen () == true) {
 			Time.timeScale = 0;
