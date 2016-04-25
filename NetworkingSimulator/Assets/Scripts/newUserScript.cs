@@ -13,12 +13,38 @@ public class newUserScript : MonoBehaviour {
 	// This is if the user is the professor and they want to change the values for soemthings
 	bool professor;
 
+	// These are the values for the car color that might be bad based on the professor preference
+	public bool red;
+	public bool blue;
+	public bool green;
+	public bool yellow;
+
+	// These are the values for the car size that might be bad based on the professor preference	\
+	public bool large;
+	public bool median;
+	public bool small;
+
+	// Bool if the bad car upgrades have been chosen
+	public bool badCarsChosen;
+
+	// These variables are used for toggling what the professor wants in terms of the type of car it is
+	public bool ambulance;
+	public bool fireTruck;
+	public bool Tanker;
+	public bool Truck;
+	public bool Hearse;
+	public bool IceCream;
+	public bool policeCar;
+	public bool Taxi;
+
 	// Use this for initialization
 	void Start () {
 		//assigns playerManager which is not destroyed throughout scenes
 		playerMemory = GameObject.Find ("GameObject");
 		playerScript = playerMemory.GetComponent<gameManager> ();	
 		professor = false;
+
+	
 	}
 	
 	// Update is called once per frame
@@ -107,9 +133,70 @@ public class newUserScript : MonoBehaviour {
 			}
 		} 
 	else {
-			GUI.Label (new Rect (Screen.width / 2, (Screen.height / 2) + 195, 190, 60), "Username is already taken");
+			int upgradeOneGUIRow =  75;
+			int upgradeTwoGUIRow = 345;
+			int upgradeThreeGUIRow  = 615;
 
+			int upgradeOneGUICol = 50;
+			int upgradeTwoGUICol = 250;
+			int upgradeThreeGUICol = 450;
+
+			GUI.skin = Resources.Load ("Buttons/ShopSkin") as GUISkin;
+			GUIStyle guiStyle = GUI.skin.GetStyle ("Shop");
+
+
+			int offset = 20;
+			float Twidth = GUI.skin.toggle.fixedWidth;
+			float Theight = 30f;
+
+
+			// Otherwise, place an interactable GUI button onto the screen called OpenShop
+			GUI.BeginGroup(new Rect((Screen.width/2)-400, Screen.height/2 -300, 800, 750));
+
+
+			GUI.Box (new Rect (0, 0, 0, 0), "Bad Car Options");
+
+			ambulance = GUI.Toggle(new Rect(Twidth * 2 + offset, 140, Twidth, Theight), ambulance, "Ambulance");
+			fireTruck = GUI.Toggle(new Rect(Twidth * 2 + offset, 215, Twidth, Theight), fireTruck, "Fire Truck");
+			Tanker = GUI.Toggle(new Rect(Twidth * 2 + offset, 290, Twidth, Theight), Tanker, "Oil Truck");
+			Truck = GUI.Toggle(new Rect(Twidth * 2 + offset, 365, Twidth, Theight), Truck, "Truck");
+			Hearse = GUI.Toggle(new Rect(Twidth * 2 + offset, 440, Twidth, Theight), Hearse, "Hearse");
+			IceCream = GUI.Toggle(new Rect(Twidth * 2 + offset, 515, Twidth, Theight), IceCream, "Ice Cream");
+			policeCar = GUI.Toggle(new Rect(Twidth * 2 + offset, 590, Twidth, Theight), policeCar, "Police Car");
+
+			small = GUI.Toggle(new Rect(Twidth + offset, 140, Twidth, Theight), small, "Small");
+			median = GUI.Toggle(new Rect(Twidth + offset, 215, Twidth, Theight), median, "Medium");
+			large = GUI.Toggle(new Rect(Twidth + offset, 290, Twidth, Theight), large, "Large");
+
+			red = GUI.Toggle (new Rect (offset, 80, Twidth, Theight), red, "Red");
+			green = GUI.Toggle (new Rect (offset, 155, Twidth, Theight), green, "Green");
+			blue = GUI.Toggle (new Rect (offset, 230, Twidth, Theight), blue, "Blue");
+			yellow = GUI.Toggle (new Rect (offset, 305, Twidth, Theight), yellow, "Yellow");
+
+
+			if (GUI.Button(new Rect(offset, 550, GUI.skin.button.fixedWidth, 50), "Change")){
+				// Send the information to the game manager
+				playerScript.setGameMangerBools (red, green, blue, yellow, small, median, large, ambulance, fireTruck, Tanker, Truck, Hearse, IceCream, policeCar);
+
+				// Clear the booleans
+				clear();
+
+				// Set professor to false so the normal gui layout appears
+				professor = false;
+			}
+
+			if (GUI.Button(new Rect(offset, 650, GUI.skin.button.fixedWidth, 50), "Cancel Change")){
+				clear();
+				professor = false;
+			}
+			GUI.EndGroup ();	
 
 		}
 	}
+
+	// This function is used to clear all of the boolean variables to false
+	void clear(){
+		red = green = blue = yellow = small = median = large = ambulance = fireTruck = Tanker = Truck = Hearse = IceCream = policeCar = false;
+	}
+
 }
