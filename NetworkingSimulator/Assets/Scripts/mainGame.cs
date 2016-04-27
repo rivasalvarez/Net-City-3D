@@ -139,7 +139,7 @@ public class mainGame : MonoBehaviour {
 
         if (endOfDay) {
 
-            scrollPos = GUI.BeginScrollView(new Rect(200, 400, 300, 300), scrollPos, new Rect(0, 0, 190, 200));
+            scrollPos = GUI.BeginScrollView(new Rect(200, 400, 300, 300), scrollPos, new Rect(0, 0, 190, 200),false,true);
             GUI.Label(new Rect(0, 0, 100, 100), "HoneyPot Log", boxInformation);
             timer = 60;
 
@@ -149,16 +149,14 @@ public class mainGame : MonoBehaviour {
                 GUI.Label(new Rect(0, ypos, 100, 100), temp, boxInformation);
                 ypos += 15;
             }
-            moneyHistory.Clear();
+
+
+            ypos += 15;
 
             foreach (var hp in gameMgr.honeyPots) {
-                //hp.writeToLog(sr);
-                hp.carPIDS.Clear();
-            } 
-
-
-
-
+                ypos = hp.writeToLog(boxInformation, ypos);
+                //hp.carPIDS.Clear();
+            }  
 
 
             GUI.EndScrollView();
@@ -167,6 +165,7 @@ public class mainGame : MonoBehaviour {
                 print("Exit hit");
                 endOfDay = false;
                 Time.timeScale = 1;
+                moneyHistory.Clear();
             }
         }
 

@@ -110,24 +110,30 @@ public class HoneyPot : MonoBehaviour {
       Hearse = h; policeCar = p; IceCream = i;
     }
 
-    public void writeToLog(StreamWriter fout){
+    public int writeToLog(GUIStyle gs, int pos){
 
-        fout.WriteLine("Log for HoneyPot {0} (Level {1}):", PID, level);
+        GUI.Label(new Rect(0, pos, 100, 100),"Log for HoneyPot " + PID + "(Level" + level + "):", gs);
+        pos += 15;
 
         foreach (KeyValuePair<int, Car> kvp in carPIDS){
-            string temp;/*
-            if (level == 1){
-                temp = "Car Color: " + kvp.Value.colorString  Time: {1}", , kvp.Value.honeyPotIn);
-            }
+            string temp = "";
 
-            if (level == 2){
-                fout.WriteLine("Car Color: {0}, Car Size: {1}, Time: {2}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.honeyPotIn);
-            }
+            if (level == 1)
+                temp = "Car Color: " + kvp.Value.colorString  + "Time: " + kvp.Value.honeyPotIn;
 
-            if (level == 3){
-                fout.WriteLine("Car Color: {0}, Car Size: {1}, Car Type: {2}, Time: {3}", kvp.Value.colorString, kvp.Value.sizeString, kvp.Value.carTypeString, kvp.Value.honeyPotIn);
-            } */
+            if (level == 2)
+                temp = "Car Color:" + kvp.Value.colorString + "Car Size: " + kvp.Value.sizeString + "Time: " + kvp.Value.honeyPotIn;
+            
+            if (level == 3)
+                temp = "Car Color: " + kvp.Value.colorString + "Car Size: " + kvp.Value.sizeString + "Car Type: " + kvp.Value.carTypeString + "Time: " + kvp.Value.honeyPotIn;
+
+            GUI.Label(new Rect(0, pos, 100, 100), temp, gs);
+            print(temp);
+
+            pos += 15;
         }
+        pos += 15;
+        return pos;
     }
 
     void OnGUI(){

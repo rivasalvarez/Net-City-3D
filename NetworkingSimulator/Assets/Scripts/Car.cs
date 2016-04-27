@@ -46,7 +46,8 @@ public class Car : MonoBehaviour {
 		setWavePoints (route);
 
         gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
-        //gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/IceCream") as Material;
+        if(gameObject.GetComponent<Car>().carTypeString == "Taxi")
+            gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/RedTaxi") as Material;
 	}
 	
 	// Update is called once per frame
