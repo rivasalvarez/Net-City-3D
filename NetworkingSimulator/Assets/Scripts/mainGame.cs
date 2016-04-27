@@ -10,6 +10,7 @@ public class mainGame : MonoBehaviour {
 	GUIStyle guiCash;
 	GUIStyle guiStyle;
 	GUIStyle boxInformation;
+    GUIStyle guiLog;
 
 	bool openingShop;  // This is a bool to open up the shop
 	public bool placingSecurity; // This is a bool to check for if placing security, this is ok
@@ -50,6 +51,10 @@ public class mainGame : MonoBehaviour {
 		boxInformation = new GUIStyle ();
 		boxInformation.fontSize = 18;
 		boxInformation.normal.textColor = Color.green;
+
+        guiLog = new GUIStyle();
+        guiLog.fontSize = 18;
+        guiLog.normal.textColor = Color.white;
 	}
 	// Update is called once per frame
     void Update() {
@@ -139,33 +144,40 @@ public class mainGame : MonoBehaviour {
 
         if (endOfDay) {
 
-            scrollPos = GUI.BeginScrollView(new Rect(200, 400, 300, 300), scrollPos, new Rect(0, 0, 190, 200),false,true);
-            GUI.Label(new Rect(0, 0, 100, 100), "HoneyPot Log", boxInformation);
+            int ySize = moneyHistory.Count + 1;
+
+            foreach (var hp in gameMgr.honeyPots)
+                ySize += hp.carPIDS.Count + 1;
+
+            ySize *= 17;
+
+            scrollPos = GUI.BeginScrollView(new Rect(Screen.width/2 - 300, 100, 600, 600), scrollPos, new Rect(0, 0, 300, ySize) );
+
+            GUI.Label(new Rect(0, 0, 100, 100), "HoneyPot Log", guiLog);
             timer = 60;
 
             int ypos = 20;
             foreach (KeyValuePair<string, int> kvp in moneyHistory) {
                 string temp = "Money Amount: " + kvp.Value + "  Time: " + kvp.Key;
-                GUI.Label(new Rect(0, ypos, 100, 100), temp, boxInformation);
+                GUI.Label(new Rect(0, ypos, 100, 100), temp, guiLog);
                 ypos += 15;
             }
 
 
             ypos += 15;
 
-            foreach (var hp in gameMgr.honeyPots) {
-                ypos = hp.writeToLog(boxInformation, ypos);
-                //hp.carPIDS.Clear();
-            }  
+            foreach (var hp in gameMgr.honeyPots)
+                ypos = hp.writeToLog(guiLog, ypos);
 
 
             GUI.EndScrollView();
 
-            if (GUI.Button(new Rect(540, 125, 300, 50), "Exit")) {
-                print("Exit hit");
+            if (GUI.Button(new Rect(Screen.width - GUI.skin.button.fixedWidth, Screen.height - GUI.skin.button.fixedHeight, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Exit")) {
                 endOfDay = false;
                 Time.timeScale = 1;
                 moneyHistory.Clear();
+                foreach (var hp in gameMgr.honeyPots) 
+                hp.carPIDS.Clear();
             }
         }
 

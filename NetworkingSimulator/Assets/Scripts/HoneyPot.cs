@@ -128,7 +128,6 @@ public class HoneyPot : MonoBehaviour {
                 temp = "Car Color: " + kvp.Value.colorString + "Car Size: " + kvp.Value.sizeString + "Car Type: " + kvp.Value.carTypeString + "Time: " + kvp.Value.honeyPotIn;
 
             GUI.Label(new Rect(0, pos, 100, 100), temp, gs);
-            print(temp);
 
             pos += 15;
         }
