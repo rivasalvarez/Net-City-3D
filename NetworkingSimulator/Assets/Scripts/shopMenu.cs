@@ -332,7 +332,7 @@ public class shopMenu : MonoBehaviour {
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button (new Rect (10, upgradeTwoGUICol + 128,GUI.skin.button.fixedWidth, 50), "HoneyPot One")) {
+				if (GUI.Button (new Rect (10, upgradeTwoGUICol + 128,GUI.skin.button.fixedWidth, 50), "Logger One")) {
 					securityType = "HL1";
 					upgradeChosen = true;
 				}
@@ -344,7 +344,7 @@ public class shopMenu : MonoBehaviour {
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button (new Rect (270, upgradeTwoGUICol + 128, GUI.skin.button.fixedWidth, 50), "HoneyPot Two")) {
+				if (GUI.Button (new Rect (270, upgradeTwoGUICol + 128, GUI.skin.button.fixedWidth, 50), "Logger Two")) {
 					securityType = "HL2";
 					upgradeChosen = true;
 				}
@@ -356,7 +356,7 @@ public class shopMenu : MonoBehaviour {
 				}
 
 				// This button is here for upgrading to security option 2
-				if (GUI.Button(new Rect(540, upgradeTwoGUICol + 128, GUI.skin.button.fixedWidth, 50), "HoneyPot Three")){
+				if (GUI.Button(new Rect(540, upgradeTwoGUICol + 128, GUI.skin.button.fixedWidth, 50), "Logger Three")){
                     securityType = "HL3";
                     upgradeChosen = true;
 				}

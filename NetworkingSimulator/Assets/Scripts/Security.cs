@@ -11,9 +11,6 @@ public class Security : MonoBehaviour {
 
 	public List<string> Keys = new List<string>();
 
-	// This is the type of security gate it is
-	public string securityType;
-
 	// This is the set of colors that it can detect
 	public bool red;
 	public bool green;
@@ -204,9 +201,6 @@ public class Security : MonoBehaviour {
 		Position = inVect;
 	}
 
-	public void setSecurityType(string st){
-		//securityType = st;
-	}
 
     public void setMenuBools(bool r, bool g, bool b, bool y, bool s, bool m, bool l, bool a, bool f, bool ta, bool tr, bool h, bool p, bool i) {
         red = r; blue = b; yellow = y; green = g;

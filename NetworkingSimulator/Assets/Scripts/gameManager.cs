@@ -223,8 +223,6 @@ public class gameManager : MonoBehaviour {
 				}
 
 				// Save all of the booleans
-				writer.WriteLine(gates.securityType);
-
 				writer.WriteLine(gates.red + " " + gates.green + " " + gates.blue + " " + gates.yellow);
 				writer.WriteLine(gates.small + " " + gates.medium + " " + gates.large);
 				writer.WriteLine(gates.ambulance + " " + gates.fireTruck + " " + gates.Tanker + " " + gates.Hearse + " " + gates.IceCream + " " + gates.policeCar + " " + gates.taxi);
