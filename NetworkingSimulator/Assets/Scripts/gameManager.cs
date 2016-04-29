@@ -177,11 +177,44 @@ public class gameManager : MonoBehaviour {
 			// Write that the honeyPot information is starting
 			writer.WriteLine("HoneyPots");
 
+
 			// Write how many honey pots were seen
 			writer.WriteLine(honeyPots.Count);
 			// Iterate through the list of honey pots and save its data
 			foreach (var honey in honeyPots) {
 				writer.WriteLine (honey.Position.x + " " + honey.Position.y + " " + honey.Position.z);
+
+				writer.WriteLine ("CarPids");
+				// This is looping through the set of car pids
+				foreach (var i in honey.carPIDS) {
+					writer.WriteLine( i.Key); 
+					writer.WriteLine(i.Value.colorString); 
+					writer.WriteLine(  i.Value.sizeString); 
+
+					writer.WriteLine(  i.Value.carTypeString);
+					writer.WriteLine(  i.Value.route);
+					writer.WriteLine(  i.Value.carColor);
+					writer.WriteLine(  i.Value.speed);
+					writer.WriteLine(  i.Value.carPID);						
+				}
+
+				writer.WriteLine ("Strings");
+				// This is looping through the list of strings
+				foreach (var i in honey.Keys) {
+					writer.WriteLine (i);
+				}
+
+				writer.WriteLine (honey.level + " " + honey.PID + " " + honey.upgrade);
+				writer.WriteLine (honey.red + " " + honey.blue + " " + honey.yellow + " " + honey.green);
+				writer.WriteLine(honey.small + " " + honey.median + " " + honey.large);
+				writer.WriteLine (honey.ambulance + " " + honey.fireTruck + " " + honey.Tanker + " " + honey.Truck + " " + honey.Hearse + " " + honey.policeCar + " " + honey.IceCream);
+				writer.WriteLine (honey.first);
+			}
+
+			writer.WriteLine ("SecurityGates");
+
+			foreach (var gates in securityGates) {
+
 			}
 
 			writer.Close();

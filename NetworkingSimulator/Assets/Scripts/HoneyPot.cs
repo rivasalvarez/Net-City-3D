@@ -13,24 +13,24 @@ public class HoneyPot : MonoBehaviour {
   public List<string> Keys = new List<string>();
 
   public int level = 1;
-  int PID;
+	public  int PID;
 
-  bool upgrade = false;
-  bool red = false;
-  bool blue = false;
-  bool yellow = false;
-  bool green = false;
-  bool small = false;
-  bool median = false;
-  bool large = false;
-  bool ambulance = false;
-  bool fireTruck = false;
-  bool Tanker = false;
-  bool Truck = false;
-  bool Hearse = false;
-  bool policeCar = false;
-  bool IceCream = false;
-  public bool first = true;
+	public bool upgrade = false;
+	public bool red = false;
+	public bool blue = false;
+	public bool yellow = false;
+	public bool green = false;
+	public bool small = false;
+	public bool median = false;
+	public bool large = false;
+	public bool ambulance = false;
+	public bool fireTruck = false;
+	public bool Tanker = false;
+	public bool Truck = false;
+	public bool Hearse = false;
+	public bool policeCar = false;
+	public bool IceCream = false;
+	public  bool first = true;
 
   public Camera myCam; // The camera object
 
@@ -90,6 +90,9 @@ public class HoneyPot : MonoBehaviour {
 
                     // Change the position of it so it will be placed a little bit above the road level
                     transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+
+					// Update the position in terms of the class variable
+					Position = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
                     }
                 }
 
