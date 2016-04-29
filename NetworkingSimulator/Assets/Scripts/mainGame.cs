@@ -287,6 +287,8 @@ public class mainGame : MonoBehaviour {
 
 							// Change the position of it so it will be placed a little bit above the road level
 							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
+							obj.GetComponent<Security> ().Position = new Vector3(obj.transform.position.x, obj.transform.position.y, obj.transform.position.z);
+
 
 							// This will add the gate to the list for it to be saved
 							gameMgr.securityGates.Add (obj.GetComponent<Security> ());

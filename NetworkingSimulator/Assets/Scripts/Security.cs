@@ -12,29 +12,29 @@ public class Security : MonoBehaviour {
 	public List<string> Keys = new List<string>();
 
 	// This is the type of security gate it is
-	private string securityType;
+	public string securityType;
 
 	// This is the set of colors that it can detect
-	private bool red;
-	private bool green;
-	private bool blue;
-	private bool yellow;
+	public bool red;
+	public bool green;
+	public bool blue;
+	public bool yellow;
 
 	// This is the set of sizes that it can detect
-	private bool small;
-	private bool medium;
-	private bool large;
+	public bool small;
+	public bool medium;
+	public bool large;
 
 	// This is the type of cars the security gate has to detect and destroy
-	private bool ambulance;
-	private bool fireTruck;
-	private bool Tanker;
-	private bool Truck;
-	private bool Hearse;
-	private bool IceCream;
-	private bool policeCar;
-	private bool taxi;
-	bool upgrade = false;
+	public bool ambulance;
+	public bool fireTruck;
+	public bool Tanker;
+	public bool Truck;
+	public bool Hearse;
+	public bool IceCream;
+	public bool policeCar;
+	public bool taxi;
+	public bool upgrade = false;
 
 	public List<string> securityFlags = new List<string>();
 	public int level; // This is the level
@@ -92,6 +92,9 @@ public class Security : MonoBehaviour {
 
 					// Change the position of it so it will be placed a little bit above the road level
 					transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+
+					// Update the position in terms of the class variable
+					Position = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
 				}
 			}
 

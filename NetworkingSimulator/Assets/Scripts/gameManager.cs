@@ -174,6 +174,9 @@ public class gameManager : MonoBehaviour {
 			writer.WriteLine (username);
 			writer.WriteLine (password);
 
+			// Write the cash
+			writer.WriteLine(cash);
+
 			// Write that the honeyPot information is starting
 			writer.WriteLine("HoneyPots");
 
@@ -214,7 +217,23 @@ public class gameManager : MonoBehaviour {
 			writer.WriteLine ("SecurityGates");
 
 			foreach (var gates in securityGates) {
+				// Save the list of keys
+				foreach(var i in gates.Keys){
+				writer.WriteLine(i);
+				}
 
+				// Save all of the booleans
+				writer.WriteLine(gates.securityType);
+
+				writer.WriteLine(gates.red + " " + gates.green + " " + gates.blue + " " + gates.yellow);
+				writer.WriteLine(gates.small + " " + gates.medium + " " + gates.large);
+				writer.WriteLine(gates.ambulance + " " + gates.fireTruck + " " + gates.Tanker + " " + gates.Hearse + " " + gates.IceCream + " " + gates.policeCar + " " + gates.taxi);
+				writer.WriteLine(gates.upgrade + " " + gates.level);
+
+				// Save each of the security flags
+				foreach(var i in gates.securityFlags){
+					writer.WriteLine(i);
+				}
 			}
 
 			writer.Close();
