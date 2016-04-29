@@ -215,29 +215,8 @@ public class mainGame : MonoBehaviour {
 
 				// Interactable GUI button for back
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Back ")) {
-					
 					// Sets this to false, so the setting gui options will not appear
 					showSettings = false;					
-				}
-
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 300, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Main Menu ")) {
-					// Sets this to false, so the setting gui options will not appear
-					showSettings = false;					
-				}
-
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 400, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Save Game ")) {
-					// This is used to check if the variable was sucessfully saved
-					bool gameSaved = false;
-
-					// Call the function
-					gameSaved = gameMgr.saveData();
-
-					// Return back to the menu
-					if (gameSaved) {
-						showSettings = false;
-					} else {
-						print ("File corruption");
-					}
 				}
 			}
 		}
@@ -281,14 +260,11 @@ public class mainGame : MonoBehaviour {
                                 shopScript.small, shopScript.median, shopScript.large, shopScript.ambulance, shopScript.fireTruck, shopScript.Tanker,
                                 shopScript.Truck, shopScript.Hearse, shopScript.policeCar, shopScript.IceCream);
 
-							obj.GetComponent <Security> ().setSecurityType (shopScript.getSecurityType());
 							obj.GetComponent <Security> ().level = shopScript.firewallLevel;
 							shopScript.securityFlags.Clear ();
 
 							// Change the position of it so it will be placed a little bit above the road level
 							obj.transform.position = new Vector3 (placePosition.x, 0.6f, placePosition.z);	
-							obj.GetComponent<Security> ().Position = new Vector3(obj.transform.position.x, obj.transform.position.y, obj.transform.position.z);
-
 
 							// This will add the gate to the list for it to be saved
 							gameMgr.securityGates.Add (obj.GetComponent<Security> ());
@@ -344,9 +320,6 @@ public class mainGame : MonoBehaviour {
 
                             // Change the position of it so it will be placed a little bit above the road level
                             obj.transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
-
-
-							obj.GetComponent<HoneyPot> ().Position = new Vector3(obj.transform.position.x, obj.transform.position.y, obj.transform.position.z);
 
                             // Set the placing security to false, in which it won't let the user keep pressing g for more security gates
                             gameMgr.honeyPots.Add( obj.GetComponent<HoneyPot>() );

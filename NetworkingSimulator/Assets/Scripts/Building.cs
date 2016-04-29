@@ -111,6 +111,7 @@ public class Building : MonoBehaviour {
             Car colCar = col.gameObject.GetComponent<Car>();
 
             Destroy(col.gameObject);
+            gameMgr.activeCars.Remove(colCar);
             gameMgr.cash += amount;
         } 
     }
