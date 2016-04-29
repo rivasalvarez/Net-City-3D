@@ -5,6 +5,7 @@ using System;
 using System.IO;
 
 public class HoneyPot : MonoBehaviour {
+  public Vector3 Position;
 
   gameManager gameMgr;
   mainGame main;

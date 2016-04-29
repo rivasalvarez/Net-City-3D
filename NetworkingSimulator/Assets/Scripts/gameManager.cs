@@ -166,7 +166,33 @@ public class gameManager : MonoBehaviour {
 	}
 
 	public bool saveData(){
-        return true;
+		if (!File.Exists (username + ".txt")) {
+			// Create the text file
+			StreamWriter writer = File.CreateText (username + ".txt");
+
+			// Write the username, and then the password
+			writer.WriteLine (username);
+			writer.WriteLine (password);
+
+			// Write that the honeyPot information is starting
+			writer.WriteLine("HoneyPots");
+
+			// Write how many honey pots were seen
+			writer.WriteLine(honeyPots.Count);
+			// Iterate through the list of honey pots and save its data
+			foreach (var honey in honeyPots) {
+				writer.WriteLine (honey.Position.x + " " + honey.Position.y + " " + honey.Position.z);
+			}
+
+			writer.Close();
+
+
+			print ("File saved");
+			return true;
+		} 
+		else {
+			return false;
+		}
 	}
 
 	//sets and gets of user attributes

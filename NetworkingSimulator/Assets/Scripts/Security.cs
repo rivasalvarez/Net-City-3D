@@ -5,7 +5,7 @@ using System;
 using System.IO;
 
 public class Security : MonoBehaviour {
-	Vector3 Position;
+	public Vector3 Position;
 	Animator animation;
 	bool objectDetected;
 
