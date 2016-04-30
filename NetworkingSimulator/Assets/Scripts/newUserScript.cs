@@ -72,29 +72,29 @@ public class newUserScript : MonoBehaviour {
 
 			GUI.Label (new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (2 * height) + 5 - 50, width, height), "Create a Password");
 
-			pass = GUI.TextField (new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (3 * height) + 5 - 50, width, height), pass, 30);
-		
+			pass =  GUI.PasswordField(new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (3 * height) + 5 - 50, width, height), pass, "*"[0], 30);
+
 			//check if the user has inputted the username
 			//if they have don't display line prompting for username
-			if (name != "") {
+			if (name != "" && name != "professor") {
 				unInput = true;
 			}
 			//else show text that prompts for the username
 			else {
 				unInput = false;
-				GUI.Label (new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (4 * height) + 5 - 50, width + 200, height), "Please enter a valid username");
+				GUI.Label (new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (4 * height) + 5 - 50, width + 200, height), "That username cannot be selected, please enter a valid name");
 			}
 
 			//check if the user has inputted the password
 			//if they have don't display text prompting for password
-			if (pass != "") {
+			if (pass != "" && pass != "professor") {
 
 				pInput = true;
 			} 
 			//else do display the text
 			else {	
 				pInput = false;
-				GUI.Label (new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (5 * height) + 5 - 50, width + 200, height), "Please enter a valid password");
+				GUI.Label (new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (5 * height) + 5 - 50, width + 200, height), "That password cannot be selected, please enter a valid password");
 
 			}
 

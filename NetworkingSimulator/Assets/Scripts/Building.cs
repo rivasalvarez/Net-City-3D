@@ -49,11 +49,11 @@ public class Building : MonoBehaviour {
 		// This is initializing all of the values of life
 		if (this.tag == "school") {
 			name = "school";
-			life = 10;
+			life = 2;
 		} 
 		else if (this.tag == "Hospatal") {
 			name = "Hospatal";
-			life = 10;
+			life = 4;
 		}
 		else if (this.tag == "Bank") {
 			name = "Bank";
@@ -67,15 +67,15 @@ public class Building : MonoBehaviour {
 
 		else if (this.tag == "Building2") {
 			name = "Store";
-			life = 10;
+			life = 5;
 		}
 		else if (this.tag == "Petrol") {
 			name = "Gas";
-			life = 10;
+			life = 3;
 		}
 		else if (this.tag == "House") {
 			name = "House";
-			life = 10;
+			life = 3;
 		}
 
 
