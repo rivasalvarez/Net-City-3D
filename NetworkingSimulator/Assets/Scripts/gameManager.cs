@@ -234,6 +234,79 @@ public class gameManager : MonoBehaviour {
 				obj.transform.position = new Vector3(x, y, z);
 				text = read.ReadLine();
 
+				// Check if the thing is car pids in order to know when to loop
+				if(text =="CarPids"){
+					int pids = 0;
+					int.TryParse (read.ReadLine (), out pids);
+
+					// Loop through the amount of pids
+					for (int p = 0; p < pids; p++) {
+						// Variable that will store key from the file
+						int key = 0;
+
+						// Will place what was read from the file into key variable
+						int.TryParse (read.ReadLine (), out key);
+
+						// Instantiate a new car object to store in the data from file
+						Car tmp = new Car();
+
+						// This is used to store the all of the different strings for carPids
+						string txt = " ";
+
+						// This will grab the colorString
+						txt = read.ReadLine ();
+
+						// Sets the car color string
+						tmp.colorString = txt;
+
+						// Sets the size
+						txt = read.ReadLine ();
+
+						// Sets the car size string
+						tmp.sizeString = txt;
+
+						// This will store the route. carColor and carPid
+						int r = 0;
+
+						// Get the route
+						int.TryParse (read.ReadLine (), out r);
+
+						// Set the route of the tmp object
+						tmp.route = r;
+
+						// Get the carColor
+						int.TryParse (read.ReadLine (), out r);
+
+						tmp.carColor = r;
+
+						// Get the carPid
+						int.TryParse (read.ReadLine (), out r);
+
+						//Set it
+						tmp.carPID = r;
+
+
+						obj.GetComponent<HoneyPot> ().carPIDS.Add (key, tmp);
+					}
+
+					text = read.ReadLine ();
+					
+					if(text == "Strings"){
+						// Variable that will store size of list of strings
+						int s = 0;
+
+						// Will place what was read from the file into key variable
+						int.TryParse (read.ReadLine (), out s);
+
+						for (int l = 0; l < s; l++) {
+							text = read.ReadLine ();
+							obj.GetComponent<HoneyPot> ().Keys.Add (text);
+						}
+					}
+	
+				}
+
+
 /*
 				obj.GetComponent<HoneyPot>().setList(shopScript.honeyFlags);
 				obj.GetComponent<HoneyPot>().setLevel(shopScript.honeyLevel);
@@ -279,6 +352,8 @@ public class gameManager : MonoBehaviour {
 				writer.WriteLine (honey.Position.x + " " + honey.Position.y + " " + honey.Position.z);
 
 				writer.WriteLine ("CarPids");
+				// This is to record how many carpids there are
+				writer.WriteLine (honey.carPIDS.Count);
 				// This is looping through the set of car pids
 				foreach (var i in honey.carPIDS) {
 					writer.WriteLine( i.Key); 
@@ -293,6 +368,10 @@ public class gameManager : MonoBehaviour {
 				}
 
 				writer.WriteLine ("Strings");
+
+				// Write how many strings are within each honeypot
+				writer.WriteLine (honey.Keys.Count);
+
 				// This is looping through the list of strings
 				foreach (var i in honey.Keys) {
 					writer.WriteLine (i);
