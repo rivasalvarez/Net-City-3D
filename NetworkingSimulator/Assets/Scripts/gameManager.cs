@@ -203,7 +203,6 @@ public class gameManager : MonoBehaviour {
 				GameObject obj;
 
 
-
 				//Instantiate the HoneyPot once 
 				obj = Instantiate(Resources.Load("Prefabs/HoneySpoon", typeof(GameObject))) as GameObject;
 
@@ -239,7 +238,7 @@ public class gameManager : MonoBehaviour {
 				if(text =="CarPids"){
 					int pids = 0;
 					int.TryParse (read.ReadLine (), out pids);
-
+				
 					// Loop through the amount of pids
 					for (int p = 0; p < pids; p++) {
 						// Variable that will store key from the file
@@ -266,6 +265,12 @@ public class gameManager : MonoBehaviour {
 						// Sets the car size string
 						tmp.sizeString = txt;
 
+						// This is for cartype
+						txt = read.ReadLine();
+
+						// Set the cartype
+						tmp.carTypeString = txt;
+
 						// This will store the route. carColor and carPid
 						int r = 0;
 
@@ -279,6 +284,8 @@ public class gameManager : MonoBehaviour {
 						int.TryParse (read.ReadLine (), out r);
 
 						tmp.carColor = r;
+
+						read.ReadLine ();
 
 						// Get the carPid
 						int.TryParse (read.ReadLine (), out r);
@@ -426,7 +433,7 @@ public class gameManager : MonoBehaviour {
 
 					}
 
-					// Do the same thing for sizes
+					// Do the same thing for first variable
 					text = read.ReadLine();
 
 					bool.TryParse(text, out obj.GetComponent<HoneyPot> ().first);
@@ -443,10 +450,10 @@ public class gameManager : MonoBehaviour {
 
 		// This should read in the SecurityGates word
 		text = read.ReadLine ();
-
 		if (text == "SecurityGates") {
 			int amount = 0;
 			int.TryParse(read.ReadLine(), out amount);
+
 
 
 			for (int i = 0; i < amount; i++) {
@@ -456,7 +463,24 @@ public class gameManager : MonoBehaviour {
 				// instantiate a tollgate
 				obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
 
+				// Get the string keys
+				text = read.ReadLine();
+				int keys = 0;
 
+				if (text == "Strings") {
+					int.TryParse (read.ReadLine (), out keys);
+
+					for (int l = 0; l < keys; l++) {
+						// Instantiate the variable that will hold the strings
+						string txt = " ";
+
+						// Read it into the variable
+						txt = read.ReadLine ();
+
+						// Then place it into the obj
+						obj.GetComponent<Security> ().Keys.Add (txt);
+					}
+				}
 				text = read.ReadLine();
 				string[] ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
 
@@ -484,20 +508,7 @@ public class gameManager : MonoBehaviour {
 				// Set the position of the newly instantiated honeypot to the one gained from the file
 				obj.transform.position = new Vector3(x, y, z);
 
-				// Get the string keys
-				int keys = 0;
-				int.TryParse (read.ReadLine (), out keys);
 
-				for (int l = 0; l < keys; l++) {
-					// Instantiate the variable that will hold the strings
-					string txt = " ";
-
-					// Read it into the variable
-					txt = read.ReadLine ();
-
-					// Then place it into the obj
-					obj.GetComponent<Security>().Keys.Add(txt);
-				}
 
 
 				// Read in the security gate colors
@@ -528,29 +539,119 @@ public class gameManager : MonoBehaviour {
 					}
 				}
 
+				// Do the same thing for sizes
+				text = read.ReadLine();
+
+				ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+				for(var o = 0; o < ssize.Length; o+=1)
+				{
+					if (o == 0) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().small);
+
+					}
+
+					if (o == 1) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().medium);
+
+					}
+
+					if (o == 2) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().large);
+
+					}
+
+				}
+
+				// Do the same thing for sizes
+				text = read.ReadLine();
+
+				ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+
+				for(var o = 0; o < ssize.Length; o+=1)
+				{
+					if (o == 0) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().ambulance);
+
+					}
+
+					if (o == 1) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().fireTruck);
+
+					}
+
+					if (o == 2) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().Tanker);
+
+					}
+
+					if (o == 3) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().Truck);
+
+					}
+
+					if (o == 4) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().Hearse);
+
+					}
+
+					if (o == 5) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().policeCar);
+
+					}
+
+					if (o == 6) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().IceCream);
+
+					}
+
+				}
+
+
+				// Do the same thing for sizes
+				text = read.ReadLine();
+
+				bool.TryParse(text, out obj.GetComponent<Security> ().upgrade);
+
+				// Get the level
+				// Get the string keys
+				int level = 0;
+				int.TryParse (read.ReadLine (), out obj.GetComponent<Security> ().level);
+		
+				// This is for the security flags strings
+				text = read.ReadLine();
+				 keys = 0;
+
+				if (text == "Strings") {
+					keys = 0;
+					int.TryParse (read.ReadLine (), out keys);
+
+					for (int l = 0; l < keys; l++) {
+						// Instantiate the variable that will hold the strings
+						string txt = " ";
+
+						// Read it into the variable
+						txt = read.ReadLine ();
+
+
+						// Then place it into the obj
+						obj.GetComponent<Security>().securityFlags.Add(txt);
+					}
+
+					//Add this to the current list of security gates
+					securityGates.Add(obj.GetComponent<Security>());
+				}
 			}
 		}
 
-		/*
-			 * 
-			 * 			foreach (var gates in securityGates) {
-				// Save the list of keys
-				foreach(var i in gates.Keys){
-				writer.WriteLine(i);
-				}
+		// This should read in the cars word
+		text = read.ReadLine ();
+		if (text == "Cars") {
 
-				// Save all of the booleans
-				writer.WriteLine(gates.red + " " + gates.green + " " + gates.blue + " " + gates.yellow);
-				writer.WriteLine(gates.small + " " + gates.medium + " " + gates.large);
-				writer.WriteLine(gates.ambulance + " " + gates.fireTruck + " " + gates.Tanker + " " + gates.Hearse + " " + gates.IceCream + " " + gates.policeCar + " " + gates.taxi);
-				writer.WriteLine(gates.upgrade + " " + gates.level);
+		}
 
-				// Save each of the security flags
-				foreach(var i in gates.securityFlags){
-					writer.WriteLine(i);
-				}
-			}
-			 * */
+
 
 		print ("reached");
 		read.Close ();
@@ -620,7 +721,13 @@ public class gameManager : MonoBehaviour {
 			// Write how many honey pots were seen
 			writer.WriteLine(securityGates.Count);
 
+
 			foreach (var gates in securityGates) {
+
+				writer.WriteLine ("Strings");
+
+				writer.WriteLine (gates.Keys.Count);
+
 				// Save the list of keys
 				foreach(var i in gates.Keys){
 				writer.WriteLine(i);
@@ -632,7 +739,12 @@ public class gameManager : MonoBehaviour {
 				writer.WriteLine(gates.red + " " + gates.green + " " + gates.blue + " " + gates.yellow);
 				writer.WriteLine(gates.small + " " + gates.medium + " " + gates.large);
 				writer.WriteLine(gates.ambulance + " " + gates.fireTruck + " " + gates.Tanker + " " + gates.Hearse + " " + gates.IceCream + " " + gates.policeCar + " " + gates.taxi);
-				writer.WriteLine(gates.upgrade + " " + gates.level);
+				writer.WriteLine (gates.upgrade);
+				writer.WriteLine(gates.level);
+
+				writer.WriteLine ("Strings");
+
+				writer.WriteLine (gates.securityFlags.Count);
 
 				// Save each of the security flags
 				foreach(var i in gates.securityFlags){
@@ -644,6 +756,8 @@ public class gameManager : MonoBehaviour {
 			writer.WriteLine("Cars");
 
 
+			// Write how many honey pots were seen
+			writer.WriteLine(activeCars.Count);
 
 			foreach (var car in activeCars) {
 				// This is to write the waypoint list to a file
