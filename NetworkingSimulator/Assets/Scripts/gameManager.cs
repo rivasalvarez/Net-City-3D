@@ -68,6 +68,16 @@ public class gameManager : MonoBehaviour {
 
     AudioSource Background;
 
+	// Variables that will get the buildings from the map
+	Building school;
+	Building Hospatal;
+	Building Bank;
+	Building PoliceStation;
+	Building store;
+	Building House;
+	Building Petrol;
+
+
 	// This is a boolean to check if the game manager should load the data
 	bool userFound;
 
@@ -155,12 +165,43 @@ public class gameManager : MonoBehaviour {
             count++;
 		}
 
+
+
 		// This checks if the loaded level is 4, which should be tutorial 01
-		if (Application.loadedLevel == 4 && userFound == true) {
-			print("Working");
-			loadSave ();
-			userFound = false;
+		if (Application.loadedLevel == 4 ) {
+			// Variables that will get the buildings from the map
+			GameObject obj = GameObject.FindGameObjectWithTag("school");
+			school = obj.GetComponent<Building>();
+
+			obj = GameObject.FindGameObjectWithTag("Hospatal");
+			Hospatal = obj.GetComponent<Building>();
+
+			obj = GameObject.FindGameObjectWithTag("Bank");
+			Bank = obj.GetComponent<Building>();
+
+			obj = GameObject.FindGameObjectWithTag("Police_station");
+			PoliceStation = obj.GetComponent<Building>();
+
+			obj = GameObject.FindGameObjectWithTag("Building2");
+			store = obj.GetComponent<Building>();
+
+			obj = GameObject.FindGameObjectWithTag("House");
+			House = obj.GetComponent<Building>();
+
+			obj = GameObject.FindGameObjectWithTag("Petrol");
+			Petrol = obj.GetComponent<Building>();
+		
+			if (userFound) {				
+				print ("Working");
+				loadSave ();
+				userFound = false;
+			}
+
+			if (school.life == 0 && Hospatal.life == 0 && Bank.life == 0 && PoliceStation.life == 0 && store.life == 0 && House.life == 0 && Petrol.life == 0) {
+				print ("GameOver");
+			}
 		}
+
 	}
 
 

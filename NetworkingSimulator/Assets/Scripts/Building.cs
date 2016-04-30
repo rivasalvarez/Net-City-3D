@@ -36,9 +36,56 @@ public class Building : MonoBehaviour {
 
     public int badNumberCars = 0;
 
+	// This is for the amount of life the building itself has
+	public int life = 0;
+	GUIStyle boxInformation;
+
+	bool showInformation;
+
+	public Camera myCam; 
+
 	// Use this for initialization
 	void Start () {
+		// This is initializing all of the values of life
+		if (this.tag == "school") {
+			name = "school";
+			life = 10;
+		} 
+		else if (this.tag == "Hospatal") {
+			name = "Hospatal";
+			life = 10;
+		}
+		else if (this.tag == "Bank") {
+			name = "Bank";
+			life = 10;
+		}
 
+		else if (this.tag == "Police_station") {
+			name = "Police Station";
+			life = 10;
+		}
+
+		else if (this.tag == "Building2") {
+			name = "Store";
+			life = 10;
+		}
+		else if (this.tag == "Petrol") {
+			name = "Gas";
+			life = 10;
+		}
+		else if (this.tag == "House") {
+			name = "House";
+			life = 10;
+		}
+
+
+		boxInformation = new GUIStyle ();
+		boxInformation.fontSize = 18;
+		boxInformation.normal.textColor = Color.green;
+	
+		myCam = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+		showInformation = false;
 		gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();
 		red = gameMgr.red;
 		blue = gameMgr.blue;
@@ -122,5 +169,14 @@ public class Building : MonoBehaviour {
 		ambulance = a; fireTruck = f; Tanker = ta; Truck = tr;
 		Hearse = h; policeCar = p; IceCream = i;
 	}
+
+
+	void OnMouseOver(){
+		if (Input.GetMouseButtonDown (1))
+			life -= 1;
+		}
+	void OnGUI(){
+
+		}
 
 }

@@ -120,17 +120,32 @@ public class mainGame : MonoBehaviour {
 			Physics.Raycast (ray, out hitDetected, Mathf.Infinity);
 
 			if (Physics.Raycast (ray, out hitDetected, Mathf.Infinity)) {
-				if (hitDetected.collider.tag == "car")
-		                {
-						// This gets the script from the object that it hits. 
-						tempScript = hitDetected.collider.GetComponent <Car> ();
+			if (hitDetected.collider.tag == "car") {
+				// This gets the script from the object that it hits. 
+				tempScript = hitDetected.collider.GetComponent <Car> ();
 								
-						GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
-						GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
-							"Car Type: " + tempScript.carTypeString +
-							" \nCar Color: " + tempScript.colorString +
-							" \nCar Size : " + tempScript.sizeString, boxInformation);
-					} 	
+				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 150, 150), "Car Information \n");					
+				GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 100, 100), 
+					"Car Type: " + tempScript.carTypeString +
+					" \nCar Color: " + tempScript.colorString +
+					" \nCar Size : " + tempScript.sizeString, boxInformation);
+			} 
+			else if (hitDetected.collider.tag == "school"
+				|| hitDetected.collider.tag == "Hospatal"
+				|| hitDetected.collider.tag == "Bank"  
+				|| hitDetected.collider.tag == "Police_station"
+				|| hitDetected.collider.tag == "Building2" 
+				|| hitDetected.collider.tag == "Petrol" 	
+				|| hitDetected.collider.tag == "House") {
+				Building tmp;
+
+				tmp = hitDetected.collider.GetComponent<Building> ();
+				GUI.Box (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y, 350, 450), "Car Information \n");					
+					
+				GUI.Label (new Rect (Input.mousePosition.x, Screen.height - Input.mousePosition.y + 20, 300, 300), 
+						" Name: " + tmp.name  +
+						" \n Life: " + tmp.life, boxInformation);
+				}
 				
 			}
 
