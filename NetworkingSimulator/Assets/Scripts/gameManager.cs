@@ -159,6 +159,7 @@ public class gameManager : MonoBehaviour {
 		if (Application.loadedLevel == 4 && userFound == true) {
 			print("Working");
 			loadSave ();
+			userFound = false;
 		}
 	}
 
@@ -169,6 +170,87 @@ public class gameManager : MonoBehaviour {
 
 	// Function that saves and loads the user information to a file
 	public bool loadSave(){
+		// This variable will be used to read the information form the file
+		StreamReader read = new StreamReader(username + ".txt", false);
+		string text = " ";
+
+		// Read through each thing one at a time
+
+		// Read in the username and assign it
+		text = read.ReadLine ();
+		username = text;
+
+		// Read in the password
+		text = read.ReadLine();
+		password = text;
+
+		// Read in the cash amount
+		text = read.ReadLine();
+		cash = int.Parse(text);
+
+		// This should read in the HoneyPots word
+		text = read.ReadLine ();
+
+		if (text == "HoneyPots") {
+			int amount = 0;
+			int.TryParse(read.ReadLine(), out amount);
+
+			for (int i = 0; i < amount; i++) {
+				// Instantiate a game object that will be used to instantiate other stuff
+				GameObject obj;
+
+
+
+				//Instantiate the HoneyPot once 
+				obj = Instantiate(Resources.Load("Prefabs/HoneySpoon", typeof(GameObject))) as GameObject;
+
+				// Read only one thing, which is the x value of the honeypot, do the same for the y and z
+				string [] seperators = {"," , " "};
+				text = read.ReadLine();
+				string[] ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+					
+
+				int x = 0, y = 0, z = 0;
+				for(var o = 0; o < ssize.Length; o+=1)
+				{
+					if (o == 0) {
+						int.TryParse (ssize [o], out x);
+
+					}
+
+					if (o == 1) {
+						int.TryParse (ssize [o], out y);
+
+					}
+
+
+					if (o == 2) {
+						int.TryParse (ssize [o], out z);
+
+					}
+				}
+
+				// Set the position of the newly instantiated honeypot to the one gained from the file
+				obj.transform.position = new Vector3(x, y, z);
+				text = read.ReadLine();
+
+/*
+				obj.GetComponent<HoneyPot>().setList(shopScript.honeyFlags);
+				obj.GetComponent<HoneyPot>().setLevel(shopScript.honeyLevel);
+				obj.GetComponent<HoneyPot>().setMenuBools(shopScript.red, shopScript.green, shopScript.blue, shopScript.yellow,
+					shopScript.small, shopScript.median, shopScript.large, shopScript.ambulance, shopScript.fireTruck, shopScript.Tanker,
+					shopScript.Truck, shopScript.Hearse, shopScript.policeCar, shopScript.IceCream);
+
+				// Change the position of it so it will be placed a little bit above the road level
+				obj.transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+				*/
+
+			}
+
+		}
+		print ("reached");
+		read.Close ();
+
 
 		return true;
 

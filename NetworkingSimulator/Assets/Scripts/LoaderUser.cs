@@ -41,7 +41,7 @@ public class LoaderUser : MonoBehaviour {
 		// This button is to load the profile
 		if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 75, 100, 50), "Find profile")) {
 			playerScript.setPassword(password);
-
+			playerScript.setUserName (name);
 			// Load tutorial 01, but then make sure that the game manager realizes that a user is loaded
 			Application.LoadLevel("Tutorial01");
 
