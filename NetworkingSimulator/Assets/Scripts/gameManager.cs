@@ -430,21 +430,128 @@ public class gameManager : MonoBehaviour {
 					text = read.ReadLine();
 
 					bool.TryParse(text, out obj.GetComponent<HoneyPot> ().first);
+
+					//Add this to the current list of honey pots
+					honeyPots.Add (obj.GetComponent<HoneyPot> ());
 				}
 
 
-/*
-
-				writer.WriteLine (honey.level + " " + honey.PID + " " + honey.upgrade);
-				writer.WriteLine (honey.red + " " + honey.blue + " " + honey.yellow + " " + honey.green);
-				writer.WriteLine(honey.small + " " + honey.median + " " + honey.large);
-				writer.WriteLine (honey.ambulance + " " + honey.fireTruck + " " + honey.Tanker + " " + honey.Truck + " " + honey.Hearse + " " + honey.policeCar + " " + honey.IceCream);
-				writer.WriteLine (honey.first);
-				*/
 
 			}
-
+				
 		}
+
+		// This should read in the SecurityGates word
+		text = read.ReadLine ();
+
+		if (text == "SecurityGates") {
+			int amount = 0;
+			int.TryParse(read.ReadLine(), out amount);
+
+
+			for (int i = 0; i < amount; i++) {
+				// Instantiate a game object that will be used to instantiate other stuff
+				GameObject obj;
+
+				// instantiate a tollgate
+				obj = Instantiate (Resources.Load ("Prefabs/tollPre", typeof(GameObject))) as GameObject;
+
+
+				text = read.ReadLine();
+				string[] ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+
+				int x = 0, y = 0, z = 0;
+				for(var o = 0; o < ssize.Length; o+=1)
+				{
+					if (o == 0) {
+						int.TryParse (ssize [o], out x);
+
+					}
+
+					if (o == 1) {
+						int.TryParse (ssize [o], out y);
+
+					}
+
+
+					if (o == 2) {
+						int.TryParse (ssize [o], out z);
+
+					}
+				}
+
+				// Set the position of the newly instantiated honeypot to the one gained from the file
+				obj.transform.position = new Vector3(x, y, z);
+
+				// Get the string keys
+				int keys = 0;
+				int.TryParse (read.ReadLine (), out keys);
+
+				for (int l = 0; l < keys; l++) {
+					// Instantiate the variable that will hold the strings
+					string txt = " ";
+
+					// Read it into the variable
+					txt = read.ReadLine ();
+
+					// Then place it into the obj
+					obj.GetComponent<Security>().Keys.Add(txt);
+				}
+
+
+				// Read in the security gate colors
+				text = read.ReadLine();
+
+				 ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+				for(var o = 0; o < ssize.Length; o+=1)
+				{
+					if (o == 0) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().red);
+
+					}
+
+					if (o == 1) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().green);
+
+					}
+
+					if (o == 2) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().blue);
+
+					}
+
+					if (o == 3) {
+						bool.TryParse (ssize [o], out obj.GetComponent<Security>().yellow);
+
+					}
+				}
+
+			}
+		}
+
+		/*
+			 * 
+			 * 			foreach (var gates in securityGates) {
+				// Save the list of keys
+				foreach(var i in gates.Keys){
+				writer.WriteLine(i);
+				}
+
+				// Save all of the booleans
+				writer.WriteLine(gates.red + " " + gates.green + " " + gates.blue + " " + gates.yellow);
+				writer.WriteLine(gates.small + " " + gates.medium + " " + gates.large);
+				writer.WriteLine(gates.ambulance + " " + gates.fireTruck + " " + gates.Tanker + " " + gates.Hearse + " " + gates.IceCream + " " + gates.policeCar + " " + gates.taxi);
+				writer.WriteLine(gates.upgrade + " " + gates.level);
+
+				// Save each of the security flags
+				foreach(var i in gates.securityFlags){
+					writer.WriteLine(i);
+				}
+			}
+			 * */
+
 		print ("reached");
 		read.Close ();
 
@@ -510,11 +617,16 @@ public class gameManager : MonoBehaviour {
 
 			writer.WriteLine ("SecurityGates");
 
+			// Write how many honey pots were seen
+			writer.WriteLine(securityGates.Count);
+
 			foreach (var gates in securityGates) {
 				// Save the list of keys
 				foreach(var i in gates.Keys){
 				writer.WriteLine(i);
 				}
+				writer.WriteLine (gates.Position.x + " " + gates.Position.y + " " + gates.Position.z);
+
 
 				// Save all of the booleans
 				writer.WriteLine(gates.red + " " + gates.green + " " + gates.blue + " " + gates.yellow);
