@@ -38,12 +38,14 @@ public class LoaderUser : MonoBehaviour {
 
 		GUI.color= Color.white;
 		
-		// This button is for create Profile
+		// This button is to load the profile
 		if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 75, 100, 50), "Find profile")) {
 			playerScript.setPassword(password);
 
-			playerScript.loadSave(name);
+			// Load tutorial 01, but then make sure that the game manager realizes that a user is loaded
+			Application.LoadLevel("Tutorial01");
 
+			playerScript.setUserFound (true);
 		}
 
 		// This button is to return to mainMenu

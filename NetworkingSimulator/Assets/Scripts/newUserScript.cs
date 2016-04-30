@@ -43,8 +43,6 @@ public class newUserScript : MonoBehaviour {
 		playerMemory = GameObject.Find ("GameObject");
 		playerScript = playerMemory.GetComponent<gameManager> ();	
 		professor = false;
-
-	
 	}
 	
 	// Update is called once per frame

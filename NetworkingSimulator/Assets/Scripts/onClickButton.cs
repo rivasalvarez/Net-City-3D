@@ -29,11 +29,7 @@ public class onClickButton : MonoBehaviour {
 		    ) {
 			Application.LoadLevel("CreateNewUser");
 		}
-		
-		/* This button is for loading an existing profile
-		if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 65, 100, 50), "Load Profile")) {
-			Application.LoadLevel ("SearchMenu");
-		}	*/
+
 		// This button is for quitting the game, upon click it quits the game
 		if (GUI.Button (
 				new Rect (
@@ -45,6 +41,19 @@ public class onClickButton : MonoBehaviour {
 			"Quit Game")
 		    ) {
 			Application.Quit ();
+		}	
+
+		if (GUI.Button (
+			new Rect (
+				(Screen.width / 2)-(buttonWidth/2),
+				(Screen.height / 2)-(buttonHeight/2)+ buttonHeight+ buttonHeight,
+				GUI.skin.button.fixedWidth,
+				GUI.skin.button.fixedHeight
+			), 
+			"Load User")
+		) {
+			print ("This is working");
+			Application.LoadLevel("SearchMenu");
 		}	
 	}
 	

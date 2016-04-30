@@ -68,6 +68,8 @@ public class gameManager : MonoBehaviour {
 
     AudioSource Background;
 
+	// This is a boolean to check if the game manager should load the data
+	bool userFound;
 
 	// Function that makes sure the script that the object is attached to stays alive
 	void Awake(){
@@ -135,6 +137,7 @@ public class gameManager : MonoBehaviour {
 		carSizeDict.Add(6,"Small");
 		carSizeDict.Add(7,"Small");
 
+		userFound = false;
 	}
 	
 	// Update is called once per frame, this will not be used for this project as far as my knowledge
@@ -152,6 +155,11 @@ public class gameManager : MonoBehaviour {
             count++;
 		}
 
+		// This checks if the loaded level is 4, which should be tutorial 01
+		if (Application.loadedLevel == 4 && userFound == true) {
+			print("Working");
+			loadSave ();
+		}
 	}
 
 
@@ -160,7 +168,7 @@ public class gameManager : MonoBehaviour {
     }
 
 	// Function that saves and loads the user information to a file
-	public bool loadSave(string name){
+	public bool loadSave(){
 
 		return true;
 
@@ -321,6 +329,10 @@ public class gameManager : MonoBehaviour {
 		ambulance = a; fireTruck = f; Tanker = ta; Truck = tr;
 		Hearse = h; policeCar = p; IceCream = i;
 
+	}
+
+	public void setUserFound(bool found){
+		userFound = found;
 	}
 
 
