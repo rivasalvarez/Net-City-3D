@@ -44,38 +44,51 @@ public class Building : MonoBehaviour {
 
 	public Camera myCam; 
 
+	float percentage;
+
 	// Use this for initialization
 	void Start () {
+
 		// This is initializing all of the values of life
 		if (this.tag == "school") {
 			name = "school";
 			life = 2;
+			percentage = 0.0714285714286f;
 		} 
+		// Worth 20 percent
 		else if (this.tag == "Hospatal") {
 			name = "Hospatal";
 			life = 4;
+			percentage = 0.15f;
 		}
 		else if (this.tag == "Bank") {
 			name = "Bank";
 			life = 10;
+			percentage = 0.20f;
 		}
 
 		else if (this.tag == "Police_station") {
 			name = "Police Station";
 			life = 10;
+			percentage = 0.15f;
 		}
 
 		else if (this.tag == "Building2") {
 			name = "Store";
 			life = 5;
+			percentage = 0.0714285714286f;
+
 		}
 		else if (this.tag == "Petrol") {
 			name = "Gas";
 			life = 3;
+			percentage = 0.0714285714286f;
 		}
+
 		else if (this.tag == "House") {
 			name = "House";
 			life = 3;
+			percentage = 0.0714285714286f;
 		}
 
 
@@ -157,10 +170,92 @@ public class Building : MonoBehaviour {
 			print (red);
             Car colCar = col.gameObject.GetComponent<Car>();
 
-            Destroy(col.gameObject);
-            gameMgr.activeCars.Remove(colCar);
-            gameMgr.cash += amount;
-        } 
+			if (gameMgr.badCarsChosen == true) {
+
+				if (badCars.Contains (colCar.carTypeString) || badCars.Contains (colCar.colorString) || badCars.Contains (colCar.sizeString)) {
+					if (name == "Bank" || name == "Store" || name == "Hospatal") {
+						amount = Random.Range (400, 900);
+						gameMgr.cash -= amount;
+						percentage -= 0.03f;
+						life -= 1;
+					} else {
+						amount = 100;
+						gameMgr.cash -= amount;
+						percentage -= 0.1f;
+						life -= 1;
+					}
+					Destroy (col.gameObject);
+					gameMgr.activeCars.Remove (colCar);
+				} else {
+					if(life != 0 && percentage >= 0.0f){
+						amount = 400;
+						Destroy (col.gameObject);
+						gameMgr.activeCars.Remove (colCar);
+						gameMgr.cash += amount;
+						gameMgr.cash += (int) (amount * percentage);
+					}
+				}
+			} 
+
+			else {
+				if(colCar.carTypeString == "tanker" && (name == "Bank" || name == "Hospatal" || name== "House"))
+					{
+						amount = Random.Range (10, 200);
+						gameMgr.cash -= amount;
+						percentage -= 0.01f;
+						life -= 1;
+					}
+				
+				else if(colCar.carTypeString == "IceCream" && (name== "Police_station" || name == "Hospatal")){
+						amount = Random.Range (10, 200);
+						gameMgr.cash -= amount;
+						percentage -= 0.01f;
+						life -= 1;
+					} 
+
+				else if(colCar.carTypeString == "fireTruck" && (name == "Bank" || name == "House")){
+						amount = Random.Range (10, 200);
+						gameMgr.cash -= amount;
+						percentage -= 0.01f;
+						life -= 1;
+				}
+
+				else if(colCar.colorString == "Red"){
+					amount = 300;
+					gameMgr.cash -= amount;
+					percentage -= 0.1f;
+					life -= 1;
+				}
+
+				if(colCar.colorString == "Blue" || colCar.colorString == "Yellow"){
+					int rand = Random.Range(0,4);
+					int srand = Random.Range (0, 4);
+
+					if(rand == srand){
+						amount = 200;
+						gameMgr.cash -= amount;
+						percentage -= 0.1f;
+						life -= 1;
+					}
+
+				}
+				else {
+					if(life != 0 && percentage >= 0.0f){
+						amount = 400;
+						Destroy (col.gameObject);
+						gameMgr.activeCars.Remove (colCar);
+						gameMgr.cash += amount;
+						gameMgr.cash += (int) (amount * percentage);
+					}
+				}
+					Destroy (col.gameObject);
+					gameMgr.activeCars.Remove (colCar);
+				} 
+
+
+
+			}
+  
     }
 
 	public void setBuildingBools(bool r, bool g, bool b, bool y, bool s, bool m, bool l, bool a, bool f, bool ta, bool tr, bool h, bool p, bool i) {

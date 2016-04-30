@@ -181,6 +181,8 @@ public class newUserScript : MonoBehaviour {
 
 				// Set professor to false so the normal gui layout appears
 				professor = false;
+
+				playerScript.badCarsChosen = true;
 			}
 
 			if (GUI.Button(new Rect(offset, 650, GUI.skin.button.fixedWidth, 50), "Cancel Change")){

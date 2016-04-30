@@ -200,6 +200,14 @@ public class gameManager : MonoBehaviour {
 			if (school.life == 0 && Hospatal.life == 0 && Bank.life == 0 && PoliceStation.life == 0 && store.life == 0 && House.life == 0 && Petrol.life == 0) {
 				print ("GameOver");
 			}
+
+			if (cash <= 0) {
+				print ("GameOver");
+			}
+
+			if (cash >= 5000) {
+				print ("Winner");
+			}
 		}
 
 	}

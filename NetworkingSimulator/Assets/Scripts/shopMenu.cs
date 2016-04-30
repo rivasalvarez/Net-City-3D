@@ -4,11 +4,16 @@ using System.Collections.Generic;
 
 public class shopMenu : MonoBehaviour {
 	private bool shopOpen; // This is to check if the shop has been opened and ready to show it to the user
-	private GameObject player; // This is to check for player manipulation, cash, levels etc.
+	private gameManager player; // This is to check for player manipulation, cash, levels etc.
+
 	private int security_one_cost; // This is the amount the player has to pay for security level 1 upgrade
 	private int security_two_cost; // This is the amount the player has to pay for security level 2 upgrade
 	private int security_three_cost; // This is the amount the player has to pay for security level 2 upgrade
-	
+
+	private int honey_one_cost; // This is the amount the player has to pay for security level 1 upgrade
+	private int honey_two_cost; // This is the amount the player has to pay for security level 2 upgrade
+	private int honey_three_cost; // This is the amount the player has to pay for security level 2 upgrade
+
 
 	// This will be for the size of the GUI buttons
 	private int guiWidth;
@@ -62,12 +67,17 @@ public class shopMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.Find ("GameObject").GetComponent<gameManager> ();
 		// This is going to initialize all of the variables at the get go
 		shopOpen = false; // The shop will be closed from the very beginning unless otherwise noted
-		security_one_cost = 75; // This is the amount the player has to pay for security level 1 upgrade
-		security_two_cost = 75*2; // This is the amount the player has to pay for security level 2 upgrade
-		security_three_cost = 75*3; // This is the amount the player has to pay for security level 2 upgrade
+		security_one_cost = 0; // This is the amount the player has to pay for security level 1 upgrade
+		security_two_cost = (int)(player.cash * 0.40); // This is the amount the player has to pay for security level 2 upgrade
+		security_three_cost = (int)(player.cash * 0.80); // This is the amount the player has to pay for security level 2 upgrade
 
+
+		honey_one_cost = (int)(player.cash * 0.30);
+		honey_two_cost = (int)(player.cash * 0.55);
+		honey_three_cost = (int)(player.cash * 0.85);
 
 		// Initialize the images
 		securityOneImage = 	(Texture2D) Resources.Load ("Images/FirewallIcon");
@@ -204,9 +214,30 @@ public class shopMenu : MonoBehaviour {
 					}
 
 					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
-						upgradeChosen = false;
-						shopOpen = false;
-						Time.timeScale = 1;
+						int cost = 0;
+						if (securityType == "FL1") {
+							if (player.securityGates.Count == 0) {
+								cost = 300;
+							}
+							else {
+								cost = (int) (player.cash * 0.30f);
+							}
+						}
+
+						if (securityType == "FL2") {
+							cost = security_two_cost;
+						}
+
+						if (securityType == "FL3") {
+							cost = security_three_cost;
+						}
+
+						if (player.cash > cost) {
+							upgradeChosen = false;
+							shopOpen = false;
+							Time.timeScale = 1;
+							player.cash -= cost;
+						}
 					}
 
 					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
@@ -293,9 +324,25 @@ public class shopMenu : MonoBehaviour {
                     }
 
                   if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
-                     upgradeChosen = false;
-                     shopOpen = false;
-                     Time.timeScale = 1;
+						int cost = 0;
+						if (securityType == "FL1") {
+							cost = honey_one_cost;
+						}
+
+						if (securityType == "FL2") {
+							cost = honey_two_cost;
+						}
+
+						if (securityType == "FL3") {
+							cost = honey_three_cost;
+						}
+
+						if (player.cash > cost) {
+							upgradeChosen = false;
+							shopOpen = false;
+							Time.timeScale = 1;
+							player.cash -= cost;
+						}
                   }
 
                  if (GUI.Button(new Rect(540, upgradeThreeGUICol + 185, GUI.skin.button.fixedWidth, 50), "Cancel Purchase")){
