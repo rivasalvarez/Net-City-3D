@@ -87,8 +87,10 @@ public class newUserScript : MonoBehaviour {
 
 			//check if the user has inputted the password
 			//if they have don't display text prompting for password
-			if (pass != "" && pass != "professor") {
-
+			if (pass != "") {
+				if (name == "professor" && pass == "professor") {
+					unInput = true;
+				}
 				pInput = true;
 			} 
 			//else do display the text
