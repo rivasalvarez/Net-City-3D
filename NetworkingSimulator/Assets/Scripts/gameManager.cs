@@ -721,6 +721,11 @@ public class gameManager : MonoBehaviour {
 		}
 
 		/*
+		for (int j = 0; j < 67; j++) {
+			read.ReadLine ();
+		}
+		*/
+		/*
 		 			// This portion is for the active cars list
 		writer.WriteLine("Cars");
 
@@ -757,6 +762,16 @@ public class gameManager : MonoBehaviour {
 		} 
 		 
 		*/
+
+		int.TryParse (read.ReadLine (), out school.life);
+		int.TryParse (read.ReadLine (), out Hospatal.life);
+		int.TryParse (read.ReadLine (), out Bank.life);
+		int.TryParse (read.ReadLine (), out PoliceStation.life);
+		int.TryParse (read.ReadLine (), out store.life);
+		int.TryParse (read.ReadLine (), out House.life);
+		int.TryParse (read.ReadLine (), out Petrol.life);
+
+
 
 
 
@@ -893,6 +908,13 @@ public class gameManager : MonoBehaviour {
 				writer.WriteLine (car.carPID);
 				writer.WriteLine (car.honeyPotIn);
 			}
+			writer.WriteLine (school.life);
+			writer.WriteLine (Hospatal.life);
+			writer.WriteLine (Bank.life);
+			writer.WriteLine (PoliceStation.life);
+			writer.WriteLine (store.life);
+			writer.WriteLine (House.life);
+			writer.WriteLine (Petrol.life);
 
 			writer.Close();
 
