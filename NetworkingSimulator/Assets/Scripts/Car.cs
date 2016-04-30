@@ -5,9 +5,9 @@ public class Car : MonoBehaviour {
 	gameManager gameMgr;
 
 	//WavePoint Stuff
-	private Transform[] wayPointList;
-	private int currentWayPoint = 0;
-	Transform targetWayPoint;
+	public Transform[] wayPointList;
+	public int currentWayPoint = 0;
+	public Transform targetWayPoint;
 
     //Car Details
     public string colorString;
@@ -19,7 +19,7 @@ public class Car : MonoBehaviour {
 	public float speed = 10.0f;
     public int carPID;
 
-	Vector3 position; // The position of the vehicle
+	public Vector3 position; // The position of the vehicle
     public string honeyPotIn;
 
 	// Use this for initialization

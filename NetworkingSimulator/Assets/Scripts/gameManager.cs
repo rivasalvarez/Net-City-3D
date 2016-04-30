@@ -235,6 +235,33 @@ public class gameManager : MonoBehaviour {
 				}
 			}
 
+			// This portion is for the active cars list
+			writer.WriteLine("Cars");
+
+
+
+			foreach (var car in activeCars) {
+				// This is to write the waypoint list to a file
+				foreach( var i in car.wayPointList){
+					writer.WriteLine (i);
+				}
+
+				writer.WriteLine (car.currentWayPoint);
+
+				writer.WriteLine (car.targetWayPoint);
+
+
+				writer.WriteLine (car.colorString);
+				writer.WriteLine (car.carTypeString);
+				writer.WriteLine (car.sizeString);
+				writer.WriteLine (car.position.x + " " +  car.position.y + " " + car.position.z);
+				writer.WriteLine (car.route);
+				writer.WriteLine (car.carColor);
+				writer.WriteLine (car.speed);
+				writer.WriteLine (car.carPID);
+				writer.WriteLine (car.honeyPotIn);
+			}
+
 			writer.Close();
 
 
