@@ -648,8 +648,74 @@ public class gameManager : MonoBehaviour {
 		// This should read in the cars word
 		text = read.ReadLine ();
 		if (text == "Cars") {
+			int amount = 0;
+			int.TryParse(read.ReadLine(), out amount);
+
+			// Instantiate the car objects here
+
+			// This will loop through the transform list
+			for (int c = 0; c < amount; c++) {
+				// Instantiate a car object
+
+				// Read the transform 
+
+				// Read the size of transform
+
+				// Read the current way point
+
+				// Write it to the obj file instantiated
+
+
+				// Read the cartypestring
+
+				// Write it to the obj file instantiated
+
+
+				// Rinse and repeat for the rest of the things
+
+
+				// make sure to add it to the list of active cars
+			}
 
 		}
+
+		/*
+		 			// This portion is for the active cars list
+		writer.WriteLine("Cars");
+
+
+		// Write how many cars were seen
+		writer.WriteLine(activeCars.Count);
+
+		foreach (var car in activeCars) {
+			// Write to file that this is the start for array
+			writer.WriteLine ("Transform");
+
+			// Write to file the size of information retrived from the array
+			writer.WriteLine (car.wayPointList.Length);
+
+			// This is to write the waypoint list to a file
+			foreach( var i in car.wayPointList){
+				writer.WriteLine (i);
+			}
+
+			writer.WriteLine (car.currentWayPoint);
+
+			writer.WriteLine (car.targetWayPoint);
+
+
+			writer.WriteLine (car.colorString);
+			writer.WriteLine (car.carTypeString);
+			writer.WriteLine (car.sizeString);
+			writer.WriteLine (car.position.x + " " +  car.position.y + " " + car.position.z);
+			writer.WriteLine (car.route);
+			writer.WriteLine (car.carColor);
+			writer.WriteLine (car.speed);
+			writer.WriteLine (car.carPID);
+			writer.WriteLine (car.honeyPotIn);
+		} 
+		 
+		*/
 
 
 
@@ -756,10 +822,16 @@ public class gameManager : MonoBehaviour {
 			writer.WriteLine("Cars");
 
 
-			// Write how many honey pots were seen
+			// Write how many cars were seen
 			writer.WriteLine(activeCars.Count);
 
 			foreach (var car in activeCars) {
+				// Write to file that this is the start for array
+				writer.WriteLine ("Transform");
+
+				// Write to file the size of information retrived from the array
+				writer.WriteLine (car.wayPointList.Length);
+
 				// This is to write the waypoint list to a file
 				foreach( var i in car.wayPointList){
 					writer.WriteLine (i);
