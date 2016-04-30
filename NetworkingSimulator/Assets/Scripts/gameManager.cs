@@ -174,6 +174,9 @@ public class gameManager : MonoBehaviour {
 		StreamReader read = new StreamReader(username + ".txt", false);
 		string text = " ";
 
+		// Read only one thing, which is the x value of the honeypot, do the same for the y and z
+		string [] seperators = {"," , " "};
+
 		// Read through each thing one at a time
 
 		// Read in the username and assign it
@@ -204,8 +207,6 @@ public class gameManager : MonoBehaviour {
 				//Instantiate the HoneyPot once 
 				obj = Instantiate(Resources.Load("Prefabs/HoneySpoon", typeof(GameObject))) as GameObject;
 
-				// Read only one thing, which is the x value of the honeypot, do the same for the y and z
-				string [] seperators = {"," , " "};
 				text = read.ReadLine();
 				string[] ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
 					
@@ -303,19 +304,142 @@ public class gameManager : MonoBehaviour {
 							obj.GetComponent<HoneyPot> ().Keys.Add (text);
 						}
 					}
+
+					// Read the level, pid, and upgrade
+					text = read.ReadLine();
+
+					ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
 	
+					// Loop through the array of ssize and then set the ones for level pid and upgrade
+					for(var o = 0; o < ssize.Length; o+=1)
+					{
+						if (o == 0) {
+							int.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().level);
+
+						}
+
+						if (o == 1) {
+							int.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().PID);
+
+						}
+							
+						if (o == 2) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().upgrade);
+
+						}
+					}
+
+					// Do the same for colors
+					text = read.ReadLine();
+
+					ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+					for(var o = 0; o < ssize.Length; o+=1)
+					{
+						if (o == 0) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().red);
+
+						}
+
+						if (o == 1) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().blue);
+
+						}
+
+						if (o == 2) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().yellow);
+
+						}
+
+						if (o == 3) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().green);
+
+						}
+					}
+
+					// Do the same thing for sizes
+					text = read.ReadLine();
+
+					ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+					for(var o = 0; o < ssize.Length; o+=1)
+					{
+						if (o == 0) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().small);
+
+						}
+
+						if (o == 1) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().median);
+
+						}
+
+						if (o == 2) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().large);
+
+						}
+							
+					}
+
+					// Do the same thing for sizes
+					text = read.ReadLine();
+
+					ssize = text.Split (seperators, StringSplitOptions.RemoveEmptyEntries);
+
+
+					for(var o = 0; o < ssize.Length; o+=1)
+					{
+						if (o == 0) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().ambulance);
+
+						}
+
+						if (o == 1) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().fireTruck);
+
+						}
+
+						if (o == 2) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().Tanker);
+
+						}
+
+						if (o == 3) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().Truck);
+
+						}
+
+						if (o == 4) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().Hearse);
+
+						}
+
+						if (o == 5) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().policeCar);
+
+						}
+							
+						if (o == 6) {
+							bool.TryParse (ssize [o], out obj.GetComponent<HoneyPot> ().IceCream);
+
+						}
+
+					}
+
+					// Do the same thing for sizes
+					text = read.ReadLine();
+
+					bool.TryParse(text, out obj.GetComponent<HoneyPot> ().first);
 				}
 
 
 /*
-				obj.GetComponent<HoneyPot>().setList(shopScript.honeyFlags);
-				obj.GetComponent<HoneyPot>().setLevel(shopScript.honeyLevel);
-				obj.GetComponent<HoneyPot>().setMenuBools(shopScript.red, shopScript.green, shopScript.blue, shopScript.yellow,
-					shopScript.small, shopScript.median, shopScript.large, shopScript.ambulance, shopScript.fireTruck, shopScript.Tanker,
-					shopScript.Truck, shopScript.Hearse, shopScript.policeCar, shopScript.IceCream);
 
-				// Change the position of it so it will be placed a little bit above the road level
-				obj.transform.position = new Vector3(placePosition.x, 0.6f, placePosition.z);
+				writer.WriteLine (honey.level + " " + honey.PID + " " + honey.upgrade);
+				writer.WriteLine (honey.red + " " + honey.blue + " " + honey.yellow + " " + honey.green);
+				writer.WriteLine(honey.small + " " + honey.median + " " + honey.large);
+				writer.WriteLine (honey.ambulance + " " + honey.fireTruck + " " + honey.Tanker + " " + honey.Truck + " " + honey.Hearse + " " + honey.policeCar + " " + honey.IceCream);
+				writer.WriteLine (honey.first);
 				*/
 
 			}
