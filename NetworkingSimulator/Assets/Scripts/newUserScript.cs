@@ -119,7 +119,7 @@ public class newUserScript : MonoBehaviour {
 					
 
 
-							Application.LoadLevel ("SelectionMenu");
+							Application.LoadLevel ("GameTutorials");
 						}
 					}
 					//else don't do anything until they do
