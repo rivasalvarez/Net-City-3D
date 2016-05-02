@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class LoaderUser : MonoBehaviour {
-	public string name = "username ";
-	public string password = "password ";
+	public string name = "";
+	public string password = "";
 
 	GameObject playerMemory;
 	gameManager playerScript;
@@ -23,18 +23,20 @@ public class LoaderUser : MonoBehaviour {
 	//sets up buttons for loading user
 	void OnGUI()
 	{
+		float width = 300.0f;
+		float height = 35.0f;
 		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		//set color and create label
-		GUI.color = Color.white;
-		GUI.Label(new Rect (Screen.width / 2, (Screen.height / 2) - 30,150,60), "Please Insert Username to load checkpoint");
+		GUI.contentColor = Color.black;
+		GUI.Label(new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) - 50, 400, height), "Please Insert Username");
 		
-		GUI.Label(new Rect (Screen.width / 2, Screen.height / 2,150,20), "Please Insert Username to load checkpoint");
+		GUI.Label(new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (2 * height) + 5 - 50, 400, height), "Please Insert Password");
 
 		//create textfields to insert username and password
-		GUI.color = Color.white;
-		name = GUI.TextField(new Rect(Screen.width / 2, (Screen.height / 2) + 25, 200, 20), name.Trim(), 25);
+		GUI.contentColor = Color.white;
+		name = GUI.TextField(new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + height + 5 - 50, width, height), name.Trim (), 30);
 
-		password = GUI.TextField(new Rect(Screen.width / 2, (Screen.height / 2) + 50, 200, 20), password.Trim(), 25);
+		password = GUI.PasswordField(new Rect ((Screen.width / 2) - width / 2, (Screen.height / 4) + (3 * height) + 5 - 50, width, height), password, "*"[0], 30);
 
 		GUI.color= Color.white;
 		
