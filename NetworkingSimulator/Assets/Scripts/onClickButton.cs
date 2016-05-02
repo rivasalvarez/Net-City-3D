@@ -17,8 +17,7 @@ public class onClickButton : MonoBehaviour {
 
     void Awake() {
         GameObject obj = GameObject.Find("GameObject");
-
-        if(!obj.GetComponent<gameManager>())
+        if(!obj.GetComponent<gameManager>() && !obj.GetComponent<AudioSource>())
             obj.AddComponent<gameManager>();
     }
 

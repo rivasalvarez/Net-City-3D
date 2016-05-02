@@ -237,6 +237,7 @@ public class mainGame : MonoBehaviour {
 
 				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) +  100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Main Menu ")) {
 					// Load the start menu again
+                    gameMgr.reset();
 					Application.LoadLevel("StartMenu");
 				}
 

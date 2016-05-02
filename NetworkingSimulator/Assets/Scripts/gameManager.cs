@@ -89,6 +89,16 @@ public class gameManager : MonoBehaviour {
 		DontDestroyOnLoad (this);
 	}
 
+    public void reset() {
+      securityGates.Clear();
+      honeyPots.Clear();
+      activeCars.Clear();
+      honeyCount = 0;
+      cash = 300;
+      gameIsStarted = false;
+      count = 0;
+    }
+
 	/**
 	 * Starting function for the player manager class, in which it guides the overall game. Loads thing based on circumstances received from the file
 	 * @param: None
