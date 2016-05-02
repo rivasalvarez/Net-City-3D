@@ -221,7 +221,7 @@ public class mainGame : MonoBehaviour {
 			// If showSettings is true, then a set of different functionalities will be displayed
 			else {
 				// Interactable GUI button for quitting the game
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Quit Game")) {
+				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) -100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Quit Game")) {
 					Application.Quit ();
 
 					// Then quit the game entirely
@@ -229,18 +229,18 @@ public class mainGame : MonoBehaviour {
 				}
 
 				// Interactable GUI button for back
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Back ")) {
+				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2), GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Back ")) {
 					
 					// Sets this to false, so the setting gui options will not appear
 					showSettings = false;					
 				}
 
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 300, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Main Menu ")) {
+				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) +  100, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Main Menu ")) {
 					// Load the start menu again
 					Application.LoadLevel("StartMenu");
 				}
 
-				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 400, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Save Game ")) {
+				if (GUI.Button (new Rect (Screen.width / 2, (Screen.height / 2) + 200, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Save Game ")) {
 					// This is used to check if the variable was sucessfully saved
 					bool gameSaved = false;
 
