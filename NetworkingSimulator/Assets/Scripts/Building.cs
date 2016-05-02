@@ -167,7 +167,7 @@ public class Building : MonoBehaviour {
     void OnCollisionEnter(Collision col) {
         int amount = 300;
         if ( col.gameObject.tag == "car" ) {
-			print (red);
+			//print (red);
             Car colCar = col.gameObject.GetComponent<Car>();
 
 			if (gameMgr.badCarsChosen == true) {

@@ -23,7 +23,8 @@ public class Car : MonoBehaviour {
     public string honeyPotIn;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+        print("in start");
         gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();	
 
 		//Random Path for now
@@ -44,6 +45,7 @@ public class Car : MonoBehaviour {
         colorString = gameMgr.carColorDict[carColor];
         carPID = gameMgr.count;
 		setWavePoints (route);
+        targetWayPoint = wayPointList[currentWayPoint];
 
         gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
         if(gameObject.GetComponent<Car>().carTypeString == "Taxi")
@@ -254,11 +256,22 @@ public class Car : MonoBehaviour {
 				wayPointList[1] = GameObject.Find ("WayPoint37").transform;
 				wayPointList[2] = GameObject.Find ("HospitalPoint2").transform;
 				break;
-
-
 		}
-
-		targetWayPoint = wayPointList[currentWayPoint];
 	}
+
+    public void loadSettings(int r,int cWP,float x,float y,float z,string col,string ty,string sis,float spe, int pi, int cInt){
+        print("inLoad");
+        route = r;
+        setWavePoints(route);
+        currentWayPoint = cWP;
+        targetWayPoint.position = new Vector3(x,y,z);
+        colorString = col;
+        carTypeString = ty;
+        sizeString = sis;
+        carColor = cInt;
+        gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
+        speed = spe;
+        carPID = pi;
+    }
 
 }

@@ -202,7 +202,7 @@ public class gameManager : MonoBehaviour {
 			}
 
 			if (cash <= 0) {
-				print ("GameOver");
+				//print ("GameOver");
 			}
 
 			if (cash >= 5000) {
@@ -704,72 +704,29 @@ public class gameManager : MonoBehaviour {
 
 			// This will loop through the transform list
 			for (int c = 0; c < amount; c++) {
-				// Instantiate a car object
+                text = read.ReadLine();
+                int route = int.Parse(read.ReadLine());
+                int curWP = int.Parse(read.ReadLine());
+                float tx = float.Parse(read.ReadLine());
+                float ty = float.Parse(read.ReadLine());
+                float tz = float.Parse(read.ReadLine());
+                string colStr = read.ReadLine();
+                string tyStr = read.ReadLine();
+                string siStr = read.ReadLine();
+                float locx = float.Parse(read.ReadLine());
+                float locy = float.Parse(read.ReadLine());
+                float locz = float.Parse(read.ReadLine());
+                int colInt = int.Parse(read.ReadLine());
+                float sp = float.Parse(read.ReadLine());
+                int pid = int.Parse(read.ReadLine());
 
-				// Read the transform 
-
-				// Read the size of transform
-
-				// Read the current way point
-
-				// Write it to the obj file instantiated
-
-
-				// Read the cartypestring
-
-				// Write it to the obj file instantiated
-
-
-				// Rinse and repeat for the rest of the things
-
-
-				// make sure to add it to the list of active cars
-			}
-
-		}
-
-		/*
-		for (int j = 0; j < 67; j++) {
-			read.ReadLine ();
-		}
-		*/
-		/*
-		 			// This portion is for the active cars list
-		writer.WriteLine("Cars");
-
-
-		// Write how many cars were seen
-		writer.WriteLine(activeCars.Count);
-
-		foreach (var car in activeCars) {
-			// Write to file that this is the start for array
-			writer.WriteLine ("Transform");
-
-			// Write to file the size of information retrived from the array
-			writer.WriteLine (car.wayPointList.Length);
-
-			// This is to write the waypoint list to a file
-			foreach( var i in car.wayPointList){
-				writer.WriteLine (i);
-			}
-
-			writer.WriteLine (car.currentWayPoint);
-
-			writer.WriteLine (car.targetWayPoint);
-
-
-			writer.WriteLine (car.colorString);
-			writer.WriteLine (car.carTypeString);
-			writer.WriteLine (car.sizeString);
-			writer.WriteLine (car.position.x + " " +  car.position.y + " " + car.position.z);
-			writer.WriteLine (car.route);
-			writer.WriteLine (car.carColor);
-			writer.WriteLine (car.speed);
-			writer.WriteLine (car.carPID);
-			writer.WriteLine (car.honeyPotIn);
-		} 
-		 
-		*/
+                GameObject tempObj = Instantiate(Resources.Load("Prefabs/"+ tyStr, typeof(GameObject))) as GameObject;
+                tempObj.GetComponent<Transform>().position = new Vector3(locx,locy,locz);
+                Car car = tempObj.GetComponent<Car>();
+                car.loadSettings(route,curWP,tx,ty,tz,colStr,tyStr,siStr,sp,pid,colInt);
+            }
+			
+        }
 
 		int.TryParse (read.ReadLine (), out school.life);
 		int.TryParse (read.ReadLine (), out Hospatal.life);
@@ -778,10 +735,6 @@ public class gameManager : MonoBehaviour {
 		int.TryParse (read.ReadLine (), out store.life);
 		int.TryParse (read.ReadLine (), out House.life);
 		int.TryParse (read.ReadLine (), out Petrol.life);
-
-
-
-
 
 		print ("reached");
 		read.Close ();
@@ -884,38 +837,30 @@ public class gameManager : MonoBehaviour {
 
 			// This portion is for the active cars list
 			writer.WriteLine("Cars");
-
-
 			// Write how many cars were seen
 			writer.WriteLine(activeCars.Count);
-
 			foreach (var car in activeCars) {
 				// Write to file that this is the start for array
 				writer.WriteLine ("Transform");
-
-				// Write to file the size of information retrived from the array
-				writer.WriteLine (car.wayPointList.Length);
-
 				// This is to write the waypoint list to a file
-				foreach( var i in car.wayPointList){
-					writer.WriteLine (i);
-				}
-
+                writer.WriteLine(car.route);
 				writer.WriteLine (car.currentWayPoint);
-
-				writer.WriteLine (car.targetWayPoint);
-
-
+                writer.WriteLine(car.targetWayPoint.position.x);
+                writer.WriteLine(car.targetWayPoint.position.y);
+                writer.WriteLine(car.targetWayPoint.position.z);
 				writer.WriteLine (car.colorString);
 				writer.WriteLine (car.carTypeString);
 				writer.WriteLine (car.sizeString);
-				writer.WriteLine (car.position.x + " " +  car.position.y + " " + car.position.z);
-				writer.WriteLine (car.route);
+                Transform trans = car.GetComponent<Transform>();
+				writer.WriteLine (trans.position.x);
+                writer.WriteLine (trans.position.y);
+                writer.WriteLine (trans.position.z);
 				writer.WriteLine (car.carColor);
 				writer.WriteLine (car.speed);
 				writer.WriteLine (car.carPID);
-				writer.WriteLine (car.honeyPotIn);
 			}
+
+
 			writer.WriteLine (school.life);
 			writer.WriteLine (Hospatal.life);
 			writer.WriteLine (Bank.life);
