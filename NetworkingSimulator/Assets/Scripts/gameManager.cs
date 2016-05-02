@@ -77,6 +77,8 @@ public class gameManager : MonoBehaviour {
 	Building House;
 	Building Petrol;
 
+    public mainGame main;
+
 
 	// This is a boolean to check if the game manager should load the data
 	bool userFound;
@@ -155,6 +157,9 @@ public class gameManager : MonoBehaviour {
         // Spawn Car
 		timer -= Time.deltaTime;
         // If game is started and car spawn timer is < 0 car will spawn
+        if(gameIsStarted)
+            main = GameObject.Find("Main Camera").GetComponent<mainGame>();
+
 		if(timer < 0 && gameIsStarted){
 
             //reset timer, random type, and spawn car
@@ -735,6 +740,7 @@ public class gameManager : MonoBehaviour {
 		int.TryParse (read.ReadLine (), out store.life);
 		int.TryParse (read.ReadLine (), out House.life);
 		int.TryParse (read.ReadLine (), out Petrol.life);
+        main.timer = float.Parse(read.ReadLine());
 
 		print ("reached");
 		read.Close ();
@@ -868,6 +874,7 @@ public class gameManager : MonoBehaviour {
 			writer.WriteLine (store.life);
 			writer.WriteLine (House.life);
 			writer.WriteLine (Petrol.life);
+            writer.WriteLine(main.timer);
 
 			writer.Close();
 

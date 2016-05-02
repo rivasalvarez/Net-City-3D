@@ -24,7 +24,6 @@ public class Car : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        print("in start");
         gameMgr = GameObject.Find("GameObject").GetComponent<gameManager>();	
 
 		//Random Path for now
@@ -260,7 +259,6 @@ public class Car : MonoBehaviour {
 	}
 
     public void loadSettings(int r,int cWP,float x,float y,float z,string col,string ty,string sis,float spe, int pi, int cInt){
-        print("inLoad");
         route = r;
         setWavePoints(route);
         currentWayPoint = cWP;

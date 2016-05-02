@@ -8,11 +8,19 @@ public class onClickButton : MonoBehaviour {
 
 	float buttonWidth = 200.0f;
 	float buttonHeight = 100.0f;
+    bool flag = false;
 
 	// Use this for initialization
 	void Start () {
 
 	}
+
+    void Awake() {
+        GameObject obj = GameObject.Find("GameObject");
+
+        if(!obj.GetComponent<gameManager>())
+            obj.AddComponent<gameManager>();
+    }
 
 	void OnGUI()
 	{
