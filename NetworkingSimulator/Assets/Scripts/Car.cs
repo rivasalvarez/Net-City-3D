@@ -47,8 +47,10 @@ public class Car : MonoBehaviour {
         targetWayPoint = wayPointList[currentWayPoint];
 
         gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
-        if(gameObject.GetComponent<Car>().carTypeString == "Taxi")
-            gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/RedTaxi") as Material;
+
+
+        if(gameObject.GetComponent<Car>().carTypeString != "PoliceCar")
+        gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/" + colorString + carTypeString) as Material;
 
         gameMgr.activeCars.Add(gameObject.GetComponent<Car>());
 	}

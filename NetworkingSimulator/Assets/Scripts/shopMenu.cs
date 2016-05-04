@@ -216,23 +216,19 @@ public class shopMenu : MonoBehaviour {
 					if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
 						int cost = 0;
 						if (securityType == "FL1") {
-							if (player.securityGates.Count == 0) {
 								cost = 300;
-							}
-							else {
-								cost = (int) (player.cash * 0.30f);
-							}
+					
 						}
 
 						if (securityType == "FL2") {
-							cost = security_two_cost;
+							cost = security_two_cost + 300; 
 						}
 
 						if (securityType == "FL3") {
-							cost = security_three_cost;
+							cost = security_three_cost + 300;
 						}
 
-						if (player.cash > cost) {
+						if (player.cash >= cost) {
 							upgradeChosen = false;
 							shopOpen = false;
 							Time.timeScale = 1;
@@ -325,19 +321,19 @@ public class shopMenu : MonoBehaviour {
 
                   if (GUI.Button(new Rect(540, upgradeThreeGUICol + 125, GUI.skin.button.fixedWidth, 50), "Purchase")){
 						int cost = 0;
-						if (securityType == "FL1") {
-							cost = honey_one_cost;
+						if (securityType == "HL1") {
+                            cost = honey_one_cost + 300;
 						}
 
-						if (securityType == "FL2") {
-							cost = honey_two_cost;
+						if (securityType == "HL2") {
+                            cost = honey_two_cost + 300;
 						}
 
-						if (securityType == "FL3") {
-							cost = honey_three_cost;
+						if (securityType == "HL3") {
+                            cost = honey_three_cost + 300;
 						}
 
-						if (player.cash > cost) {
+						if (player.cash >= cost) {
 							upgradeChosen = false;
 							shopOpen = false;
 							Time.timeScale = 1;

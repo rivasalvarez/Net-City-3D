@@ -38,18 +38,18 @@ public class tutorials : MonoBehaviour {
 		GUI.skin = Resources.Load ("Buttons/ButtonSkin") as GUISkin;
 		GUI.skin.box.fixedWidth = 500;
 		GUI.skin.box.fixedHeight = 250;
-		GUI.Box (new Rect ((Screen.width / 2) - (GUI.skin.box.fixedWidth / 2), Screen.height/6, 0, 0),tutTextures[currentTut] as MovieTexture);
+		GUI.Box (new Rect ((Screen.width / 2) - (GUI.skin.box.fixedWidth / 2), Screen.height/6 +5, 0, 0),tutTextures[currentTut] as MovieTexture);
 		tutTextures[currentTut].Play();
 		tutTextures[currentTut].loop = true;
 		GUI.skin = Resources.Load ("Buttons/TutorialSkin") as GUISkin;
-		GUI.TextField (new Rect ((Screen.width / 2) - (GUI.skin.box.fixedWidth / 2),Screen.height/6+250, 0, 0), tutStrings [currentTut]);
+		GUI.TextField (new Rect ((Screen.width / 2) - (GUI.skin.box.fixedWidth / 2),Screen.height/6+250+7, 0, 0), tutStrings [currentTut]);
 		// This button is to go to skip tutorials and start game
-		if (GUI.Button (new Rect ((Screen.width/2)-GUI.skin.button.fixedWidth/2, (3*Screen.height/4 ) , GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Skip Tutorials")) {
+		if (GUI.Button (new Rect ((Screen.width/2)-GUI.skin.button.fixedWidth/2, (3*Screen.height/4 ) +90, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Skip Tutorials")) {
 			Application.LoadLevel("SelectionMenu");			
 		}
 
 		// This button is to go to start game
-		if (GUI.Button (new Rect ((Screen.width/2)+GUI.skin.button.fixedWidth/2, (3*Screen.height/4 ) , GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Next")) {
+        if (GUI.Button(new Rect((Screen.width / 2) + GUI.skin.button.fixedWidth / 2, (3 * Screen.height / 4) + 90, GUI.skin.button.fixedWidth, GUI.skin.button.fixedHeight), "Next")) {
 			currentTut++;
 			currentTut %= tutTextures.Length;
 			if(tutTextures[currentTut].isPlaying){

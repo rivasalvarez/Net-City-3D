@@ -83,6 +83,9 @@ public class gameManager : MonoBehaviour {
 	// This is a boolean to check if the game manager should load the data
 	bool userFound;
 
+    bool gameOver;
+    bool gameWin;
+
 	// Function that makes sure the script that the object is attached to stays alive
 	void Awake(){
 		// Don't destroy this object, self explanatory
@@ -108,6 +111,7 @@ public class gameManager : MonoBehaviour {
 	 */ 
 	void Start () {
         cash = 300;
+        gameOver = gameWin = false;
 
         Background = gameObject.AddComponent<AudioSource>();
         Background.clip = Resources.Load("Audio/Background") as AudioClip;
@@ -214,14 +218,20 @@ public class gameManager : MonoBehaviour {
 
 			if (school.life == 0 && Hospatal.life == 0 && Bank.life == 0 && PoliceStation.life == 0 && store.life == 0 && House.life == 0 && Petrol.life == 0) {
 				print ("GameOver");
+                gameOver = true;
+                Time.timeScale = 0;
+
 			}
 
-			if (cash <= 0) {
-				//print ("GameOver");
+			if (cash < 0) {
+				print ("GameOver");
+                gameOver = true;
+                Time.timeScale = 0;
 			}
 
 			if (cash >= 5000) {
 				print ("Winner");
+                gameWin = true;
 			}
 		}
 
@@ -229,6 +239,29 @@ public class gameManager : MonoBehaviour {
 
 
     void OnGUI() {
+        GUI.skin = Resources.Load("Buttons/ShopSkin") as GUISkin;
+        GUI.skin.box.fixedWidth = 800;
+        float width = 300.0f;
+        float height = 35.0f;
+
+        if (gameOver) {
+            GUI.Label(     new Rect( Screen.width/2, Screen.height /2 - 50, width, height), "Game Over");
+            if (GUI.Button(new Rect( Screen.width/2, Screen.height/2, GUI.skin.button.fixedWidth, 50), "Go to main menu")) {
+                Time.timeScale = 1;
+                Application.LoadLevel("StartMenu");
+                gameOver = false;
+            }
+        }
+
+        if (gameWin) {
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 - 50, width, height), "Winner");
+            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2, GUI.skin.button.fixedWidth, 50), "Go to main menu")) {
+                Time.timeScale = 1;
+                Application.LoadLevel("StartMenu");
+                gameWin = false;
+            }
+        }
+
 
     }
 
@@ -761,10 +794,10 @@ public class gameManager : MonoBehaviour {
 	}
 
 	public bool saveData(){
-		if (!File.Exists (username + ".txt")) {
+		
 			// Create the text file
 			StreamWriter writer = File.CreateText (username + ".txt");
-
+            
 			// Write the username, and then the password
 			writer.WriteLine (username);
 			writer.WriteLine (password);
@@ -891,10 +924,7 @@ public class gameManager : MonoBehaviour {
 
 			print ("File saved");
 			return true;
-		} 
-		else {
-			return false;
-		}
+
 	}
 
 	//sets and gets of user attributes
