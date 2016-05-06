@@ -48,6 +48,9 @@ public class Security : MonoBehaviour {
 	void OnMouseOver(){
 		if (Input.GetMouseButtonDown (1)) 
 			upgrade = true;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+            transform.Rotate(0,90,0);
 	}
 
 	// Update is called once per frame

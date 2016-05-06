@@ -49,8 +49,8 @@ public class Car : MonoBehaviour {
         gameObject.GetComponent<Renderer>().material.color = gameMgr.colorArray[carColor];
 
 
-        if(gameObject.GetComponent<Car>().carTypeString != "PoliceCar")
-        gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/" + colorString + carTypeString) as Material;
+        //if(gameObject.GetComponent<Car>().carTypeString != "PoliceCar")
+        //gameObject.GetComponent<Renderer>().material = Resources.Load("Materials/" + colorString + carTypeString) as Material;
 
         gameMgr.activeCars.Add(gameObject.GetComponent<Car>());
 	}
